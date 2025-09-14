@@ -1,28 +1,36 @@
 import '#/styles/globals.css';
 
-import db from '#/lib/db';
 import Byline from '#/ui/byline';
-import { GlobalNav } from '#/ui/global-nav';
 import { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Playfair_Display, Dancing_Script, Inter } from 'next/font/google';
+import { AuthProvider } from './_components/auth-provider';
+import ConditionalLayout from './_components/conditional-layout';
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const playfairDisplay = Playfair_Display({ 
+  variable: '--font-playfair', 
   subsets: ['latin'],
+  display: 'swap',
+});
+
+const dancingScript = Dancing_Script({ 
+  variable: '--font-dancing', 
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const inter = Inter({ 
+  variable: '--font-inter', 
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: { default: 'Next.js Playground', template: '%s | Next.js Playground' },
-  metadataBase: new URL('https://app-router.vercel.app'),
-  description:
-    'A playground to explore Next.js features such as nested layouts, instant loading states, streaming, and component level data fetching.',
+  title: { default: "Eric + Hang's Wedding", template: "%s | Eric + Hang's Wedding" },
+  metadataBase: new URL('https://your-wedding-site.vercel.app'),
+  description: 'Join us in celebrating our special day! RSVP, view our schedule, and learn more about our wedding.',
   openGraph: {
-    title: 'Next.js Playground',
-    description:
-      'A playground to explore Next.js features such as nested layouts, instant loading states, streaming, and component level data fetching.',
-    images: [`/api/og?title=Next.js Playground`],
+    title: "Eric + Hang's Wedding",
+    description: 'Join us in celebrating our special day! RSVP, view our schedule, and learn more about our wedding.',
   },
   twitter: { card: 'summary_large_image' },
 };
@@ -32,23 +40,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const demos = db.demo.findMany();
   return (
     <html lang="en" className="[color-scheme:dark]">
       <body
-        className={`overflow-y-scroll bg-gray-950 font-sans ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`bg-gray-950 font-sans ${playfairDisplay.variable} ${dancingScript.variable} ${inter.variable} antialiased`}
       >
-        <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-r lg:border-b-0 lg:border-gray-800">
-          <GlobalNav items={demos} />
-        </div>
-
-        <div className="lg:pl-72">
-          <div className="mx-auto mt-12 mb-24 max-w-4xl -space-y-[1px] lg:px-8 lg:py-8">
+        <AuthProvider>
+          <ConditionalLayout>
             {children}
-
-            <Byline />
-          </div>
-        </div>
+          </ConditionalLayout>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,48 +1,100 @@
-import db from '#/lib/db';
-import { Boundary } from '#/ui/boundary';
-import { LinkStatus } from '#/ui/link-status';
 import Link from 'next/link';
 
 export default function Page() {
-  const demos = db.demo.findMany();
   return (
-    <Boundary
-      label="Examples"
-      animateRerendering={false}
-      kind="solid"
-      className="flex flex-col gap-9"
-    >
-      {demos.map((section) => {
-        return (
-          <div key={section.name} className="flex flex-col gap-3">
-            <div className="font-mono text-xs font-semibold tracking-wider text-gray-700 uppercase">
-              {section.name}
-            </div>
-
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-              {section.items.map((item) => {
-                return (
-                  <Link
-                    href={`/${item.slug}`}
-                    key={item.name}
-                    className="group flex flex-col gap-1 rounded-lg bg-gray-900 px-5 py-3 hover:bg-gray-800"
-                  >
-                    <div className="flex items-center justify-between font-medium text-gray-200 group-hover:text-gray-50">
-                      {item.name} <LinkStatus />
-                    </div>
-
-                    {item.description ? (
-                      <div className="line-clamp-3 text-[13px] text-gray-500 group-hover:text-gray-300">
-                        {item.description}
-                      </div>
-                    ) : null}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-    </Boundary>
+    <div className="space-y-8">
+      <div className="text-center">
+        <h1 className="text-5xl font-serif font-bold text-white mb-4">Welcome to Our Wedding</h1>
+        <p className="text-gray-300 text-xl font-script">
+          We're so excited to celebrate with you! Use the menu above to explore all the details.
+        </p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <Link 
+          href="/rsvp"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            RSVP
+          </h2>
+          <p className="text-gray-400 font-script">
+            Let us know if you'll be joining us
+          </p>
+        </Link>
+        
+        <Link 
+          href="/schedule"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Schedule
+          </h2>
+          <p className="text-gray-400 font-script">
+            Wedding day timeline and events
+          </p>
+        </Link>
+        
+        <Link 
+          href="/our-story"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Our Story
+          </h2>
+          <p className="text-gray-400 font-script">
+            How we met and fell in love
+          </p>
+        </Link>
+        
+        <Link 
+          href="/venue"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Venue
+          </h2>
+          <p className="text-gray-400 font-script">
+            Location details and directions
+          </p>
+        </Link>
+        
+        <Link 
+          href="/things-to-do"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Things to do
+          </h2>
+          <p className="text-gray-400 font-script">
+            Local activities and recommendations
+          </p>
+        </Link>
+        
+        <Link 
+          href="/registry"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Registry
+          </h2>
+          <p className="text-gray-400 font-script">
+            Gift registry information
+          </p>
+        </Link>
+        
+        <Link 
+          href="/qa"
+          className="group p-6 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
+        >
+          <h2 className="text-xl font-serif font-semibold text-white mb-2 group-hover:text-blue-400">
+            Q&A
+          </h2>
+          <p className="text-gray-400 font-script">
+            Frequently asked questions
+          </p>
+        </Link>
+      </div>
+    </div>
   );
 }
