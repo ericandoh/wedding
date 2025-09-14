@@ -38,7 +38,7 @@ export default function LoginPage() {
 
   return (
     <div 
-      className="min-h-screen bg-white bg-cover bg-no-repeat flex items-center justify-center px-4"
+      className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 bg-cover bg-no-repeat flex items-center justify-center px-4"
       style={{
         backgroundImage: 'url(/login.png)',
         backgroundSize: 'cover',
@@ -49,10 +49,10 @@ export default function LoginPage() {
       <div className="max-w-md w-full">
         <div className="space-y-6">
           <div>
-            <h2 className="text-4xl font-serif font-bold text-black drop-shadow-lg">
+            <h2 className="text-4xl font-serif font-bold text-purple-800 drop-shadow-lg">
               Welcome to Eric + Hang's Wedding!
             </h2>
-            <p className="mt-2 text-lg font-script text-black drop-shadow-md">
+            <p className="mt-2 text-lg font-script text-purple-600 drop-shadow-md">
               Type in the secret password to gain access!
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function LoginPage() {
                 name="keyphrase"
                 type="password"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 bg-white/90 backdrop-blur-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-lg"
+                className="relative block w-full px-3 py-2 border border-purple-300 placeholder-purple-400 text-purple-800 bg-white/90 backdrop-blur-sm rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent shadow-lg"
                 placeholder="shh..."
                 value={keyphrase}
                 onChange={(e) => setKeyphrase(e.target.value)}
@@ -84,7 +84,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-script font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-script font-medium rounded-md text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
               >
                 {isLoading ? 'Verifying...' : 'Access Website'}
               </button>

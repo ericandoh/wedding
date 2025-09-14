@@ -2,13 +2,14 @@ import '#/styles/globals.css';
 
 import Byline from '#/ui/byline';
 import { Metadata } from 'next';
-import { Playfair_Display, Dancing_Script, Inter } from 'next/font/google';
+import { Cormorant_Garamond, Dancing_Script, Inter } from 'next/font/google';
 import { AuthProvider } from './_components/auth-provider';
 import ConditionalLayout from './_components/conditional-layout';
 
-const playfairDisplay = Playfair_Display({ 
-  variable: '--font-playfair', 
+const cormorantGaramond = Cormorant_Garamond({ 
+  variable: '--font-cormorant', 
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
@@ -41,9 +42,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="[color-scheme:dark]">
+    <html lang="en" className="[color-scheme:light]">
       <body
-        className={`bg-gray-950 font-sans ${playfairDisplay.variable} ${dancingScript.variable} ${inter.variable} antialiased`}
+        className={`bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} antialiased`}
       >
         <AuthProvider>
           <ConditionalLayout>
