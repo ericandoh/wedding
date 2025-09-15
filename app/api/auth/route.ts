@@ -30,6 +30,6 @@ export async function DELETE() {
   // Logout endpoint
   const cookieStore = await cookies();
   cookieStore.delete('authenticated');
-  
+
   return NextResponse.json({ success: true });
 }

@@ -10,7 +10,8 @@ export default function TopNav() {
 
   const checkScrollPosition = () => {
     if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } =
+        scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
@@ -29,89 +30,97 @@ export default function TopNav() {
   };
 
   return (
-    <nav className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 px-6 py-4 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-center relative">
+    <nav className="border-b border-gray-200/50 bg-white/80 px-6 py-4 shadow-sm backdrop-blur-sm">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-center">
         {/* Left Arrow */}
         {showLeftArrow && (
           <button
             onClick={scrollLeft}
-            className="absolute left-0 z-10 p-2 text-gray-600 hover:text-gray-800 transition-colors bg-white/90 rounded-full shadow-sm"
+            className="absolute left-0 z-10 rounded-full bg-white/90 p-2 text-gray-600 shadow-sm transition-colors hover:text-gray-800"
             aria-label="Scroll left"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </button>
         )}
 
         {/* Navigation Links */}
-        <div 
+        <div
           ref={scrollContainerRef}
-          className={`flex items-center space-x-8 overflow-x-auto scrollbar-hide ${
+          className={`scrollbar-hide flex items-center space-x-8 overflow-x-auto ${
             showLeftArrow ? 'pl-12' : 'pl-0'
-          } ${
-            showRightArrow ? 'pr-12' : 'pr-0'
-          }`}
+          } ${showRightArrow ? 'pr-12' : 'pr-0'}`}
           onScroll={checkScrollPosition}
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          <Link 
-            href="/" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Home
           </Link>
-          <Link 
-            href="/rsvp" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/rsvp"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             RSVP
           </Link>
-          <Link 
-            href="/schedule" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/schedule"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Schedule
           </Link>
-          <Link 
-            href="/our-story" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/our-story"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Our Story
           </Link>
-          <Link 
-            href="/venue" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/venue"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Venue
           </Link>
-          <Link 
-            href="/things-to-do" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/things-to-do"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Things to do
           </Link>
-          <Link 
-            href="/registry" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/registry"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Registry
           </Link>
-          <Link 
-            href="/qa" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/qa"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Q&A
           </Link>
-          <Link 
-            href="/chatbot" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/chatbot"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Chatbot
           </Link>
-          <Link 
-            href="/pet-cats" 
-            className="text-gray-600 hover:text-gray-800 transition-colors font-satisfy font-medium whitespace-nowrap"
+          <Link
+            href="/pet-cats"
+            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Pet Cats
           </Link>
@@ -121,11 +130,21 @@ export default function TopNav() {
         {showRightArrow && (
           <button
             onClick={scrollRight}
-            className="absolute right-0 z-10 p-2 text-gray-600 hover:text-gray-800 transition-colors bg-white/90 rounded-full shadow-sm"
+            className="absolute right-0 z-10 rounded-full bg-white/90 p-2 text-gray-600 shadow-sm transition-colors hover:text-gray-800"
             aria-label="Scroll right"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
             </svg>
           </button>
         )}

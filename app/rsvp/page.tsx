@@ -15,7 +15,7 @@ export default function RSVP() {
     accommodationDetails: false,
     dietaryRestrictions: '',
     accessibilityRestrictions: '',
-    rowIndex: 0
+    rowIndex: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,9 +35,7 @@ export default function RSVP() {
     try {
       const response = await fetch('/api/rsvp/lookup', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim() }),
       });
 
@@ -51,41 +49,52 @@ export default function RSVP() {
         // Load existing data
         setFormData({
           ...data.data,
-          email: email.trim() // Use the email they entered
+          email: email.trim(), // Use the email they entered
         });
         setIsExistingUser(true);
       } else {
         // New user, start with blank form
-        setFormData(prev => ({
-          ...prev,
-          email: email.trim()
-        }));
+        setFormData((prev) => ({ ...prev, email: email.trim() }));
         setIsExistingUser(false);
       }
 
       setStep('form');
     } catch (err) {
       console.error('Email lookup error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to lookup RSVP. Please try again.');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to lookup RSVP. Please try again.',
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({ ...prev, [name]: checked }));
+      setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.canAttend || !formData.email.trim()) {
-      setError('Please fill in all required fields (Name, Can you attend?, and Email)');
+    if (
+      !formData.name.trim() ||
+      !formData.canAttend ||
+      !formData.email.trim()
+    ) {
+      setError(
+        'Please fill in all required fields (Name, Can you attend?, and Email)',
+      );
       return;
     }
 
@@ -95,9 +104,7 @@ export default function RSVP() {
     try {
       const response = await fetch('/api/rsvp', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -110,7 +117,11 @@ export default function RSVP() {
       setStep('submitted');
     } catch (err) {
       console.error('RSVP submission error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to submit RSVP. Please try again.');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to submit RSVP. Please try again.',
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -123,20 +134,23 @@ export default function RSVP() {
 
   if (step === 'submitted') {
     return (
-      <div className="min-h-screen flex flex-col">
-        <div className="text-center py-8 bg-white">
-          <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">RSVP</h1>
-          <p className="text-gray-600 text-xl font-satisfy">
+      <div className="flex min-h-screen flex-col">
+        <div className="bg-white py-8 text-center">
+          <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+            RSVP
+          </h1>
+          <p className="font-satisfy text-xl text-gray-600">
             Thank you for your response!
           </p>
         </div>
-        
+
         <div className="flex-grow bg-white py-12">
-          <div className="text-center max-w-4xl mx-auto px-6">
-            <p className="text-gray-700 text-lg md:text-xl font-satisfy mb-8 leading-relaxed">
-              Thank you, {formData.name}! We've received your RSVP and can't wait to celebrate with you!
+          <div className="mx-auto max-w-4xl px-6 text-center">
+            <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
+              Thank you, {formData.name}! We've received your RSVP and can't
+              wait to celebrate with you!
             </p>
-            <p className="text-gray-600 text-base font-satisfy mb-6">
+            <p className="font-satisfy mb-6 text-base text-gray-600">
               You can come back here anytime to edit your response!
             </p>
             <button
@@ -153,12 +167,12 @@ export default function RSVP() {
                   accommodationDetails: false,
                   dietaryRestrictions: '',
                   accessibilityRestrictions: '',
-                  rowIndex: 0
+                  rowIndex: 0,
                 });
                 setIsExistingUser(false);
                 setError('');
               }}
-              className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-medium py-2 px-6 transition-all duration-300 font-satisfy"
+              className="font-satisfy border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
             >
               Submit Another RSVP
             </button>
@@ -170,19 +184,24 @@ export default function RSVP() {
 
   if (step === 'email') {
     return (
-      <div className="min-h-screen flex flex-col">
-        <div className="text-center py-8 bg-white">
-          <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">RSVP</h1>
-          <p className="text-gray-600 text-xl font-satisfy">
+      <div className="flex min-h-screen flex-col">
+        <div className="bg-white py-8 text-center">
+          <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+            RSVP
+          </h1>
+          <p className="font-satisfy text-xl text-gray-600">
             Please enter your email to get started
           </p>
         </div>
-        
+
         <div className="flex-grow bg-white py-12">
-          <div className="text-center max-w-md mx-auto px-6">
+          <div className="mx-auto max-w-md px-6 text-center">
             <form onSubmit={handleEmailSubmit} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+                <label
+                  htmlFor="email"
+                  className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                >
                   Email Address *
                 </label>
                 <input
@@ -192,27 +211,43 @@ export default function RSVP() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   disabled={isLoading}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy"
+                  className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                   placeholder="Enter your email address"
                 />
               </div>
-              
+
               {error && (
-                <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg font-satisfy">
+                <div className="font-satisfy rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                   {error}
                 </div>
               )}
-              
+
               <button
                 type="submit"
                 disabled={isLoading || !email.trim()}
-                className="w-full border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-medium py-3 px-8 transition-all duration-300 font-satisfy text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="font-satisfy w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isLoading ? (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    <svg
+                      className="mr-3 -ml-1 h-5 w-5 animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
                     </svg>
                     Looking up...
                   </span>
@@ -229,32 +264,39 @@ export default function RSVP() {
 
   // Form step
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="text-center py-8 bg-white">
-        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">RSVP</h1>
-        <p className="text-gray-600 text-xl font-satisfy">
-          {isExistingUser ? 'Update your RSVP details' : 'Please fill out your RSVP details'}
+    <div className="flex min-h-screen flex-col">
+      <div className="bg-white py-8 text-center">
+        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+          RSVP
+        </h1>
+        <p className="font-satisfy text-xl text-gray-600">
+          {isExistingUser
+            ? 'Update your RSVP details'
+            : 'Please fill out your RSVP details'}
         </p>
-        <p className="text-gray-500 text-sm font-satisfy mt-2">
+        <p className="font-satisfy mt-2 text-sm text-gray-500">
           You can come back here anytime to edit your response!
         </p>
       </div>
-      
+
       <div className="flex-grow bg-white py-12">
-        <div className="text-center max-w-2xl mx-auto px-6">
+        <div className="mx-auto max-w-2xl px-6 text-center">
           <div className="mb-6">
             <button
               onClick={handleBackToEmail}
-              className="text-gray-600 hover:text-gray-800 font-satisfy text-sm underline"
+              className="font-satisfy text-sm text-gray-600 underline hover:text-gray-800"
             >
               ← Back to email entry
             </button>
           </div>
-          
+
           <form onSubmit={handleFormSubmit} className="space-y-6">
             {/* Your Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="name"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Your Name *
               </label>
               <input
@@ -265,14 +307,17 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy"
+                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your full name"
               />
             </div>
 
             {/* +1 Name */}
             <div>
-              <label htmlFor="plusOneName" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="plusOneName"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 +1 Name
               </label>
               <input
@@ -282,14 +327,14 @@ export default function RSVP() {
                 value={formData.plusOneName}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy"
+                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your +1's name (if applicable)"
               />
             </div>
 
             {/* Can you attend? */}
             <div>
-              <label className="block text-sm font-satisfy font-medium text-gray-700 mb-3 text-left">
+              <label className="font-satisfy mb-3 block text-left text-sm font-medium text-gray-700">
                 Can you attend? *
               </label>
               <div className="space-y-2">
@@ -322,7 +367,10 @@ export default function RSVP() {
 
             {/* Email (read-only) */}
             <div>
-              <label htmlFor="email" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="email"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Email *
               </label>
               <input
@@ -331,14 +379,17 @@ export default function RSVP() {
                 name="email"
                 value={formData.email}
                 disabled
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 font-satisfy text-gray-600"
+                className="font-satisfy w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
                 placeholder="Enter your email address"
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="phone"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Phone # (optional)
               </label>
               <input
@@ -348,14 +399,17 @@ export default function RSVP() {
                 value={formData.phone}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy"
+                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your phone number"
               />
             </div>
 
             {/* Event Type Dropdown */}
             <div>
-              <label htmlFor="eventType" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="eventType"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Which event can you join?
               </label>
               <select
@@ -364,11 +418,15 @@ export default function RSVP() {
                 value={formData.eventType}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy"
+                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="">Select an event</option>
-                <option value="Western Wedding, May 23, Da Nang">Western Wedding, May 23, Da Nang</option>
-                <option value="Tea Ceremony, May 21, Sa Dec">Tea Ceremony, May 21, Sa Dec</option>
+                <option value="Western Wedding, May 23, Da Nang">
+                  Western Wedding, May 23, Da Nang
+                </option>
+                <option value="Tea Ceremony, May 21, Sa Dec">
+                  Tea Ceremony, May 21, Sa Dec
+                </option>
                 <option value="Both events">Both events</option>
               </select>
             </div>
@@ -384,23 +442,28 @@ export default function RSVP() {
                   disabled={isSubmitting}
                   className="mr-3"
                 />
-                <span className="text-sm font-satisfy text-gray-700">
+                <span className="font-satisfy text-sm text-gray-700">
                   I'd like details about accommodation at the venue directly
-                  <span className="text-gray-500 text-xs block">(This is being finalized)</span>
+                  <span className="block text-xs text-gray-500">
+                    (This is being finalized)
+                  </span>
                 </span>
               </label>
             </div>
 
             {/* Transportation Note */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm font-satisfy text-blue-800">
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+              <p className="font-satisfy text-sm text-blue-800">
                 Transportation details coming soon!
               </p>
             </div>
 
             {/* Dietary Restrictions */}
             <div>
-              <label htmlFor="dietaryRestrictions" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="dietaryRestrictions"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Dietary Restrictions
               </label>
               <textarea
@@ -410,14 +473,17 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy resize-none"
+                className="font-satisfy w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Please let us know about any dietary restrictions or allergies"
               />
             </div>
 
             {/* Accessibility Restrictions */}
             <div>
-              <label htmlFor="accessibilityRestrictions" className="block text-sm font-satisfy font-medium text-gray-700 mb-2 text-left">
+              <label
+                htmlFor="accessibilityRestrictions"
+                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+              >
                 Accessibility Restrictions
               </label>
               <textarea
@@ -427,32 +493,55 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-satisfy resize-none"
+                className="font-satisfy w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Please let us know about any accessibility needs"
               />
             </div>
-            
+
             {error && (
-              <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg font-satisfy">
+              <div className="font-satisfy rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                 {error}
               </div>
             )}
-            
+
             <button
               type="submit"
-              disabled={isSubmitting || !formData.name.trim() || !formData.canAttend || !formData.email.trim()}
-              className="w-full border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-medium py-3 px-8 transition-all duration-300 font-satisfy text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={
+                isSubmitting ||
+                !formData.name.trim() ||
+                !formData.canAttend ||
+                !formData.email.trim()
+              }
+              className="font-satisfy w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="mr-3 -ml-1 h-5 w-5 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   {isExistingUser ? 'Updating...' : 'Submitting...'}
                 </span>
+              ) : isExistingUser ? (
+                'Update RSVP'
               ) : (
-                isExistingUser ? 'Update RSVP' : 'Submit RSVP'
+                'Submit RSVP'
               )}
             </button>
           </form>

@@ -18,7 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // This will be set by the server-side middleware
       setIsAuthenticated(true);
     };
-    
+
     checkAuth();
   }, []);
 

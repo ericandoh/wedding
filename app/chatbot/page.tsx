@@ -1,16 +1,18 @@
 export default function Chatbot() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="text-center py-8 bg-white">
-        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">Chatbot</h1>
-        <p className="text-gray-600 text-xl font-satisfy">
+    <div className="flex min-h-screen flex-col">
+      <div className="bg-white py-8 text-center">
+        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+          Chatbot
+        </h1>
+        <p className="font-satisfy text-xl text-gray-600">
           Ask questions about our wedding
         </p>
       </div>
-      
+
       <div className="flex-grow bg-white py-12">
-        <div className="text-center max-w-4xl mx-auto px-6">
-          <p className="text-gray-700 text-lg md:text-xl font-satisfy mb-8 leading-relaxed">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
             Chatbot functionality will be added here
           </p>
         </div>

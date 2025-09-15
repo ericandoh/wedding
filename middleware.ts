@@ -4,13 +4,16 @@ import { AUTH_CONFIG } from './app/_config/auth';
 
 export function middleware(request: NextRequest) {
   // Check if user is already authenticated
-  const isAuthenticated = request.cookies.get('authenticated')?.value === 'true';
-  
+  const isAuthenticated =
+    request.cookies.get('authenticated')?.value === 'true';
+
   // Allow access to login page and static assets
-  if (request.nextUrl.pathname === '/login' || 
-      request.nextUrl.pathname.startsWith('/_next') ||
-      request.nextUrl.pathname.startsWith('/api') ||
-      request.nextUrl.pathname.startsWith('/favicon')) {
+  if (
+    request.nextUrl.pathname === '/login' ||
+    request.nextUrl.pathname.startsWith('/_next') ||
+    request.nextUrl.pathname.startsWith('/api') ||
+    request.nextUrl.pathname.startsWith('/favicon')
+  ) {
     return NextResponse.next();
   }
 

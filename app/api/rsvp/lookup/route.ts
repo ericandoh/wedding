@@ -6,10 +6,7 @@ export async function POST(request: NextRequest) {
     const { email } = await request.json();
 
     if (!email || typeof email !== 'string' || email.trim().length === 0) {
-      return NextResponse.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
     // Get environment variables
@@ -22,7 +19,7 @@ export async function POST(request: NextRequest) {
       console.error('Missing required environment variables');
       return NextResponse.json(
         { error: 'Server configuration error' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -43,11 +40,15 @@ export async function POST(request: NextRequest) {
     });
 
     const rows = response.data.values || [];
-    
+
     // Find the row with matching email (column D, index 3)
     const matchingRow = rows.find((row, index) => {
       // Skip header row (index 0) and check if email matches
-      return index > 0 && row[3] && row[3].trim().toLowerCase() === email.trim().toLowerCase();
+      return (
+        index > 0 &&
+        row[3] &&
+        row[3].trim().toLowerCase() === email.trim().toLowerCase()
+      );
     });
 
     if (matchingRow) {
@@ -64,25 +65,21 @@ export async function POST(request: NextRequest) {
           accommodationDetails: matchingRow[6] === 'Yes',
           dietaryRestrictions: matchingRow[7] || '',
           accessibilityRestrictions: matchingRow[8] || '',
-          rowIndex: rows.indexOf(matchingRow) + 1 // 1-based index for Google Sheets
-        }
+          rowIndex: rows.indexOf(matchingRow) + 1, // 1-based index for Google Sheets
+        },
       });
     } else {
-      return NextResponse.json({
-        found: false,
-        data: null
-      });
+      return NextResponse.json({ found: false, data: null });
     }
-
   } catch (error) {
     console.error('Error looking up RSVP:', error);
-    
+
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to lookup RSVP. Please try again later.',
-        details: process.env.NODE_ENV === 'development' ? error : undefined
+        details: process.env.NODE_ENV === 'development' ? error : undefined,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

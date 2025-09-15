@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   *,
@@ -6,52 +8,49 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: theme('colors.gray.200');
   }
 }
 
-@theme inline {
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
-  --font-script: var(--font-dancing);
-  --font-allura: var(--font-allura);
-  --font-great-vibes: var(--font-great-vibes);
-  --font-satisfy: var(--font-satisfy);
+@layer components {
+  .font-sans {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  .font-serif {
+    font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  }
+  
+  .font-script {
+    font-family: var(--font-dancing), cursive;
+  }
+  
+  .font-allura {
+    font-family: var(--font-allura), cursive;
+  }
+  
+  .font-great-vibes {
+    font-family: var(--font-great-vibes), cursive;
+  }
+  
+  .font-satisfy {
+    font-family: var(--font-satisfy), cursive;
+  }
 }
 
-@theme {
-  --color-gray-50: var(--color-neutral-50);
-  --color-gray-100: var(--color-neutral-100);
-  --color-gray-200: var(--color-neutral-200);
-  --color-gray-300: var(--color-neutral-300);
-  --color-gray-400: var(--color-neutral-400);
-  --color-gray-500: var(--color-neutral-500);
-  --color-gray-600: var(--color-neutral-600);
-  --color-gray-700: var(--color-neutral-700);
-  --color-gray-800: var(--color-neutral-800);
-  --color-gray-900: var(--color-neutral-900);
-  --color-gray-950: var(--color-neutral-950);
-
-  --animate-shimmer: shimmer 1.5s infinite;
-
-  --duration-enter: 210ms;
-  --duration-move: 400ms;
-  --duration-exit: 150ms;
-
-  @keyframes shimmer {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(150%);
-      opacity: 0;
-    }
+@keyframes shimmer {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
   }
 }
 
@@ -65,8 +64,8 @@
 @keyframes highlight {
   0%,
   40% {
-    background: var(--color-blue-600);
-    color: var(--color-blue-100);
+    background: theme('colors.blue.600');
+    color: theme('colors.blue.100');
   }
 }
 
@@ -122,9 +121,6 @@
     transform: scale(0.95);
   }
 }
-
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/typography";
 
 @keyframes fade {
   from {

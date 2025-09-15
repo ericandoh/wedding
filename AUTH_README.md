@@ -12,11 +12,13 @@ This website is now password protected with a secret keyphrase system.
 ## Configuration
 
 ### ⚠️ SECURITY IMPORTANT ⚠️
-The secret keyphrase is now stored in environment variables for security. 
+
+The secret keyphrase is now stored in environment variables for security.
 
 **To set your secret keyphrase:**
 
 1. Create a `.env.local` file in the root directory:
+
 ```bash
 # Wedding Website Environment Variables
 WEDDING_SECRET_KEYPHRASE=your-secret-keyphrase-here

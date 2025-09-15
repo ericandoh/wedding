@@ -3,7 +3,11 @@
 import { usePathname } from 'next/navigation';
 import TopNav from './top-nav';
 
-export default function ConditionalLayout({ children }: { children: React.ReactNode }) {
+export default function ConditionalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const isLoginPage = pathname === '/login';
 
@@ -15,9 +19,7 @@ export default function ConditionalLayout({ children }: { children: React.ReactN
     <>
       <TopNav />
       <main className="min-h-screen">
-        <div className="mx-auto max-w-7xl px-6 py-8">
-          {children}
-        </div>
+        <div className="mx-auto max-w-7xl px-6 py-8">{children}</div>
       </main>
     </>
   );
