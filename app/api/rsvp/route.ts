@@ -3,11 +3,36 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { name } = await request.json();
+    const formData = await request.json();
+    const { 
+      name, 
+      plusOneName, 
+      canAttend, 
+      email, 
+      phone, 
+      eventType, 
+      accommodationDetails, 
+      dietaryRestrictions, 
+      accessibilityRestrictions 
+    } = formData;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
       return NextResponse.json(
         { error: 'Name is required' },
+        { status: 400 }
+      );
+    }
+
+    if (!canAttend) {
+      return NextResponse.json(
+        { error: 'Please specify if you can attend' },
+        { status: 400 }
+      );
+    }
+
+    if (!email || typeof email !== 'string' || email.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Email is required' },
         { status: 400 }
       );
     }
@@ -47,23 +72,64 @@ export async function POST(request: NextRequest) {
       second: '2-digit',
     });
 
-    // Add row to spreadsheet
-    const response = await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: 'Sheet1!A:B', // Assuming name in column A, timestamp in column B
-      valueInputOption: 'USER_ENTERED',
-      requestBody: {
-        values: [[name.trim(), timestamp]],
-      },
-    });
+    // Check if this is an update operation (has rowIndex)
+    const isUpdate = formData.rowIndex && formData.rowIndex > 0;
+    
+    let response;
+    
+    if (isUpdate) {
+      // Update existing row
+      response = await sheets.spreadsheets.values.update({
+        spreadsheetId,
+        range: `Sheet1!A${formData.rowIndex}:J${formData.rowIndex}`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: {
+          values: [[
+            name.trim(),
+            plusOneName || '',
+            canAttend,
+            email.trim(),
+            phone || '',
+            eventType || '',
+            accommodationDetails ? 'Yes' : 'No',
+            dietaryRestrictions || '',
+            accessibilityRestrictions || '',
+            timestamp
+          ]],
+        },
+      });
+    } else {
+      // Add new row to spreadsheet
+      response = await sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range: 'Sheet1!A:J', // Extended range for all fields
+        valueInputOption: 'USER_ENTERED',
+        requestBody: {
+          values: [[
+            name.trim(),
+            plusOneName || '',
+            canAttend,
+            email.trim(),
+            phone || '',
+            eventType || '',
+            accommodationDetails ? 'Yes' : 'No',
+            dietaryRestrictions || '',
+            accessibilityRestrictions || '',
+            timestamp
+          ]],
+        },
+      });
+    }
 
     console.log('RSVP added to spreadsheet:', response.data);
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'RSVP submitted successfully',
-        updatedRows: response.data.updates?.updatedRows || 0
+        message: isUpdate ? 'RSVP updated successfully' : 'RSVP submitted successfully',
+        updatedRows: isUpdate ? 
+          (response.data as any).updatedRows || 1 : 
+          (response.data as any).updates?.updatedRows || 1
       },
       { status: 200 }
     );

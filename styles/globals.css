@@ -14,6 +14,9 @@
   --font-sans: var(--font-inter);
   --font-serif: var(--font-cormorant);
   --font-script: var(--font-dancing);
+  --font-allura: var(--font-allura);
+  --font-great-vibes: var(--font-great-vibes);
+  --font-satisfy: var(--font-satisfy);
 }
 
 @theme {
@@ -192,4 +195,13 @@
   30% {
     filter: blur(3px);
   }
+}
+
+/* Hide scrollbar for horizontal navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }

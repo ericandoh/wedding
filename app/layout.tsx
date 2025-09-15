@@ -1,7 +1,7 @@
 import '#/styles/globals.css';
 
 import { Metadata } from 'next';
-import { Cormorant_Garamond, Dancing_Script, Inter } from 'next/font/google';
+import { Cormorant_Garamond, Dancing_Script, Inter, Allura, Great_Vibes, Satisfy } from 'next/font/google';
 import { AuthProvider } from './_components/auth-provider';
 import ConditionalLayout from './_components/conditional-layout';
 
@@ -24,6 +24,27 @@ const inter = Inter({
   display: 'swap',
 });
 
+const allura = Allura({ 
+  variable: '--font-allura', 
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const greatVibes = Great_Vibes({ 
+  variable: '--font-great-vibes', 
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const satisfy = Satisfy({ 
+  variable: '--font-satisfy', 
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: { default: "Eric + Hang's Wedding", template: "%s | Eric + Hang's Wedding" },
   metadataBase: new URL('https://your-wedding-site.vercel.app'),
@@ -43,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="[color-scheme:light]">
       <body
-        className={`bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} antialiased`}
+        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} antialiased`}
       >
         <AuthProvider>
           <ConditionalLayout>

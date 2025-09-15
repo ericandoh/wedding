@@ -1,99 +1,41 @@
 import Link from 'next/link';
+import LogoutButton from './_components/logout-button';
 
 export default function Page() {
   return (
-    <div className="space-y-8">
-      <div className="text-center">
-        <h1 className="text-5xl font-serif font-bold text-purple-800 mb-4">Welcome to Our Wedding</h1>
-        <p className="text-purple-600 text-xl font-script">
-          We're so excited to celebrate with you! Use the menu above to explore all the details.
+    <div className="min-h-screen flex flex-col">
+      {/* Title above the image */}
+      <div className="text-center py-8 bg-white">
+        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">Hang & Eric</h1>
+        <p className="text-gray-600 text-xl font-satisfy">
+          May 23rd, 2026 | Fusion Resorts Da Nang
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-        <Link 
-          href="/rsvp"
-          className="group p-6 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg hover:from-pink-200 hover:to-purple-200 transition-all duration-300 shadow-sm border border-pink-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
+      {/* Full-width image */}
+      <div className="w-full h-96 md:h-[500px] lg:h-[600px] relative">
+        <img 
+          src="/home.JPG" 
+          alt="Hang & Eric Wedding" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      {/* RSVP button */}
+      <div className="flex-grow bg-white py-12">
+        <div className="text-center max-w-4xl mx-auto px-6">
+          <Link 
+            href="/rsvp"
+            className="inline-block border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white font-medium py-3 px-8 transition-all duration-300 font-satisfy text-lg"
+          >
             RSVP
-          </h2>
-          <p className="text-purple-600 font-script">
-            Let us know if you'll be joining us
-          </p>
-        </Link>
-        
-        <Link 
-          href="/schedule"
-          className="group p-6 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg hover:from-purple-200 hover:to-blue-200 transition-all duration-300 shadow-sm border border-purple-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Schedule
-          </h2>
-          <p className="text-purple-600 font-script">
-            Wedding day timeline and events
-          </p>
-        </Link>
-        
-        <Link 
-          href="/our-story"
-          className="group p-6 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg hover:from-blue-200 hover:to-cyan-200 transition-all duration-300 shadow-sm border border-blue-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Our Story
-          </h2>
-          <p className="text-purple-600 font-script">
-            How we met and fell in love
-          </p>
-        </Link>
-        
-        <Link 
-          href="/venue"
-          className="group p-6 bg-gradient-to-br from-cyan-100 to-teal-100 rounded-lg hover:from-cyan-200 hover:to-teal-200 transition-all duration-300 shadow-sm border border-cyan-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Venue
-          </h2>
-          <p className="text-purple-600 font-script">
-            Location details and directions
-          </p>
-        </Link>
-        
-        <Link 
-          href="/things-to-do"
-          className="group p-6 bg-gradient-to-br from-teal-100 to-green-100 rounded-lg hover:from-teal-200 hover:to-green-200 transition-all duration-300 shadow-sm border border-teal-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Things to do
-          </h2>
-          <p className="text-purple-600 font-script">
-            Local activities and recommendations
-          </p>
-        </Link>
-        
-        <Link 
-          href="/registry"
-          className="group p-6 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg hover:from-green-200 hover:to-emerald-200 transition-all duration-300 shadow-sm border border-green-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Registry
-          </h2>
-          <p className="text-purple-600 font-script">
-            Gift registry information
-          </p>
-        </Link>
-        
-        <Link 
-          href="/qa"
-          className="group p-6 bg-gradient-to-br from-emerald-100 to-pink-100 rounded-lg hover:from-emerald-200 hover:to-pink-200 transition-all duration-300 shadow-sm border border-emerald-200/50"
-        >
-          <h2 className="text-xl font-serif font-semibold text-purple-800 mb-2 group-hover:text-pink-600">
-            Q&A
-          </h2>
-          <p className="text-purple-600 font-script">
-            Frequently asked questions
-          </p>
-        </Link>
+          </Link>
+        </div>
+      </div>
+      
+      {/* Logout button at bottom */}
+      <div className="flex justify-center pb-8 bg-white">
+        <LogoutButton />
       </div>
     </div>
   );

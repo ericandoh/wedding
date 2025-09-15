@@ -1,17 +1,17 @@
-export default function OurStory() {
+export default function Chatbot() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="text-center py-8 bg-white">
-        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">Our Story</h1>
+        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">Chatbot</h1>
         <p className="text-gray-600 text-xl font-satisfy">
-          How we met and fell in love
+          Ask questions about our wedding
         </p>
       </div>
       
       <div className="flex-grow bg-white py-12">
         <div className="text-center max-w-4xl mx-auto px-6">
           <p className="text-gray-700 text-lg md:text-xl font-satisfy mb-8 leading-relaxed">
-            Your love story will be added here
+            Chatbot functionality will be added here
           </p>
         </div>
       </div>

@@ -1,12 +1,19 @@
 export default function Registry() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-4xl font-serif font-bold text-purple-800">Registry</h1>
-      <p className="text-purple-600 text-lg font-script">
-        Gift registry information for our guests
-      </p>
-      <div className="bg-gradient-to-br from-green-100 to-emerald-100 p-6 rounded-lg border border-green-200/50 shadow-sm">
-        <p className="text-purple-600 font-script">Registry links and information will be added here</p>
+    <div className="min-h-screen flex flex-col">
+      <div className="text-center py-8 bg-white">
+        <h1 className="text-5xl font-great-vibes font-bold text-gray-800 mb-2">Registry</h1>
+        <p className="text-gray-600 text-xl font-satisfy">
+          Gift registry information for our guests
+        </p>
+      </div>
+      
+      <div className="flex-grow bg-white py-12">
+        <div className="text-center max-w-4xl mx-auto px-6">
+          <p className="text-gray-700 text-lg md:text-xl font-satisfy mb-8 leading-relaxed">
+            Registry links and information will be added here
+          </p>
+        </div>
       </div>
     </div>
   );
