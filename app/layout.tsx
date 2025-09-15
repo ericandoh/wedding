@@ -1,6 +1,5 @@
 import '#/styles/globals.css';
 
-import Byline from '#/ui/byline';
 import { Metadata } from 'next';
 import { Cormorant_Garamond, Dancing_Script, Inter } from 'next/font/google';
 import { AuthProvider } from './_components/auth-provider';

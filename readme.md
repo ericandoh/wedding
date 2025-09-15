@@ -7,13 +7,15 @@ This playground is used by the DX team to explore, test, and demo new Next.js fe
 1. Install dependencies:
 
 ```sh
+vercel env pull
 pnpm install
 ```
 
 2. Start the dev server:
 
 ```sh
-pnpm dev
+vercel dev
+vercel deploy --prod
 ```
 
 ## Documentation

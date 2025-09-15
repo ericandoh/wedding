@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import TopNav from './top-nav';
-import Byline from '#/ui/byline';
 
 export default function ConditionalLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +17,6 @@ export default function ConditionalLayout({ children }: { children: React.ReactN
       <main className="min-h-screen">
         <div className="mx-auto max-w-7xl px-6 py-8">
           {children}
-          <Byline />
         </div>
       </main>
     </>
