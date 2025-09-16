@@ -10,6 +10,15 @@ export default function ThingsToDo() {
         </p>
       </div>
 
+      {/* Full-width image */}
+      <div className="relative h-96 w-full md:h-[500px] lg:h-[600px]">
+        <img
+          src="/what_to_do.jpg"
+          alt="What to do in Da Nang"
+          className="h-full w-full object-cover"
+        />
+      </div>
+
       <div className="flex-grow bg-white py-12">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">

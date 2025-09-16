@@ -86,7 +86,7 @@ export default function TopNav() {
             href="/our-story"
             className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
-            Our Story
+            About the Couple
           </Link>
           <Link
             href="/venue"

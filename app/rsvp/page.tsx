@@ -144,7 +144,7 @@ export default function RSVP() {
           </p>
         </div>
 
-        <div className="flex-grow bg-white py-12">
+        <div className="flex-grow bg-white py-6">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
               Thank you, {formData.name}! We've received your RSVP and can't
@@ -194,7 +194,7 @@ export default function RSVP() {
           </p>
         </div>
 
-        <div className="flex-grow bg-white py-12">
+        <div className="flex-grow bg-white py-6">
           <div className="mx-auto max-w-md px-6 text-center">
             <form onSubmit={handleEmailSubmit} className="space-y-6">
               <div>
@@ -279,7 +279,7 @@ export default function RSVP() {
         </p>
       </div>
 
-      <div className="flex-grow bg-white py-12">
+      <div className="flex-grow bg-white py-6">
         <div className="mx-auto max-w-2xl px-6 text-center">
           <div className="mb-6">
             <button
