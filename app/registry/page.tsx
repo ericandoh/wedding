@@ -13,7 +13,7 @@ export default function Registry() {
       <div className="flex-grow bg-white py-12">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
-            Registry links and information will be added here
+            We'd like you to donate to a charity of our choice! Check back later for details
           </p>
         </div>
       </div>

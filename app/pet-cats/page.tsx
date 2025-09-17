@@ -13,6 +13,16 @@ interface Cat {
   isPetted: boolean;
   petCount: number;
   lastPetTime: number;
+  isDragging: boolean;
+  speedBoostEndTime: number;
+}
+
+interface LeaderboardEntry {
+  name: string;
+  cypress: number;
+  aspen: number;
+  fiona: number;
+  total: number;
 }
 
 export default function PetCats() {
@@ -20,14 +30,222 @@ export default function PetCats() {
   const [roomSize, setRoomSize] = useState({ width: 800, height: 600 });
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [userName, setUserName] = useState<string>('');
+  const [showNameDialog, setShowNameDialog] = useState(false);
+  const [nameInput, setNameInput] = useState('');
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(true);
+  const [draggedCatId, setDraggedCatId] = useState<number | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const roomRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
+  const lastInteractionTime = useRef<number>(0);
 
   const catImages = [
     '/aspenified.png',
     '/cypressified.png', 
     '/fionified.png'
   ];
+
+  // API functions
+  const fetchLeaderboard = async (forceRefresh = false) => {
+    try {
+      setIsLoadingLeaderboard(true);
+      
+      if (forceRefresh) {
+        // Clear current leaderboard data to force a fresh fetch
+        setLeaderboard([]);
+      }
+      
+      const response = await fetch('/api/cats/leaderboard');
+      
+      if (response.ok) {
+        const data = await response.json();
+        setLeaderboard(data.leaderboard || []);
+      } else {
+        console.error('Failed to fetch leaderboard, status:', response.status);
+      }
+    } catch (error) {
+      console.error('Failed to fetch leaderboard:', error);
+    } finally {
+      setIsLoadingLeaderboard(false);
+    }
+  };
+
+  const updateCatCountOptimistically = (catType: 'cypress' | 'aspen' | 'fiona') => {
+    if (!userName) return;
+    
+    // Update local leaderboard optimistically
+    setLeaderboard(prevLeaderboard => {
+      const existingUserIndex = prevLeaderboard.findIndex(entry => entry.name === userName);
+      
+      if (existingUserIndex >= 0) {
+        // Update existing user
+        const updatedLeaderboard = [...prevLeaderboard];
+        const user = updatedLeaderboard[existingUserIndex];
+        
+        if (catType === 'cypress') {
+          user.cypress += 1;
+        } else if (catType === 'aspen') {
+          user.aspen += 1;
+        } else if (catType === 'fiona') {
+          user.fiona += 1;
+        }
+        
+        user.total = user.cypress + user.aspen + user.fiona;
+        
+        // Sort by total pets (descending)
+        updatedLeaderboard.sort((a, b) => b.total - a.total);
+        
+        return updatedLeaderboard;
+      } else {
+        // Add new user
+        const newUser = {
+          name: userName,
+          cypress: catType === 'cypress' ? 1 : 0,
+          aspen: catType === 'aspen' ? 1 : 0,
+          fiona: catType === 'fiona' ? 1 : 0,
+          total: 1
+        };
+        
+        const updatedLeaderboard = [...prevLeaderboard, newUser];
+        updatedLeaderboard.sort((a, b) => b.total - a.total);
+        
+        return updatedLeaderboard;
+      }
+    });
+  };
+
+  const saveCatToSpreadsheet = async (catType: 'cypress' | 'aspen' | 'fiona') => {
+    if (!userName) return;
+    
+    try {
+      const response = await fetch('/api/cats/leaderboard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: userName,
+          catType: catType
+        }),
+      });
+      
+      if (!response.ok) {
+        console.error('Failed to save cat to spreadsheet');
+      }
+    } catch (error) {
+      console.error('Error saving cat to spreadsheet:', error);
+    }
+  };
+
+  const syncToSpreadsheet = async () => {
+    if (!userName) return;
+    
+    try {
+      setIsLoading(true);
+      
+      // Get current user data from local leaderboard
+      const currentUser = leaderboard.find(entry => entry.name === userName);
+      if (!currentUser) return;
+      
+      // Send all current counts to the API
+      const response = await fetch('/api/cats/leaderboard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: userName,
+          catType: 'sync', // Special type for full sync
+          existingUser: {
+            cypress: currentUser.cypress,
+            aspen: currentUser.aspen,
+            fiona: currentUser.fiona
+              }
+        }),
+      });
+      
+      if (!response.ok) {
+        console.error('Failed to sync to spreadsheet');
+      }
+    } catch (error) {
+      console.error('Error syncing to spreadsheet:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const saveUserName = (name: string) => {
+    localStorage.setItem('pet-cats-username', name.toLowerCase());
+  };
+
+  const loadUserName = (): string => {
+    return localStorage.getItem('pet-cats-username') || '';
+  };
+
+  const clearUserIdentity = () => {
+    localStorage.removeItem('pet-cats-username');
+    setUserName('');
+    setHasInteracted(false);
+    
+    // Reset all cat pet counters
+    setCats(prevCats =>
+      prevCats.map(cat => ({
+        ...cat,
+        petCount: 0,
+        isPetted: false,
+        lastPetTime: 0,
+        isDragging: false,
+        speedBoostEndTime: 0
+      }))
+    );
+  };
+
+  // Initialize user data and fetch leaderboard
+  useEffect(() => {
+    const storedUserName = loadUserName();
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+    
+    // Fetch leaderboard with a small delay to ensure component is mounted
+    const timer = setTimeout(() => {
+      fetchLeaderboard();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Load user's existing counters when leaderboard data is available (only on initial load)
+  useEffect(() => {
+    if (userName && leaderboard.length > 0 && !hasInteracted) {
+      const existingUser = leaderboard.find(entry => entry.name === userName);
+      if (existingUser) {
+        // Update cat counters based on existing leaderboard data
+        setCats(prevCats =>
+          prevCats.map((cat, index) => {
+            let petCount = 0;
+            // Map cat index to the correct counter based on image
+            if (catImages[index] === '/cypressified.png') {
+              petCount = existingUser.cypress;
+            } else if (catImages[index] === '/aspenified.png') {
+              petCount = existingUser.aspen;
+            } else if (catImages[index] === '/fionified.png') {
+              petCount = existingUser.fiona;
+            }
+            
+            return {
+              ...cat,
+              petCount: petCount
+            };
+          })
+        );
+      }
+    }
+  }, [userName, leaderboard, hasInteracted]);
 
   // Initialize cats with proper positioning
   const initializeCats = (width: number, height: number) => {
@@ -49,7 +267,9 @@ export default function PetCats() {
         image,
         isPetted: false,
         petCount: 0,
-        lastPetTime: 0
+        lastPetTime: 0,
+        isDragging: false,
+        speedBoostEndTime: 0
       };
     });
   };
@@ -128,17 +348,137 @@ export default function PetCats() {
     return () => window.removeEventListener('resize', updateRoomSize);
   }, [isMobile]);
 
+  // Global mouse and touch event listeners for dragging
+  useEffect(() => {
+    const handleGlobalMouseMove = (event: MouseEvent) => {
+      if (draggedCatId === null) return;
+      
+      event.preventDefault();
+      const catSize = isMobile ? 80 : 100;
+      const margin = 10;
+      
+      if (roomRef.current) {
+        const roomRect = roomRef.current.getBoundingClientRect();
+        const newX = event.clientX - roomRect.left - dragOffset.x;
+        const newY = event.clientY - roomRect.top - dragOffset.y;
+        
+        // Constrain to room bounds
+        const constrainedX = Math.max(margin, Math.min(roomSize.width - catSize - margin, newX));
+        const constrainedY = Math.max(margin, Math.min(roomSize.height - catSize - margin, newY));
+        
+        setCats(prevCats =>
+          prevCats.map(cat =>
+            cat.id === draggedCatId
+              ? { ...cat, x: constrainedX, y: constrainedY }
+              : cat
+          )
+        );
+      }
+    };
+
+    const handleGlobalTouchMove = (event: TouchEvent) => {
+      if (draggedCatId === null) return;
+      
+      event.preventDefault();
+      const catSize = isMobile ? 80 : 100;
+      const margin = 10;
+      
+      if (roomRef.current && event.touches[0]) {
+        const touch = event.touches[0];
+        const roomRect = roomRef.current.getBoundingClientRect();
+        const newX = touch.clientX - roomRect.left - dragOffset.x;
+        const newY = touch.clientY - roomRect.top - dragOffset.y;
+        
+        // Constrain to room bounds
+        const constrainedX = Math.max(margin, Math.min(roomSize.width - catSize - margin, newX));
+        const constrainedY = Math.max(margin, Math.min(roomSize.height - catSize - margin, newY));
+        
+        setCats(prevCats =>
+          prevCats.map(cat =>
+            cat.id === draggedCatId
+              ? { ...cat, x: constrainedX, y: constrainedY }
+              : cat
+          )
+        );
+      }
+    };
+
+    const handleGlobalMouseUp = () => {
+      if (draggedCatId !== null) {
+        const now = Date.now();
+        setCats(prevCats =>
+          prevCats.map(cat =>
+            cat.id === draggedCatId
+              ? {
+                  ...cat,
+                  isDragging: false,
+                  vx: (Math.random() - 0.5) * 4,
+                  vy: (Math.random() - 0.5) * 4,
+                  speedBoostEndTime: now + 3000 // 3 seconds of speed boost
+                }
+              : cat
+          )
+        );
+        setDraggedCatId(null);
+      }
+    };
+
+    const handleGlobalTouchEnd = () => {
+      if (draggedCatId !== null) {
+        const now = Date.now();
+        setCats(prevCats =>
+          prevCats.map(cat =>
+            cat.id === draggedCatId
+              ? {
+                  ...cat,
+                  isDragging: false,
+                  vx: (Math.random() - 0.5) * 4,
+                  vy: (Math.random() - 0.5) * 4,
+                  speedBoostEndTime: now + 3000 // 3 seconds of speed boost
+                }
+              : cat
+          )
+        );
+        setDraggedCatId(null);
+      }
+    };
+
+    if (draggedCatId !== null) {
+      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+      document.addEventListener('touchend', handleGlobalTouchEnd);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener('touchmove', handleGlobalTouchMove);
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
+      document.removeEventListener('touchend', handleGlobalTouchEnd);
+    };
+  }, [draggedCatId, dragOffset, roomSize, isMobile]);
+
   // Animation loop
   useEffect(() => {
     const animate = () => {
       setCats(prevCats => 
         prevCats.map(cat => {
+          // Don't animate cats that are being dragged
+          if (cat.isDragging) {
+            return cat;
+          }
+          
           const catSize = isMobile ? 80 : 100;
           const margin = 10;
           const minVelocity = 0.3; // Minimum velocity to prevent cats from getting stuck
+          const now = Date.now();
           
-          let newX = cat.x + cat.vx;
-          let newY = cat.y + cat.vy;
+          // Check if cat has speed boost
+          const hasSpeedBoost = now < cat.speedBoostEndTime;
+          const speedMultiplier = hasSpeedBoost ? 2.5 : 1; // 2.5x speed during boost
+          
+          let newX = cat.x + (cat.vx * speedMultiplier);
+          let newY = cat.y + (cat.vy * speedMultiplier);
           let newVx = cat.vx;
           let newVy = cat.vy;
 
@@ -176,7 +516,6 @@ export default function PetCats() {
           }
 
           // Reset petting state after 2 seconds
-          const now = Date.now();
           const isPetted = now - cat.lastPetTime < 2000;
 
           return {
@@ -211,8 +550,22 @@ export default function PetCats() {
     event.stopPropagation();
     
     const now = Date.now();
-    setCats(prevCats =>
-      prevCats.map(cat =>
+    
+    // More aggressive debouncing - check if interaction happened within 500ms
+    if (now - lastInteractionTime.current < 500) {
+      return;
+    }
+    lastInteractionTime.current = now;
+    
+    // If user hasn't interacted before and no name is set, show name dialog
+    if (!hasInteracted && !userName) {
+      setShowNameDialog(true);
+      setHasInteracted(true);
+      return;
+    }
+    
+    setCats(prevCats => {
+      const updatedCats = prevCats.map(cat =>
         cat.id === catId
           ? {
               ...cat,
@@ -223,8 +576,149 @@ export default function PetCats() {
               vy: (Math.random() - 0.5) * 4
             }
           : cat
+      );
+
+      // Update leaderboard optimistically based on updated cat counts
+      if (userName) {
+        const cypressCount = updatedCats.find(cat => catImages[cat.id] === '/cypressified.png')?.petCount || 0;
+        const aspenCount = updatedCats.find(cat => catImages[cat.id] === '/aspenified.png')?.petCount || 0;
+        const fionaCount = updatedCats.find(cat => catImages[cat.id] === '/fionified.png')?.petCount || 0;
+        
+        // Update leaderboard with current counts
+        setLeaderboard(prevLeaderboard => {
+          const existingUserIndex = prevLeaderboard.findIndex(entry => entry.name === userName);
+          
+          if (existingUserIndex >= 0) {
+            // Update existing user
+            const updatedLeaderboard = [...prevLeaderboard];
+            const user = updatedLeaderboard[existingUserIndex];
+            
+            user.cypress = cypressCount;
+            user.aspen = aspenCount;
+            user.fiona = fionaCount;
+            user.total = cypressCount + aspenCount + fionaCount;
+            
+            // Sort by total pets (descending)
+            updatedLeaderboard.sort((a, b) => b.total - a.total);
+            
+            return updatedLeaderboard;
+          } else {
+            // Add new user
+            const newUser = {
+              name: userName,
+              cypress: cypressCount,
+              aspen: aspenCount,
+              fiona: fionaCount,
+              total: cypressCount + aspenCount + fionaCount
+            };
+            
+            const updatedLeaderboard = [...prevLeaderboard, newUser];
+            updatedLeaderboard.sort((a, b) => b.total - a.total);
+            
+            return updatedLeaderboard;
+          }
+        });
+      }
+
+      return updatedCats;
+    });
+
+    // Save to spreadsheet after updating
+    if (userName) {
+      // Map cat ID to cat type based on image
+      const catType = catImages[catId] === '/cypressified.png' ? 'cypress' :
+                     catImages[catId] === '/aspenified.png' ? 'aspen' : 'fiona';
+      
+      // Save individual cat increment to spreadsheet
+      saveCatToSpreadsheet(catType);
+    }
+  };
+
+  // Drag and drop handlers
+  const handleMouseDown = (catId: number, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const cat = cats.find(c => c.id === catId);
+    if (!cat) return;
+    
+    const rect = event.currentTarget.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const offsetY = event.clientY - rect.top;
+    
+    setDragOffset({ x: offsetX, y: offsetY });
+    setDraggedCatId(catId);
+    
+    // Mark cat as being dragged
+    setCats(prevCats =>
+      prevCats.map(c =>
+        c.id === catId ? { ...c, isDragging: true } : c
       )
     );
+  };
+
+  const handleTouchStart = (catId: number, event: React.TouchEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const cat = cats.find(c => c.id === catId);
+    if (!cat) return;
+    
+    const touch = event.touches[0];
+    const rect = event.currentTarget.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.left;
+    const offsetY = touch.clientY - rect.top;
+    
+    setDragOffset({ x: offsetX, y: offsetY });
+    setDraggedCatId(catId);
+    
+    // Mark cat as being dragged
+    setCats(prevCats =>
+      prevCats.map(c =>
+        c.id === catId ? { ...c, isDragging: true } : c
+      )
+    );
+  };
+
+
+  const handleNameSubmit = () => {
+    if (nameInput.trim()) {
+      const name = nameInput.trim().toLowerCase();
+      setUserName(name);
+      saveUserName(name);
+      setShowNameDialog(false);
+      setNameInput('');
+      
+      // Check if user already exists in leaderboard and load their counters
+      const existingUser = leaderboard.find(entry => entry.name === name);
+      if (existingUser) {
+        // Update cat counters based on existing leaderboard data
+        setCats(prevCats =>
+          prevCats.map((cat, index) => {
+            let petCount = 0;
+            // Map cat index to the correct counter based on image
+            if (catImages[index] === '/cypressified.png') {
+              petCount = existingUser.cypress;
+            } else if (catImages[index] === '/aspenified.png') {
+              petCount = existingUser.aspen;
+            } else if (catImages[index] === '/fionified.png') {
+              petCount = existingUser.fiona;
+            }
+            
+            return {
+              ...cat,
+              petCount: petCount
+            };
+          })
+        );
+      }
+    }
+  };
+
+  const handleNameDialogKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleNameSubmit();
+    }
   };
 
   return (
@@ -236,6 +730,31 @@ export default function PetCats() {
         <p className="font-satisfy text-xl text-gray-600">
           Click on the cats to pet them!
         </p>
+        {isLoading && (
+          <div className="mt-2 text-amber-600 font-medium">
+            Updating leaderboard...
+          </div>
+        )}
+        
+        
+        {/* User info */}
+        {userName && (
+          <div className="mt-6 max-w-4xl mx-auto px-4">
+            <div className="flex items-center justify-center space-x-4">
+              <div className="bg-amber-100 px-4 py-2 rounded-full border-2 border-amber-300">
+                <span className="font-satisfy text-lg text-amber-800">
+                  Playing as: <span className="font-bold">{userName}</span>
+                </span>
+              </div>
+              <button
+                onClick={clearUserIdentity}
+                className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-full text-sm font-medium transition-colors"
+              >
+                Clear Identity
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex-grow bg-gradient-to-b from-blue-100 to-green-100 py-8">
@@ -285,15 +804,24 @@ export default function PetCats() {
                 key={cat.id}
                 className={`absolute cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 touch-manipulation ${
                   cat.isPetted ? 'animate-pulse' : ''
+                } ${
+                  cat.isDragging ? 'z-50 opacity-80 scale-110' : ''
                 }`}
                 style={{
                   left: `${cat.x}px`,
                   top: `${cat.y}px`,
                   transform: cat.vx < 0 ? 'scaleX(-1)' : 'scaleX(1)',
-                  touchAction: 'manipulation'
+                  touchAction: 'manipulation',
+                  userSelect: 'none'
                 }}
-                onClick={(e) => handleCatInteraction(cat.id, e)}
-                onTouchStart={(e) => handleCatInteraction(cat.id, e)}
+                onMouseDown={(e) => handleMouseDown(cat.id, e)}
+                onTouchStart={(e) => handleTouchStart(cat.id, e)}
+                onClick={(e) => {
+                  // Only handle click if not dragging
+                  if (!cat.isDragging) {
+                    handleCatInteraction(cat.id, e);
+                  }
+                }}
                 onTouchEnd={(e) => e.preventDefault()}
               >
                 <Image
@@ -312,6 +840,11 @@ export default function PetCats() {
                 {cat.petCount > 0 && (
                   <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-sm font-bold text-amber-800 bg-white px-2 py-1 rounded-full shadow-md pointer-events-none">
                     {cat.petCount}
+                  </div>
+                )}
+                {Date.now() < cat.speedBoostEndTime && (
+                  <div className="absolute -top-2 -left-2 text-xl animate-pulse pointer-events-none">
+                    ⚡
                   </div>
                 )}
               </div>
@@ -347,7 +880,7 @@ export default function PetCats() {
           {/* Instructions */}
           <div className="mt-6 text-center px-4">
             <p className="font-satisfy text-lg text-gray-700">
-              {isMobile ? 'Tap the cats to pet them!' : 'Click on the cats to pet them!'} They love attention and will show hearts when petted.
+              {isMobile ? 'Tap the cats to pet them or drag them around!' : 'Click on the cats to pet them or drag them around!'} They love attention and will show hearts when petted.
             </p>
             <div className={`mt-4 flex justify-center ${isMobile ? 'flex-col space-y-4' : 'space-x-8'} text-sm text-gray-600`}>
               <div className="flex items-center justify-center space-x-2">
@@ -366,6 +899,169 @@ export default function PetCats() {
           </div>
         </div>
       </div>
+
+      {/* Leaderboard Section */}
+      <div className="bg-white py-8">
+        <div className="max-w-4xl mx-auto px-4">
+          {/* Leaderboard Header with Refresh Button */}
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-satisfy text-2xl font-bold text-amber-800">🏆 Leaderboard</h3>
+            {userName && (
+              <button
+                onClick={async () => {
+                  await syncToSpreadsheet();
+                  await fetchLeaderboard(true);
+                }}
+                disabled={isLoading || isLoadingLeaderboard}
+                className="bg-blue-100 hover:bg-blue-200 disabled:bg-gray-200 text-blue-700 px-4 py-2 rounded-full text-sm font-medium transition-colors"
+              >
+                {isLoading || isLoadingLeaderboard ? 'Syncing...' : 'Refresh'}
+              </button>
+            )}
+          </div>
+          
+          {isLoadingLeaderboard ? (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border-2 border-amber-200">
+              <div className="text-center py-4">
+                <div className="text-amber-600">Loading leaderboard...</div>
+              </div>
+            </div>
+          ) : leaderboard.length > 0 ? (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border-2 border-amber-200">
+              <div className="space-y-2">
+                {leaderboard.slice(0, 10).map((entry, index) => (
+                  <div
+                    key={entry.name}
+                    className={`px-4 py-3 rounded-lg ${
+                      entry.name === userName 
+                        ? 'bg-amber-200 border-2 border-amber-400' 
+                        : 'bg-white border border-amber-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-lg font-bold text-amber-700">
+                          {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`}
+                        </span>
+                        <span className={`font-medium ${entry.name === userName ? 'text-amber-800' : 'text-gray-700'}`}>
+                          {entry.name}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-amber-700">{entry.total} total</div>
+                      </div>
+                    </div>
+                    <div className="flex justify-center space-x-4 text-sm">
+                      <div className="flex items-center space-x-1">
+                        <Image src="/cypressified.png" alt="Cypress" width={20} height={20} className="rounded-full" />
+                        <span className="text-gray-600">{entry.cypress}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Image src="/aspenified.png" alt="Aspen" width={20} height={20} className="rounded-full" />
+                        <span className="text-gray-600">{entry.aspen}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Image src="/fionified.png" alt="Fiona" width={20} height={20} className="rounded-full" />
+                        <span className="text-gray-600">{entry.fiona}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border-2 border-amber-200">
+              <div className="text-center py-4">
+                <div className="text-amber-600">No leaderboard data yet. Start petting cats to see the leaderboard!</div>
+              </div>
+            </div>
+          )}
+
+          {/* Personal Stats */}
+          {userName && leaderboard.length > 0 && (
+            <div className="mt-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border-2 border-blue-200">
+              <h4 className="font-satisfy text-lg font-bold text-blue-800 mb-3 text-center">Your Stats</h4>
+              {(() => {
+                const userEntry = leaderboard.find(entry => entry.name === userName);
+                if (!userEntry) return null;
+                
+                return (
+                  <div className="flex justify-center space-x-6">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Image src="/cypressified.png" alt="Cypress" width={24} height={24} className="rounded-full" />
+                        <span className="font-bold text-blue-700">{userEntry.cypress}</span>
+                      </div>
+                      <div className="text-xs text-gray-600">Cypress</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Image src="/aspenified.png" alt="Aspen" width={24} height={24} className="rounded-full" />
+                        <span className="font-bold text-blue-700">{userEntry.aspen}</span>
+                      </div>
+                      <div className="text-xs text-gray-600">Aspen</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-1 mb-1">
+                        <Image src="/fionified.png" alt="Fiona" width={24} height={24} className="rounded-full" />
+                        <span className="font-bold text-blue-700">{userEntry.fiona}</span>
+                      </div>
+                      <div className="text-xs text-gray-600">Fiona</div>
+                    </div>
+                    <div className="text-center border-l border-blue-300 pl-4">
+                      <div className="font-bold text-blue-700 text-lg">{userEntry.total}</div>
+                      <div className="text-xs text-gray-600">Total</div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Name Registration Dialog */}
+      {showNameDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-2xl">
+            <h3 className="font-satisfy text-2xl font-bold text-gray-800 mb-4 text-center">
+              🐱 Welcome to Pet Cats!
+            </h3>
+            <p className="text-gray-600 mb-4 text-center">
+              Enter your name to join the leaderboard:
+            </p>
+            <div className="space-y-4">
+              <input
+                type="text"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                onKeyPress={handleNameDialogKeyPress}
+                placeholder="Your name"
+                className="w-full px-4 py-2 border-2 border-amber-300 rounded-lg focus:outline-none focus:border-amber-500 text-center text-lg"
+                autoFocus
+              />
+              <div className="flex space-x-3">
+                <button
+                  onClick={handleNameSubmit}
+                  disabled={!nameInput.trim()}
+                  className="flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                >
+                  Join Leaderboard
+                </button>
+                <button
+                  onClick={() => {
+                    setShowNameDialog(false);
+                    setHasInteracted(false);
+                  }}
+                  className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg transition-colors"
+                >
+                  Skip
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

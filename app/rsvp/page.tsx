@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function RSVP() {
   const [step, setStep] = useState<'email' | 'form' | 'submitted'>('email');
@@ -22,6 +22,60 @@ export default function RSVP() {
   const [error, setError] = useState('');
   const [isExistingUser, setIsExistingUser] = useState(false);
 
+  // Load saved email from localStorage on component mount and auto-proceed
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rsvp-email');
+    if (savedEmail) {
+      setEmail(savedEmail);
+      // Automatically proceed to form step with saved email
+      handleAutoLookup(savedEmail);
+    }
+  }, []);
+
+  const handleAutoLookup = async (emailToLookup: string) => {
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/rsvp/lookup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailToLookup.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to lookup RSVP');
+      }
+
+      if (data.found) {
+        // Load existing data
+        setFormData({
+          ...data.data,
+          email: emailToLookup.trim(), // Use the saved email
+        });
+        setIsExistingUser(true);
+      } else {
+        // New user, start with blank form
+        setFormData((prev) => ({ ...prev, email: emailToLookup.trim() }));
+        setIsExistingUser(false);
+      }
+
+      setStep('form');
+    } catch (err) {
+      console.error('Auto lookup error:', err);
+      // If auto-lookup fails, stay on email step and show error
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to lookup RSVP. Please try again.',
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
@@ -31,6 +85,9 @@ export default function RSVP() {
 
     setIsLoading(true);
     setError('');
+
+    // Save email to localStorage
+    localStorage.setItem('rsvp-email', email.trim());
 
     try {
       const response = await fetch('/api/rsvp/lookup', {
@@ -132,6 +189,11 @@ export default function RSVP() {
     setError('');
   };
 
+  const clearSavedEmail = () => {
+    localStorage.removeItem('rsvp-email');
+    setEmail('');
+  };
+
   if (step === 'submitted') {
     return (
       <div className="flex min-h-screen flex-col">
@@ -190,7 +252,7 @@ export default function RSVP() {
             RSVP
           </h1>
           <p className="font-satisfy text-xl text-gray-600">
-            Please enter your email to get started
+            {isLoading ? 'Loading your RSVP...' : 'Please enter your email to get started'}
           </p>
         </div>
 
@@ -204,16 +266,28 @@ export default function RSVP() {
                 >
                   Email Address *
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Enter your email address"
-                />
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Enter your email address"
+                  />
+                  {email && (
+                    <button
+                      type="button"
+                      onClick={clearSavedEmail}
+                      disabled={isLoading}
+                      className="font-satisfy absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
 
               {error && (
@@ -277,18 +351,19 @@ export default function RSVP() {
         <p className="font-satisfy mt-2 text-sm text-gray-500">
           You can come back here anytime to edit your response!
         </p>
+        <p className="font-satisfy mt-1 text-xs text-gray-400">
+          Using email: {formData.email} •{' '}
+          <button
+            onClick={handleBackToEmail}
+            className="underline hover:text-gray-600"
+          >
+            Use different email
+          </button>
+        </p>
       </div>
 
       <div className="flex-grow bg-white py-6">
         <div className="mx-auto max-w-2xl px-6 text-center">
-          <div className="mb-6">
-            <button
-              onClick={handleBackToEmail}
-              className="font-satisfy text-sm text-gray-600 underline hover:text-gray-800"
-            >
-              ← Back to email entry
-            </button>
-          </div>
 
           <form onSubmit={handleFormSubmit} className="space-y-6">
             {/* Your Name */}

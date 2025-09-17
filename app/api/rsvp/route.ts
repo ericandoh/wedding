@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
       // Update existing row
       response = await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `Sheet1!A${formData.rowIndex}:J${formData.rowIndex}`,
+        range: `RSVP!A${formData.rowIndex}:J${formData.rowIndex}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
       // Add new row to spreadsheet
       response = await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'Sheet1!A:J', // Extended range for all fields
+        range: 'RSVP!A:J', // Extended range for all fields
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
