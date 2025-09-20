@@ -1,27 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface Message {
   id: number;
   text: string;
   isUser: boolean;
   timestamp: Date;
+  isRateLimit?: boolean;
 }
 
 export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [messageId, setMessageId] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim()) return;
+    if (!inputText.trim() || isLoading) return;
 
+    const userMessageText = inputText.trim();
+    
     // Add user message
     const userMessage: Message = {
       id: messageId,
-      text: inputText.trim(),
+      text: userMessageText,
       isUser: true,
       timestamp: new Date(),
     };
@@ -29,18 +42,58 @@ export default function Chatbot() {
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
     setMessageId(prev => prev + 1);
+    setIsLoading(true);
 
-    // Add bot response after a short delay
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/chatbot', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessageText }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        if (response.status === 429) {
+          // Rate limit exceeded
+          const botMessage: Message = {
+            id: messageId + 1,
+            text: data.message || 'Sorry, we can only answer 1000 questions a day because we are cheap and on a free model. Please try again tomorrow!',
+            isUser: false,
+            timestamp: new Date(),
+            isRateLimit: true,
+          };
+          setMessages(prev => [...prev, botMessage]);
+          setMessageId(prev => prev + 2);
+          return;
+        }
+        throw new Error('Failed to get response');
+      }
+      
       const botMessage: Message = {
         id: messageId + 1,
-        text: 'I am not smart yet, sowwie',
+        text: data.response || 'Sorry, I couldn\'t process your request. Please try again.',
         isUser: false,
         timestamp: new Date(),
       };
+      
       setMessages(prev => [...prev, botMessage]);
       setMessageId(prev => prev + 2);
-    }, 500);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorMessage: Message = {
+        id: messageId + 1,
+        text: 'Sorry, I\'m having trouble connecting right now. Please try again later.',
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      setMessageId(prev => prev + 2);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,7 +113,31 @@ export default function Chatbot() {
           <div className="mb-6 h-96 overflow-y-auto rounded-lg border border-gray-200 bg-white p-4">
             {messages.length === 0 ? (
               <div className="flex h-full items-center justify-center text-gray-500">
-                <p className="font-satisfy text-lg">Start a conversation...</p>
+                <div className="text-center max-w-md">
+                  <p className="font-satisfy text-lg mb-4">Start a conversation...</p>
+                  <p className="font-satisfy text-sm mb-6">Ask me anything about the wedding!</p>
+                  <div className="space-y-2">
+                    <p className="font-satisfy text-xs text-gray-400 mb-2">Try asking:</p>
+                    <button
+                      onClick={() => setInputText("What should I wear to the wedding?")}
+                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      "What should I wear to the wedding?"
+                    </button>
+                    <button
+                      onClick={() => setInputText("When and where is the wedding?")}
+                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      "When and where is the wedding?"
+                    </button>
+                    <button
+                      onClick={() => setInputText("Do I need a visa for Vietnam?")}
+                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      "Do I need a visa for Vietnam?"
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="space-y-4">
@@ -73,12 +150,18 @@ export default function Chatbot() {
                       className={`max-w-xs rounded-lg px-4 py-2 ${
                         message.isUser
                           ? 'bg-blue-500 text-white'
+                          : message.isRateLimit
+                          ? 'bg-red-100 border border-red-300 text-red-800'
                           : 'bg-gray-200 text-gray-800'
                       }`}
                     >
-                      <p className="text-sm">{message.text}</p>
+                      <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                       <p className={`mt-1 text-xs ${
-                        message.isUser ? 'text-blue-100' : 'text-gray-500'
+                        message.isUser 
+                          ? 'text-blue-100' 
+                          : message.isRateLimit 
+                          ? 'text-red-600' 
+                          : 'text-gray-500'
                       }`}>
                         {message.timestamp.toLocaleTimeString([], {
                           hour: '2-digit',
@@ -88,6 +171,21 @@ export default function Chatbot() {
                     </div>
                   </div>
                 ))}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="max-w-xs rounded-lg px-4 py-2 bg-gray-200 text-gray-800">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                        </div>
+                        <p className="text-sm text-gray-600">Thinking...</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
             )}
           </div>
@@ -98,15 +196,16 @@ export default function Chatbot() {
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-grow rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="Ask me anything about the wedding..."
+              disabled={isLoading}
+              className="flex-grow rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
             <button
               type="submit"
-              disabled={!inputText.trim()}
-              className="rounded-lg bg-blue-500 px-6 py-2 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              disabled={!inputText.trim() || isLoading}
+              className="rounded-lg bg-blue-500 px-6 py-2 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
-              Send
+              {isLoading ? 'Sending...' : 'Send'}
             </button>
           </form>
         </div>
