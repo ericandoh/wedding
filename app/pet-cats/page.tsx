@@ -43,6 +43,7 @@ export default function PetCats() {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartPos, setDragStartPos] = useState({ x: 0, y: 0 });
   const [roomRect, setRoomRect] = useState<DOMRect | null>(null);
+  const [immediateDragPos, setImmediateDragPos] = useState<{ [catId: number]: { x: number, y: number } }>({});
   const roomRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
   const lastInteractionTime = useRef<number>(0);
@@ -350,6 +351,13 @@ export default function PetCats() {
         const constrainedX = Math.max(margin, Math.min(roomRect.width - catSize - margin, newX));
         const constrainedY = Math.max(margin, Math.min(roomRect.height - catSize - margin, newY));
         
+        // Update immediate drag position for smooth rendering
+        setImmediateDragPos(prev => ({
+          ...prev,
+          [draggedCatId]: { x: constrainedX, y: constrainedY }
+        }));
+        
+        // Also update the cat state for final position
         setCats(prevCats =>
           prevCats.map(cat =>
             cat.id === draggedCatId
@@ -395,6 +403,13 @@ export default function PetCats() {
         const constrainedX = Math.max(margin, Math.min(roomRect.width - catSize - margin, newX));
         const constrainedY = Math.max(margin, Math.min(roomRect.height - catSize - margin, newY));
         
+        // Update immediate drag position for smooth rendering
+        setImmediateDragPos(prev => ({
+          ...prev,
+          [draggedCatId]: { x: constrainedX, y: constrainedY }
+        }));
+        
+        // Also update the cat state for final position
         setCats(prevCats =>
           prevCats.map(cat =>
             cat.id === draggedCatId
@@ -439,6 +454,11 @@ export default function PetCats() {
         setDraggedCatId(null);
         setIsDragging(false);
         setRoomRect(null); // Clear cached room rect
+        setImmediateDragPos(prev => {
+          const newPos = { ...prev };
+          delete newPos[draggedCatId];
+          return newPos;
+        });
       }
     };
 
@@ -476,6 +496,11 @@ export default function PetCats() {
         setDraggedCatId(null);
         setIsDragging(false);
         setRoomRect(null); // Clear cached room rect
+        setImmediateDragPos(prev => {
+          const newPos = { ...prev };
+          delete newPos[draggedCatId];
+          return newPos;
+        });
       }
     };
 
@@ -825,17 +850,21 @@ export default function PetCats() {
             {isInitialized && cats.map(cat => (
               <div
                 key={cat.id}
-                className={`absolute transition-all duration-200 touch-manipulation ${
-                  isUserDataLoaded ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-not-allowed opacity-60'
+                className={`absolute transition-[opacity,background-color,border-color,text-decoration-color,fill,stroke] duration-200 touch-manipulation ${
+                  isUserDataLoaded ? 'cursor-pointer hover:opacity-90 active:opacity-80' : 'cursor-not-allowed opacity-60'
                 } ${
                   cat.isPetted ? 'animate-pulse' : ''
                 } ${
-                  cat.isDragging ? 'z-50 opacity-80 scale-110' : ''
+                  cat.isDragging ? 'z-50 opacity-80' : ''
                 }`}
                 style={{
-                  left: `${cat.x}px`,
-                  top: `${cat.y}px`,
-                  transform: cat.vx < 0 ? 'scaleX(-1)' : 'scaleX(1)',
+                  transform: (() => {
+                    const x = cat.isDragging && immediateDragPos[cat.id] ? immediateDragPos[cat.id].x : cat.x;
+                    const y = cat.isDragging && immediateDragPos[cat.id] ? immediateDragPos[cat.id].y : cat.y;
+                    const dragScale = cat.isDragging ? 1.1 : 1;
+                    const flipScale = cat.vx < 0 ? -1 : 1;
+                    return `translate(${x}px, ${y}px) scale(${dragScale}) scaleX(${flipScale})`;
+                  })(),
                   touchAction: 'manipulation',
                   userSelect: 'none'
                 }}
