@@ -37,8 +37,12 @@ export default function PetCats() {
   const [hasInteracted, setHasInteracted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(true);
+  const [isUserDataLoaded, setIsUserDataLoaded] = useState(false);
   const [draggedCatId, setDraggedCatId] = useState<number | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartPos, setDragStartPos] = useState({ x: 0, y: 0 });
+  const [roomRect, setRoomRect] = useState<DOMRect | null>(null);
   const roomRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
   const lastInteractionTime = useRef<number>(0);
@@ -72,50 +76,6 @@ export default function PetCats() {
     } finally {
       setIsLoadingLeaderboard(false);
     }
-  };
-
-  const updateCatCountOptimistically = (catType: 'cypress' | 'aspen' | 'fiona') => {
-    if (!userName) return;
-    
-    // Update local leaderboard optimistically
-    setLeaderboard(prevLeaderboard => {
-      const existingUserIndex = prevLeaderboard.findIndex(entry => entry.name === userName);
-      
-      if (existingUserIndex >= 0) {
-        // Update existing user
-        const updatedLeaderboard = [...prevLeaderboard];
-        const user = updatedLeaderboard[existingUserIndex];
-        
-        if (catType === 'cypress') {
-          user.cypress += 1;
-        } else if (catType === 'aspen') {
-          user.aspen += 1;
-        } else if (catType === 'fiona') {
-          user.fiona += 1;
-        }
-        
-        user.total = user.cypress + user.aspen + user.fiona;
-        
-        // Sort by total pets (descending)
-        updatedLeaderboard.sort((a, b) => b.total - a.total);
-        
-        return updatedLeaderboard;
-      } else {
-        // Add new user
-        const newUser = {
-          name: userName,
-          cypress: catType === 'cypress' ? 1 : 0,
-          aspen: catType === 'aspen' ? 1 : 0,
-          fiona: catType === 'fiona' ? 1 : 0,
-          total: 1
-        };
-        
-        const updatedLeaderboard = [...prevLeaderboard, newUser];
-        updatedLeaderboard.sort((a, b) => b.total - a.total);
-        
-        return updatedLeaderboard;
-      }
-    });
   };
 
   const saveCatToSpreadsheet = async (catType: 'cypress' | 'aspen' | 'fiona') => {
@@ -190,6 +150,7 @@ export default function PetCats() {
     localStorage.removeItem('pet-cats-username');
     setUserName('');
     setHasInteracted(false);
+    setIsUserDataLoaded(false);
     
     // Reset all cat pet counters
     setCats(prevCats =>
@@ -244,6 +205,11 @@ export default function PetCats() {
           })
         );
       }
+      // Mark user data as loaded regardless of whether user exists in leaderboard
+      setIsUserDataLoaded(true);
+    } else if (!userName && leaderboard.length > 0) {
+      // If no user name but leaderboard is loaded, mark as loaded
+      setIsUserDataLoaded(true);
     }
   }, [userName, leaderboard, hasInteracted]);
 
@@ -353,18 +319,36 @@ export default function PetCats() {
     const handleGlobalMouseMove = (event: MouseEvent) => {
       if (draggedCatId === null) return;
       
-      event.preventDefault();
-      const catSize = isMobile ? 80 : 100;
-      const margin = 10;
+      const dragThreshold = 5; // pixels
+      const distance = Math.sqrt(
+        Math.pow(event.clientX - dragStartPos.x, 2) + 
+        Math.pow(event.clientY - dragStartPos.y, 2)
+      );
       
-      if (roomRef.current) {
-        const roomRect = roomRef.current.getBoundingClientRect();
+      // Only start dragging if we've moved beyond the threshold
+      if (!isDragging && distance > dragThreshold) {
+        setIsDragging(true);
+        // Mark cat as being dragged
+        setCats(prevCats =>
+          prevCats.map(c =>
+            c.id === draggedCatId ? { ...c, isDragging: true } : c
+          )
+        );
+      }
+      
+      // Only update position if we're actually dragging
+      if (isDragging && roomRect) {
+        event.preventDefault();
+        const catSize = isMobile ? 80 : 100;
+        const margin = 10;
+        
+        // Calculate position relative to the room container using cached rect
         const newX = event.clientX - roomRect.left - dragOffset.x;
         const newY = event.clientY - roomRect.top - dragOffset.y;
         
         // Constrain to room bounds
-        const constrainedX = Math.max(margin, Math.min(roomSize.width - catSize - margin, newX));
-        const constrainedY = Math.max(margin, Math.min(roomSize.height - catSize - margin, newY));
+        const constrainedX = Math.max(margin, Math.min(roomRect.width - catSize - margin, newX));
+        const constrainedY = Math.max(margin, Math.min(roomRect.height - catSize - margin, newY));
         
         setCats(prevCats =>
           prevCats.map(cat =>
@@ -379,19 +363,37 @@ export default function PetCats() {
     const handleGlobalTouchMove = (event: TouchEvent) => {
       if (draggedCatId === null) return;
       
-      event.preventDefault();
-      const catSize = isMobile ? 80 : 100;
-      const margin = 10;
+      const dragThreshold = 0; // pixels
+      const touch = event.touches[0];
+      const distance = Math.sqrt(
+        Math.pow(touch.clientX - dragStartPos.x, 2) + 
+        Math.pow(touch.clientY - dragStartPos.y, 2)
+      );
       
-      if (roomRef.current && event.touches[0]) {
-        const touch = event.touches[0];
-        const roomRect = roomRef.current.getBoundingClientRect();
+      // Only start dragging if we've moved beyond the threshold
+      if (!isDragging && distance > dragThreshold) {
+        setIsDragging(true);
+        // Mark cat as being dragged
+        setCats(prevCats =>
+          prevCats.map(c =>
+            c.id === draggedCatId ? { ...c, isDragging: true } : c
+          )
+        );
+      }
+      
+      // Only update position if we're actually dragging
+      if (isDragging && roomRect && event.touches[0]) {
+        event.preventDefault();
+        const catSize = isMobile ? 80 : 100;
+        const margin = 10;
+        
+        // Calculate position relative to the room container using cached rect
         const newX = touch.clientX - roomRect.left - dragOffset.x;
         const newY = touch.clientY - roomRect.top - dragOffset.y;
         
         // Constrain to room bounds
-        const constrainedX = Math.max(margin, Math.min(roomSize.width - catSize - margin, newX));
-        const constrainedY = Math.max(margin, Math.min(roomSize.height - catSize - margin, newY));
+        const constrainedX = Math.max(margin, Math.min(roomRect.width - catSize - margin, newX));
+        const constrainedY = Math.max(margin, Math.min(roomRect.height - catSize - margin, newY));
         
         setCats(prevCats =>
           prevCats.map(cat =>
@@ -405,41 +407,75 @@ export default function PetCats() {
 
     const handleGlobalMouseUp = () => {
       if (draggedCatId !== null) {
-        const now = Date.now();
-        setCats(prevCats =>
-          prevCats.map(cat =>
-            cat.id === draggedCatId
-              ? {
-                  ...cat,
-                  isDragging: false,
-                  vx: (Math.random() - 0.5) * 4,
-                  vy: (Math.random() - 0.5) * 4,
-                  speedBoostEndTime: now + 3000 // 3 seconds of speed boost
-                }
-              : cat
-          )
-        );
+        if (isDragging) {
+          // Was dragging - apply speed boost
+          const now = Date.now();
+          setCats(prevCats =>
+            prevCats.map(cat =>
+              cat.id === draggedCatId
+                ? {
+                    ...cat,
+                    isDragging: false,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    speedBoostEndTime: now + 3000 // 3 seconds of speed boost
+                  }
+                : cat
+            )
+          );
+        } else {
+          // Was just a tap - handle as pet interaction
+          handleCatInteraction(draggedCatId);
+          
+          // Reset dragging state without speed boost
+          setCats(prevCats =>
+            prevCats.map(cat =>
+              cat.id === draggedCatId
+                ? { ...cat, isDragging: false }
+                : cat
+            )
+          );
+        }
         setDraggedCatId(null);
+        setIsDragging(false);
+        setRoomRect(null); // Clear cached room rect
       }
     };
 
     const handleGlobalTouchEnd = () => {
       if (draggedCatId !== null) {
-        const now = Date.now();
-        setCats(prevCats =>
-          prevCats.map(cat =>
-            cat.id === draggedCatId
-              ? {
-                  ...cat,
-                  isDragging: false,
-                  vx: (Math.random() - 0.5) * 4,
-                  vy: (Math.random() - 0.5) * 4,
-                  speedBoostEndTime: now + 3000 // 3 seconds of speed boost
-                }
-              : cat
-          )
-        );
+        if (isDragging) {
+          // Was dragging - apply speed boost
+          const now = Date.now();
+          setCats(prevCats =>
+            prevCats.map(cat =>
+              cat.id === draggedCatId
+                ? {
+                    ...cat,
+                    isDragging: false,
+                    vx: (Math.random() - 0.5) * 4,
+                    vy: (Math.random() - 0.5) * 4,
+                    speedBoostEndTime: now + 3000 // 3 seconds of speed boost
+                  }
+                : cat
+            )
+          );
+        } else {
+          // Was just a tap - handle as pet interaction
+          handleCatInteraction(draggedCatId);
+          
+          // Reset dragging state without speed boost
+          setCats(prevCats =>
+            prevCats.map(cat =>
+              cat.id === draggedCatId
+                ? { ...cat, isDragging: false }
+                : cat
+            )
+          );
+        }
         setDraggedCatId(null);
+        setIsDragging(false);
+        setRoomRect(null); // Clear cached room rect
       }
     };
 
@@ -456,7 +492,7 @@ export default function PetCats() {
       document.removeEventListener('mouseup', handleGlobalMouseUp);
       document.removeEventListener('touchend', handleGlobalTouchEnd);
     };
-  }, [draggedCatId, dragOffset, roomSize, isMobile]);
+  }, [draggedCatId, dragOffset, roomSize, isMobile, isDragging, dragStartPos, roomRect]);
 
   // Animation loop
   useEffect(() => {
@@ -544,10 +580,11 @@ export default function PetCats() {
     };
   }, [roomSize.width, roomSize.height, isMobile, cats.length]);
 
-  const handleCatInteraction = (catId: number, event: React.MouseEvent | React.TouchEvent) => {
-    // Prevent default behaviors that could interfere with touch
-    event.preventDefault();
-    event.stopPropagation();
+  const handleCatInteraction = (catId: number) => {
+    // Don't allow interactions until user data is loaded
+    if (!isUserDataLoaded) {
+      return;
+    }
     
     const now = Date.now();
     
@@ -634,50 +671,34 @@ export default function PetCats() {
     }
   };
 
-  // Drag and drop handlers
-  const handleMouseDown = (catId: number, event: React.MouseEvent) => {
-    event.preventDefault();
+  // Drag and drop handlers - unified for mouse and touch
+  const handlePointerStart = (catId: number, event: React.MouseEvent | React.TouchEvent) => {
     event.stopPropagation();
     
+    // Don't allow dragging until user data is loaded
+    if (!isUserDataLoaded) {
+      return;
+    }
+    
     const cat = cats.find(c => c.id === catId);
-    if (!cat) return;
+    if (!cat || !roomRef.current) return;
+    
+    // Capture room rect once for consistent positioning
+    const currentRoomRect = roomRef.current.getBoundingClientRect();
+    setRoomRect(currentRoomRect);
+    
+    // Extract coordinates - handle both mouse and touch events
+    const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    const clientY = 'touches' in event ? event.touches[0].clientY : event.clientY;
     
     const rect = event.currentTarget.getBoundingClientRect();
-    const offsetX = event.clientX - rect.left;
-    const offsetY = event.clientY - rect.top;
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
     
     setDragOffset({ x: offsetX, y: offsetY });
     setDraggedCatId(catId);
-    
-    // Mark cat as being dragged
-    setCats(prevCats =>
-      prevCats.map(c =>
-        c.id === catId ? { ...c, isDragging: true } : c
-      )
-    );
-  };
-
-  const handleTouchStart = (catId: number, event: React.TouchEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const cat = cats.find(c => c.id === catId);
-    if (!cat) return;
-    
-    const touch = event.touches[0];
-    const rect = event.currentTarget.getBoundingClientRect();
-    const offsetX = touch.clientX - rect.left;
-    const offsetY = touch.clientY - rect.top;
-    
-    setDragOffset({ x: offsetX, y: offsetY });
-    setDraggedCatId(catId);
-    
-    // Mark cat as being dragged
-    setCats(prevCats =>
-      prevCats.map(c =>
-        c.id === catId ? { ...c, isDragging: true } : c
-      )
-    );
+    setDragStartPos({ x: clientX, y: clientY });
+    setIsDragging(false); // Start as not dragging
   };
 
 
@@ -712,6 +733,8 @@ export default function PetCats() {
           })
         );
       }
+      // Mark user data as loaded when name is submitted
+      setIsUserDataLoaded(true);
     }
   };
 
@@ -802,7 +825,9 @@ export default function PetCats() {
             {isInitialized && cats.map(cat => (
               <div
                 key={cat.id}
-                className={`absolute cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 touch-manipulation ${
+                className={`absolute transition-all duration-200 touch-manipulation ${
+                  isUserDataLoaded ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-not-allowed opacity-60'
+                } ${
                   cat.isPetted ? 'animate-pulse' : ''
                 } ${
                   cat.isDragging ? 'z-50 opacity-80 scale-110' : ''
@@ -814,14 +839,8 @@ export default function PetCats() {
                   touchAction: 'manipulation',
                   userSelect: 'none'
                 }}
-                onMouseDown={(e) => handleMouseDown(cat.id, e)}
-                onTouchStart={(e) => handleTouchStart(cat.id, e)}
-                onClick={(e) => {
-                  // Only handle click if not dragging
-                  if (!cat.isDragging) {
-                    handleCatInteraction(cat.id, e);
-                  }
-                }}
+                onMouseDown={(e) => handlePointerStart(cat.id, e)}
+                onTouchStart={(e) => handlePointerStart(cat.id, e)}
                 onTouchEnd={(e) => e.preventDefault()}
               >
                 <Image
@@ -873,6 +892,16 @@ export default function PetCats() {
             {!isInitialized && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-2xl animate-spin">🐱</div>
+              </div>
+            )}
+            
+            {/* User data loading indicator */}
+            {isInitialized && !isUserDataLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+                <div className="text-center">
+                  <div className="text-2xl animate-spin mb-2">🐱</div>
+                  <div className="text-sm text-gray-600 font-medium">Loading your cat scores...</div>
+                </div>
               </div>
             )}
           </div>
