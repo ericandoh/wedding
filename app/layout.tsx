@@ -2,11 +2,14 @@ import '#/styles/globals.css';
 
 import { Metadata } from 'next';
 import {
+  Charm,
   Cormorant_Garamond,
   Dancing_Script,
+  Eagle_Lake,
   Inter,
   Allura,
   Great_Vibes,
+  Moon_Dance,
   Satisfy,
 } from 'next/font/google';
 import { AuthProvider } from './_components/auth-provider';
@@ -52,6 +55,27 @@ const satisfy = Satisfy({
   display: 'swap',
 });
 
+const eagleLake = Eagle_Lake({
+  variable: '--font-eagle-lake',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const charm = Charm({
+  variable: '--font-charm',
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
+const moonDance = Moon_Dance({
+  variable: '--font-moon-dance',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Eric + Hang's Wedding",
@@ -76,7 +100,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="[color-scheme:light]">
       <body
-        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} antialiased`}
+        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} antialiased`}
       >
         <AuthProvider>
           <ConditionalLayout>{children}</ConditionalLayout>

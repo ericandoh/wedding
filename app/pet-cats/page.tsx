@@ -772,10 +772,10 @@ export default function PetCats() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           Pet Cats
         </h1>
-        <p className="font-satisfy text-xl text-gray-600">
+        <p className="text-body text-xl text-gray-600">
           Click on the cats to pet them!
         </p>
         {isLoading && (
@@ -790,7 +790,7 @@ export default function PetCats() {
           <div className="mt-6 max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-center space-x-4">
               <div className="bg-amber-100 px-4 py-2 rounded-full border-2 border-amber-300">
-                <span className="font-satisfy text-lg text-amber-800">
+                <span className="text-body text-lg text-amber-800">
                   Playing as: <span className="font-bold">{userName}</span>
                 </span>
               </div>
@@ -937,7 +937,7 @@ export default function PetCats() {
 
           {/* Instructions */}
           <div className="mt-6 text-center px-4">
-            <p className="font-satisfy text-lg text-gray-700">
+            <p className="text-body text-lg text-gray-700">
               {isMobile ? 'Tap the cats to pet them or drag them around!' : 'Click on the cats to pet them or drag them around!'} They love attention and will show hearts when petted.
             </p>
             <div className={`mt-4 flex justify-center ${isMobile ? 'flex-col space-y-4' : 'space-x-8'} text-sm text-gray-600`}>
@@ -963,7 +963,7 @@ export default function PetCats() {
         <div className="max-w-4xl mx-auto px-4">
           {/* Leaderboard Header with Refresh Button */}
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-satisfy text-2xl font-bold text-amber-800">🏆 Leaderboard</h3>
+            <h3 className="text-body text-2xl font-bold text-amber-800">🏆 Leaderboard</h3>
             {userName && (
               <button
                 onClick={async () => {
@@ -1038,7 +1038,7 @@ export default function PetCats() {
           {/* Personal Stats */}
           {userName && leaderboard.length > 0 && (
             <div className="mt-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border-2 border-blue-200">
-              <h4 className="font-satisfy text-lg font-bold text-blue-800 mb-3 text-center">Your Stats</h4>
+              <h4 className="text-body text-lg font-bold text-blue-800 mb-3 text-center">Your Stats</h4>
               {(() => {
                 const userEntry = leaderboard.find(entry => entry.name === userName);
                 if (!userEntry) return null;
@@ -1082,7 +1082,7 @@ export default function PetCats() {
       {showNameDialog && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-2xl">
-            <h3 className="font-satisfy text-2xl font-bold text-gray-800 mb-4 text-center">
+            <h3 className="text-body text-2xl font-bold text-gray-800 mb-4 text-center">
               🐱 Welcome to Pet Cats!
             </h3>
             <p className="text-gray-600 mb-4 text-center">

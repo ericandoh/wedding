@@ -58,7 +58,7 @@ export default function OurStory() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           About the Couple
         </h1>
       </div>
@@ -87,10 +87,10 @@ export default function OurStory() {
               />
             </div>
             <div className="flex-1 text-center lg:text-left">
-              <h2 className="font-great-vibes mb-4 text-4xl text-gray-800">
+              <h2 className="text-title mb-4 text-4xl text-gray-800">
                 Our Engagement
               </h2>
-              <p className="font-satisfy text-xl leading-relaxed text-gray-700">
+              <p className="text-body text-xl leading-relaxed text-gray-700">
                 Hang and Eric got engaged on March 3rd, 2025!
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function OurStory() {
 
           {/* Gallery Section */}
           <div className="mb-16">
-            <h2 className="font-great-vibes mb-8 text-center text-4xl text-gray-800">
+            <h2 className="text-title mb-8 text-center text-4xl text-gray-800">
               Our Journey Together
             </h2>
             <div className="columns-1 gap-6 sm:columns-2 lg:columns-2 xl:columns-2">
@@ -133,10 +133,10 @@ export default function OurStory() {
 
           {/* Story Section */}
           <div className="text-center">
-            <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
+            <p className="text-body mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
-            <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
+            <p className="text-body mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
             </p>
           </div>

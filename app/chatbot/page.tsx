@@ -99,10 +99,10 @@ export default function Chatbot() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2">
           Chatbot
         </h1>
-        <p className="font-satisfy text-xl text-gray-600">
+        <p className="text-subtitle">
           Ask questions about our wedding
         </p>
       </div>
@@ -114,25 +114,25 @@ export default function Chatbot() {
             {messages.length === 0 ? (
               <div className="flex h-full items-center justify-center text-gray-500">
                 <div className="text-center max-w-md">
-                  <p className="font-satisfy text-lg mb-4">Start a conversation...</p>
-                  <p className="font-satisfy text-sm mb-6">Ask me anything about the wedding!</p>
+                  <p className="text-body mb-4">Start a conversation...</p>
+                  <p className="text-body-sm mb-6">Ask me anything about the wedding!</p>
                   <div className="space-y-2">
-                    <p className="font-satisfy text-xs text-gray-400 mb-2">Try asking:</p>
+                    <p className="text-caption-sm text-gray-400 mb-2">Try asking:</p>
                     <button
                       onClick={() => setInputText("What should I wear to the wedding?")}
-                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                     >
                       "What should I wear to the wedding?"
                     </button>
                     <button
                       onClick={() => setInputText("When and where is the wedding?")}
-                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                     >
                       "When and where is the wedding?"
                     </button>
                     <button
                       onClick={() => setInputText("Do I need a visa for Vietnam?")}
-                      className="block w-full text-left px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                     >
                       "Do I need a visa for Vietnam?"
                     </button>
@@ -155,7 +155,7 @@ export default function Chatbot() {
                           : 'bg-gray-200 text-gray-800'
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">{message.text}</p>
+                      <p className="text-chat-message whitespace-pre-wrap">{message.text}</p>
                       <p className={`mt-1 text-xs ${
                         message.isUser 
                           ? 'text-blue-100' 
@@ -180,7 +180,7 @@ export default function Chatbot() {
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
                         </div>
-                        <p className="text-sm text-gray-600">Thinking...</p>
+                        <p className="text-chat-message text-gray-600">Thinking...</p>
                       </div>
                     </div>
                   </div>
@@ -198,12 +198,12 @@ export default function Chatbot() {
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Ask me anything about the wedding..."
               disabled={isLoading}
-              className="flex-grow rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="text-input text-placeholder flex-grow rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             />
             <button
               type="submit"
               disabled={!inputText.trim() || isLoading}
-              className="rounded-lg bg-blue-500 px-6 py-2 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="text-button rounded-lg bg-blue-500 px-6 py-2 text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? 'Sending...' : 'Send'}
             </button>

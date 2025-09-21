@@ -66,61 +66,61 @@ export default function TopNav() {
         >
           <Link
             href="/"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Home
           </Link>
           <Link
             href="/rsvp"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             RSVP
           </Link>
           <Link
             href="/schedule"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Schedule
           </Link>
           <Link
             href="/our-story"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             About the Couple
           </Link>
           <Link
             href="/venue"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Venue
           </Link>
           <Link
             href="/things-to-do"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Things to do
           </Link>
           <Link
             href="/registry"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Registry
           </Link>
           <Link
             href="/qa"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Q&A
           </Link>
           <Link
             href="/chatbot"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Chatbot
           </Link>
           <Link
             href="/pet-cats"
-            className="font-satisfy font-medium whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
           >
             Pet Cats
           </Link>

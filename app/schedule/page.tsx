@@ -2,10 +2,10 @@ export default function Schedule() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           Schedule
         </h1>
-        <p className="font-satisfy text-xl text-gray-600">
+        <p className="text-body text-xl text-gray-600">
           Join us for our wedding celebrations
         </p>
       </div>
@@ -20,33 +20,33 @@ export default function Schedule() {
               <div className="mb-16 text-center">
                 <div className="mb-6">
                   <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                  <h2 className="font-great-vibes text-5xl font-bold text-gray-800">
+                  <h2 className="text-title text-5xl font-bold text-gray-800">
                     Tea Ceremony
                   </h2>
                   <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
-                  <p className="font-satisfy text-2xl text-gray-700">
+                  <p className="text-body text-2xl text-gray-700">
                     Hang's Familial Home
                   </p>
-                  <p className="font-satisfy text-xl text-gray-600">
+                  <p className="text-body text-xl text-gray-600">
                     Sa Dec
                   </p>
-                  <p className="font-satisfy text-xl font-semibold text-gray-800">
+                  <p className="text-body text-xl font-semibold text-gray-800">
                     May 20th, 2026
                   </p>
                 </div>
                 
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Groom procession
                     </div>
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Exchange of gifts
                     </div>
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Lunch
                     </div>
                   </div>
@@ -64,36 +64,36 @@ export default function Schedule() {
               <div className="mb-8 text-center">
                 <div className="mb-6">
                   <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                  <h2 className="font-great-vibes text-5xl font-bold text-gray-800">
+                  <h2 className="text-title text-5xl font-bold text-gray-800">
                     Western Wedding
                   </h2>
                   <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
-                  <p className="font-satisfy text-2xl text-gray-700">
+                  <p className="text-body text-2xl text-gray-700">
                     Fusion Resorts & Spa
                   </p>
-                  <p className="font-satisfy text-xl text-gray-600">
+                  <p className="text-body text-xl text-gray-600">
                     Da Nang
                   </p>
-                  <p className="font-satisfy text-xl font-semibold text-gray-800">
+                  <p className="text-body text-xl font-semibold text-gray-800">
                     May 23rd, 2026
                   </p>
                 </div>
                 
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Ceremony
                     </div>
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Dinner
                     </div>
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       TODO PM - Afterparty
                     </div>
-                    <div className="font-satisfy text-gray-700">
+                    <div className="text-body text-gray-700">
                       <span className="italic">TODO PM - (optional) Post Wedding Brunch</span>
                     </div>
                   </div>
@@ -108,7 +108,7 @@ export default function Schedule() {
 
             {/* Additional Information */}
             <div className="mt-12 text-center">
-              <p className="font-satisfy text-lg text-gray-600">
+              <p className="text-body text-lg text-gray-600">
                 More details about timing and logistics will be shared closer to the events.
               </p>
             </div>

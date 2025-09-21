@@ -198,21 +198,21 @@ export default function RSVP() {
     return (
       <div className="flex min-h-screen flex-col">
         <div className="bg-white py-8 text-center">
-          <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+          <h1 className="text-title mb-2">
             RSVP
           </h1>
-          <p className="font-satisfy text-xl text-gray-600">
+          <p className="text-subtitle">
             Thank you for your response!
           </p>
         </div>
 
         <div className="flex-grow bg-white py-6">
           <div className="mx-auto max-w-4xl px-6 text-center">
-            <p className="font-satisfy mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
+            <p className="text-body-lg mb-8">
               Thank you, {formData.name}! We've received your RSVP and can't
               wait to celebrate with you!
             </p>
-            <p className="font-satisfy mb-6 text-base text-gray-600">
+            <p className="text-body mb-6">
               You can come back here anytime to edit your response!
             </p>
             <button
@@ -234,7 +234,7 @@ export default function RSVP() {
                 setIsExistingUser(false);
                 setError('');
               }}
-              className="font-satisfy border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+              className="text-subtitle border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
             >
               Submit Another RSVP
             </button>
@@ -248,10 +248,10 @@ export default function RSVP() {
     return (
       <div className="flex min-h-screen flex-col">
         <div className="bg-white py-8 text-center">
-          <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+          <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
             RSVP
           </h1>
-          <p className="font-satisfy text-xl text-gray-600">
+          <p className="text-subtitle">
             {isLoading ? 'Loading your RSVP...' : 'Please enter your email to get started'}
           </p>
         </div>
@@ -262,7 +262,7 @@ export default function RSVP() {
               <div>
                 <label
                   htmlFor="email"
-                  className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                  className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
                 >
                   Email Address *
                 </label>
@@ -274,7 +274,7 @@ export default function RSVP() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={isLoading}
-                    className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Enter your email address"
                   />
                   {email && (
@@ -282,7 +282,7 @@ export default function RSVP() {
                       type="button"
                       onClick={clearSavedEmail}
                       disabled={isLoading}
-                      className="font-satisfy absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="text-subtitle absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       Clear
                     </button>
@@ -291,7 +291,7 @@ export default function RSVP() {
               </div>
 
               {error && (
-                <div className="font-satisfy rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
+                <div className="text-subtitle rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                   {error}
                 </div>
               )}
@@ -299,7 +299,7 @@ export default function RSVP() {
               <button
                 type="submit"
                 disabled={isLoading || !email.trim()}
-                className="font-satisfy w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-button-lg w-full border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isLoading ? (
                   <span className="flex items-center justify-center">
@@ -340,18 +340,18 @@ export default function RSVP() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="font-great-vibes mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           RSVP
         </h1>
-        <p className="font-satisfy text-xl text-gray-600">
+        <p className="text-subtitle text-xl text-gray-600">
           {isExistingUser
             ? 'Update your RSVP details'
             : 'Please fill out your RSVP details'}
         </p>
-        <p className="font-satisfy mt-2 text-sm text-gray-500">
+        <p className="text-subtitle mt-2 text-sm text-gray-500">
           You can come back here anytime to edit your response!
         </p>
-        <p className="font-satisfy mt-1 text-xs text-gray-400">
+        <p className="text-subtitle mt-1 text-xs text-gray-400">
           Using email: {formData.email} •{' '}
           <button
             onClick={handleBackToEmail}
@@ -370,7 +370,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="name"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Your Name *
               </label>
@@ -382,7 +382,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your full name"
               />
             </div>
@@ -391,7 +391,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="plusOneName"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 +1 Name
               </label>
@@ -402,14 +402,14 @@ export default function RSVP() {
                 value={formData.plusOneName}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your +1's name (if applicable)"
               />
             </div>
 
             {/* Can you attend? */}
             <div>
-              <label className="font-satisfy mb-3 block text-left text-sm font-medium text-gray-700">
+              <label className="text-subtitle mb-3 block text-left text-sm font-medium text-gray-700">
                 Can you attend? *
               </label>
               <div className="space-y-2">
@@ -423,7 +423,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="font-satisfy">Yes</span>
+                  <span className="text-subtitle">Yes</span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -435,7 +435,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="font-satisfy">No</span>
+                  <span className="text-subtitle">No</span>
                 </label>
               </div>
             </div>
@@ -444,7 +444,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="email"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Email *
               </label>
@@ -454,7 +454,7 @@ export default function RSVP() {
                 name="email"
                 value={formData.email}
                 disabled
-                className="font-satisfy w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
+                className="text-subtitle w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
                 placeholder="Enter your email address"
               />
             </div>
@@ -463,7 +463,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="phone"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Phone # (optional)
               </label>
@@ -474,7 +474,7 @@ export default function RSVP() {
                 value={formData.phone}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Enter your phone number"
               />
             </div>
@@ -483,7 +483,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="eventType"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Which event can you join?
               </label>
@@ -493,7 +493,7 @@ export default function RSVP() {
                 value={formData.eventType}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="font-satisfy w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="">Select an event</option>
                 <option value="Western Wedding, May 23, Da Nang">
@@ -517,7 +517,7 @@ export default function RSVP() {
                   disabled={isSubmitting}
                   className="mr-3"
                 />
-                <span className="font-satisfy text-sm text-gray-700">
+                <span className="text-subtitle text-sm text-gray-700">
                   I'd like details about accommodation at the venue directly
                   <span className="block text-xs text-gray-500">
                     (This is being finalized)
@@ -528,7 +528,7 @@ export default function RSVP() {
 
             {/* Transportation Note */}
             <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-              <p className="font-satisfy text-sm text-blue-800">
+              <p className="text-subtitle text-sm text-blue-800">
                 Transportation details coming soon!
               </p>
             </div>
@@ -537,7 +537,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="dietaryRestrictions"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Dietary Restrictions
               </label>
@@ -548,7 +548,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="font-satisfy w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Please let us know about any dietary restrictions or allergies"
               />
             </div>
@@ -557,7 +557,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="accessibilityRestrictions"
-                className="font-satisfy mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 Accessibility Restrictions
               </label>
@@ -568,13 +568,13 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="font-satisfy w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Please let us know about any accessibility needs"
               />
             </div>
 
             {error && (
-              <div className="font-satisfy rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
+              <div className="text-subtitle rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                 {error}
               </div>
             )}
@@ -587,7 +587,7 @@ export default function RSVP() {
                 !formData.canAttend ||
                 !formData.email.trim()
               }
-              className="font-satisfy w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-subtitle w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">

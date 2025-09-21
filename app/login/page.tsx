@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Head from 'next/head';
 
 export default function LoginPage() {
   const [keyphrase, setKeyphrase] = useState('');
@@ -68,13 +67,6 @@ export default function LoginPage() {
   };
 
   return (
-    <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 px-4">
         {/* Mobile background image - hidden on larger screens */}
         <div
@@ -99,12 +91,11 @@ export default function LoginPage() {
             {/* Title Section */}
             <div className="space-y-4 text-center">
               <h1
-                className="text-6xl text-white"
+                className="text-title text-white"
                 style={{
                   textShadow:
                     '2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5)',
-                  fontFamily: 'Dancing Script, cursive',
-                  fontWeight: '600',
+                  fontSize: '4rem',
                   letterSpacing: '0.02em',
                 }}
               >
@@ -112,24 +103,21 @@ export default function LoginPage() {
               </h1>
               <div className="space-y-2">
                 <p
-                  className="text-2xl text-white"
+                  className="text-section-header text-white"
                   style={{
                     textShadow:
                       '1px 1px 3px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.5)',
-                    fontFamily: 'Caveat, cursive',
-                    fontWeight: '500',
+                    fontSize: '2rem',
                     letterSpacing: '0.01em',
                   }}
                 >
                   May 23, 2026
                 </p>
                 <p
-                  className="text-lg text-white"
+                  className="text-card-header text-white"
                   style={{
                     textShadow:
                       '1px 1px 3px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.5)',
-                    fontFamily: 'Caveat, cursive',
-                    fontWeight: '400',
                     letterSpacing: '0.01em',
                   }}
                 >
@@ -139,12 +127,10 @@ export default function LoginPage() {
 
               {/* Countdown Timer */}
               <p
-                className="text-base text-white"
+                className="text-body text-white"
                 style={{
                   textShadow:
                     '1px 1px 3px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.5)',
-                  fontFamily: 'Kalam, cursive',
-                  fontWeight: '300',
                   letterSpacing: '0.01em',
                 }}
               >
@@ -162,10 +148,8 @@ export default function LoginPage() {
                   name="keyphrase"
                   type={showPassword ? 'text' : 'password'}
                   required
-                  className="relative block w-full rounded-md border border-gray-300 bg-white/90 px-3 py-2 pr-12 text-gray-800 placeholder-gray-400 shadow-lg backdrop-blur-sm focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
+                  className="text-input text-placeholder relative block w-full rounded-md border border-gray-300 bg-white/90 px-3 py-2 pr-12 text-gray-800 shadow-lg backdrop-blur-sm focus:border-transparent focus:ring-2 focus:ring-gray-500 focus:outline-none"
                   style={{
-                    fontFamily: 'Kalam, cursive',
-                    fontWeight: '400',
                     letterSpacing: '0.01em',
                   }}
                   placeholder="hint: cypress, aspen, fiona..."
@@ -219,10 +203,8 @@ export default function LoginPage() {
 
               {error && (
                 <div
-                  className="rounded-md bg-white/80 px-3 py-2 text-sm text-red-600 shadow-lg"
+                  className="text-error rounded-md bg-white/80 px-3 py-2 shadow-lg"
                   style={{
-                    fontFamily: 'Kalam, cursive',
-                    fontWeight: '400',
                     letterSpacing: '0.01em',
                   }}
                 >
@@ -234,7 +216,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="font-satisfy border-2 border-white px-8 py-3 text-lg font-medium text-white transition-all duration-300 hover:bg-white hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="text-button-lg border-2 border-white px-8 py-3 text-white transition-all duration-300 hover:bg-white hover:text-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
                   style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
                 >
                   {isLoading ? 'Verifying...' : 'Access Website'}
@@ -244,6 +226,5 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-    </>
   );
 }
