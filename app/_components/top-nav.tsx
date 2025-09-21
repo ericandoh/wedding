@@ -33,14 +33,10 @@ export default function TopNav() {
   };
 
   return (
-    <nav className="border-b border-gray-200/50 bg-white/80 px-6 py-4 shadow-sm backdrop-blur-sm">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between">
-        {/* Language Switcher */}
-        <div className="flex-shrink-0">
-          <LanguageSwitcher />
-        </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200/50 bg-white/80 shadow-sm backdrop-blur-sm">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-center px-6 py-4">
         {/* Navigation Links Container */}
-        <div className="relative flex-1 flex items-center justify-center">
+        <div className="relative flex items-center justify-center min-w-0 w-full">
           {/* Left Arrow */}
           {showLeftArrow && (
             <button
@@ -67,12 +63,16 @@ export default function TopNav() {
           {/* Navigation Links */}
           <div
             ref={scrollContainerRef}
-            className={`scrollbar-hide flex items-center space-x-8 overflow-x-auto ${
+            className={`scrollbar-hide flex items-center space-x-8 overflow-x-auto w-full ${
               showLeftArrow ? 'pl-12' : 'pl-0'
             } ${showRightArrow ? 'pr-12' : 'pr-0'}`}
             onScroll={checkScrollPosition}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
+          {/* Language Switcher */}
+          <div className="flex-shrink-0">
+            <LanguageSwitcher />
+          </div>
           <Link
             href="/"
             className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"

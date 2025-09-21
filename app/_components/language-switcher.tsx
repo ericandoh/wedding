@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center space-x-2 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+      className="flex items-center space-x-2 rounded-md px-3 py-2 text-body text-gray-600 transition-all duration-300 hover:text-gray-800 hover:bg-gray-50 hover:underline hover:underline-offset-4 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
       aria-label={`Switch to ${language === 'en' ? 'Vietnamese' : 'English'}`}
     >
       <span className="text-lg">

@@ -18,7 +18,7 @@ export default function ConditionalLayout({
   return (
     <>
       <TopNav />
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-20">
         <div className="mx-auto max-w-7xl px-6 py-8">{children}</div>
       </main>
     </>
