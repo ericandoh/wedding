@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 
 ${weddingFactSheet}
 
-Please answer the guest's question based on this information. Be friendly, helpful, and accurate. If you don't have specific information about something, let them know they can contact the couple directly at ohhangno@gmail.com for more details.
+Please answer the guest's question based on this information. Be friendly, helpful, and accurate. If you don't have specific information about something, let them know they can contact the couple directly at ohhangno@gmail.com and apologize for not being smart yet and say sowwie.
 
 Guest's question: ${message}`;
 
