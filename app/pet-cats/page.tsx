@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { useLanguage } from '../_components/language-provider';
 
 interface Cat {
   id: number;
@@ -47,6 +48,7 @@ export default function PetCats() {
   const roomRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
   const lastInteractionTime = useRef<number>(0);
+  const { t } = useLanguage();
 
   const catImages = [
     '/aspenified.png',
@@ -773,14 +775,14 @@ export default function PetCats() {
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2">
-          Pet Cats
+          {t.petCatsTitle}
         </h1>
         <p className="text-subtitle">
-          Click on the cats to pet them!
+          {t.clickOnCatsToPet}
         </p>
         {isLoading && (
           <div className="mt-2 text-amber-600 text-body">
-            Updating leaderboard...
+            {t.updatingLeaderboard}
           </div>
         )}
         
@@ -791,14 +793,14 @@ export default function PetCats() {
             <div className="flex items-center justify-center space-x-4">
               <div className="bg-amber-100 px-4 py-2 rounded-full border-2 border-amber-300">
                 <span className="text-body text-amber-800">
-                  Playing as: <span className="text-body">{userName}</span>
+                  {t.playingAs} <span className="text-body">{userName}</span>
                 </span>
               </div>
               <button
                 onClick={clearUserIdentity}
                 className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-full text-button-sm transition-colors"
               >
-                Clear Identity
+                {t.clearIdentity}
               </button>
             </div>
           </div>
@@ -938,20 +940,20 @@ export default function PetCats() {
           {/* Instructions */}
           <div className="mt-6 text-center px-4">
             <p className="text-body text-gray-700">
-              {isMobile ? 'Tap the cats to pet them or drag them around!' : 'Click on the cats to pet them or drag them around!'} They love attention and will show hearts when petted.
+              {isMobile ? t.tapCatsToPet : t.clickCatsToPet} {t.theyLoveAttention}
             </p>
                 <div className={`mt-4 flex justify-center ${isMobile ? 'flex-col space-y-4' : 'space-x-8'} text-caption text-gray-600`}>
               <div className="flex items-center justify-center space-x-2">
                 <Image src="/aspenified.png" alt="Aspen" width={30} height={30} className="rounded-full" />
-                <span>Aspen</span>
+                <span>{t.aspen}</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
                 <Image src="/cypressified.png" alt="Cypress" width={30} height={30} className="rounded-full" />
-                <span>Cypress</span>
+                <span>{t.cypress}</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
                 <Image src="/fionified.png" alt="Fiona" width={30} height={30} className="rounded-full" />
-                <span>Fiona</span>
+                <span>{t.fiona}</span>
               </div>
             </div>
           </div>
@@ -963,7 +965,7 @@ export default function PetCats() {
         <div className="max-w-4xl mx-auto px-4">
           {/* Leaderboard Header with Refresh Button */}
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-section-header text-amber-800">🏆 Leaderboard</h3>
+            <h3 className="text-section-header text-amber-800">{t.leaderboard}</h3>
             {userName && (
               <button
                 onClick={async () => {
@@ -973,7 +975,7 @@ export default function PetCats() {
                 disabled={isLoading || isLoadingLeaderboard}
                 className="bg-blue-100 hover:bg-blue-200 disabled:bg-gray-200 text-blue-700 px-4 py-2 rounded-full text-button-sm transition-colors"
               >
-                {isLoading || isLoadingLeaderboard ? 'Syncing...' : 'Refresh'}
+                {isLoading || isLoadingLeaderboard ? t.syncing : t.refresh}
               </button>
             )}
           </div>

@@ -1,12 +1,17 @@
+'use client';
+
+import { useLanguage } from '../_components/language-provider';
+
 export default function QA() {
+  const { t } = useLanguage();
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          Q&A
+          {t.qaTitle}
         </h1>
         <p className="text-body text-xl text-gray-600">
-          Frequently asked questions about our wedding
+          {t.frequentlyAskedQuestions}
         </p>
       </div>
 
@@ -16,27 +21,25 @@ export default function QA() {
             {/* Wedding Details */}
             <div className="space-y-6">
               <h2 className="text-title text-3xl font-bold text-gray-800 text-center">
-                Wedding Details
+                {t.weddingDetails}
               </h2>
               
               <div className="space-y-4">
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    When and where is the wedding?
+                    {t.whenAndWhereWedding}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Our wedding will be held on May 23rd, 2026 at Fusion Resorts Da Nang, Vietnam. 
-                    The ceremony will begin at TODO PM, followed by cocktail hour and reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.
+                    {t.weddingDetailsAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    What should I wear?
+                    {t.whatShouldIWear}
                   </h3>
                   <p className="text-body text-gray-700">
-                    We'd love to see you dressed up! The dress code is TODO attire. 
-                    For women: TODO dresses. For men: TODO suits.
+                    {t.dressCodeAnswer}
                   </p>
                 </div>
 
@@ -56,7 +59,7 @@ export default function QA() {
             {/* Travel & Accommodation */}
             <div className="space-y-6">
               <h2 className="text-title text-3xl font-bold text-gray-800 text-center">
-                Travel & Accommodation
+                {t.travelAndAccommodation}
               </h2>
               
               <div className="space-y-4">

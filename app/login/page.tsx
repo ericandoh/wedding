@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '../_components/language-provider';
+import LanguageSwitcher from '../_components/language-switcher';
 
 export default function LoginPage() {
   const [keyphrase, setKeyphrase] = useState('');
@@ -15,6 +17,7 @@ export default function LoginPage() {
     seconds: 0,
   });
   const router = useRouter();
+  const { t } = useLanguage();
 
   // Countdown timer
   useEffect(() => {
@@ -57,10 +60,10 @@ export default function LoginPage() {
         router.push('/');
         router.refresh();
       } else {
-        setError('Invalid keyphrase. Please try again.');
+        setError(t.invalidKeyphrase);
       }
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError(t.somethingWentWrong);
     } finally {
       setIsLoading(false);
     }
@@ -68,6 +71,10 @@ export default function LoginPage() {
 
   return (
       <div className="relative flex min-h-screen items-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 px-4 justify-center">
+        {/* Language Switcher */}
+        <div className="absolute top-4 right-4 z-20">
+          <LanguageSwitcher />
+        </div>
         {/* Mobile background image - hidden on larger screens */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
@@ -98,7 +105,7 @@ export default function LoginPage() {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  Hang and Eric
+                  {t.hangAndEric}
                 </h1>
                 <div className="space-y-2">
                   <p
@@ -108,7 +115,7 @@ export default function LoginPage() {
                       letterSpacing: '0.01em',
                     }}
                   >
-                    May 23, 2026
+                    {t.may232026}
                   </p>
                   <p
                     className="text-card-header text-gray-800"
@@ -116,7 +123,7 @@ export default function LoginPage() {
                       letterSpacing: '0.01em',
                     }}
                   >
-                    Da Nang, Vietnam
+                    {t.daNangVietnam}
                   </p>
                 </div>
 
@@ -127,8 +134,8 @@ export default function LoginPage() {
                     letterSpacing: '0.01em',
                   }}
                 >
-                  {timeLeft.days} days, {timeLeft.hours} hours, {timeLeft.minutes}{' '}
-                  minutes, {timeLeft.seconds} seconds
+                  {timeLeft.days} {t.days}, {timeLeft.hours} {t.hours}, {timeLeft.minutes}{' '}
+                  {t.minutes}, {timeLeft.seconds} {t.seconds}
                 </p>
               </div>
 
@@ -136,7 +143,7 @@ export default function LoginPage() {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="relative">
                   <label htmlFor="keyphrase" className="sr-only">
-                    Secret Keyphrase
+                    {t.secretKeyphrase}
                   </label>
                   <input
                     id="keyphrase"
@@ -147,7 +154,7 @@ export default function LoginPage() {
                     style={{
                       letterSpacing: '0.01em',
                     }}
-                    placeholder="hint: cypress, aspen, fiona..."
+                    placeholder={t.hint}
                     value={keyphrase}
                     onChange={(e) => setKeyphrase(e.target.value)}
                     disabled={isLoading}
@@ -213,7 +220,7 @@ export default function LoginPage() {
                     disabled={isLoading}
                     className="text-button-lg bg-gray-800 px-8 py-3 text-white transition-all duration-300 hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {isLoading ? 'Verifying...' : 'Access Website'}
+                    {isLoading ? t.verifying : t.accessWebsite}
                   </button>
                 </div>
               </form>

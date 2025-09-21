@@ -13,6 +13,7 @@ import {
   Satisfy,
 } from 'next/font/google';
 import { AuthProvider } from './_components/auth-provider';
+import { LanguageProvider } from './_components/language-provider';
 import ConditionalLayout from './_components/conditional-layout';
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -102,9 +103,11 @@ export default function RootLayout({
       <body
         className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} antialiased`}
       >
-        <AuthProvider>
-          <ConditionalLayout>{children}</ConditionalLayout>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <ConditionalLayout>{children}</ConditionalLayout>
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

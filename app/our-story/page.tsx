@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../_components/language-provider';
 
 export default function OurStory() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const { t } = useLanguage();
 
   const galleryImages = [
     '/gallery1.JPG',
@@ -59,7 +61,7 @@ export default function OurStory() {
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          About the Couple
+          {t.aboutTheCoupleTitle}
         </h1>
       </div>
 
@@ -67,7 +69,7 @@ export default function OurStory() {
       <div className="relative h-96 w-full md:h-[500px] lg:h-[600px]">
         <Image
           src="/our_story_cover.JPG"
-          alt="Hang & Eric's Love Story"
+          alt={t.hangAndEricsLoveStory}
           fill
           className="object-cover"
         />
@@ -88,10 +90,10 @@ export default function OurStory() {
             </div>
             <div className="flex-1 text-center lg:text-left">
               <h2 className="text-title mb-4 text-4xl text-gray-800">
-                Our Engagement
+                {t.ourEngagement}
               </h2>
               <p className="text-body text-xl leading-relaxed text-gray-700">
-                Hang and Eric got engaged on March 3rd, 2025, at Hakone Gardens! But they actually first met on Hinge early 2022 (started talking together on Valentine's Day!)
+                {t.engagementStory}
               </p>
             </div>
           </div>
@@ -99,7 +101,7 @@ export default function OurStory() {
           {/* Gallery Section */}
           <div className="mb-16">
             <h2 className="text-title mb-8 text-center text-4xl text-gray-800">
-              Our Journey Together
+              {t.photoGallery}
             </h2>
             <div className="columns-1 gap-6 sm:columns-2 lg:columns-2 xl:columns-2">
               {[1, 2, 3, 4, 5, 6, 7].map((num) => {

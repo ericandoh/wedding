@@ -1,16 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 import LogoutButton from './_components/logout-button';
+import { useLanguage } from './_components/language-provider';
 
 export default function Page() {
+  const { t } = useLanguage();
   return (
     <div className="flex min-h-screen flex-col">
       {/* Title and RSVP button above the image */}
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2">
-          Hang & Eric
+          {t.hangAndEricMain}
         </h1>
         <p className="text-subtitle mb-8">
-          May 23rd, 2026 | Fusion Resorts Da Nang
+          {t.may23rd2026} | {t.fusionResortsDaNang}
         </p>
         
         {/* RSVP button */}
@@ -19,7 +23,7 @@ export default function Page() {
             href="/rsvp"
             className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
           >
-            RSVP
+            {t.rsvp}
           </Link>
         </div>
       </div>

@@ -1,12 +1,17 @@
+'use client';
+
+import { useLanguage } from '../_components/language-provider';
+
 export default function Schedule() {
+  const { t } = useLanguage();
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          Schedule
+          {t.scheduleTitle}
         </h1>
         <p className="text-body text-xl text-gray-600">
-          Join us for our wedding celebrations
+          {t.joinUsForCelebrations}
         </p>
       </div>
 
@@ -21,33 +26,33 @@ export default function Schedule() {
                 <div className="mb-6">
                   <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
                   <h2 className="text-title text-5xl font-bold text-gray-800">
-                    Tea Ceremony
+                    {t.teaCeremony}
                   </h2>
                   <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
                   <p className="text-body text-2xl text-gray-700">
-                    Hang's Familial Home
+                    {t.hangsFamilialHome}
                   </p>
                   <p className="text-body text-xl text-gray-600">
-                    Sa Dec, Vietnam
+                    {t.saDecVietnam}
                   </p>
                   <p className="text-body text-xl font-semibold text-gray-800">
-                    May 20th, 2026
+                    {t.may20th2026}
                   </p>
                 </div>
                 
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
                     <div className="text-body text-gray-700">
-                      TODO PM - Groom procession
+                      TODO PM - {t.groomProcession}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - Exchange of gifts
+                      TODO PM - {t.exchangeOfGifts}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - Lunch
+                      TODO PM - {t.lunch}
                     </div>
                   </div>
                 </div>
@@ -65,36 +70,36 @@ export default function Schedule() {
                 <div className="mb-6">
                   <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
                   <h2 className="text-title text-5xl font-bold text-gray-800">
-                    Western Wedding
+                    {t.westernWedding}
                   </h2>
                   <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
                   <p className="text-body text-2xl text-gray-700">
-                    Fusion Resorts & Spa
+                    {t.fusionResortsAndSpa}
                   </p>
                   <p className="text-body text-xl text-gray-600">
-                    Da Nang, Vietnam
+                    {t.daNangVietnam}
                   </p>
                   <p className="text-body text-xl font-semibold text-gray-800">
-                    May 23rd, 2026
+                    {t.may23rd2026Schedule}
                   </p>
                 </div>
                 
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
                     <div className="text-body text-gray-700">
-                      TODO PM - Ceremony
+                      TODO PM - {t.ceremony}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - Dinner
+                      TODO PM - {t.dinner}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - Afterparty
+                      TODO PM - {t.afterparty}
                     </div>
                     <div className="text-body text-gray-700">
-                      <span className="italic">TODO PM - (optional) Post Wedding Brunch</span>
+                      <span className="italic">TODO PM - {t.postWeddingBrunch}</span>
                     </div>
                   </div>
                 </div>
@@ -109,7 +114,7 @@ export default function Schedule() {
             {/* Additional Information */}
             <div className="mt-12 text-center">
               <p className="text-body text-lg text-gray-600">
-                More details about timing and logistics will be shared closer to the events.
+                {t.moreDetailsComing}
               </p>
             </div>
           </div>
