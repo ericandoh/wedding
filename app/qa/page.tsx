@@ -26,7 +26,7 @@ export default function QA() {
                   </h3>
                   <p className="text-body text-gray-700">
                     Our wedding will be held on May 23rd, 2026 at Fusion Resorts Da Nang, Vietnam. 
-                    The ceremony will begin at TODO PM, followed by cocktail hour and reception.
+                    The ceremony will begin at TODO PM, followed by cocktail hour and reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.
                   </p>
                 </div>
 

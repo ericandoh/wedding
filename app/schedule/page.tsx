@@ -31,7 +31,7 @@ export default function Schedule() {
                     Hang's Familial Home
                   </p>
                   <p className="text-body text-xl text-gray-600">
-                    Sa Dec
+                    Sa Dec, Vietnam
                   </p>
                   <p className="text-body text-xl font-semibold text-gray-800">
                     May 20th, 2026
@@ -75,7 +75,7 @@ export default function Schedule() {
                     Fusion Resorts & Spa
                   </p>
                   <p className="text-body text-xl text-gray-600">
-                    Da Nang
+                    Da Nang, Vietnam
                   </p>
                   <p className="text-body text-xl font-semibold text-gray-800">
                     May 23rd, 2026

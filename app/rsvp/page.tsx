@@ -13,8 +13,12 @@ export default function RSVP() {
     phone: '',
     eventType: '',
     accommodationDetails: false,
+    transportationDetails: false,
     dietaryRestrictions: '',
     accessibilityRestrictions: '',
+    notificationMethod: '',
+    notificationOther: '',
+    instagramHandle: '',
     rowIndex: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -227,8 +231,12 @@ export default function RSVP() {
                   phone: '',
                   eventType: '',
                   accommodationDetails: false,
+                  transportationDetails: false,
                   dietaryRestrictions: '',
                   accessibilityRestrictions: '',
+                  notificationMethod: '',
+                  notificationOther: '',
+                  instagramHandle: '',
                   rowIndex: 0,
                 });
                 setIsExistingUser(false);
@@ -347,6 +355,9 @@ export default function RSVP() {
           {isExistingUser
             ? 'Update your RSVP details'
             : 'Please fill out your RSVP details'}
+        </p>
+        <p className="text-card-header text-xl text-gray-600">
+          Note: We are still finalizing the details of the wedding. At this point, we only really need your RSVP + (+1) count and for you to save the date! We will keep you posted once we have accomodation / transportation / other details! (See notification preferences below).
         </p>
         <p className="text-subtitle mt-2 text-sm text-gray-500">
           You can come back here anytime to edit your response!
@@ -526,11 +537,27 @@ export default function RSVP() {
               </label>
             </div>
 
-            {/* Transportation Note */}
-            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
-              <p className="text-subtitle text-sm text-blue-800">
-                Transportation details coming soon!
-              </p>
+            {/* Transportation Details */}
+            <div>
+              <label className="flex items-start space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.transportationDetails}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      transportationDetails: e.target.checked,
+                    })
+                  }
+                  className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <span className="text-subtitle text-sm text-gray-700">
+                  I'd like details about transportation to the venue
+                  <span className="block text-xs text-gray-500">
+                    (This is being finalized)
+                  </span>
+                </span>
+              </label>
             </div>
 
             {/* Dietary Restrictions */}
@@ -571,6 +598,108 @@ export default function RSVP() {
                 className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="Please let us know about any accessibility needs"
               />
+            </div>
+
+            {/* Notification Preferences */}
+            <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
+              <h3 className="text-card-header text-gray-800 mb-4">
+                How would you like to be notified?
+              </h3>
+              
+              <div className="space-y-3">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="notificationMethod"
+                    value="IG"
+                    checked={formData.notificationMethod === 'IG'}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">Instagram (IG)</span>
+                </label>
+                
+                {formData.notificationMethod === 'IG' && (
+                  <div className="ml-6 mt-3">
+                    <input
+                      type="text"
+                      name="instagramHandle"
+                      value={formData.instagramHandle}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                      placeholder="Enter your Instagram handle (e.g., @username)"
+                      className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                  </div>
+                )}
+                
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="notificationMethod"
+                    value="email"
+                    checked={formData.notificationMethod === 'email'}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">Email</span>
+                </label>
+                
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="notificationMethod"
+                    value="SMS"
+                    checked={formData.notificationMethod === 'SMS'}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">SMS</span>
+                </label>
+                
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="notificationMethod"
+                    value="Messenger"
+                    checked={formData.notificationMethod === 'Messenger'}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">Messenger</span>
+                </label>
+                
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="notificationMethod"
+                    value="Other"
+                    checked={formData.notificationMethod === 'Other'}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">Other</span>
+                </label>
+                
+                {formData.notificationMethod === 'Other' && (
+                  <div className="ml-6 mt-3">
+                    <input
+                      type="text"
+                      name="notificationOther"
+                      value={formData.notificationOther}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                      placeholder="Please specify..."
+                      className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             {error && (

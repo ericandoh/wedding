@@ -91,7 +91,7 @@ export default function OurStory() {
                 Our Engagement
               </h2>
               <p className="text-body text-xl leading-relaxed text-gray-700">
-                Hang and Eric got engaged on March 3rd, 2025!
+                Hang and Eric got engaged on March 3rd, 2025, at Hakone Gardens! But they actually first met on Hinge early 2022 (started talking together on Valentine's Day!)
               </p>
             </div>
           </div>

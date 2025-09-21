@@ -12,8 +12,12 @@ export async function POST(request: NextRequest) {
       phone,
       eventType,
       accommodationDetails,
+      transportationDetails,
       dietaryRestrictions,
       accessibilityRestrictions,
+      notificationMethod,
+      notificationOther,
+      instagramHandle,
     } = formData;
 
     if (!name || typeof name !== 'string' || name.trim().length === 0) {
@@ -66,6 +70,17 @@ export async function POST(request: NextRequest) {
       second: '2-digit',
     });
 
+    // Create concatenated notification field
+    let notificationField = '';
+    if (notificationMethod) {
+      notificationField = notificationMethod;
+      if (notificationMethod === 'IG' && instagramHandle) {
+        notificationField += ` (${instagramHandle})`;
+      } else if (notificationMethod === 'Other' && notificationOther) {
+        notificationField += ` (${notificationOther})`;
+      }
+    }
+
     // Check if this is an update operation (has rowIndex)
     const isUpdate = formData.rowIndex && formData.rowIndex > 0;
 
@@ -75,7 +90,7 @@ export async function POST(request: NextRequest) {
       // Update existing row
       response = await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `RSVP!A${formData.rowIndex}:J${formData.rowIndex}`,
+        range: `RSVP!A${formData.rowIndex}:L${formData.rowIndex}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -87,8 +102,10 @@ export async function POST(request: NextRequest) {
               phone || '',
               eventType || '',
               accommodationDetails ? 'Yes' : 'No',
+              transportationDetails ? 'Yes' : 'No',
               dietaryRestrictions || '',
               accessibilityRestrictions || '',
+              notificationField,
               timestamp,
             ],
           ],
@@ -98,7 +115,7 @@ export async function POST(request: NextRequest) {
       // Add new row to spreadsheet
       response = await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'RSVP!A:J', // Extended range for all fields
+        range: 'RSVP!A:L', // Extended range for all fields
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -110,8 +127,10 @@ export async function POST(request: NextRequest) {
               phone || '',
               eventType || '',
               accommodationDetails ? 'Yes' : 'No',
+              transportationDetails ? 'Yes' : 'No',
               dietaryRestrictions || '',
               accessibilityRestrictions || '',
+              notificationField,
               timestamp,
             ],
           ],

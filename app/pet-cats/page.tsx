@@ -772,14 +772,14 @@ export default function PetCats() {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
-        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
+        <h1 className="text-title mb-2">
           Pet Cats
         </h1>
-        <p className="text-body text-xl text-gray-600">
+        <p className="text-subtitle">
           Click on the cats to pet them!
         </p>
         {isLoading && (
-          <div className="mt-2 text-amber-600 font-medium">
+          <div className="mt-2 text-amber-600 text-body">
             Updating leaderboard...
           </div>
         )}
@@ -790,13 +790,13 @@ export default function PetCats() {
           <div className="mt-6 max-w-4xl mx-auto px-4">
             <div className="flex items-center justify-center space-x-4">
               <div className="bg-amber-100 px-4 py-2 rounded-full border-2 border-amber-300">
-                <span className="text-body text-lg text-amber-800">
-                  Playing as: <span className="font-bold">{userName}</span>
+                <span className="text-body text-amber-800">
+                  Playing as: <span className="text-body">{userName}</span>
                 </span>
               </div>
               <button
                 onClick={clearUserIdentity}
-                className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-full text-sm font-medium transition-colors"
+                className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-full text-button-sm transition-colors"
               >
                 Clear Identity
               </button>
@@ -929,7 +929,7 @@ export default function PetCats() {
               <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
                 <div className="text-center">
                   <div className="text-2xl animate-spin mb-2">🐱</div>
-                  <div className="text-sm text-gray-600 font-medium">Loading your cat scores...</div>
+                  <div className="text-body text-gray-600">Loading your cat scores...</div>
                 </div>
               </div>
             )}
@@ -937,10 +937,10 @@ export default function PetCats() {
 
           {/* Instructions */}
           <div className="mt-6 text-center px-4">
-            <p className="text-body text-lg text-gray-700">
+            <p className="text-body text-gray-700">
               {isMobile ? 'Tap the cats to pet them or drag them around!' : 'Click on the cats to pet them or drag them around!'} They love attention and will show hearts when petted.
             </p>
-            <div className={`mt-4 flex justify-center ${isMobile ? 'flex-col space-y-4' : 'space-x-8'} text-sm text-gray-600`}>
+                <div className={`mt-4 flex justify-center ${isMobile ? 'flex-col space-y-4' : 'space-x-8'} text-caption text-gray-600`}>
               <div className="flex items-center justify-center space-x-2">
                 <Image src="/aspenified.png" alt="Aspen" width={30} height={30} className="rounded-full" />
                 <span>Aspen</span>
@@ -963,7 +963,7 @@ export default function PetCats() {
         <div className="max-w-4xl mx-auto px-4">
           {/* Leaderboard Header with Refresh Button */}
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-body text-2xl font-bold text-amber-800">🏆 Leaderboard</h3>
+            <h3 className="text-section-header text-amber-800">🏆 Leaderboard</h3>
             {userName && (
               <button
                 onClick={async () => {
@@ -971,7 +971,7 @@ export default function PetCats() {
                   await fetchLeaderboard(true);
                 }}
                 disabled={isLoading || isLoadingLeaderboard}
-                className="bg-blue-100 hover:bg-blue-200 disabled:bg-gray-200 text-blue-700 px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                className="bg-blue-100 hover:bg-blue-200 disabled:bg-gray-200 text-blue-700 px-4 py-2 rounded-full text-button-sm transition-colors"
               >
                 {isLoading || isLoadingLeaderboard ? 'Syncing...' : 'Refresh'}
               </button>
@@ -998,18 +998,18 @@ export default function PetCats() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center space-x-3">
-                        <span className="text-lg font-bold text-amber-700">
+                        <span className="text-body text-amber-700">
                           {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`}
                         </span>
-                        <span className={`font-medium ${entry.name === userName ? 'text-amber-800' : 'text-gray-700'}`}>
+                        <span className={`text-body ${entry.name === userName ? 'text-amber-800' : 'text-gray-700'}`}>
                           {entry.name}
                         </span>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-amber-700">{entry.total} total</div>
+                        <div className="text-body text-amber-700">{entry.total} total</div>
                       </div>
                     </div>
-                    <div className="flex justify-center space-x-4 text-sm">
+                    <div className="flex justify-center space-x-4 text-caption">
                       <div className="flex items-center space-x-1">
                         <Image src="/cypressified.png" alt="Cypress" width={20} height={20} className="rounded-full" />
                         <span className="text-gray-600">{entry.cypress}</span>
@@ -1025,6 +1025,44 @@ export default function PetCats() {
                     </div>
                   </div>
                 ))}
+                
+                {/* All Cats Total Row */}
+                {(() => {
+                  const totalCypress = leaderboard.reduce((sum, entry) => sum + entry.cypress, 0);
+                  const totalAspen = leaderboard.reduce((sum, entry) => sum + entry.aspen, 0);
+                  const totalFiona = leaderboard.reduce((sum, entry) => sum + entry.fiona, 0);
+                  const grandTotal = totalCypress + totalAspen + totalFiona;
+                  
+                  return (
+                    <div className="mt-4 pt-4 border-t-2 border-amber-300">
+                      <div className="px-4 py-3 rounded-lg bg-gradient-to-r from-purple-100 to-purple-200 border-2 border-purple-300">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center space-x-3">
+                            <span className="text-body text-purple-700">📊</span>
+                            <span className="text-body text-purple-800 font-semibold">All Cats Total</span>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-body text-purple-700 font-semibold">{grandTotal} total</div>
+                          </div>
+                        </div>
+                        <div className="flex justify-center space-x-4 text-caption">
+                          <div className="flex items-center space-x-1">
+                            <Image src="/cypressified.png" alt="Cypress" width={20} height={20} className="rounded-full" />
+                            <span className="text-purple-600 font-medium">{totalCypress}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Image src="/aspenified.png" alt="Aspen" width={20} height={20} className="rounded-full" />
+                            <span className="text-purple-600 font-medium">{totalAspen}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Image src="/fionified.png" alt="Fiona" width={20} height={20} className="rounded-full" />
+                            <span className="text-purple-600 font-medium">{totalFiona}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           ) : (
@@ -1038,37 +1076,39 @@ export default function PetCats() {
           {/* Personal Stats */}
           {userName && leaderboard.length > 0 && (
             <div className="mt-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border-2 border-blue-200">
-              <h4 className="text-body text-lg font-bold text-blue-800 mb-3 text-center">Your Stats</h4>
+              <h4 className="text-card-header text-blue-800 mb-3 text-center">Your Stats</h4>
               {(() => {
                 const userEntry = leaderboard.find(entry => entry.name === userName);
                 if (!userEntry) return null;
                 
                 return (
-                  <div className="flex justify-center space-x-6">
-                    <div className="text-center">
-                      <div className="flex items-center justify-center space-x-1 mb-1">
-                        <Image src="/cypressified.png" alt="Cypress" width={24} height={24} className="rounded-full" />
-                        <span className="font-bold text-blue-700">{userEntry.cypress}</span>
+                  <div className="text-center">
+                    <div className="flex justify-center space-x-6">
+                      <div className="text-center">
+                        <div className="flex items-center justify-center space-x-1 mb-1">
+                          <Image src="/cypressified.png" alt="Cypress" width={24} height={24} className="rounded-full" />
+                          <span className="text-body text-blue-700">{userEntry.cypress}</span>
+                        </div>
+                        <div className="text-caption-sm text-gray-600">Cypress</div>
                       </div>
-                      <div className="text-xs text-gray-600">Cypress</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="flex items-center justify-center space-x-1 mb-1">
-                        <Image src="/aspenified.png" alt="Aspen" width={24} height={24} className="rounded-full" />
-                        <span className="font-bold text-blue-700">{userEntry.aspen}</span>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center space-x-1 mb-1">
+                          <Image src="/aspenified.png" alt="Aspen" width={24} height={24} className="rounded-full" />
+                          <span className="text-body text-blue-700">{userEntry.aspen}</span>
+                        </div>
+                        <div className="text-caption-sm text-gray-600">Aspen</div>
                       </div>
-                      <div className="text-xs text-gray-600">Aspen</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="flex items-center justify-center space-x-1 mb-1">
-                        <Image src="/fionified.png" alt="Fiona" width={24} height={24} className="rounded-full" />
-                        <span className="font-bold text-blue-700">{userEntry.fiona}</span>
+                      <div className="text-center">
+                        <div className="flex items-center justify-center space-x-1 mb-1">
+                          <Image src="/fionified.png" alt="Fiona" width={24} height={24} className="rounded-full" />
+                          <span className="text-body text-blue-700">{userEntry.fiona}</span>
+                        </div>
+                        <div className="text-caption-sm text-gray-600">Fiona</div>
                       </div>
-                      <div className="text-xs text-gray-600">Fiona</div>
-                    </div>
-                    <div className="text-center border-l border-blue-300 pl-4">
-                      <div className="font-bold text-blue-700 text-lg">{userEntry.total}</div>
-                      <div className="text-xs text-gray-600">Total</div>
+                      <div className="text-center border-l border-blue-300 pl-4">
+                        <div className="text-body text-blue-700">{userEntry.total}</div>
+                        <div className="text-caption text-gray-600">Total</div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -1082,10 +1122,10 @@ export default function PetCats() {
       {showNameDialog && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-2xl">
-            <h3 className="text-body text-2xl font-bold text-gray-800 mb-4 text-center">
+            <h3 className="text-section-header text-gray-800 mb-4 text-center">
               🐱 Welcome to Pet Cats!
             </h3>
-            <p className="text-gray-600 mb-4 text-center">
+            <p className="text-body text-gray-600 mb-4 text-center">
               Enter your name to join the leaderboard:
             </p>
             <div className="space-y-4">
@@ -1095,14 +1135,14 @@ export default function PetCats() {
                 onChange={(e) => setNameInput(e.target.value)}
                 onKeyPress={handleNameDialogKeyPress}
                 placeholder="Your name"
-                className="w-full px-4 py-2 border-2 border-amber-300 rounded-lg focus:outline-none focus:border-amber-500 text-center text-lg"
+                className="text-input w-full px-4 py-2 border-2 border-amber-300 rounded-lg focus:outline-none focus:border-amber-500 text-center"
                 autoFocus
               />
               <div className="flex space-x-3">
                 <button
                   onClick={handleNameSubmit}
                   disabled={!nameInput.trim()}
-                  className="flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                  className="text-button flex-1 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 text-white py-2 px-4 rounded-lg transition-colors"
                 >
                   Join Leaderboard
                 </button>
@@ -1111,7 +1151,7 @@ export default function PetCats() {
                     setShowNameDialog(false);
                     setHasInteracted(false);
                   }}
-                  className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg transition-colors"
+                  className="text-button flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
                 >
                   Skip
                 </button>

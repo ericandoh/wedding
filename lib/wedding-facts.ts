@@ -2,10 +2,12 @@ export const WEDDING_FACT_SHEET = `
 Wedding Information:
 
 DATE & LOCATION:
+- Couple: Hang and Eric
 - Wedding Date: May 23rd, 2026
 - Venue: Fusion Resorts Da Nang, Vietnam
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup
 - Time: Ceremony time TBD, cocktail hour and reception to follow
+- More details will be filled out later. We will send a later invite asking for you to fill in more details!
 
 DRESS CODE:
 - Formal attire requested

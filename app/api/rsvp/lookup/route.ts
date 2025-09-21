@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     // Get all data from the spreadsheet
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'RSVP!A:J', // All columns
+      range: 'RSVP!A:L', // All columns including new fields
     });
 
     const rows = response.data.values || [];
@@ -52,6 +52,24 @@ export async function POST(request: NextRequest) {
     });
 
     if (matchingRow) {
+      // Parse notification field back into components
+      const notificationField = matchingRow[10] || '';
+      let notificationMethod = '';
+      let notificationOther = '';
+      let instagramHandle = '';
+      
+      if (notificationField) {
+        if (notificationField.startsWith('IG (')) {
+          notificationMethod = 'IG';
+          instagramHandle = notificationField.slice(4, -1); // Remove 'IG (' and ')'
+        } else if (notificationField.startsWith('Other (')) {
+          notificationMethod = 'Other';
+          notificationOther = notificationField.slice(7, -1); // Remove 'Other (' and ')'
+        } else {
+          notificationMethod = notificationField;
+        }
+      }
+
       // Return the existing data
       return NextResponse.json({
         found: true,
@@ -63,8 +81,12 @@ export async function POST(request: NextRequest) {
           phone: matchingRow[4] || '',
           eventType: matchingRow[5] || '',
           accommodationDetails: matchingRow[6] === 'Yes',
-          dietaryRestrictions: matchingRow[7] || '',
-          accessibilityRestrictions: matchingRow[8] || '',
+          transportationDetails: matchingRow[7] === 'Yes',
+          dietaryRestrictions: matchingRow[8] || '',
+          accessibilityRestrictions: matchingRow[9] || '',
+          notificationMethod,
+          notificationOther,
+          instagramHandle,
           rowIndex: rows.indexOf(matchingRow) + 1, // 1-based index for Google Sheets
         },
       });

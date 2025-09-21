@@ -10,6 +10,16 @@
   ::file-selector-button {
     border-color: theme('colors.gray.200');
   }
+  
+  /* Fix overscroll background color */
+  html {
+    background-color: white;
+  }
+  
+  body {
+    background-color: white;
+    overscroll-behavior: contain;
+  }
 }
 
 @layer components {
@@ -49,14 +59,14 @@
     color: theme('colors.gray.800');
   }
   
-  /* Page Subtitles */
-  .text-subtitle {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.4;
-    color: theme('colors.gray.600');
-  }
+      /* Page Subtitles */
+      .text-subtitle {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.375rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: theme('colors.gray.600');
+      }
   
   /* Section Headers */
   .text-section-header {
@@ -76,113 +86,113 @@
     color: theme('colors.gray.800');
   }
   
-  /* Body Text */
-  .text-body {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: theme('colors.gray.700');
-  }
+      /* Body Text */
+      .text-body {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1.6;
+        color: theme('colors.gray.700');
+      }
   
-  /* Body Text Small */
-  .text-body-sm {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: theme('colors.gray.700');
-  }
+      /* Body Text Small */
+      .text-body-sm {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.125rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: theme('colors.gray.700');
+      }
   
-  /* Body Text Large */
-  .text-body-lg {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.7;
-    color: theme('colors.gray.700');
-  }
+      /* Body Text Large */
+      .text-body-lg {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.375rem;
+        font-weight: 400;
+        line-height: 1.7;
+        color: theme('colors.gray.700');
+      }
   
-  /* Caption Text */
-  .text-caption {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.4;
-    color: theme('colors.gray.600');
-  }
+      /* Caption Text */
+      .text-caption {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: theme('colors.gray.600');
+      }
   
-  /* Small Caption Text */
-  .text-caption-sm {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 1.3;
-    color: theme('colors.gray.500');
-  }
+      /* Small Caption Text */
+      .text-caption-sm {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.3;
+        color: theme('colors.gray.500');
+      }
   
-  /* Form Labels */
-  .text-label {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: theme('colors.gray.700');
-  }
+      /* Form Labels */
+      .text-label {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: theme('colors.gray.700');
+      }
   
-  /* Input Fields */
-  .text-input {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: theme('colors.gray.900');
-  }
+      /* Input Fields */
+      .text-input {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.125rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: theme('colors.gray.900');
+      }
   
-  /* Button Text */
-  .text-button {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: inherit;
-  }
+      /* Button Text */
+      .text-button {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: inherit;
+      }
   
-  /* Button Text Large */
-  .text-button-lg {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: inherit;
-  }
+      /* Button Text Large */
+      .text-button-lg {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: inherit;
+      }
   
-  /* Button Text Small */
-  .text-button-sm {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.3;
-    color: inherit;
-  }
+      /* Button Text Small */
+      .text-button-sm {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: inherit;
+      }
   
-  /* Error Text */
-  .text-error {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.4;
-    color: theme('colors.red.700');
-  }
+      /* Error Text */
+      .text-error {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: theme('colors.red.700');
+      }
   
-  /* Success Text */
-  .text-success {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.4;
-    color: theme('colors.green.700');
-  }
+      /* Success Text */
+      .text-success {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: theme('colors.green.700');
+      }
   
   /* Link Text */
   .text-link {
@@ -194,14 +204,14 @@
     text-decoration: underline;
   }
   
-  /* Chat Message Text */
-  .text-chat-message {
-    font-family: var(--font-moon-dance), cursive;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.4;
-    color: inherit;
-  }
+      /* Chat Message Text */
+      .text-chat-message {
+        font-family: var(--font-moon-dance), cursive;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: inherit;
+      }
   
   /* Placeholder Text */
   .text-placeholder {

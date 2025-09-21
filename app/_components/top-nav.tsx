@@ -66,61 +66,61 @@ export default function TopNav() {
         >
           <Link
             href="/"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Home
           </Link>
           <Link
             href="/rsvp"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             RSVP
           </Link>
           <Link
             href="/schedule"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Schedule
           </Link>
           <Link
             href="/our-story"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             About the Couple
           </Link>
           <Link
             href="/venue"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Venue
           </Link>
           <Link
             href="/things-to-do"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Things to do
           </Link>
           <Link
             href="/registry"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Registry
           </Link>
           <Link
             href="/qa"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Q&A
           </Link>
           <Link
             href="/chatbot"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Chatbot
           </Link>
           <Link
             href="/pet-cats"
-            className="text-body whitespace-nowrap text-gray-600 transition-colors hover:text-gray-800"
+            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             Pet Cats
           </Link>
