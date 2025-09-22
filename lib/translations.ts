@@ -89,14 +89,26 @@ export interface Translations {
   accommodationAnswer: string;
   howToGetFromAirport: string;
   airportTransportAnswer: string;
+  additionalQuestions: string;
+  contactUs: string;
+  contactUsAnswer: string;
   rsvpAndGifts: string;
   rsvpDeadline: string;
   rsvpDeadlineAnswer: string;
   giftRegistry: string;
   giftRegistryAnswer: string;
-  additionalQuestions: string;
-  contactUs: string;
-  contactUsAnswer: string;
+  canIBringPlusOne: string;
+  plusOneAnswer: string;
+  ceremonyAndReception: string;
+  ceremonyIndoorsOrOutdoors: string;
+  ceremonyLocationAnswer: string;
+  whatTimeShouldIArrive: string;
+  arrivalTimeAnswer: string;
+  willThereBeFoodAndDrinks: string;
+  foodAndDrinksAnswer: string;
+  stillHaveQuestions: string;
+  contactUsMessage: string;
+  contactEmail: string;
 
   // Chatbot page
   chatbotTitle: string;
@@ -138,6 +150,67 @@ export interface Translations {
   joinLeaderboard: string;
   skip: string;
   loadingYourCatScores: string;
+
+  // RSVP page
+  rsvpTitle: string;
+  rsvpSubtitle: string;
+  rsvpLoading: string;
+  rsvpEmailPrompt: string;
+  emailAddress: string;
+  emailPlaceholder: string;
+  clear: string;
+  rsvpButton: string;
+  lookingUp: string;
+  rsvpFormTitle: string;
+  updateRsvpDetails: string;
+  fillRsvpDetails: string;
+  rsvpNote: string;
+  editResponseNote: string;
+  usingEmail: string;
+  useDifferentEmail: string;
+  yourNamePlaceholder: string;
+  plusOneName: string;
+  plusOneNamePlaceholder: string;
+  canYouAttend: string;
+  yes: string;
+  no: string;
+  email: string;
+  phoneOptional: string;
+  phonePlaceholder: string;
+  whichEventCanYouJoin: string;
+  selectEvent: string;
+  westernWeddingMay23: string;
+  teaCeremonyMay21: string;
+  bothEvents: string;
+  accommodationDetails: string;
+  accommodationDetailsNote: string;
+  transportationDetails: string;
+  transportationDetailsNote: string;
+  dietaryRestrictions: string;
+  dietaryRestrictionsPlaceholder: string;
+  accessibilityRestrictions: string;
+  accessibilityRestrictionsPlaceholder: string;
+  notificationPreferences: string;
+  howWouldYouLikeToBeNotified: string;
+  instagram: string;
+  instagramHandlePlaceholder: string;
+  emailNotification: string;
+  sms: string;
+  messenger: string;
+  other: string;
+  pleaseSpecify: string;
+  submitRsvp: string;
+  updateRsvp: string;
+  submitting: string;
+  updating: string;
+  thankYouForResponse: string;
+  thankYouMessage: string;
+  editResponseAnytime: string;
+  submitAnotherRsvp: string;
+  pleaseFillRequiredFields: string;
+  failedToLookupRsvp: string;
+  failedToSubmitRsvp: string;
+  pleaseEnterEmail: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -230,14 +303,26 @@ export const translations: Record<Language, Translations> = {
     accommodationAnswer: 'We recommend staying at Fusion Resorts Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details. There are also many beautiful beachfront hotels in the area.',
     howToGetFromAirport: 'How do I get from the airport to the venue?',
     airportTransportAnswer: 'Da Nang International Airport is about 20-30 minutes from Fusion Resorts. You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. We can help coordinate group transportation if needed - see RSVP for details.',
+    additionalQuestions: 'Additional Questions',
+    contactUs: 'How can I contact you with questions?',
+    contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact Hang at TODO or Eric at TODO. We are here to help make your trip and our celebration as wonderful as possible!',
     rsvpAndGifts: 'RSVP & Gifts',
     rsvpDeadline: 'What is the RSVP deadline?',
     rsvpDeadlineAnswer: 'Please RSVP by TODO date. You can RSVP online through our website or contact us directly.',
     giftRegistry: 'Do you have a gift registry?',
     giftRegistryAnswer: 'Your presence at our wedding is the greatest gift of all! However, if you wish to give us a gift, we have created a registry with items we would love to have in our new home together.',
-    additionalQuestions: 'Additional Questions',
-    contactUs: 'How can I contact you with questions?',
-    contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact Hang at TODO or Eric at TODO. We are here to help make your trip and our celebration as wonderful as possible!',
+    canIBringPlusOne: 'Can I bring a plus one?',
+    plusOneAnswer: 'TODO but yes.',
+    ceremonyAndReception: 'Ceremony & Reception',
+    ceremonyIndoorsOrOutdoors: 'Will the ceremony be indoors or outdoors?',
+    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resorts, weather permitting. In case of rain, we have a beautiful indoor backup location at the resort.',
+    whatTimeShouldIArrive: 'What time should I arrive?',
+    arrivalTimeAnswer: 'Please arrive by TODO PM to ensure you\'re seated before the ceremony begins at TODO PM. There will be a welcome reception area where you can enjoy refreshments before the ceremony.',
+    willThereBeFoodAndDrinks: 'Will there be food and drinks?',
+    foodAndDrinksAnswer: 'Absolutely! We\'ll have a cocktail hour with appetizers and drinks after the ceremony, followed by a full dinner reception. We\'ll accommodate dietary restrictions - please let us know when you RSVP.',
+    stillHaveQuestions: 'Still Have Questions?',
+    contactUsMessage: 'If you have any other questions or concerns, please don\'t hesitate to reach out to us!',
+    contactEmail: 'You can contact us at:',
 
     // Chatbot page
     chatbotTitle: 'Chatbot',
@@ -255,12 +340,12 @@ export const translations: Record<Language, Translations> = {
 
     // Pet Cats page
     petCatsTitle: 'Pet Cats',
-    clickOnCatsToPet: 'Click on the cats to pet them!',
+    clickOnCatsToPet: 'Click on the cats to pet them! You can also drag them around the house',
     updatingLeaderboard: 'Updating leaderboard...',
     playingAs: 'Playing as:',
     clearIdentity: 'Clear Identity',
     tapCatsToPet: 'Tap the cats to pet them or drag them around!',
-    clickCatsToPet: 'Click on the cats to pet them or drag them around!',
+    clickCatsToPet: 'Click on the cats to pet them! You can also drag them around the house',
     theyLoveAttention: 'They love attention and will show hearts when petted.',
     aspen: 'Aspen',
     cypress: 'Cypress',
@@ -279,6 +364,67 @@ export const translations: Record<Language, Translations> = {
     joinLeaderboard: 'Join Leaderboard',
     skip: 'Skip',
     loadingYourCatScores: 'Loading your cat scores...',
+
+    // RSVP page
+    rsvpTitle: 'RSVP',
+    rsvpSubtitle: 'Please enter your email to get started',
+    rsvpLoading: 'Loading your RSVP...',
+    rsvpEmailPrompt: 'Please enter your email to get started',
+    emailAddress: 'Email Address',
+    emailPlaceholder: 'Enter your email address',
+    clear: 'Clear',
+    rsvpButton: 'RSVP',
+    lookingUp: 'Looking up...',
+    rsvpFormTitle: 'RSVP',
+    updateRsvpDetails: 'Update your RSVP details',
+    fillRsvpDetails: 'Please fill out your RSVP details',
+    rsvpNote: 'Note: We are still finalizing the details of the wedding. At this point, we only really need your RSVP + (+1) count and for you to save the date! We will keep you posted once we have accomodation / transportation / other details! (See notification preferences below).',
+    editResponseNote: 'You can come back here anytime to edit your response!',
+    usingEmail: 'Using email:',
+    useDifferentEmail: 'Use different email',
+    yourNamePlaceholder: 'Enter your full name',
+    plusOneName: '+1 Name',
+    plusOneNamePlaceholder: "Enter your +1's name (if applicable)",
+    canYouAttend: 'Can you attend?',
+    yes: 'Yes',
+    no: 'No',
+    email: 'Email',
+    phoneOptional: 'Phone # (optional)',
+    phonePlaceholder: 'Enter your phone number',
+    whichEventCanYouJoin: 'Which event can you join?',
+    selectEvent: 'Select an event',
+    westernWeddingMay23: 'Western Wedding, May 23, Da Nang',
+    teaCeremonyMay21: 'Tea Ceremony, May 21, Sa Dec',
+    bothEvents: 'Both events',
+    accommodationDetails: "I'd like details about accommodation at the venue directly",
+    accommodationDetailsNote: '(This is being finalized)',
+    transportationDetails: "I'd like details about transportation to the venue",
+    transportationDetailsNote: '(This is being finalized)',
+    dietaryRestrictions: 'Dietary Restrictions',
+    dietaryRestrictionsPlaceholder: 'Please let us know about any dietary restrictions or allergies',
+    accessibilityRestrictions: 'Accessibility Restrictions',
+    accessibilityRestrictionsPlaceholder: 'Please let us know about any accessibility needs',
+    notificationPreferences: 'How would you like to be notified?',
+    howWouldYouLikeToBeNotified: 'How would you like to be notified?',
+    instagram: 'Instagram (IG)',
+    instagramHandlePlaceholder: 'Enter your Instagram handle (e.g., @username)',
+    emailNotification: 'Email',
+    sms: 'SMS',
+    messenger: 'Messenger',
+    other: 'Other',
+    pleaseSpecify: 'Please specify...',
+    submitRsvp: 'Submit RSVP',
+    updateRsvp: 'Update RSVP',
+    submitting: 'Submitting...',
+    updating: 'Updating...',
+    thankYouForResponse: 'Thank you for your response!',
+    thankYouMessage: "Thank you, {name}! We've received your RSVP and can't wait to celebrate with you!",
+    editResponseAnytime: 'You can come back here anytime to edit your response!',
+    submitAnotherRsvp: 'Submit Another RSVP',
+    pleaseFillRequiredFields: 'Please fill in all required fields (Name, Can you attend?, and Email)',
+    failedToLookupRsvp: 'Failed to lookup RSVP. Please try again.',
+    failedToSubmitRsvp: 'Failed to submit RSVP. Please try again.',
+    pleaseEnterEmail: 'Please enter your email address',
   },
   vi: {
     // Common
@@ -369,14 +515,26 @@ export const translations: Record<Language, Translations> = {
     accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resorts Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
     howToGetFromAirport: 'Làm sao để đi từ sân bay đến địa điểm?',
     airportTransportAnswer: 'Sân bay Quốc tế Đà Nẵng cách Fusion Resorts khoảng 20-30 phút. Bạn có thể đi taxi, Grab (ứng dụng đi chung xe), hoặc sắp xếp đưa đón sân bay thông qua khu nghỉ dưỡng. Chúng tôi có thể giúp điều phối vận chuyển nhóm nếu cần - xem RSVP để biết chi tiết.',
+    additionalQuestions: 'Câu Hỏi Bổ Sung',
+    contactUs: 'Làm sao tôi có thể liên hệ với bạn để đặt câu hỏi?',
+    contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang tại TODO hoặc Eric tại TODO. Chúng tôi ở đây để giúp làm cho chuyến đi và lễ kỷ niệm của chúng tôi trở nên tuyệt vời nhất có thể!',
     rsvpAndGifts: 'RSVP & Quà Tặng',
     rsvpDeadline: 'Hạn chót RSVP là khi nào?',
     rsvpDeadlineAnswer: 'Vui lòng RSVP trước ngày TODO. Bạn có thể RSVP trực tuyến thông qua trang web của chúng tôi hoặc liên hệ trực tiếp với chúng tôi.',
     giftRegistry: 'Bạn có danh sách quà tặng không?',
     giftRegistryAnswer: 'Sự có mặt của bạn tại lễ cưới của chúng tôi là món quà tuyệt vời nhất! Tuy nhiên, nếu bạn muốn tặng chúng tôi một món quà, chúng tôi đã tạo một danh sách quà tặng với những món đồ chúng tôi muốn có trong ngôi nhà mới của chúng tôi.',
-    additionalQuestions: 'Câu Hỏi Bổ Sung',
-    contactUs: 'Làm sao tôi có thể liên hệ với bạn để đặt câu hỏi?',
-    contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang tại TODO hoặc Eric tại TODO. Chúng tôi ở đây để giúp làm cho chuyến đi và lễ kỷ niệm của chúng tôi trở nên tuyệt vời nhất có thể!',
+    canIBringPlusOne: 'Tôi có thể mang người đi cùng không?',
+    plusOneAnswer: 'TODO nhưng có.',
+    ceremonyAndReception: 'Lễ Cưới & Tiệc Cưới',
+    ceremonyIndoorsOrOutdoors: 'Lễ cưới sẽ được tổ chức trong nhà hay ngoài trời?',
+    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resorts, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà đẹp tại khu nghỉ dưỡng.',
+    whatTimeShouldIArrive: 'Tôi nên đến lúc mấy giờ?',
+    arrivalTimeAnswer: 'Vui lòng đến trước TODO PM để đảm bảo bạn được ngồi trước khi lễ cưới bắt đầu lúc TODO PM. Sẽ có khu vực tiếp đón chào mừng nơi bạn có thể thưởng thức đồ uống trước lễ cưới.',
+    willThereBeFoodAndDrinks: 'Sẽ có thức ăn và đồ uống không?',
+    foodAndDrinksAnswer: 'Tất nhiên! Chúng tôi sẽ có giờ cocktail với món khai vị và đồ uống sau lễ cưới, tiếp theo là tiệc tối đầy đủ. Chúng tôi sẽ đáp ứng các hạn chế về ăn uống - vui lòng cho chúng tôi biết khi bạn RSVP.',
+    stillHaveQuestions: 'Vẫn Còn Câu Hỏi?',
+    contactUsMessage: 'Nếu bạn có bất kỳ câu hỏi hoặc lo ngại nào khác, đừng ngại liên hệ với chúng tôi!',
+    contactEmail: 'Bạn có thể liên hệ với chúng tôi tại:',
 
     // Chatbot page
     chatbotTitle: 'Trò Chuyện',
@@ -394,12 +552,12 @@ export const translations: Record<Language, Translations> = {
 
     // Pet Cats page
     petCatsTitle: 'Thú Cưng',
-    clickOnCatsToPet: 'Nhấp vào những chú mèo để vuốt ve chúng!',
+    clickOnCatsToPet: 'Nhấp vào những chú mèo để vuốt ve chúng! Bạn cũng có thể kéo chúng đi khắp nhà',
     updatingLeaderboard: 'Đang cập nhật bảng xếp hạng...',
     playingAs: 'Đang chơi với tên:',
     clearIdentity: 'Xóa Danh Tính',
     tapCatsToPet: 'Chạm vào những chú mèo để vuốt ve hoặc kéo chúng xung quanh!',
-    clickCatsToPet: 'Nhấp vào những chú mèo để vuốt ve hoặc kéo chúng xung quanh!',
+    clickCatsToPet: 'Nhấp vào những chú mèo để vuốt ve chúng! Bạn cũng có thể kéo chúng đi khắp nhà',
     theyLoveAttention: 'Chúng thích được chú ý và sẽ hiển thị trái tim khi được vuốt ve.',
     aspen: 'Aspen',
     cypress: 'Cypress',
@@ -418,5 +576,66 @@ export const translations: Record<Language, Translations> = {
     joinLeaderboard: 'Tham Gia Bảng Xếp Hạng',
     skip: 'Bỏ Qua',
     loadingYourCatScores: 'Đang tải điểm mèo của bạn...',
+
+    // RSVP page
+    rsvpTitle: 'Xác Nhận Tham Dự',
+    rsvpSubtitle: 'Vui lòng nhập email của bạn để bắt đầu',
+    rsvpLoading: 'Đang tải RSVP của bạn...',
+    rsvpEmailPrompt: 'Vui lòng nhập email của bạn để bắt đầu',
+    emailAddress: 'Địa Chỉ Email',
+    emailPlaceholder: 'Nhập địa chỉ email của bạn',
+    clear: 'Xóa',
+    rsvpButton: 'Xác Nhận Tham Dự',
+    lookingUp: 'Đang tìm kiếm...',
+    rsvpFormTitle: 'Xác Nhận Tham Dự',
+    updateRsvpDetails: 'Cập nhật thông tin RSVP của bạn',
+    fillRsvpDetails: 'Vui lòng điền thông tin RSVP của bạn',
+    rsvpNote: 'Lưu ý: Chúng tôi vẫn đang hoàn thiện các chi tiết của lễ cưới. Tại thời điểm này, chúng tôi chỉ cần số lượng RSVP + (+1) của bạn và để bạn lưu ngày! Chúng tôi sẽ thông báo cho bạn khi có thông tin về chỗ ở / phương tiện di chuyển / các chi tiết khác! (Xem tùy chọn thông báo bên dưới).',
+    editResponseNote: 'Bạn có thể quay lại đây bất cứ lúc nào để chỉnh sửa phản hồi của mình!',
+    usingEmail: 'Đang sử dụng email:',
+    useDifferentEmail: 'Sử dụng email khác',
+    yourNamePlaceholder: 'Nhập họ tên đầy đủ của bạn',
+    plusOneName: 'Tên Người Đi Cùng',
+    plusOneNamePlaceholder: 'Nhập tên người đi cùng (nếu có)',
+    canYouAttend: 'Bạn có thể tham dự không?',
+    yes: 'Có',
+    no: 'Không',
+    email: 'Email',
+    phoneOptional: 'Số Điện Thoại (tùy chọn)',
+    phonePlaceholder: 'Nhập số điện thoại của bạn',
+    whichEventCanYouJoin: 'Bạn có thể tham dự sự kiện nào?',
+    selectEvent: 'Chọn một sự kiện',
+    westernWeddingMay23: 'Lễ Cưới Phương Tây, 23 tháng 5, Đà Nẵng',
+    teaCeremonyMay21: 'Lễ Trà, 21 tháng 5, Sa Đéc',
+    bothEvents: 'Cả hai sự kiện',
+    accommodationDetails: 'Tôi muốn biết chi tiết về chỗ ở tại địa điểm trực tiếp',
+    accommodationDetailsNote: '(Đang được hoàn thiện)',
+    transportationDetails: 'Tôi muốn biết chi tiết về phương tiện di chuyển đến địa điểm',
+    transportationDetailsNote: '(Đang được hoàn thiện)',
+    dietaryRestrictions: 'Hạn Chế Về Ăn Uống',
+    dietaryRestrictionsPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ hạn chế ăn uống hoặc dị ứng nào',
+    accessibilityRestrictions: 'Hạn Chế Về Khả Năng Tiếp Cận',
+    accessibilityRestrictionsPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ nhu cầu tiếp cận nào',
+    notificationPreferences: 'Bạn muốn được thông báo như thế nào?',
+    howWouldYouLikeToBeNotified: 'Bạn muốn được thông báo như thế nào?',
+    instagram: 'Instagram (IG)',
+    instagramHandlePlaceholder: 'Nhập tên Instagram của bạn (ví dụ: @username)',
+    emailNotification: 'Email',
+    sms: 'SMS',
+    messenger: 'Messenger',
+    other: 'Khác',
+    pleaseSpecify: 'Vui lòng chỉ rõ...',
+    submitRsvp: 'Gửi RSVP',
+    updateRsvp: 'Cập Nhật RSVP',
+    submitting: 'Đang gửi...',
+    updating: 'Đang cập nhật...',
+    thankYouForResponse: 'Cảm ơn bạn đã phản hồi!',
+    thankYouMessage: 'Cảm ơn bạn, {name}! Chúng tôi đã nhận được RSVP của bạn và không thể chờ đợi để ăn mừng cùng bạn!',
+    editResponseAnytime: 'Bạn có thể quay lại đây bất cứ lúc nào để chỉnh sửa phản hồi của mình!',
+    submitAnotherRsvp: 'Gửi RSVP Khác',
+    pleaseFillRequiredFields: 'Vui lòng điền tất cả các trường bắt buộc (Tên, Bạn có thể tham dự?, và Email)',
+    failedToLookupRsvp: 'Không thể tìm kiếm RSVP. Vui lòng thử lại.',
+    failedToSubmitRsvp: 'Không thể gửi RSVP. Vui lòng thử lại.',
+    pleaseEnterEmail: 'Vui lòng nhập địa chỉ email của bạn',
   },
 };

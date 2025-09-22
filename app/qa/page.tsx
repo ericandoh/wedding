@@ -45,12 +45,10 @@ export default function QA() {
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    What's the weather like in Da Nang in May?
+                    {t.weatherInDaNang}
                   </h3>
                   <p className="text-body text-gray-700">
-                    May is typically warm and sunny in Da Nang with temperatures around 25-30°C (77-86°F). 
-                    It's the beginning of the dry season, so rain is less likely. 
-                    We recommend bringing light, breathable clothing and sunscreen.
+                    {t.weatherAnswer}
                   </p>
                 </div>
               </div>
@@ -65,33 +63,28 @@ export default function QA() {
               <div className="space-y-4">
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Do I need a visa to visit Vietnam?
+                    {t.doINeedVisa}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Most visitors need a visa to enter Vietnam. You can apply for an e-visa online 
-                    and apply well in advance of your travel dates. <a href="https://evisa.gov.vn/" target="_blank" rel="noopener noreferrer">https://evisa.gov.vn/</a>. Please check the latest requirements for your country 
+                    {t.visaAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Where should I stay?
+                    {t.whereShouldIStay}
                   </h3>
                   <p className="text-body text-gray-700">
-                    We recommend staying at Fusion Resorts Da Nang or nearby hotels in the Da Nang area. 
-                    The resort offers special rates for wedding guests - please contact us for details. 
-                    There are also many beautiful beachfront hotels in the area.
+                    {t.accommodationAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    How do I get from the airport to the venue?
+                    {t.howToGetFromAirport}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Da Nang International Airport is about 20-30 minutes from Fusion Resorts. 
-                    You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. 
-                    We can help coordinate group transportation if needed - see RSVP for details.
+                    {t.airportTransportAnswer}
                   </p>
                 </div>
               </div>
@@ -100,35 +93,34 @@ export default function QA() {
             {/* RSVP & Gifts */}
             <div className="space-y-6">
               <h2 className="text-title text-3xl font-bold text-gray-800 text-center">
-                RSVP & Gifts
+                {t.rsvpAndGifts}
               </h2>
               
               <div className="space-y-4">
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    When should I RSVP by?
+                    {t.rsvpDeadline}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Please RSVP by TODO. This gives us enough time to finalize our guest count 
-                    and make arrangements with the venue. You can RSVP through our website or by contacting us directly.
+                    {t.rsvpDeadlineAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Do you have a wedding registry?
+                    {t.giftRegistry}
                   </h3>
                   <p className="text-body text-gray-700">
-                    TODO
+                    {t.giftRegistryAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Can I bring a plus one?
+                    {t.canIBringPlusOne}
                   </h3>
                   <p className="text-body text-gray-700">
-                    TODO but yes.
+                    {t.plusOneAnswer}
                   </p>
                 </div>
               </div>
@@ -137,38 +129,34 @@ export default function QA() {
             {/* Ceremony & Reception */}
             <div className="space-y-6">
               <h2 className="text-title text-3xl font-bold text-gray-800 text-center">
-                Ceremony & Reception
+                {t.ceremonyAndReception}
               </h2>
               
               <div className="space-y-4">
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Will the ceremony be indoors or outdoors?
+                    {t.ceremonyIndoorsOrOutdoors}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Our ceremony will be held outdoors on the beach at Fusion Resorts, weather permitting. 
-                    In case of rain, we have a beautiful indoor backup location at the resort.
+                    {t.ceremonyLocationAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    What time should I arrive?
+                    {t.whatTimeShouldIArrive}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Please arrive by TODO PM to ensure you're seated before the ceremony begins at TODO PM. 
-                    There will be a welcome reception area where you can enjoy refreshments before the ceremony.
+                    {t.arrivalTimeAnswer}
                   </p>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
-                    Will there be food and drinks?
+                    {t.willThereBeFoodAndDrinks}
                   </h3>
                   <p className="text-body text-gray-700">
-                    Absolutely! We'll have a cocktail hour with appetizers and drinks after the ceremony, 
-                    followed by a full dinner reception. We'll accommodate dietary restrictions - 
-                    please let us know when you RSVP.
+                    {t.foodAndDrinksAnswer}
                   </p>
                 </div>
               </div>
@@ -177,15 +165,15 @@ export default function QA() {
             {/* Contact */}
             <div className="space-y-6">
               <h2 className="text-title text-3xl font-bold text-gray-800 text-center">
-                Still Have Questions?
+                {t.stillHaveQuestions}
               </h2>
               
               <div className="bg-gray-50 p-6 rounded-lg text-center">
                 <p className="text-body text-lg text-gray-700 mb-4">
-                  If you have any other questions or concerns, please don't hesitate to reach out to us!
+                  {t.contactUsMessage}
                 </p>
                 <p className="text-body text-base text-gray-600">
-                  You can contact us at: <strong>ohhangno@gmail.com</strong>
+                  {t.contactEmail} <strong>ohhangno@gmail.com</strong>
                 </p>
               </div>
             </div>

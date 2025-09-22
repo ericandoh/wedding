@@ -16,6 +16,11 @@ interface Cat {
   lastPetTime: number;
   isDragging: boolean;
   speedBoostEndTime: number;
+  isAsleep: boolean;
+  sleepStartTime: number;
+  sleepDuration: number;
+  awakeDuration: number;
+  awakeStartTime: number;
 }
 
 interface LeaderboardEntry {
@@ -54,6 +59,12 @@ export default function PetCats() {
     '/aspenified.png',
     '/cypressified.png', 
     '/fionified.png'
+  ];
+
+  const asleepImages = [
+    '/aspen_asleep.png',
+    '/cypress_asleep.png',
+    '/fiona_asleep.png'
   ];
 
   // API functions
@@ -101,43 +112,6 @@ export default function PetCats() {
       }
     } catch (error) {
       console.error('Error saving cat to spreadsheet:', error);
-    }
-  };
-
-  const syncToSpreadsheet = async () => {
-    if (!userName) return;
-    
-    try {
-      setIsLoading(true);
-      
-      // Get current user data from local leaderboard
-      const currentUser = leaderboard.find(entry => entry.name === userName);
-      if (!currentUser) return;
-      
-      // Send all current counts to the API
-      const response = await fetch('/api/cats/leaderboard', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: userName,
-          catType: 'sync', // Special type for full sync
-          existingUser: {
-            cypress: currentUser.cypress,
-            aspen: currentUser.aspen,
-            fiona: currentUser.fiona
-              }
-        }),
-      });
-      
-      if (!response.ok) {
-        console.error('Failed to sync to spreadsheet');
-      }
-    } catch (error) {
-      console.error('Error syncing to spreadsheet:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -227,29 +201,42 @@ export default function PetCats() {
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.max(minVelocity, Math.random() * 2);
       
+      // 1/3 chance to start asleep, 2/3 chance to start awake
+      const isAsleep = Math.random() < 1/3;
+      const currentTime = Date.now();
+      
+      // Set initial durations
+      const sleepDuration = (1 + Math.random()) * 10000; // 10-20 seconds in milliseconds
+      const awakeDuration = (1 + Math.random()) * 10000; // 10-20 seconds in milliseconds
+      
       return {
         id: index,
         x: Math.max(margin, Math.min(width - catSize - margin, Math.random() * (width - catSize))),
         y: Math.max(margin, Math.min(height - catSize - margin, Math.random() * (height - catSize))),
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        image,
+        vx: isAsleep ? 0 : Math.cos(angle) * speed,
+        vy: isAsleep ? 0 : Math.sin(angle) * speed,
+        image: isAsleep ? asleepImages[index] : image,
         isPetted: false,
         petCount: 0,
         lastPetTime: 0,
         isDragging: false,
-        speedBoostEndTime: 0
+        speedBoostEndTime: 0,
+        isAsleep,
+        sleepStartTime: isAsleep ? currentTime : 0,
+        sleepDuration,
+        awakeDuration,
+        awakeStartTime: isAsleep ? 0 : currentTime
       };
     });
   };
 
-  // Initialize cats when room size is available
+  // Initialize cats when room size is available (only once)
   useEffect(() => {
-    if (roomSize.width > 0 && roomSize.height > 0) {
+    if (roomSize.width > 0 && roomSize.height > 0 && cats.length === 0) {
       setCats(initializeCats(roomSize.width, roomSize.height));
       setIsInitialized(true);
     }
-  }, [roomSize.width, roomSize.height, isMobile]);
+  }, [roomSize.width, roomSize.height, isMobile, cats.length]);
 
   // Mobile detection and room size updates
   useEffect(() => {
@@ -273,7 +260,7 @@ export default function PetCats() {
           const margin = 20;
           const minVelocity = 0.5;
           
-          // If cat is outside bounds, reposition it
+          // If cat is outside bounds, reposition it while preserving all other properties
           if (cat.x < margin || cat.x > newWidth - catSize - margin ||
               cat.y < margin || cat.y > newHeight - catSize - margin) {
             // Generate random angle and speed for velocity
@@ -281,14 +268,14 @@ export default function PetCats() {
             const speed = Math.max(minVelocity, Math.random() * 2);
             
             return {
-              ...cat,
+              ...cat, // Preserve all existing properties including petCount, isPetted, etc.
               x: Math.max(margin, Math.min(newWidth - catSize - margin, Math.random() * (newWidth - catSize))),
               y: Math.max(margin, Math.min(newHeight - catSize - margin, Math.random() * (newHeight - catSize))),
               vx: Math.cos(angle) * speed,
               vy: Math.sin(angle) * speed
             };
           }
-          return cat;
+          return cat; // Return cat unchanged if it's still within bounds
         })
       );
     };
@@ -301,17 +288,15 @@ export default function PetCats() {
       checkMobile();
       updateRoomSize();
       
-      // If switching between mobile/desktop, reposition cats
-      if (wasMobile !== window.innerWidth < 768) {
-        setTimeout(() => {
-          if (roomRef.current) {
-            const rect = roomRef.current.getBoundingClientRect();
-            const width = Math.max(300, rect.width);
-            const height = window.innerWidth < 768 ? Math.min(400, rect.height) : 600;
-            repositionCats(width, height);
-          }
-        }, 100);
-      }
+      // Always reposition cats on resize to keep them within bounds
+      setTimeout(() => {
+        if (roomRef.current) {
+          const rect = roomRef.current.getBoundingClientRect();
+          const width = Math.max(300, rect.width);
+          const height = window.innerWidth < 768 ? Math.min(400, rect.height) : 600;
+          repositionCats(width, height);
+        }
+      }, 100);
     });
     
     return () => window.removeEventListener('resize', updateRoomSize);
@@ -536,57 +521,103 @@ export default function PetCats() {
           const minVelocity = 0.3; // Minimum velocity to prevent cats from getting stuck
           const now = Date.now();
           
-          // Check if cat has speed boost
-          const hasSpeedBoost = now < cat.speedBoostEndTime;
-          const speedMultiplier = hasSpeedBoost ? 2.5 : 1; // 2.5x speed during boost
+          // Handle sleep/awake state transitions
+          let updatedCat = { ...cat };
           
-          let newX = cat.x + (cat.vx * speedMultiplier);
-          let newY = cat.y + (cat.vy * speedMultiplier);
-          let newVx = cat.vx;
-          let newVy = cat.vy;
+          if (cat.isAsleep) {
+            // Check if cat should wake up
+            if (now - cat.sleepStartTime >= cat.sleepDuration) {
+              // Wake up the cat
+              const angle = Math.random() * Math.PI * 2;
+              const speed = Math.max(minVelocity, Math.random() * 2);
+              updatedCat = {
+                ...cat,
+                isAsleep: false,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                image: catImages[cat.id],
+                awakeStartTime: now,
+                awakeDuration: (1 + Math.random()) * 10000 // 10-20 seconds
+              };
+            } else {
+              // Cat is still sleeping, don't move
+              return {
+                ...cat,
+                isPetted: now - cat.lastPetTime < 2000
+              };
+            }
+          } else {
+            // Cat is awake, check if it should go to sleep
+            if (now - cat.awakeStartTime >= cat.awakeDuration) {
+              // Put cat to sleep
+              updatedCat = {
+                ...cat,
+                isAsleep: true,
+                vx: 0,
+                vy: 0,
+                image: asleepImages[cat.id],
+                sleepStartTime: now,
+                sleepDuration: (1 + Math.random()) * 10000 // 10-20 seconds
+              };
+            } else {
+              // Cat is still awake, continue normal movement
+              // Check if cat has speed boost
+              const hasSpeedBoost = now < cat.speedBoostEndTime;
+              const speedMultiplier = hasSpeedBoost ? 2.5 : 1; // 2.5x speed during boost
+              
+              let newX = cat.x + (cat.vx * speedMultiplier);
+              let newY = cat.y + (cat.vy * speedMultiplier);
+              let newVx = cat.vx;
+              let newVy = cat.vy;
 
-          // Ensure cats stay within bounds with proper margins
-          if (newX <= margin) {
-            newVx = Math.max(minVelocity, Math.abs(newVx)); // Ensure positive velocity with minimum
-            newX = margin;
-          } else if (newX >= roomSize.width - catSize - margin) {
-            newVx = -Math.max(minVelocity, Math.abs(newVx)); // Ensure negative velocity with minimum
-            newX = roomSize.width - catSize - margin;
-          }
-          
-          if (newY <= margin) {
-            newVy = Math.max(minVelocity, Math.abs(newVy)); // Ensure positive velocity with minimum
-            newY = margin;
-          } else if (newY >= roomSize.height - catSize - margin) {
-            newVy = -Math.max(minVelocity, Math.abs(newVy)); // Ensure negative velocity with minimum
-            newY = roomSize.height - catSize - margin;
-          }
+              // Ensure cats stay within bounds with proper margins
+              if (newX <= margin) {
+                newVx = Math.max(minVelocity, Math.abs(newVx)); // Ensure positive velocity with minimum
+                newX = margin;
+              } else if (newX >= roomSize.width - catSize - margin) {
+                newVx = -Math.max(minVelocity, Math.abs(newVx)); // Ensure negative velocity with minimum
+                newX = roomSize.width - catSize - margin;
+              }
+              
+              if (newY <= margin) {
+                newVy = Math.max(minVelocity, Math.abs(newVy)); // Ensure positive velocity with minimum
+                newY = margin;
+              } else if (newY >= roomSize.height - catSize - margin) {
+                newVy = -Math.max(minVelocity, Math.abs(newVy)); // Ensure negative velocity with minimum
+                newY = roomSize.height - catSize - margin;
+              }
 
-          // Ensure minimum velocity - if velocity is too low, give it a boost
-          const speed = Math.sqrt(newVx * newVx + newVy * newVy);
-          if (speed < minVelocity) {
-            const angle = Math.random() * Math.PI * 2;
-            newVx = Math.cos(angle) * minVelocity;
-            newVy = Math.sin(angle) * minVelocity;
-          }
+              // Ensure minimum velocity - if velocity is too low, give it a boost
+              const speed = Math.sqrt(newVx * newVx + newVy * newVy);
+              if (speed < minVelocity) {
+                const angle = Math.random() * Math.PI * 2;
+                newVx = Math.cos(angle) * minVelocity;
+                newVy = Math.sin(angle) * minVelocity;
+              }
 
-          // Random direction changes - increased frequency
-          if (Math.random() < 0.02) { // Increased from 0.01 to 0.02
-            const angle = Math.random() * Math.PI * 2;
-            const speed = Math.max(minVelocity, Math.random() * 2);
-            newVx = Math.cos(angle) * speed;
-            newVy = Math.sin(angle) * speed;
+              // Random direction changes - increased frequency
+              if (Math.random() < 0.02) { // Increased from 0.01 to 0.02
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.max(minVelocity, Math.random() * 2);
+                newVx = Math.cos(angle) * speed;
+                newVy = Math.sin(angle) * speed;
+              }
+
+              updatedCat = {
+                ...cat,
+                x: newX,
+                y: newY,
+                vx: newVx,
+                vy: newVy
+              };
+            }
           }
 
           // Reset petting state after 2 seconds
-          const isPetted = now - cat.lastPetTime < 2000;
+          const isPetted = now - updatedCat.lastPetTime < 2000;
 
           return {
-            ...cat,
-            x: newX,
-            y: newY,
-            vx: newVx,
-            vy: newVy,
+            ...updatedCat,
             isPetted
           };
         })
@@ -637,7 +668,12 @@ export default function PetCats() {
               petCount: cat.petCount + 1,
               lastPetTime: now,
               vx: (Math.random() - 0.5) * 4, // Give them a little boost
-              vy: (Math.random() - 0.5) * 4
+              vy: (Math.random() - 0.5) * 4,
+              // Wake up the cat if it was sleeping
+              isAsleep: false,
+              image: catImages[cat.id],
+              awakeStartTime: now,
+              awakeDuration: (1 + Math.random()) * 10000 // 10-20 seconds awake
             }
           : cat
       );
@@ -709,6 +745,24 @@ export default function PetCats() {
     
     const cat = cats.find(c => c.id === catId);
     if (!cat || !roomRef.current) return;
+    
+    // Wake up the cat if it was sleeping
+    if (cat.isAsleep) {
+      const now = Date.now();
+      setCats(prevCats =>
+        prevCats.map(c =>
+          c.id === catId
+            ? {
+                ...c,
+                isAsleep: false,
+                image: catImages[c.id],
+                awakeStartTime: now,
+                awakeDuration: (1 + Math.random()) * 10000 // 10-20 seconds awake
+              }
+            : c
+        )
+      );
+    }
     
     // Capture room rect once for consistent positioning
     const currentRoomRect = roomRef.current.getBoundingClientRect();
@@ -812,42 +866,18 @@ export default function PetCats() {
           {/* Room Container */}
           <div 
             ref={roomRef}
-            className="relative mx-auto overflow-hidden rounded-lg border-4 border-amber-800 bg-gradient-to-b from-amber-50 to-amber-100 shadow-2xl touch-none select-none"
+            className="relative mx-auto overflow-hidden rounded-lg border-4 border-amber-800 shadow-2xl touch-none select-none"
             style={{ 
               width: '100%', 
               height: isMobile ? '400px' : '600px', 
               maxWidth: isMobile ? '100%' : '800px',
-              minHeight: '300px'
+              minHeight: '300px',
+              backgroundImage: 'url(/cat_playground.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
             }}
           >
-            {/* Cat Tree */}
-            <div className={`absolute bottom-0 ${isMobile ? 'right-4' : 'right-8'}`}>
-              <div className="relative">
-                {/* Main pole */}
-                <div className={`absolute bottom-0 ${isMobile ? 'h-32 w-3' : 'h-48 w-4'} bg-amber-700 rounded-full`}></div>
-                {/* Platforms */}
-                <div className={`absolute ${isMobile ? 'bottom-20 right-0 h-4 w-16' : 'bottom-32 right-0 h-6 w-20'} bg-amber-600 rounded-full`}></div>
-                <div className={`absolute ${isMobile ? 'bottom-12 right-1 h-4 w-12' : 'bottom-20 right-2 h-6 w-16'} bg-amber-600 rounded-full`}></div>
-                <div className={`absolute ${isMobile ? 'bottom-4 right-2 h-4 w-8' : 'bottom-8 right-4 h-6 w-12'} bg-amber-600 rounded-full`}></div>
-                {/* Scratching post */}
-                <div className={`absolute bottom-0 ${isMobile ? 'right-8 h-20 w-2' : 'right-12 h-32 w-3'} bg-amber-700 rounded-full`}></div>
-                {/* Toys */}
-                <div className={`absolute ${isMobile ? 'bottom-16 right-10 w-2 h-2' : 'bottom-28 right-16 w-3 h-3'} bg-red-500 rounded-full`}></div>
-                <div className={`absolute ${isMobile ? 'bottom-8 right-8 w-2 h-2' : 'bottom-16 right-14 w-3 h-3'} bg-yellow-500 rounded-full`}></div>
-              </div>
-            </div>
-
-            {/* Window */}
-            <div className={`absolute top-4 left-4 ${isMobile ? 'h-20 w-32' : 'h-32 w-48'} bg-gradient-to-br from-blue-200 to-blue-300 rounded-lg border-2 border-amber-600`}>
-              <div className="absolute inset-2 border border-amber-600 rounded"></div>
-              <div className="absolute top-1/2 left-0 right-0 h-px bg-amber-600"></div>
-              <div className="absolute top-0 bottom-0 left-1/2 w-px bg-amber-600"></div>
-            </div>
-
-            {/* Floor patterns */}
-            <div className="absolute bottom-0 left-0 right-0 h-2 bg-amber-800"></div>
-            <div className="absolute bottom-2 left-4 right-4 h-1 bg-amber-700 rounded-full"></div>
-
             {/* Cats */}
             {isInitialized && cats.map(cat => (
               <div
@@ -969,7 +999,6 @@ export default function PetCats() {
             {userName && (
               <button
                 onClick={async () => {
-                  await syncToSpreadsheet();
                   await fetchLeaderboard(true);
                 }}
                 disabled={isLoading || isLoadingLeaderboard}

@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../_components/language-provider';
 
 export default function RSVP() {
+  const { t } = useLanguage();
   const [step, setStep] = useState<'email' | 'form' | 'submitted'>('email');
   const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({
@@ -73,7 +75,7 @@ export default function RSVP() {
       setError(
         err instanceof Error
           ? err.message
-          : 'Failed to lookup RSVP. Please try again.',
+          : t.failedToLookupRsvp,
       );
     } finally {
       setIsLoading(false);
@@ -83,7 +85,7 @@ export default function RSVP() {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
-      setError('Please enter your email address');
+      setError(t.pleaseEnterEmail);
       return;
     }
 
@@ -125,7 +127,7 @@ export default function RSVP() {
       setError(
         err instanceof Error
           ? err.message
-          : 'Failed to lookup RSVP. Please try again.',
+          : t.failedToLookupRsvp,
       );
     } finally {
       setIsLoading(false);
@@ -153,9 +155,7 @@ export default function RSVP() {
       !formData.canAttend ||
       !formData.email.trim()
     ) {
-      setError(
-        'Please fill in all required fields (Name, Can you attend?, and Email)',
-      );
+      setError(t.pleaseFillRequiredFields);
       return;
     }
 
@@ -181,7 +181,7 @@ export default function RSVP() {
       setError(
         err instanceof Error
           ? err.message
-          : 'Failed to submit RSVP. Please try again.',
+          : t.failedToSubmitRsvp,
       );
     } finally {
       setIsSubmitting(false);
@@ -203,21 +203,20 @@ export default function RSVP() {
       <div className="flex min-h-screen flex-col">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2">
-            RSVP
+            {t.rsvpTitle}
           </h1>
           <p className="text-subtitle">
-            Thank you for your response!
+            {t.thankYouForResponse}
           </p>
         </div>
 
         <div className="flex-grow bg-white py-6">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <p className="text-body-lg mb-8">
-              Thank you, {formData.name}! We've received your RSVP and can't
-              wait to celebrate with you!
+              {t.thankYouMessage.replace('{name}', formData.name)}
             </p>
             <p className="text-body mb-6">
-              You can come back here anytime to edit your response!
+              {t.editResponseAnytime}
             </p>
             <button
               onClick={() => {
@@ -244,7 +243,7 @@ export default function RSVP() {
               }}
               className="text-subtitle border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
             >
-              Submit Another RSVP
+              {t.submitAnotherRsvp}
             </button>
           </div>
         </div>
@@ -257,10 +256,10 @@ export default function RSVP() {
       <div className="flex min-h-screen flex-col">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-            RSVP
+            {t.rsvpTitle}
           </h1>
           <p className="text-subtitle">
-            {isLoading ? 'Loading your RSVP...' : 'Please enter your email to get started'}
+            {isLoading ? t.rsvpLoading : t.rsvpEmailPrompt}
           </p>
         </div>
 
@@ -272,7 +271,7 @@ export default function RSVP() {
                   htmlFor="email"
                   className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
                 >
-                  Email Address *
+                  {t.emailAddress} *
                 </label>
                 <div className="relative">
                   <input
@@ -283,7 +282,7 @@ export default function RSVP() {
                     required
                     disabled={isLoading}
                     className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="Enter your email address"
+                    placeholder={t.emailPlaceholder}
                   />
                   {email && (
                     <button
@@ -292,7 +291,7 @@ export default function RSVP() {
                       disabled={isLoading}
                       className="text-subtitle absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      Clear
+                      {t.clear}
                     </button>
                   )}
                 </div>
@@ -331,10 +330,10 @@ export default function RSVP() {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Looking up...
+                    {t.lookingUp}
                   </span>
                 ) : (
-                  'RSVP'
+                  t.rsvpButton
                 )}
               </button>
             </form>
@@ -349,26 +348,26 @@ export default function RSVP() {
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          RSVP
+          {t.rsvpFormTitle}
         </h1>
         <p className="text-subtitle text-xl text-gray-600">
           {isExistingUser
-            ? 'Update your RSVP details'
-            : 'Please fill out your RSVP details'}
+            ? t.updateRsvpDetails
+            : t.fillRsvpDetails}
         </p>
         <p className="text-card-header text-xl text-gray-600">
-          Note: We are still finalizing the details of the wedding. At this point, we only really need your RSVP + (+1) count and for you to save the date! We will keep you posted once we have accomodation / transportation / other details! (See notification preferences below).
+          {t.rsvpNote}
         </p>
         <p className="text-subtitle mt-2 text-sm text-gray-500">
-          You can come back here anytime to edit your response!
+          {t.editResponseNote}
         </p>
         <p className="text-subtitle mt-1 text-xs text-gray-400">
-          Using email: {formData.email} •{' '}
+          {t.usingEmail} {formData.email} •{' '}
           <button
             onClick={handleBackToEmail}
             className="underline hover:text-gray-600"
           >
-            Use different email
+            {t.useDifferentEmail}
           </button>
         </p>
       </div>
@@ -383,7 +382,7 @@ export default function RSVP() {
                 htmlFor="name"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Your Name *
+                {t.yourName} *
               </label>
               <input
                 type="text"
@@ -394,7 +393,7 @@ export default function RSVP() {
                 required
                 disabled={isSubmitting}
                 className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter your full name"
+                placeholder={t.yourNamePlaceholder}
               />
             </div>
 
@@ -404,7 +403,7 @@ export default function RSVP() {
                 htmlFor="plusOneName"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                +1 Name
+                {t.plusOneName}
               </label>
               <input
                 type="text"
@@ -414,14 +413,14 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter your +1's name (if applicable)"
+                placeholder={t.plusOneNamePlaceholder}
               />
             </div>
 
             {/* Can you attend? */}
             <div>
               <label className="text-subtitle mb-3 block text-left text-sm font-medium text-gray-700">
-                Can you attend? *
+                {t.canYouAttend} *
               </label>
               <div className="space-y-2">
                 <label className="flex items-center">
@@ -434,7 +433,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-subtitle">Yes</span>
+                  <span className="text-subtitle">{t.yes}</span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -446,7 +445,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-subtitle">No</span>
+                  <span className="text-subtitle">{t.no}</span>
                 </label>
               </div>
             </div>
@@ -457,7 +456,7 @@ export default function RSVP() {
                 htmlFor="email"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Email *
+                {t.email} *
               </label>
               <input
                 type="email"
@@ -466,7 +465,7 @@ export default function RSVP() {
                 value={formData.email}
                 disabled
                 className="text-subtitle w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
-                placeholder="Enter your email address"
+                placeholder={t.emailPlaceholder}
               />
             </div>
 
@@ -476,7 +475,7 @@ export default function RSVP() {
                 htmlFor="phone"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Phone # (optional)
+                {t.phoneOptional}
               </label>
               <input
                 type="tel"
@@ -486,7 +485,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Enter your phone number"
+                placeholder={t.phonePlaceholder}
               />
             </div>
 
@@ -496,7 +495,7 @@ export default function RSVP() {
                 htmlFor="eventType"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Which event can you join?
+                {t.whichEventCanYouJoin}
               </label>
               <select
                 id="eventType"
@@ -506,14 +505,14 @@ export default function RSVP() {
                 disabled={isSubmitting}
                 className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <option value="">Select an event</option>
+                <option value="">{t.selectEvent}</option>
                 <option value="Western Wedding, May 23, Da Nang">
-                  Western Wedding, May 23, Da Nang
+                  {t.westernWeddingMay23}
                 </option>
                 <option value="Tea Ceremony, May 21, Sa Dec">
-                  Tea Ceremony, May 21, Sa Dec
+                  {t.teaCeremonyMay21}
                 </option>
-                <option value="Both events">Both events</option>
+                <option value="Both events">{t.bothEvents}</option>
               </select>
             </div>
 
@@ -529,9 +528,9 @@ export default function RSVP() {
                   className="mr-3"
                 />
                 <span className="text-subtitle text-sm text-gray-700">
-                  I'd like details about accommodation at the venue directly
+                  {t.accommodationDetails}
                   <span className="block text-xs text-gray-500">
-                    (This is being finalized)
+                    {t.accommodationDetailsNote}
                   </span>
                 </span>
               </label>
@@ -552,9 +551,9 @@ export default function RSVP() {
                   className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
                 <span className="text-subtitle text-sm text-gray-700">
-                  I'd like details about transportation to the venue
+                  {t.transportationDetails}
                   <span className="block text-xs text-gray-500">
-                    (This is being finalized)
+                    {t.transportationDetailsNote}
                   </span>
                 </span>
               </label>
@@ -566,7 +565,7 @@ export default function RSVP() {
                 htmlFor="dietaryRestrictions"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Dietary Restrictions
+                {t.dietaryRestrictions}
               </label>
               <textarea
                 id="dietaryRestrictions"
@@ -576,7 +575,7 @@ export default function RSVP() {
                 disabled={isSubmitting}
                 rows={3}
                 className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Please let us know about any dietary restrictions or allergies"
+                placeholder={t.dietaryRestrictionsPlaceholder}
               />
             </div>
 
@@ -586,7 +585,7 @@ export default function RSVP() {
                 htmlFor="accessibilityRestrictions"
                 className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
               >
-                Accessibility Restrictions
+                {t.accessibilityRestrictions}
               </label>
               <textarea
                 id="accessibilityRestrictions"
@@ -596,14 +595,14 @@ export default function RSVP() {
                 disabled={isSubmitting}
                 rows={3}
                 className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Please let us know about any accessibility needs"
+                placeholder={t.accessibilityRestrictionsPlaceholder}
               />
             </div>
 
             {/* Notification Preferences */}
             <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
               <h3 className="text-card-header text-gray-800 mb-4">
-                How would you like to be notified?
+                {t.howWouldYouLikeToBeNotified}
               </h3>
               
               <div className="space-y-3">
@@ -617,7 +616,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">Instagram (IG)</span>
+                  <span className="text-body">{t.instagram}</span>
                 </label>
                 
                 {formData.notificationMethod === 'IG' && (
@@ -628,7 +627,7 @@ export default function RSVP() {
                       value={formData.instagramHandle}
                       onChange={handleInputChange}
                       disabled={isSubmitting}
-                      placeholder="Enter your Instagram handle (e.g., @username)"
+                      placeholder={t.instagramHandlePlaceholder}
                       className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -644,7 +643,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">Email</span>
+                  <span className="text-body">{t.emailNotification}</span>
                 </label>
                 
                 <label className="flex items-center">
@@ -657,7 +656,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">SMS</span>
+                  <span className="text-body">{t.sms}</span>
                 </label>
                 
                 <label className="flex items-center">
@@ -670,7 +669,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">Messenger</span>
+                  <span className="text-body">{t.messenger}</span>
                 </label>
                 
                 <label className="flex items-center">
@@ -683,7 +682,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">Other</span>
+                  <span className="text-body">{t.other}</span>
                 </label>
                 
                 {formData.notificationMethod === 'Other' && (
@@ -694,7 +693,7 @@ export default function RSVP() {
                       value={formData.notificationOther}
                       onChange={handleInputChange}
                       disabled={isSubmitting}
-                      placeholder="Please specify..."
+                      placeholder={t.pleaseSpecify}
                       className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
@@ -740,12 +739,12 @@ export default function RSVP() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  {isExistingUser ? 'Updating...' : 'Submitting...'}
+                  {isExistingUser ? t.updating : t.submitting}
                 </span>
               ) : isExistingUser ? (
-                'Update RSVP'
+                t.updateRsvp
               ) : (
-                'Submit RSVP'
+                t.submitRsvp
               )}
             </button>
           </form>
