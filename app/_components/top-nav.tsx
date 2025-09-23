@@ -75,61 +75,61 @@ export default function TopNav() {
           </div>
           <Link
             href="/"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.home}
           </Link>
           <Link
             href="/rsvp"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.rsvp}
           </Link>
           <Link
             href="/schedule"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.schedule}
           </Link>
           <Link
             href="/our-story"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.aboutTheCouple}
           </Link>
           <Link
             href="/venue"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.venue}
           </Link>
           <Link
             href="/things-to-do"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.thingsToDo}
           </Link>
           <Link
             href="/registry"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.registry}
           </Link>
           <Link
             href="/qa"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.qa}
           </Link>
           <Link
             href="/chatbot"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.chatbot}
           </Link>
           <Link
             href="/pet-cats"
-            className="text-body whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
           >
             {t.petCats}
           </Link>

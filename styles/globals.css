@@ -47,8 +47,16 @@
   .font-satisfy {
     font-family: var(--font-satisfy), cursive;
   }
+  
+  .font-luxurious-roman {
+    font-family: var(--font-luxurious-roman), serif;
+  }
 
-  /* Typography System Classes - All using Moon Dance */
+  .font-cormorant-garamond {
+    font-family: var(--font-cormorant), serif;
+  }
+
+  /* Typography System Classes - Titles use Moon Dance, body text uses Cormorant Garamond */
   
   /* Page Titles */
   .text-title {
@@ -79,16 +87,25 @@
   
   /* Card Headers */
   .text-card-header {
-    font-family: var(--font-moon-dance), cursive;
+    font-family: var(--font-cormorant), italic;
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.3;
     color: theme('colors.gray.800');
   }
+
+  /* App Bar Headers */
+  .text-bar-header {
+    font-family: var(--font-moon-dance), cursive;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: theme('colors.gray.800');
+  }
   
       /* Body Text */
       .text-body {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.25rem;
         font-weight: 400;
         line-height: 1.6;
@@ -97,7 +114,7 @@
   
       /* Body Text Small */
       .text-body-sm {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.125rem;
         font-weight: 400;
         line-height: 1.5;
@@ -106,7 +123,7 @@
   
       /* Body Text Large */
       .text-body-lg {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.375rem;
         font-weight: 400;
         line-height: 1.7;
@@ -115,7 +132,7 @@
   
       /* Caption Text */
       .text-caption {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.4;
@@ -124,7 +141,7 @@
   
       /* Small Caption Text */
       .text-caption-sm {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 0.875rem;
         font-weight: 400;
         line-height: 1.3;
@@ -133,7 +150,7 @@
   
       /* Form Labels */
       .text-label {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.4;
@@ -142,7 +159,7 @@
   
       /* Input Fields */
       .text-input {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.125rem;
         font-weight: 400;
         line-height: 1.5;
@@ -151,7 +168,7 @@
   
       /* Button Text */
       .text-button {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.125rem;
         font-weight: 500;
         line-height: 1.4;
@@ -160,7 +177,7 @@
   
       /* Button Text Large */
       .text-button-lg {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1.25rem;
         font-weight: 500;
         line-height: 1.4;
@@ -169,7 +186,7 @@
   
       /* Button Text Small */
       .text-button-sm {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 0.875rem;
         font-weight: 500;
         line-height: 1.3;
@@ -178,7 +195,7 @@
   
       /* Error Text */
       .text-error {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.4;
@@ -187,7 +204,7 @@
   
       /* Success Text */
       .text-success {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.4;
@@ -196,7 +213,7 @@
   
   /* Link Text */
   .text-link {
-    font-family: var(--font-moon-dance), cursive;
+    font-family: var(--font-cormorant), italic;
     font-size: inherit;
     font-weight: 400;
     line-height: inherit;
@@ -206,7 +223,7 @@
   
       /* Chat Message Text */
       .text-chat-message {
-        font-family: var(--font-moon-dance), cursive;
+        font-family: var(--font-cormorant), italic;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.4;
@@ -215,7 +232,7 @@
   
   /* Placeholder Text */
   .text-placeholder {
-    font-family: var(--font-moon-dance), cursive;
+    font-family: var(--font-cormorant), italic;
     font-size: inherit;
     font-weight: 400;
     line-height: inherit;

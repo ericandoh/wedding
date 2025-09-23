@@ -2,11 +2,12 @@ export const WEDDING_FACT_SHEET = `
 Wedding Information:
 
 DATE & LOCATION:
-- Couple: Hang and Eric
+- Couple: Bride: Hang, Groom: Eric
 - Wedding Date: May 23rd, 2026
 - Venue: Fusion Resorts Da Nang, Vietnam
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup
 - Time: Ceremony time TBD, cocktail hour and reception to follow
+- Tea ceremony on May 20th, 2026 at Hang's family home in Sa Dec, Vietnam
 - More details will be filled out later. We will send a later invite asking for you to fill in more details!
 
 DRESS CODE:
@@ -27,7 +28,7 @@ RSVP & LOGISTICS:
 - RSVP deadline: TBD
 - Plus ones: Allowed (please specify in RSVP)
 - Dietary restrictions: Accommodated (mention in RSVP)
-- Transportation coordination available for groups
+- Transportation coordination available
 
 CEREMONY & RECEPTION:
 - Arrival: Please arrive by TBD (before ceremony start time)

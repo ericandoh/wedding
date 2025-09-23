@@ -9,6 +9,7 @@ import {
   Inter,
   Allura,
   Great_Vibes,
+  Luxurious_Roman,
   Moon_Dance,
   Satisfy,
 } from 'next/font/google';
@@ -77,6 +78,13 @@ const moonDance = Moon_Dance({
   display: 'swap',
 });
 
+const luxuriousRoman = Luxurious_Roman({
+  variable: '--font-luxurious-roman',
+  subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Eric + Hang's Wedding",
@@ -101,7 +109,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="[color-scheme:light]">
       <body
-        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} antialiased`}
+        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} ${luxuriousRoman.variable} antialiased`}
       >
         <LanguageProvider>
           <AuthProvider>

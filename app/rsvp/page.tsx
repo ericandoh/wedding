@@ -241,7 +241,7 @@ export default function RSVP() {
                 setIsExistingUser(false);
                 setError('');
               }}
-              className="text-subtitle border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+              className="text-button border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
             >
               {t.submitAnotherRsvp}
             </button>
@@ -269,7 +269,7 @@ export default function RSVP() {
               <div>
                 <label
                   htmlFor="email"
-                  className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                  className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
                 >
                   {t.emailAddress} *
                 </label>
@@ -281,7 +281,7 @@ export default function RSVP() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={isLoading}
-                    className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 pr-20 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder={t.emailPlaceholder}
                   />
                   {email && (
@@ -289,7 +289,7 @@ export default function RSVP() {
                       type="button"
                       onClick={clearSavedEmail}
                       disabled={isLoading}
-                      className="text-subtitle absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="text-caption-sm absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {t.clear}
                     </button>
@@ -298,7 +298,7 @@ export default function RSVP() {
               </div>
 
               {error && (
-                <div className="text-subtitle rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
+                <div className="text-error rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                   {error}
                 </div>
               )}
@@ -358,10 +358,10 @@ export default function RSVP() {
         <p className="text-card-header text-xl text-gray-600">
           {t.rsvpNote}
         </p>
-        <p className="text-subtitle mt-2 text-sm text-gray-500">
+        <p className="text-caption mt-2 text-sm text-gray-500">
           {t.editResponseNote}
         </p>
-        <p className="text-subtitle mt-1 text-xs text-gray-400">
+        <p className="text-caption-sm mt-1 text-xs text-gray-400">
           {t.usingEmail} {formData.email} •{' '}
           <button
             onClick={handleBackToEmail}
@@ -380,7 +380,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="name"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.yourName} *
               </label>
@@ -392,7 +392,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder={t.yourNamePlaceholder}
               />
             </div>
@@ -401,7 +401,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="plusOneName"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.plusOneName}
               </label>
@@ -412,14 +412,14 @@ export default function RSVP() {
                 value={formData.plusOneName}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder={t.plusOneNamePlaceholder}
               />
             </div>
 
             {/* Can you attend? */}
             <div>
-              <label className="text-subtitle mb-3 block text-left text-sm font-medium text-gray-700">
+              <label className="text-label mb-3 block text-left text-sm font-medium text-gray-700">
                 {t.canYouAttend} *
               </label>
               <div className="space-y-2">
@@ -433,7 +433,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-subtitle">{t.yes}</span>
+                  <span className="text-body">{t.yes}</span>
                 </label>
                 <label className="flex items-center">
                   <input
@@ -445,7 +445,7 @@ export default function RSVP() {
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-subtitle">{t.no}</span>
+                  <span className="text-body">{t.no}</span>
                 </label>
               </div>
             </div>
@@ -454,7 +454,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="email"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.email} *
               </label>
@@ -464,7 +464,7 @@ export default function RSVP() {
                 name="email"
                 value={formData.email}
                 disabled
-                className="text-subtitle w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
+                className="text-input w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
                 placeholder={t.emailPlaceholder}
               />
             </div>
@@ -473,7 +473,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="phone"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.phoneOptional}
               </label>
@@ -484,7 +484,7 @@ export default function RSVP() {
                 value={formData.phone}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder={t.phonePlaceholder}
               />
             </div>
@@ -493,7 +493,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="eventType"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.whichEventCanYouJoin}
               </label>
@@ -503,7 +503,7 @@ export default function RSVP() {
                 value={formData.eventType}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
-                className="text-subtitle w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="">{t.selectEvent}</option>
                 <option value="Western Wedding, May 23, Da Nang">
@@ -527,7 +527,7 @@ export default function RSVP() {
                   disabled={isSubmitting}
                   className="mr-3"
                 />
-                <span className="text-subtitle text-sm text-gray-700">
+                <span className="text-body-sm text-sm text-gray-700">
                   {t.accommodationDetails}
                   <span className="block text-xs text-gray-500">
                     {t.accommodationDetailsNote}
@@ -550,7 +550,7 @@ export default function RSVP() {
                   }
                   className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <span className="text-subtitle text-sm text-gray-700">
+                <span className="text-body-sm text-sm text-gray-700">
                   {t.transportationDetails}
                   <span className="block text-xs text-gray-500">
                     {t.transportationDetailsNote}
@@ -563,7 +563,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="dietaryRestrictions"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.dietaryRestrictions}
               </label>
@@ -574,7 +574,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder={t.dietaryRestrictionsPlaceholder}
               />
             </div>
@@ -583,7 +583,7 @@ export default function RSVP() {
             <div>
               <label
                 htmlFor="accessibilityRestrictions"
-                className="text-subtitle mb-2 block text-left text-sm font-medium text-gray-700"
+                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
               >
                 {t.accessibilityRestrictions}
               </label>
@@ -594,7 +594,7 @@ export default function RSVP() {
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="text-subtitle w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="text-input w-full resize-none rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder={t.accessibilityRestrictionsPlaceholder}
               />
             </div>
@@ -702,7 +702,7 @@ export default function RSVP() {
             </div>
 
             {error && (
-              <div className="text-subtitle rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
+              <div className="text-error rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-700">
                 {error}
               </div>
             )}
@@ -715,7 +715,7 @@ export default function RSVP() {
                 !formData.canAttend ||
                 !formData.email.trim()
               }
-              className="text-subtitle w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-button-lg w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
