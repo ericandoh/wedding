@@ -109,7 +109,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="[color-scheme:light]">
       <body
-        className={`bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} ${luxuriousRoman.variable} antialiased`}
+        className={`bg-gray-50 font-sans ${cormorantGaramond.variable} ${dancingScript.variable} ${inter.variable} ${allura.variable} ${greatVibes.variable} ${satisfy.variable} ${eagleLake.variable} ${charm.variable} ${moonDance.variable} ${luxuriousRoman.variable} antialiased`}
       >
         <LanguageProvider>
           <AuthProvider>

@@ -200,7 +200,7 @@ export default function RSVP() {
 
   if (step === 'submitted') {
     return (
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col bg-gray-50">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2">
             {t.rsvpTitle}
@@ -220,30 +220,12 @@ export default function RSVP() {
             </p>
             <button
               onClick={() => {
-                setStep('email');
-                setEmail('');
-                setFormData({
-                  name: '',
-                  plusOneName: '',
-                  canAttend: '',
-                  email: '',
-                  phone: '',
-                  eventType: '',
-                  accommodationDetails: false,
-                  transportationDetails: false,
-                  dietaryRestrictions: '',
-                  accessibilityRestrictions: '',
-                  notificationMethod: '',
-                  notificationOther: '',
-                  instagramHandle: '',
-                  rowIndex: 0,
-                });
-                setIsExistingUser(false);
+                setStep('form');
                 setError('');
               }}
               className="text-button border-2 border-gray-800 px-6 py-2 font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
             >
-              {t.submitAnotherRsvp}
+              Back to RSVP details
             </button>
           </div>
         </div>
@@ -253,7 +235,7 @@ export default function RSVP() {
 
   if (step === 'email') {
     return (
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col bg-gray-50">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
             {t.rsvpTitle}
@@ -345,7 +327,7 @@ export default function RSVP() {
 
   // Form step
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gray-50">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           {t.rsvpFormTitle}

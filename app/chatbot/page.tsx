@@ -109,7 +109,7 @@ export default function Chatbot() {
         </p>
       </div>
 
-      <div className="flex-grow bg-gray-50">
+      <div className="flex-grow bg-white">
         <div className="mx-auto max-w-4xl px-6 py-8">
           {/* Chat Messages */}
           <div className="mb-6 h-96 overflow-y-auto rounded-lg border border-gray-200 bg-white p-4">
