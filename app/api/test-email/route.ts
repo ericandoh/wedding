@@ -41,18 +41,22 @@ export async function GET(request: NextRequest) {
         }),
       });
 
-      testEmailResult = {
-        success: testEmailResponse.ok,
-        status: testEmailResponse.status,
-        statusText: testEmailResponse.statusText,
-      };
-
       if (testEmailResponse.ok) {
         const testEmailData = await testEmailResponse.json();
-        testEmailResult.response = testEmailData;
+        testEmailResult = {
+          success: true,
+          status: testEmailResponse.status,
+          statusText: testEmailResponse.statusText,
+          response: testEmailData,
+        };
       } else {
         const errorText = await testEmailResponse.text();
-        testEmailResult.error = errorText;
+        testEmailResult = {
+          success: false,
+          status: testEmailResponse.status,
+          statusText: testEmailResponse.statusText,
+          error: errorText,
+        };
       }
     } catch (fetchError) {
       testEmailResult = {

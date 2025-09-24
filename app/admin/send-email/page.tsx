@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { generateRSVPConfirmationEmail, generateAdminNotificationEmail, RSVPData } from '../../../lib/email-templates';
 
 // Email template options using actual templates from email-templates.ts
@@ -47,6 +47,13 @@ export default function SendEmailAdmin() {
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
   const [showPreview, setShowPreview] = useState(false);
 
+  // Development-only page - should not be accessible in production
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('Admin send-email page is not available in production');
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -70,7 +77,7 @@ export default function SendEmailAdmin() {
 
       if (response.ok) {
         setResult({ success: true, message: 'Email sent successfully!' });
-        setFormData({ to: '', subject: '', message: '' });
+        setFormData({ to: '', subject: '', message: '', template: 'custom' });
       } else {
         setResult({ success: false, message: data.error || 'Failed to send email' });
       }
