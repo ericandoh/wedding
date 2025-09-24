@@ -18,7 +18,7 @@ export default function ThingsToDo() {
       {/* Full-width image */}
       <div className="relative h-96 w-full md:h-[500px] lg:h-[600px]">
         <img
-          src="/what_to_do.jpg"
+          src="/what_to_do.JPG"
           alt={t.whatToDoInDaNang}
           className="h-full w-full object-cover"
         />
