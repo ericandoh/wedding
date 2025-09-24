@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import { NextRequest, NextResponse } from 'next/server';
+import { generateRSVPConfirmationEmail, generateAdminNotificationEmail } from '../../../lib/email-templates';
 
 export async function POST(request: NextRequest) {
   try {
@@ -139,6 +140,75 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('RSVP added to spreadsheet:', response.data);
+
+    // Send confirmation email to the guest
+    try {
+      const emailData = {
+        name: name.trim(),
+        plusOneName: plusOneName || '',
+        canAttend,
+        email: email.trim(),
+        phone: phone || '',
+        eventType: eventType || '',
+        accommodationDetails,
+        transportationDetails,
+        dietaryRestrictions: dietaryRestrictions || '',
+        accessibilityRestrictions: accessibilityRestrictions || '',
+        notificationMethod: notificationMethod || '',
+        notificationOther: notificationOther || '',
+        instagramHandle: instagramHandle || '',
+        isUpdate: isUpdate, // Pass the isUpdate flag to the email template
+      };
+
+      const confirmationEmail = generateRSVPConfirmationEmail(emailData);
+      
+      const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: email.trim(),
+          subject: confirmationEmail.subject,
+          htmlContent: confirmationEmail.html,
+          textContent: confirmationEmail.text,
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        console.error('Failed to send confirmation email');
+      } else {
+        console.log('Confirmation email sent successfully');
+      }
+
+      // Send notification email to admin (you)
+      const adminEmail = process.env.ADMIN_EMAIL;
+      if (adminEmail) {
+        const adminNotification = generateAdminNotificationEmail(emailData);
+        
+        const adminEmailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            to: adminEmail,
+            subject: adminNotification.subject,
+            htmlContent: adminNotification.html,
+            textContent: adminNotification.text,
+          }),
+        });
+
+        if (!adminEmailResponse.ok) {
+          console.error('Failed to send admin notification email');
+        } else {
+          console.log('Admin notification email sent successfully');
+        }
+      }
+    } catch (emailError) {
+      console.error('Error sending emails:', emailError);
+      // Don't fail the RSVP submission if email fails
+    }
 
     return NextResponse.json(
       {
