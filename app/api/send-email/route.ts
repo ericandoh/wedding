@@ -25,9 +25,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('Sending email from:', senderEmail);
-    console.log('Sending email to:', to);
-    console.log('Subject:', subject);
 
     // Create transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
@@ -53,8 +50,6 @@ export async function POST(request: NextRequest) {
     // Send email
     const info = await transporter.sendMail(mailOptions);
 
-    console.log('Email sent successfully:', info.messageId);
-
     return NextResponse.json(
       {
         success: true,
@@ -64,8 +59,6 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error sending email:', error);
-    
     return NextResponse.json(
       {
         error: 'Failed to send email',

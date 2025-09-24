@@ -20,11 +20,15 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
   
   const isAttending = canAttend === 'Yes';
   const plusOneText = data.plusOneName ? ` and ${data.plusOneName}` : '';
-  const eventText = eventType ? ` for ${eventType}` : '';
+  const eventText = eventType 
+    ? eventType === 'Both events' 
+      ? ' for the ceremony and reception'
+      : ` for ${eventType}`
+    : '';
   
   const subject = isUpdate 
-    ? `RSVP Updated - ${isAttending ? 'We can\'t wait to celebrate with you!' : 'Thank you for letting us know'}`
-    : `RSVP Confirmation - ${isAttending ? 'We can\'t wait to celebrate with you!' : 'Thank you for letting us know'}`;
+    ? `RSVP Updated`
+    : `RSVP Received`;
   
   const html = `
 <!DOCTYPE html>
@@ -35,13 +39,13 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
   <title>RSVP Confirmation</title>
   <style>
     body {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      line-height: 1.6;
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.7;
       color: #374151;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f9fafb;
+      background-color: #ffffff;
     }
     .container {
       background-color: white;
@@ -56,33 +60,38 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
       padding-bottom: 20px;
     }
     .title {
-      font-family: 'Moon Dance', cursive;
-      font-size: 2.5rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #1f2937;
       margin: 0;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      font-style: italic;
     }
     .subtitle {
-      font-family: 'Moon Dance', cursive;
-      font-size: 1.2rem;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.3rem;
       color: #6b7280;
       margin: 10px 0 0 0;
+      font-style: italic;
     }
     .content {
       font-size: 1.1rem;
       margin-bottom: 20px;
     }
     .rsvp-details {
-      background-color: #f3f4f6;
-      padding: 20px;
+      border: 2px solid #e5e7eb;
+      padding: 30px;
       border-radius: 6px;
-      margin: 20px 0;
+      margin: 30px 0;
+      background-color: #ffffff;
+      text-align: center;
     }
     .detail-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      padding: 4px 0;
+      margin-bottom: 12px;
+      padding: 6px 0;
+      font-size: 0.9rem;
     }
     .detail-label {
       font-weight: 600;
@@ -90,14 +99,6 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
     }
     .detail-value {
       color: #6b7280;
-    }
-    .attending {
-      color: #059669;
-      font-weight: 600;
-    }
-    .not-attending {
-      color: #dc2626;
-      font-weight: 600;
     }
     .footer {
       text-align: center;
@@ -109,126 +110,81 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
     }
     .button {
       display: inline-block;
-      background-color: #1f2937;
-      color: white;
+      background-color: #ffffff;
+      color: #1f2937;
       padding: 12px 24px;
       text-decoration: none;
       border-radius: 6px;
       font-weight: 500;
       margin: 20px 0;
+      border: 2px solid #1f2937;
+      transition: all 0.3s ease;
+    }
+    .button:hover {
+      background-color: #1f2937;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1 class="title">Eric + Hang's Wedding</h1>
-      <p class="subtitle">RSVP Confirmation</p>
-    </div>
-    
-    <div class="content">
-      <p>Dear ${name}${plusOneText},</p>
-      
-      ${isUpdate 
-        ? `<p>We've received your RSVP update!</p>`
-        : `<p>We've received your RSVP!</p>`
-      }
-      
-      ${isAttending 
-        ? `<p>We're thrilled that you'll be joining us for our special day! 🎉</p>
-           <p>We can't wait to celebrate with you${eventText}.</p>`
-        : `<p>Thank you so much for letting us know that you won't be able to attend${eventText}.</p>
-           <p>We completely understand and will miss you on our special day.</p>`
-      }
-    </div>
-    
     <div class="rsvp-details">
-      <h3 style="margin-top: 0; color: #1f2937;">Your RSVP Details:</h3>
+      <h1 class="title">${isUpdate 
+        ? `RSVP Updated`
+        : `RSVP Received`}</h1>
+      <div class="details-section">
       <div class="detail-row">
-        <span class="detail-label">Name:</span>
+        <span class="detail-label">Name: </span>
         <span class="detail-value">${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Attending:</span>
-        <span class="detail-value ${isAttending ? 'attending' : 'not-attending'}">${canAttend}</span>
+        <span class="detail-label">Attending: </span>
+        <span class="detail-value">${canAttend}</span>
       </div>
       ${eventType ? `
       <div class="detail-row">
-        <span class="detail-label">Event:</span>
+        <span class="detail-label">Event: </span>
         <span class="detail-value">${eventType}</span>
       </div>
       ` : ''}
       ${accommodationDetails ? `
       <div class="detail-row">
-        <span class="detail-label">Accommodation:</span>
+        <span class="detail-label">Accommodation: </span>
         <span class="detail-value">Details requested</span>
       </div>
       ` : ''}
       ${transportationDetails ? `
       <div class="detail-row">
-        <span class="detail-label">Transportation:</span>
+        <span class="detail-label">Transportation: </span>
         <span class="detail-value">Details requested</span>
       </div>
       ` : ''}
       ${data.dietaryRestrictions ? `
       <div class="detail-row">
-        <span class="detail-label">Dietary Restrictions:</span>
+        <span class="detail-label">Dietary Restrictions: </span>
         <span class="detail-value">${data.dietaryRestrictions}</span>
       </div>
       ` : ''}
       ${data.accessibilityRestrictions ? `
       <div class="detail-row">
-        <span class="detail-label">Accessibility Needs:</span>
+        <span class="detail-label">Accessibility Needs: </span>
         <span class="detail-value">${data.accessibilityRestrictions}</span>
       </div>
       ` : ''}
-    </div>
-    
-    ${isAttending ? `
-    <div class="content">
-      <p>We'll be sending out more details about the wedding as the date approaches, including:</p>
-      <ul>
-        <li>Detailed schedule and timeline</li>
-        <li>Venue information and directions</li>
-        <li>Accommodation recommendations</li>
-        <li>Dress code and other helpful details</li>
-      </ul>
+      </div>
       
-      <p>If you have any other questions in the meantime, please don't hesitate to reach out to us! Or trial our chatbot at https://www.hangeric.com/chatbot.</p>
-    </div>
-    ` : ''}
-    
-    <div class="content">
-      <p>Thank you for being part of our special day!</p>
-      <p>Best,<br><strong>Eric & Hang</strong></p>
-    </div>
-    
-    <div class="footer">
-      <p>This email was sent in response to your RSVP submission. If you need to make any changes, please visit our wedding website.</p>
-      <p><a href="https://www.hangeric.com/rsvp" class="button">Update RSVP</a></p>
+      
+      <div class="footer">
+        <p>This email was sent in response to your RSVP submission. If you need to make any changes, please visit our wedding website.</p>
+        <p><a href="https://www.hangeric.com/rsvp" class="button">Update RSVP</a></p>
+      </div>
     </div>
   </div>
 </body>
 </html>`;
 
   const text = `
-Eric + Hang's Wedding - RSVP Confirmation
-
-Dear ${name}${plusOneText},
-
-${isUpdate 
-  ? `We've received your RSVP update!`
-  : `We've received your RSVP!`
-}
-
-${isAttending 
-  ? `We're thrilled that you'll be joining us for our special day! 🎉
-We can't wait to celebrate with you${eventText}.`
-  : `Thank you so much for letting us know that you won't be able to attend${eventText}.
-We completely understand and will miss you on our special day.`
-}
-
-Your RSVP Details:
+RSVP Received
 - Name: ${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}
 - Attending: ${canAttend}
 ${eventType ? `- Event: ${eventType}` : ''}
@@ -272,13 +228,13 @@ export function generateAdminNotificationEmail(data: RSVPData): { subject: strin
   <title>New RSVP Notification</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Georgia, 'Times New Roman', serif;
       line-height: 1.6;
       color: #374151;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f9fafb;
+      background-color: #ffffff;
     }
     .container {
       background-color: white;
@@ -300,10 +256,11 @@ export function generateAdminNotificationEmail(data: RSVPData): { subject: strin
       margin: 0;
     }
     .details {
-      background-color: #f3f4f6;
+      border: 2px solid #e5e7eb;
       padding: 20px;
       border-radius: 6px;
       margin: 20px 0;
+      background-color: #ffffff;
     }
     .detail-row {
       display: flex;
@@ -332,50 +289,50 @@ export function generateAdminNotificationEmail(data: RSVPData): { subject: strin
     
     <div class="details">
       <div class="detail-row">
-        <span class="detail-label">Name:</span>
+        <span class="detail-label">Name: </span>
         <span class="detail-value">${data.name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Email:</span>
+        <span class="detail-label">Email: </span>
         <span class="detail-value">${data.email}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Phone:</span>
+        <span class="detail-label">Phone: </span>
         <span class="detail-value">${data.phone || 'Not provided'}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Attending:</span>
+        <span class="detail-label">Attending: </span>
         <span class="detail-value">${data.canAttend}</span>
       </div>
       ${eventType ? `
       <div class="detail-row">
-        <span class="detail-label">Event:</span>
+        <span class="detail-label">Event: </span>
         <span class="detail-value">${eventType}</span>
       </div>
       ` : ''}
       <div class="detail-row">
-        <span class="detail-label">Accommodation Details:</span>
+        <span class="detail-label">Accommodation Details: </span>
         <span class="detail-value">${data.accommodationDetails ? 'Yes' : 'No'}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Transportation Details:</span>
+        <span class="detail-label">Transportation Details: </span>
         <span class="detail-value">${data.transportationDetails ? 'Yes' : 'No'}</span>
       </div>
       ${data.dietaryRestrictions ? `
       <div class="detail-row">
-        <span class="detail-label">Dietary Restrictions:</span>
+        <span class="detail-label">Dietary Restrictions: </span>
         <span class="detail-value">${data.dietaryRestrictions}</span>
       </div>
       ` : ''}
       ${data.accessibilityRestrictions ? `
       <div class="detail-row">
-        <span class="detail-label">Accessibility Needs:</span>
+        <span class="detail-label">Accessibility Needs: </span>
         <span class="detail-value">${data.accessibilityRestrictions}</span>
       </div>
       ` : ''}
       ${data.notificationMethod ? `
       <div class="detail-row">
-        <span class="detail-label">Notification Preference:</span>
+        <span class="detail-label">Notification Preference: </span>
         <span class="detail-value">${data.notificationMethod}${data.instagramHandle ? ` (${data.instagramHandle})` : ''}${data.notificationOther ? ` (${data.notificationOther})` : ''}</span>
       </div>
       ` : ''}

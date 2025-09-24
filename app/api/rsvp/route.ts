@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import { NextRequest, NextResponse } from 'next/server';
 import { generateRSVPConfirmationEmail, generateAdminNotificationEmail } from '../../../lib/email-templates';
+import * as nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -139,7 +140,6 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    console.log('RSVP added to spreadsheet:', response.data);
 
     // Send confirmation email to the guest
     try {
@@ -162,51 +162,50 @@ export async function POST(request: NextRequest) {
 
       const confirmationEmail = generateRSVPConfirmationEmail(emailData);
       
-      const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      // Send email directly using nodemailer
+      const senderEmail = process.env.SENDER_EMAIL;
+      const senderPassword = process.env.SENDER_PASSWORD;
+      const senderName = process.env.SENDER_NAME || "Eric & Hang's Wedding";
+
+      if (!senderEmail || !senderPassword) {
+        console.error('Missing SENDER_EMAIL or SENDER_PASSWORD environment variables');
+        throw new Error('Email configuration missing');
+      }
+
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: senderEmail,
+          pass: senderPassword,
         },
-        body: JSON.stringify({
-          to: email.trim(),
-          subject: confirmationEmail.subject,
-          htmlContent: confirmationEmail.html,
-          textContent: confirmationEmail.text,
-        }),
       });
 
-      if (!emailResponse.ok) {
-        console.error('Failed to send confirmation email');
-      } else {
-        console.log('Confirmation email sent successfully');
-      }
+      const mailOptions = {
+        from: `"${senderName}" <${senderEmail}>`,
+        to: email.trim(),
+        subject: confirmationEmail.subject,
+        html: confirmationEmail.html,
+        text: confirmationEmail.text,
+      };
+
+      await transporter.sendMail(mailOptions);
 
       // Send notification email to admin (you)
       const adminEmail = process.env.ADMIN_EMAIL;
       if (adminEmail) {
         const adminNotification = generateAdminNotificationEmail(emailData);
         
-        const adminEmailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/send-email`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            to: adminEmail,
-            subject: adminNotification.subject,
-            htmlContent: adminNotification.html,
-            textContent: adminNotification.text,
-          }),
-        });
+        const adminMailOptions = {
+          from: `"${senderName}" <${senderEmail}>`,
+          to: adminEmail,
+          subject: adminNotification.subject,
+          html: adminNotification.html,
+          text: adminNotification.text,
+        };
 
-        if (!adminEmailResponse.ok) {
-          console.error('Failed to send admin notification email');
-        } else {
-          console.log('Admin notification email sent successfully');
-        }
+        await transporter.sendMail(adminMailOptions);
       }
     } catch (emailError) {
-      console.error('Error sending emails:', emailError);
       // Don't fail the RSVP submission if email fails
     }
 
