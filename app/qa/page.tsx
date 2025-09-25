@@ -1,10 +1,13 @@
 'use client';
 
-import Link from 'next/link';
+import { useState } from 'react';
 import { useLanguage } from '../_components/language-provider';
+import ChatbotBubble from '../_components/chatbot-bubble';
 
 export default function QA() {
   const { t } = useLanguage();
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-white py-8 text-center">
@@ -15,12 +18,12 @@ export default function QA() {
           {t.frequentlyAskedQuestions}
         </p>
         <div className="mt-6">
-          <Link 
-            href="/chatbot"
+          <button 
+            onClick={() => setIsChatbotOpen(true)}
             className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
           >
             {t.askChatbotButton}
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -189,6 +192,12 @@ export default function QA() {
           </div>
         </div>
       </div>
+      
+      {/* Chatbot Bubble */}
+      <ChatbotBubble 
+        isOpen={isChatbotOpen} 
+        onClose={() => setIsChatbotOpen(false)} 
+      />
     </div>
   );
 }

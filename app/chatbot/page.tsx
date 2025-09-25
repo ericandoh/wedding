@@ -19,6 +19,70 @@ export default function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
+  // Function to parse **text** to bold text and * item to lists
+  const parseMessageText = (text: string) => {
+    // First check if the text contains list items
+    const lines = text.split('\n');
+    const hasListItems = lines.some(line => line.trim().startsWith('* '));
+    
+    if (hasListItems) {
+      // Process each line
+      const processedLines = lines.map((line, lineIndex) => {
+        const trimmedLine = line.trim();
+        if (trimmedLine.startsWith('* ')) {
+          // This is a list item
+          const itemText = trimmedLine.slice(2); // Remove '* '
+          return <li key={lineIndex}>{parseBoldText(itemText)}</li>;
+        } else if (trimmedLine === '') {
+          // Empty line - add a break
+          return <br key={lineIndex} />;
+        } else {
+          // Regular text line
+          return <div key={lineIndex}>{parseBoldText(line)}</div>;
+        }
+      });
+      
+      // Group consecutive list items into a ul
+      const result = [];
+      let currentList = [];
+      
+      for (let i = 0; i < processedLines.length; i++) {
+        const element = processedLines[i];
+        
+        if (element.type === 'li') {
+          currentList.push(element);
+        } else {
+          if (currentList.length > 0) {
+            result.push(<ul key={`list-${i}`} className="list-disc list-inside ml-2 space-y-1">{currentList}</ul>);
+            currentList = [];
+          }
+          result.push(element);
+        }
+      }
+      
+      // Add any remaining list items
+      if (currentList.length > 0) {
+        result.push(<ul key="list-final" className="list-disc list-inside ml-2 space-y-1">{currentList}</ul>);
+      }
+      
+      return result;
+    } else {
+      // No list items, just parse bold text
+      return parseBoldText(text);
+    }
+  };
+
+  // Function to parse **text** to bold text
+  const parseBoldText = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index}>{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -157,7 +221,7 @@ export default function Chatbot() {
                           : 'bg-gray-200 text-gray-800'
                       }`}
                     >
-                      <p className="text-chat-message whitespace-pre-wrap">{message.text}</p>
+                      <div className="text-chat-message">{parseMessageText(message.text)}</div>
                       <p className={`mt-1 text-xs ${
                         message.isUser 
                           ? 'text-blue-100' 

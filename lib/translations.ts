@@ -64,13 +64,20 @@ export interface Translations {
   venueTitle: string;
   venueInformation: string;
   fusionResortsDaNangVenue: string;
+  fusionResortsVillasDaNang: string;
   venueDetailsComing: string;
+  address: string;
+  website: string;
+  venueAddress: string;
+  venueWebsite: string;
 
   // Things to Do page
   thingsToDoTitle: string;
   activitiesAndRecommendations: string;
   whatToDoInDaNang: string;
   localAttractionsComing: string;
+  placesOfInterest: string;
+  daNangDescription: string;
 
   // Q&A page
   qaTitle: string;
@@ -279,13 +286,20 @@ export const translations: Record<Language, Translations> = {
     venueTitle: 'Venue',
     venueInformation: 'Information about our wedding venue',
     fusionResortsDaNangVenue: 'Fusion Resorts Da Nang',
+    fusionResortsVillasDaNang: 'Fusion Resorts & Villas Da Nang',
     venueDetailsComing: 'Venue details and directions will be added here',
+    address: 'Address',
+    website: 'Website',
+    venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam',
+    venueWebsite: 'fusionresorts.com',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
     activitiesAndRecommendations: 'Activities and recommendations for our guests',
     whatToDoInDaNang: 'What to do in Da Nang',
     localAttractionsComing: 'Local attractions and activities will be added here',
+    placesOfInterest: 'Places of Interest',
+    daNangDescription: 'There are actually three places of interest to visit near Da Nang: Da Nang itself, which is a beach town, Hoi An, which is a historical town + a UNESCO World Heritage Town, and Hue, the former capital of Vietnam!',
 
     // Q&A page
     qaTitle: 'Q&A',
@@ -492,13 +506,20 @@ export const translations: Record<Language, Translations> = {
     venueTitle: 'Địa Điểm',
     venueInformation: 'Thông tin về địa điểm cưới của chúng tôi',
     fusionResortsDaNangVenue: 'Fusion Resorts Đà Nẵng',
+    fusionResortsVillasDaNang: 'Fusion Resorts & Villas Đà Nẵng',
     venueDetailsComing: 'Chi tiết địa điểm và chỉ đường sẽ được thêm vào đây',
+    address: 'Địa chỉ',
+    website: 'Trang web',
+    venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam',
+    venueWebsite: 'fusionresorts.com',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
     activitiesAndRecommendations: 'Các hoạt động và gợi ý cho khách mời của chúng tôi',
     whatToDoInDaNang: 'Những việc cần làm ở Đà Nẵng',
     localAttractionsComing: 'Các điểm tham quan và hoạt động địa phương sẽ được thêm vào đây',
+    placesOfInterest: 'Điểm Tham Quan',
+    daNangDescription: 'Thực ra có ba nơi thú vị để tham quan gần Đà Nẵng: chính Đà Nẵng, một thị trấn biển, Hội An, một thị trấn lịch sử + Di sản Thế giới UNESCO, và Huế, cố đô của Việt Nam!',
 
     // Q&A page
     qaTitle: 'Hỏi Đáp',

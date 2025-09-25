@@ -25,10 +25,25 @@ export default function ThingsToDo() {
       </div>
 
       <div className="flex-grow bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <p className="text-body mb-8 text-lg leading-relaxed text-gray-700 md:text-xl">
-            {t.localAttractionsComing}
-          </p>
+        <div className="mx-auto max-w-6xl px-6">
+          {/* Places of Interest Section */}
+          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
+            <div className="flex-1">
+              <img
+                src="/fusion_resort_things_to_do.jpg"
+                alt={t.placesOfInterest}
+                className="w-full rounded-lg shadow-lg"
+              />
+            </div>
+            <div className="flex-1 text-center lg:text-left">
+              <h2 className="text-title mb-4 text-4xl text-gray-800">
+                {t.placesOfInterest}
+              </h2>
+              <p className="text-body text-xl leading-relaxed text-gray-700">
+                {t.daNangDescription}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
