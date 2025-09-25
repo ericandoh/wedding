@@ -844,15 +844,13 @@ export default function PetCats() {
         {/* User info */}
         {userName && (
           <div className="mt-6 max-w-4xl mx-auto px-4">
-            <div className="flex items-center justify-center space-x-4">
-              <div className="bg-amber-100 px-4 py-2 rounded-full border-2 border-amber-300">
-                <span className="text-body text-amber-800">
-                  {t.playingAs} <span className="text-body">{userName}</span>
-                </span>
+            <div className="flex flex-col items-center justify-center space-y-3">
+              <div className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white">
+                {t.playingAs} {userName}
               </div>
               <button
                 onClick={clearUserIdentity}
-                className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1 rounded-full text-button-sm transition-colors"
+                className="text-button-sm inline-block border-2 border-gray-800 px-4 py-2 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
               >
                 {t.clearIdentity}
               </button>
@@ -1002,7 +1000,7 @@ export default function PetCats() {
                   await fetchLeaderboard(true);
                 }}
                 disabled={isLoading || isLoadingLeaderboard}
-                className="bg-blue-100 hover:bg-blue-200 disabled:bg-gray-200 text-blue-700 px-4 py-2 rounded-full text-button-sm transition-colors"
+                className="text-button-sm inline-block border-2 border-gray-800 px-4 py-2 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:border-gray-400 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-400"
               >
                 {isLoading || isLoadingLeaderboard ? t.syncing : t.refresh}
               </button>

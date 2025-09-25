@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useLanguage } from '../_components/language-provider';
 
 export default function QA() {
@@ -13,6 +14,14 @@ export default function QA() {
         <p className="text-body text-xl text-gray-600">
           {t.frequentlyAskedQuestions}
         </p>
+        <div className="mt-6">
+          <Link 
+            href="/chatbot"
+            className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+          >
+            {t.askChatbotButton}
+          </Link>
+        </div>
       </div>
 
       <div className="flex-grow bg-white py-12">

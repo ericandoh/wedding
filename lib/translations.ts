@@ -109,6 +109,7 @@ export interface Translations {
   stillHaveQuestions: string;
   contactUsMessage: string;
   contactEmail: string;
+  askChatbotButton: string;
 
   // Chatbot page
   chatbotTitle: string;
@@ -323,6 +324,7 @@ export const translations: Record<Language, Translations> = {
     stillHaveQuestions: 'Still Have Questions?',
     contactUsMessage: 'If you have any other questions or concerns, please don\'t hesitate to reach out to us!',
     contactEmail: 'You can contact us at:',
+    askChatbotButton: 'Ask a chatbot!',
 
     // Chatbot page
     chatbotTitle: 'Chatbot',
@@ -535,6 +537,7 @@ export const translations: Record<Language, Translations> = {
     stillHaveQuestions: 'Vẫn Còn Câu Hỏi?',
     contactUsMessage: 'Nếu bạn có bất kỳ câu hỏi hoặc lo ngại nào khác, đừng ngại liên hệ với chúng tôi!',
     contactEmail: 'Bạn có thể liên hệ với chúng tôi tại:',
+    askChatbotButton: 'Hỏi chatbot!',
 
     // Chatbot page
     chatbotTitle: 'Trò Chuyện',

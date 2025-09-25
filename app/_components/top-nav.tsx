@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { useLanguage } from './language-provider';
 import LanguageSwitcher from './language-switcher';
@@ -9,7 +10,15 @@ export default function TopNav() {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const { t } = useLanguage();
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
 
   const checkScrollPosition = () => {
     if (scrollContainerRef.current) {
@@ -75,61 +84,101 @@ export default function TopNav() {
           </div>
           <Link
             href="/"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.home}
           </Link>
           <Link
             href="/rsvp"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/rsvp') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.rsvp}
           </Link>
           <Link
             href="/schedule"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/schedule') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.schedule}
           </Link>
           <Link
             href="/our-story"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/our-story') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.aboutTheCouple}
           </Link>
           <Link
             href="/venue"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/venue') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.venue}
           </Link>
           <Link
             href="/things-to-do"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/things-to-do') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.thingsToDo}
           </Link>
           <Link
             href="/registry"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/registry') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.registry}
           </Link>
           <Link
             href="/qa"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/qa') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.qa}
           </Link>
           <Link
             href="/chatbot"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/chatbot') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.chatbot}
           </Link>
           <Link
             href="/pet-cats"
-            className="text-bar-header whitespace-nowrap text-gray-600 transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+              isActive('/pet-cats') 
+                ? 'text-gray-800 underline underline-offset-4' 
+                : 'text-gray-600'
+            }`}
           >
             {t.petCats}
           </Link>
