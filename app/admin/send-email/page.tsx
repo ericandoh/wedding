@@ -23,10 +23,10 @@ const EMAIL_TEMPLATES = {
 const SAMPLE_RSVP_DATA: RSVPData = {
   name: 'John Smith',
   plusOneName: 'Jane Smith',
-  canAttend: 'Yes',
+  canAttendWesternWedding: true,
+  canAttendTeaCeremony: false,
   email: 'john@example.com',
   phone: '+1 (555) 123-4567',
-  eventType: 'Western Wedding, May 23, Da Nang',
   accommodationDetails: true,
   transportationDetails: true,
   dietaryRestrictions: 'Vegetarian',

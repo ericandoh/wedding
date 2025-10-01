@@ -10,13 +10,13 @@ export default function OurStory() {
   const { t } = useLanguage();
 
   const galleryImages = [
-    '/gallery1.JPG',
-    '/gallery2.JPG', 
-    '/gallery3.JPG',
-    '/gallery4.JPG',
-    '/gallery5.JPG',
-    '/gallery6.JPG',
-    '/gallery7.JPG'
+    '/gallery1.JPG?v=2',
+    '/gallery2.JPG?v=2', 
+    '/gallery3.JPG?v=2',
+    '/gallery5.JPG?v=2',
+    '/gallery7.JPG?v=2',
+    '/gallery8.JPG?v=2',
+    '/gallery9.JPG?v=2',
   ];
 
   const openModal = (imageSrc: string) => {
@@ -104,10 +104,10 @@ export default function OurStory() {
               {t.photoGallery}
             </h2>
             <div className="columns-1 gap-6 sm:columns-2 lg:columns-2 xl:columns-2">
-              {[1, 2, 3, 4, 5, 6, 7].map((num) => {
+              {galleryImages.map((imageSrc, index) => {
                 // Create varying heights for waterfall effect with larger images
                 const heights = ['h-80', 'h-96', 'h-72', 'h-88', 'h-76', 'h-84', 'h-92'];
-                const heightClass = heights[(num - 1) % heights.length];
+                const heightClass = heights[index % heights.length];
                 
                 // For waterfall layout, we'll use a more balanced approach
                 // that works for both left and right positioned images
@@ -115,13 +115,13 @@ export default function OurStory() {
                 
                 return (
                   <div 
-                    key={num} 
+                    key={imageSrc} 
                     className={`group relative mb-6 overflow-hidden rounded-lg shadow-lg transition-all duration-300 break-inside-avoid cursor-pointer`}
-                    onClick={() => openModal(`/gallery${num}.JPG`)}
+                    onClick={() => openModal(imageSrc)}
                   >
                     <Image
-                      src={`/gallery${num}.JPG`}
-                      alt={`Gallery photo ${num}`}
+                      src={imageSrc}
+                      alt={`Gallery photo ${index + 1}`}
                       width={400}
                       height={500}
                       className={`w-full object-cover ${heightClass}`}
