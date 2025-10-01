@@ -10,7 +10,6 @@ export default function OurStory() {
   const { t } = useLanguage();
 
   const galleryImages = [
-    '/gallery1.JPG?v=2',
     '/gallery2.JPG?v=2', 
     '/gallery3.JPG?v=2',
     '/gallery5.JPG?v=2',

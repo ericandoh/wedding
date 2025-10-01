@@ -37,11 +37,18 @@ export default function Page() {
       </div>
 
       {/* Full-width image */}
-      <div className="relative h-96 w-full md:h-[500px] lg:h-[600px]">
+      <div className="relative h-[500px] w-full md:h-[500px] lg:h-[600px]">
+        {/* Mobile image - hidden on larger screens */}
+        <img
+          src="/home_mobile.JPG"
+          alt="Hang & Eric Wedding"
+          className="h-full w-full object-cover md:hidden"
+        />
+        {/* Desktop image - hidden on mobile */}
         <img
           src="/home.JPG"
           alt="Hang & Eric Wedding"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover hidden md:block"
         />
       </div>
 
