@@ -9,10 +9,10 @@ export async function POST(request: NextRequest) {
     const {
       name,
       plusOneName,
-      canAttend,
+      canAttendWesternWedding,
+      canAttendTeaCeremony,
       email,
       phone,
-      eventType,
       accommodationDetails,
       transportationDetails,
       dietaryRestrictions,
@@ -26,12 +26,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name is required' }, { status: 400 });
     }
 
-    if (!canAttend) {
-      return NextResponse.json(
-        { error: 'Please specify if you can attend' },
-        { status: 400 },
-      );
-    }
 
     if (!email || typeof email !== 'string' || email.trim().length === 0) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -92,17 +86,17 @@ export async function POST(request: NextRequest) {
       // Update existing row
       response = await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `RSVP!A${formData.rowIndex}:L${formData.rowIndex}`,
+        range: `RSVP!A${formData.rowIndex}:M${formData.rowIndex}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
             [
               name.trim(),
               plusOneName || '',
-              canAttend,
+              canAttendWesternWedding ? 'Yes' : 'No',
+              canAttendTeaCeremony ? 'Yes' : 'No',
               email.trim(),
               phone || '',
-              eventType || '',
               accommodationDetails ? 'Yes' : 'No',
               transportationDetails ? 'Yes' : 'No',
               dietaryRestrictions || '',
@@ -117,17 +111,17 @@ export async function POST(request: NextRequest) {
       // Add new row to spreadsheet
       response = await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'RSVP!A:L', // Extended range for all fields
+        range: 'RSVP!A:M', // Extended range for all fields
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
             [
               name.trim(),
               plusOneName || '',
-              canAttend,
+              canAttendWesternWedding ? 'Yes' : 'No',
+              canAttendTeaCeremony ? 'Yes' : 'No',
               email.trim(),
               phone || '',
-              eventType || '',
               accommodationDetails ? 'Yes' : 'No',
               transportationDetails ? 'Yes' : 'No',
               dietaryRestrictions || '',
@@ -146,10 +140,10 @@ export async function POST(request: NextRequest) {
       const emailData = {
         name: name.trim(),
         plusOneName: plusOneName || '',
-        canAttend,
+        canAttendWesternWedding,
+        canAttendTeaCeremony,
         email: email.trim(),
         phone: phone || '',
-        eventType: eventType || '',
         accommodationDetails,
         transportationDetails,
         dietaryRestrictions: dietaryRestrictions || '',

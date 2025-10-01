@@ -2,50 +2,35 @@ export const WEDDING_FACT_SHEET = `
 Wedding Information:
 
 DATE & LOCATION:
-- Couple: Bride: Hang, Groom: Eric
-- Wedding Date: May 23rd, 2026
-- Venue: Fusion Resorts Da Nang, Vietnam
+- Bride: Hang, Groom: Eric
+- Western Wedding: Date - May 23rd, 2026, Location - Fusion Resorts Da Nang, Vietnam
+- Tea Ceremony: Date - May 20th, 2026, Location - Hang's family home in Sa Dec, Vietnam
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup
 - Time: Ceremony time TBD, cocktail hour and reception to follow
-- Tea ceremony on May 20th, 2026 at Hang's family home in Sa Dec, Vietnam
-- More details will be filled out later. We will send a later invite asking for you to fill in more details!
+- We will have more information once we send out invitations to RSVP
 
 DRESS CODE:
-- Formal attire requested
-- Women: Formal dresses
-- Men: Formal suits
-- Weather: May in Da Nang is warm and sunny (25-30°C/77-86°F), dry season
-- Recommendations: Light, breathable clothing and sunscreen
+- Wait for invitation to RSVP for dress code
 
 TRAVEL & ACCOMMODATION:
-- Visa: Most visitors need a visa for Vietnam (apply online at evisa.gov.vn)
-- Recommended Stay: Fusion Resorts Da Nang or nearby beachfront hotels
-- Special rates available for wedding guests at Fusion Resorts
+- Visa: US passport will need a visa. Most other passport holders will also need a visa.
+- Recommended Stay: Fusion Resorts Da Nang (special rates available) or nearby beachfront hotels
 - Airport: Da Nang International Airport, 20-30 minutes from venue
-- Transportation: Taxi, Grab (ride-sharing), or resort transfer available
+- Transportation: Taxi, Grab (ride-sharing), or resort transfer available, wait for details in invitation for coordination.
 
 RSVP & LOGISTICS:
-- RSVP deadline: TBD
-- Plus ones: Allowed (please specify in RSVP)
+- RSVP deadline: No RSVP needed at this time, look for an invitation to RSVP soon!
+- Can bring plus ones. If you want to bring other guests please check with Hang or Eric.
 - Dietary restrictions: Accommodated (mention in RSVP)
-- Transportation coordination available
 
 CEREMONY & RECEPTION:
-- Arrival: Please arrive by TBD (before ceremony start time)
-- Welcome reception area with refreshments before ceremony
-- Full cocktail hour with appetizers and drinks
-- Complete dinner reception following ceremony
-- Indoor backup location available in case of rain
+- More details coming with the invitation.
 
 CONTACT:
 - Email: ohhangno@gmail.com
-- For questions, accommodations, transportation coordination, or special requests
+- Feel free to reach out to us directly as well.
 
-ADDITIONAL NOTES:
-- This is a destination wedding in Vietnam
-- May is the beginning of dry season with minimal rain
-- Beachfront ceremony with beautiful resort setting
-- Full service wedding with food, drinks, and entertainment
+You can answer questions directly if they are not present in the fact sheet.
 `;
 
 export function getWeddingFactSheet(): string {

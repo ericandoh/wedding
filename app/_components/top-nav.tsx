@@ -93,14 +93,14 @@ export default function TopNav() {
             {t.home}
           </Link>
           <Link
-            href="/rsvp"
+            href="/save-the-date"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
-              isActive('/rsvp') 
+              isActive('/rsvp') || isActive('/save-the-date')
                 ? 'text-gray-800 underline underline-offset-4' 
                 : 'text-gray-600'
             }`}
           >
-            {t.rsvp}
+            {pathname === '/rsvp' ? t.rsvp : t.saveTheDateNav}
           </Link>
           <Link
             href="/schedule"

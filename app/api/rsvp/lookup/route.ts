@@ -36,18 +36,18 @@ export async function POST(request: NextRequest) {
     // Get all data from the spreadsheet
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'RSVP!A:L', // All columns including new fields
+      range: 'RSVP!A:M', // All columns including new fields
     });
 
     const rows = response.data.values || [];
 
-    // Find the row with matching email (column D, index 3)
+    // Find the row with matching email (column E, index 4)
     const matchingRow = rows.find((row, index) => {
       // Skip header row (index 0) and check if email matches
       return (
         index > 0 &&
-        row[3] &&
-        row[3].trim().toLowerCase() === email.trim().toLowerCase()
+        row[4] &&
+        row[4].trim().toLowerCase() === email.trim().toLowerCase()
       );
     });
 
@@ -76,10 +76,10 @@ export async function POST(request: NextRequest) {
         data: {
           name: matchingRow[0] || '',
           plusOneName: matchingRow[1] || '',
-          canAttend: matchingRow[2] || '',
-          email: matchingRow[3] || '',
-          phone: matchingRow[4] || '',
-          eventType: matchingRow[5] || '',
+          canAttendWesternWedding: matchingRow[2] === 'Yes',
+          canAttendTeaCeremony: matchingRow[3] === 'Yes',
+          email: matchingRow[4] || '',
+          phone: matchingRow[5] || '',
           accommodationDetails: matchingRow[6] === 'Yes',
           transportationDetails: matchingRow[7] === 'Yes',
           dietaryRestrictions: matchingRow[8] || '',

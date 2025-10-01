@@ -4,6 +4,7 @@ export interface Translations {
   // Common
   home: string;
   rsvp: string;
+  saveTheDateNav: string;
   schedule: string;
   aboutTheCouple: string;
   venue: string;
@@ -32,6 +33,7 @@ export interface Translations {
   hangAndEricMain: string;
   may23rd2026: string;
   fusionResortsDaNang: string;
+  saveTheDateButton: string;
 
   // Schedule page
   scheduleTitle: string;
@@ -179,17 +181,14 @@ export interface Translations {
   yourNamePlaceholder: string;
   plusOneName: string;
   plusOneNamePlaceholder: string;
-  canYouAttend: string;
+  whichEventsCanYouAttend: string;
+  westernWeddingCheckbox: string;
+  teaCeremonyCheckbox: string;
   yes: string;
   no: string;
   email: string;
   phoneOptional: string;
   phonePlaceholder: string;
-  whichEventCanYouJoin: string;
-  selectEvent: string;
-  westernWeddingMay23: string;
-  teaCeremonyMay21: string;
-  bothEvents: string;
   accommodationDetails: string;
   accommodationDetailsNote: string;
   transportationDetails: string;
@@ -213,12 +212,18 @@ export interface Translations {
   updating: string;
   thankYouForResponse: string;
   thankYouMessage: string;
+  thankYouMessageUnableToAttend: string;
   editResponseAnytime: string;
   submitAnotherRsvp: string;
   pleaseFillRequiredFields: string;
   failedToLookupRsvp: string;
   failedToSubmitRsvp: string;
   pleaseEnterEmail: string;
+  
+  // Save the Date page
+  saveTheDateSubtitle: string;
+  noRsvpNeededMessage: string;
+  rsvpAnyways: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -226,6 +231,7 @@ export const translations: Record<Language, Translations> = {
     // Common
     home: 'Home',
     rsvp: 'RSVP',
+    saveTheDateNav: 'Save the Date',
     schedule: 'Schedule',
     aboutTheCouple: 'About the Couple',
     venue: 'Venue',
@@ -254,6 +260,7 @@ export const translations: Record<Language, Translations> = {
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: 'May 23rd, 2026',
     fusionResortsDaNang: 'Fusion Resorts Da Nang',
+    saveTheDateButton: 'Save the Date',
 
     // Schedule page
     scheduleTitle: 'Schedule',
@@ -306,33 +313,33 @@ export const translations: Record<Language, Translations> = {
     frequentlyAskedQuestions: 'Frequently asked questions about our wedding',
     weddingDetails: 'Wedding Details',
     whenAndWhereWedding: 'When and where is the wedding?',
-    weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resorts Da Nang, Vietnam. The ceremony will begin at TODO PM, followed by cocktail hour and reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
+    weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resorts Da Nang, Vietnam. The ceremony will begin at ??:??, followed by cocktail hour and reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
     whatShouldIWear: 'What should I wear?',
-    dressCodeAnswer: "We'd love to see you dressed up! The dress code is TODO attire. For women: TODO dresses. For men: TODO suits.",
+    dressCodeAnswer: "We'd love to see you dressed up! We will get back to you with details about the dress code.",
     weatherInDaNang: "What's the weather like in Da Nang in May?",
     weatherAnswer: "May is typically warm and sunny in Da Nang with temperatures around 25-30°C (77-86°F). It's the beginning of the dry season, so rain is less likely. We recommend bringing light, breathable clothing and sunscreen.",
     travelAndAccommodation: 'Travel & Accommodation',
     doINeedVisa: 'Do I need a visa to visit Vietnam?',
-    visaAnswer: 'Most visitors need a visa to enter Vietnam. You can apply for an e-visa online and apply well in advance of your travel dates. https://evisa.gov.vn/. Please check the latest requirements for your country',
+    visaAnswer: 'US Passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa to enter Vietnam. You can apply for an e-visa online and apply well in advance of your travel dates. https://evisa.gov.vn/. Please check the latest requirements for your country',
     whereShouldIStay: 'Where should I stay?',
-    accommodationAnswer: 'We recommend staying at Fusion Resorts Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details. There are also many beautiful beachfront hotels in the area.',
+    accommodationAnswer: 'We recommend staying at Fusion Resorts Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details.',
     howToGetFromAirport: 'How do I get from the airport to the venue?',
     airportTransportAnswer: 'Da Nang International Airport is about 20-30 minutes from Fusion Resorts. You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. We can help coordinate group transportation if needed - see RSVP for details.',
     additionalQuestions: 'Additional Questions',
     contactUs: 'How can I contact you with questions?',
-    contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact Hang at TODO or Eric at TODO. We are here to help make your trip and our celebration as wonderful as possible!',
+    contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact either Hang or Eric at ohhangno@gmail.com, or apinecone@ on IG, or directly through Messenger if you have us friended!',
     rsvpAndGifts: 'RSVP & Gifts',
     rsvpDeadline: 'What is the RSVP deadline?',
-    rsvpDeadlineAnswer: 'Please RSVP by TODO date. You can RSVP online through our website or contact us directly.',
+    rsvpDeadlineAnswer: 'Currently, we are only asking you to save the date! Look for an invitation to RSVP soon!',
     giftRegistry: 'Do you have a gift registry?',
-    giftRegistryAnswer: 'Your presence at our wedding is the greatest gift of all! However, if you wish to give us a gift, we have created a registry with items we would love to have in our new home together.',
+    giftRegistryAnswer: 'Your presence at our wedding is the greatest gift of all! However, if you wish to give us a gift, we will have instructions soon closer to the wedding date!',
     canIBringPlusOne: 'Can I bring a plus one?',
-    plusOneAnswer: 'TODO but yes.',
+    plusOneAnswer: 'Yes!',
     ceremonyAndReception: 'Ceremony & Reception',
     ceremonyIndoorsOrOutdoors: 'Will the ceremony be indoors or outdoors?',
-    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resorts, weather permitting. In case of rain, we have a beautiful indoor backup location at the resort.',
+    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resorts, weather permitting. In case of rain, we have an indoor backup location at the resort.',
     whatTimeShouldIArrive: 'What time should I arrive?',
-    arrivalTimeAnswer: 'Please arrive by TODO PM to ensure you\'re seated before the ceremony begins at TODO PM. There will be a welcome reception area where you can enjoy refreshments before the ceremony.',
+    arrivalTimeAnswer: 'This will be updated closer to the wedding date!',
     willThereBeFoodAndDrinks: 'Will there be food and drinks?',
     foodAndDrinksAnswer: 'Absolutely! We\'ll have a cocktail hour with appetizers and drinks after the ceremony, followed by a full dinner reception. We\'ll accommodate dietary restrictions - please let us know when you RSVP.',
     stillHaveQuestions: 'Still Have Questions?',
@@ -356,7 +363,7 @@ export const translations: Record<Language, Translations> = {
 
     // Pet Cats page
     petCatsTitle: 'Pet Cats',
-    clickOnCatsToPet: 'Click on the cats to pet them! You can also drag them around the house',
+    clickOnCatsToPet: 'Play with our cats',
     updatingLeaderboard: 'Updating leaderboard...',
     playingAs: 'Playing as:',
     clearIdentity: 'Clear Identity',
@@ -394,24 +401,21 @@ export const translations: Record<Language, Translations> = {
     rsvpFormTitle: 'RSVP',
     updateRsvpDetails: 'Update your RSVP details',
     fillRsvpDetails: 'Please fill out your RSVP details',
-    rsvpNote: 'Note: We are still finalizing the details of the wedding. At this point, we only really need your RSVP + (+1) count and for you to save the date! We will keep you posted once we have accomodation / transportation / other details! (See notification preferences below).',
+    rsvpNote: '',
     editResponseNote: 'You can come back here anytime to edit your response!',
     usingEmail: 'Using email:',
     useDifferentEmail: 'Use different email',
     yourNamePlaceholder: 'Enter your full name',
-    plusOneName: '+1 Name',
+    plusOneName: 'Name of Plus One (leave blank if none)',
     plusOneNamePlaceholder: "Enter your +1's name (if applicable)",
-    canYouAttend: 'Can you attend?',
+    whichEventsCanYouAttend: 'Which events can you attend?',
+    westernWeddingCheckbox: 'Western Wedding | May 23rd, 2026 | Da Nang, Vietnam',
+    teaCeremonyCheckbox: 'Tea Ceremony | May 20th, 2026 | Sa Dec, Vietnam',
     yes: 'Yes',
     no: 'No',
     email: 'Email',
     phoneOptional: 'Phone # (optional)',
     phonePlaceholder: 'Enter your phone number',
-    whichEventCanYouJoin: 'Which event can you join?',
-    selectEvent: 'Select an event',
-    westernWeddingMay23: 'Western Wedding, May 23, Da Nang',
-    teaCeremonyMay21: 'Tea Ceremony, May 21, Sa Dec',
-    bothEvents: 'Both events',
     accommodationDetails: "I'd like details about accommodation at the venue directly",
     accommodationDetailsNote: '(This is being finalized)',
     transportationDetails: "I'd like details about transportation to the venue",
@@ -435,17 +439,24 @@ export const translations: Record<Language, Translations> = {
     updating: 'Updating...',
     thankYouForResponse: 'Thank you for your response!',
     thankYouMessage: "Thank you, {name}! We've received your RSVP and can't wait to celebrate with you!",
+    thankYouMessageUnableToAttend: "Thank you, {name}! We're sorry to hear that you're unable to attend our wedding.",
     editResponseAnytime: 'You can come back here anytime to edit your response!',
     submitAnotherRsvp: 'Submit Another RSVP',
-    pleaseFillRequiredFields: 'Please fill in all required fields (Name, Can you attend?, and Email)',
+    pleaseFillRequiredFields: 'Please fill in all required fields (Name and Email)',
     failedToLookupRsvp: 'Failed to lookup RSVP. Please try again.',
     failedToSubmitRsvp: 'Failed to submit RSVP. Please try again.',
     pleaseEnterEmail: 'Please enter your email address',
+    
+    // Save the Date page
+    saveTheDateSubtitle: "You're invited to Hang + Eric's wedding!",
+    noRsvpNeededMessage: 'No RSVP is needed at this time. Please wait for a formal invitation to RSVP!',
+    rsvpAnyways: 'RSVP Anyways',
   },
   vi: {
     // Common
     home: 'Trang chủ',
     rsvp: 'Xác nhận tham dự',
+    saveTheDateNav: 'Lưu ngày cưới',
     schedule: 'Lịch trình',
     aboutTheCouple: 'Về cặp đôi',
     venue: 'Địa điểm',
@@ -474,6 +485,7 @@ export const translations: Record<Language, Translations> = {
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: '23 tháng 5, 2026',
     fusionResortsDaNang: 'Fusion Resorts Đà Nẵng',
+    saveTheDateButton: 'Lưu ngày cưới',
 
     // Schedule page
     scheduleTitle: 'Lịch trình',
@@ -526,33 +538,33 @@ export const translations: Record<Language, Translations> = {
     frequentlyAskedQuestions: 'Những câu hỏi thường gặp về lễ cưới của chúng tôi',
     weddingDetails: 'Chi Tiết Lễ Cưới',
     whenAndWhereWedding: 'Khi nào và ở đâu sẽ tổ chức lễ cưới?',
-    weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resorts Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc TODO PM, tiếp theo là tiệc cocktail và tiệc cưới. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
+    weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resorts Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc ??:??, tiếp theo là tiệc cocktail và tiệc cưới. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
     whatShouldIWear: 'Tôi nên mặc gì?',
-    dressCodeAnswer: 'Chúng tôi rất muốn thấy bạn ăn mặc đẹp! Mã trang phục là TODO. Đối với phụ nữ: TODO váy. Đối với nam giới: TODO vest.',
+    dressCodeAnswer: 'Chúng tôi rất muốn thấy bạn ăn mặc đẹp! Chúng tôi sẽ liên hệ lại với bạn về chi tiết mã trang phục.',
     weatherInDaNang: 'Thời tiết ở Đà Nẵng vào tháng 5 như thế nào?',
     weatherAnswer: 'Tháng 5 thường ấm và nắng ở Đà Nẵng với nhiệt độ khoảng 25-30°C (77-86°F). Đây là đầu mùa khô, nên ít có khả năng mưa. Chúng tôi khuyên bạn nên mang quần áo nhẹ, thoáng khí và kem chống nắng.',
     travelAndAccommodation: 'Du Lịch & Chỗ Ở',
     doINeedVisa: 'Tôi có cần visa để thăm Việt Nam không?',
-    visaAnswer: 'Hầu hết du khách cần visa để vào Việt Nam. Bạn có thể nộp đơn xin visa điện tử trực tuyến và nộp đơn trước ngày đi du lịch. https://evisa.gov.vn/. Vui lòng kiểm tra yêu cầu mới nhất cho quốc gia của bạn',
+    visaAnswer: 'Người mang hộ chiếu Mỹ sẽ cần visa để thăm Việt Nam. Hầu hết người mang hộ chiếu khác cũng sẽ cần visa để vào Việt Nam. Bạn có thể nộp đơn xin visa điện tử trực tuyến và nộp đơn trước ngày đi du lịch. https://evisa.gov.vn/. Vui lòng kiểm tra yêu cầu mới nhất cho quốc gia của bạn',
     whereShouldIStay: 'Tôi nên ở đâu?',
     accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resorts Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
     howToGetFromAirport: 'Làm sao để đi từ sân bay đến địa điểm?',
     airportTransportAnswer: 'Sân bay Quốc tế Đà Nẵng cách Fusion Resorts khoảng 20-30 phút. Bạn có thể đi taxi, Grab (ứng dụng đi chung xe), hoặc sắp xếp đưa đón sân bay thông qua khu nghỉ dưỡng. Chúng tôi có thể giúp điều phối vận chuyển nhóm nếu cần - xem RSVP để biết chi tiết.',
     additionalQuestions: 'Câu Hỏi Bổ Sung',
     contactUs: 'Làm sao tôi có thể liên hệ với bạn để đặt câu hỏi?',
-    contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang tại TODO hoặc Eric tại TODO. Chúng tôi ở đây để giúp làm cho chuyến đi và lễ kỷ niệm của chúng tôi trở nên tuyệt vời nhất có thể!',
+    contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang hoặc Eric tại ohhangno@gmail.com, hoặc apinecone@ trên IG, hoặc trực tiếp qua Messenger nếu bạn đã kết bạn với chúng tôi!',
     rsvpAndGifts: 'RSVP & Quà Tặng',
     rsvpDeadline: 'Hạn chót RSVP là khi nào?',
-    rsvpDeadlineAnswer: 'Vui lòng RSVP trước ngày TODO. Bạn có thể RSVP trực tuyến thông qua trang web của chúng tôi hoặc liên hệ trực tiếp với chúng tôi.',
+    rsvpDeadlineAnswer: 'Hiện tại, chúng tôi chỉ yêu cầu bạn lưu ngày! Hãy tìm kiếm thiệp mời để RSVP sớm!',
     giftRegistry: 'Bạn có danh sách quà tặng không?',
-    giftRegistryAnswer: 'Sự có mặt của bạn tại lễ cưới của chúng tôi là món quà tuyệt vời nhất! Tuy nhiên, nếu bạn muốn tặng chúng tôi một món quà, chúng tôi đã tạo một danh sách quà tặng với những món đồ chúng tôi muốn có trong ngôi nhà mới của chúng tôi.',
+    giftRegistryAnswer: 'Sự có mặt của bạn tại lễ cưới của chúng tôi là món quà tuyệt vời nhất! Tuy nhiên, nếu bạn muốn tặng chúng tôi một món quà, chúng tôi sẽ có hướng dẫn sớm hơn gần ngày cưới!',
     canIBringPlusOne: 'Tôi có thể mang người đi cùng không?',
-    plusOneAnswer: 'TODO nhưng có.',
+    plusOneAnswer: 'Có!',
     ceremonyAndReception: 'Lễ Cưới & Tiệc Cưới',
     ceremonyIndoorsOrOutdoors: 'Lễ cưới sẽ được tổ chức trong nhà hay ngoài trời?',
-    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resorts, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà đẹp tại khu nghỉ dưỡng.',
+    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resorts, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà tại khu nghỉ dưỡng.',
     whatTimeShouldIArrive: 'Tôi nên đến lúc mấy giờ?',
-    arrivalTimeAnswer: 'Vui lòng đến trước TODO PM để đảm bảo bạn được ngồi trước khi lễ cưới bắt đầu lúc TODO PM. Sẽ có khu vực tiếp đón chào mừng nơi bạn có thể thưởng thức đồ uống trước lễ cưới.',
+    arrivalTimeAnswer: 'Thông tin này sẽ được cập nhật gần hơn với ngày cưới!',
     willThereBeFoodAndDrinks: 'Sẽ có thức ăn và đồ uống không?',
     foodAndDrinksAnswer: 'Tất nhiên! Chúng tôi sẽ có giờ cocktail với món khai vị và đồ uống sau lễ cưới, tiếp theo là tiệc tối đầy đủ. Chúng tôi sẽ đáp ứng các hạn chế về ăn uống - vui lòng cho chúng tôi biết khi bạn RSVP.',
     stillHaveQuestions: 'Vẫn Còn Câu Hỏi?',
@@ -576,7 +588,7 @@ export const translations: Record<Language, Translations> = {
 
     // Pet Cats page
     petCatsTitle: 'Thú Cưng',
-    clickOnCatsToPet: 'Nhấp vào những chú mèo để vuốt ve chúng! Bạn cũng có thể kéo chúng đi khắp nhà',
+    clickOnCatsToPet: 'Chơi với những chú mèo của chúng tôi',
     updatingLeaderboard: 'Đang cập nhật bảng xếp hạng...',
     playingAs: 'Đang chơi với tên:',
     clearIdentity: 'Xóa Danh Tính',
@@ -614,24 +626,21 @@ export const translations: Record<Language, Translations> = {
     rsvpFormTitle: 'Xác Nhận Tham Dự',
     updateRsvpDetails: 'Cập nhật thông tin RSVP của bạn',
     fillRsvpDetails: 'Vui lòng điền thông tin RSVP của bạn',
-    rsvpNote: 'Lưu ý: Chúng tôi vẫn đang hoàn thiện các chi tiết của lễ cưới. Tại thời điểm này, chúng tôi chỉ cần số lượng RSVP + (+1) của bạn và để bạn lưu ngày! Chúng tôi sẽ thông báo cho bạn khi có thông tin về chỗ ở / phương tiện di chuyển / các chi tiết khác! (Xem tùy chọn thông báo bên dưới).',
+    rsvpNote: '',
     editResponseNote: 'Bạn có thể quay lại đây bất cứ lúc nào để chỉnh sửa phản hồi của mình!',
     usingEmail: 'Đang sử dụng email:',
     useDifferentEmail: 'Sử dụng email khác',
     yourNamePlaceholder: 'Nhập họ tên đầy đủ của bạn',
-    plusOneName: 'Tên Người Đi Cùng',
+    plusOneName: 'Tên Người Đi Cùng (để trống nếu không có)',
     plusOneNamePlaceholder: 'Nhập tên người đi cùng (nếu có)',
-    canYouAttend: 'Bạn có thể tham dự không?',
+    whichEventsCanYouAttend: 'Bạn có thể tham dự sự kiện nào?',
+    westernWeddingCheckbox: 'Lễ Cưới Phương Tây | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
+    teaCeremonyCheckbox: 'Lễ Trà | 20 tháng 5, 2026 | Sa Đéc, Việt Nam',
     yes: 'Có',
     no: 'Không',
     email: 'Email',
     phoneOptional: 'Số Điện Thoại (tùy chọn)',
     phonePlaceholder: 'Nhập số điện thoại của bạn',
-    whichEventCanYouJoin: 'Bạn có thể tham dự sự kiện nào?',
-    selectEvent: 'Chọn một sự kiện',
-    westernWeddingMay23: 'Lễ Cưới Phương Tây, 23 tháng 5, Đà Nẵng',
-    teaCeremonyMay21: 'Lễ Trà, 21 tháng 5, Sa Đéc',
-    bothEvents: 'Cả hai sự kiện',
     accommodationDetails: 'Tôi muốn biết chi tiết về chỗ ở tại địa điểm trực tiếp',
     accommodationDetailsNote: '(Đang được hoàn thiện)',
     transportationDetails: 'Tôi muốn biết chi tiết về phương tiện di chuyển đến địa điểm',
@@ -655,11 +664,17 @@ export const translations: Record<Language, Translations> = {
     updating: 'Đang cập nhật...',
     thankYouForResponse: 'Cảm ơn bạn đã phản hồi!',
     thankYouMessage: 'Cảm ơn bạn, {name}! Chúng tôi đã nhận được RSVP của bạn và không thể chờ đợi để ăn mừng cùng bạn!',
+    thankYouMessageUnableToAttend: 'Cảm ơn bạn, {name}! Chúng tôi rất tiếc khi biết rằng bạn không thể tham dự lễ cưới của chúng tôi.',
     editResponseAnytime: 'Bạn có thể quay lại đây bất cứ lúc nào để chỉnh sửa phản hồi của mình!',
     submitAnotherRsvp: 'Gửi RSVP Khác',
-    pleaseFillRequiredFields: 'Vui lòng điền tất cả các trường bắt buộc (Tên, Bạn có thể tham dự?, và Email)',
+    pleaseFillRequiredFields: 'Vui lòng điền tất cả các trường bắt buộc (Tên và Email)',
     failedToLookupRsvp: 'Không thể tìm kiếm RSVP. Vui lòng thử lại.',
     failedToSubmitRsvp: 'Không thể gửi RSVP. Vui lòng thử lại.',
     pleaseEnterEmail: 'Vui lòng nhập địa chỉ email của bạn',
+    
+    // Save the Date page
+    saveTheDateSubtitle: 'Bạn được mời đến đám cưới của Hang + Eric!',
+    noRsvpNeededMessage: 'Hiện tại chưa cần xác nhận tham dự. Vui lòng đợi thiệp mời chính thức để RSVP!',
+    rsvpAnyways: 'Xác nhận tham dự ngay',
   },
 };

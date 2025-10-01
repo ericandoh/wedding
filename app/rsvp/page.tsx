@@ -10,10 +10,10 @@ export default function RSVP() {
   const [formData, setFormData] = useState({
     name: '',
     plusOneName: '',
-    canAttend: '',
+    canAttendWesternWedding: false,
+    canAttendTeaCeremony: false,
     email: '',
     phone: '',
-    eventType: '',
     accommodationDetails: false,
     transportationDetails: false,
     dietaryRestrictions: '',
@@ -152,7 +152,6 @@ export default function RSVP() {
     e.preventDefault();
     if (
       !formData.name.trim() ||
-      !formData.canAttend ||
       !formData.email.trim()
     ) {
       setError(t.pleaseFillRequiredFields);
@@ -213,7 +212,10 @@ export default function RSVP() {
         <div className="flex-grow bg-white py-6">
           <div className="mx-auto max-w-4xl px-6 text-center">
             <p className="text-body-lg mb-8">
-              {t.thankYouMessage.replace('{name}', formData.name)}
+              {(formData.canAttendWesternWedding || formData.canAttendTeaCeremony 
+                ? t.thankYouMessage 
+                : t.thankYouMessageUnableToAttend
+              ).replace('{name}', formData.name)}
             </p>
             <p className="text-body mb-6">
               {t.editResponseAnytime}
@@ -399,35 +401,33 @@ export default function RSVP() {
               />
             </div>
 
-            {/* Can you attend? */}
+            {/* Which events can you attend? */}
             <div>
               <label className="text-label mb-3 block text-left text-sm font-medium text-gray-700">
-                {t.canYouAttend} *
+                {t.whichEventsCanYouAttend} *
               </label>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="flex items-center">
                   <input
-                    type="radio"
-                    name="canAttend"
-                    value="Yes"
-                    checked={formData.canAttend === 'Yes'}
+                    type="checkbox"
+                    name="canAttendWesternWedding"
+                    checked={formData.canAttendWesternWedding}
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">{t.yes}</span>
+                  <span className="text-body">{t.westernWeddingCheckbox}</span>
                 </label>
                 <label className="flex items-center">
                   <input
-                    type="radio"
-                    name="canAttend"
-                    value="No"
-                    checked={formData.canAttend === 'No'}
+                    type="checkbox"
+                    name="canAttendTeaCeremony"
+                    checked={formData.canAttendTeaCeremony}
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     className="mr-3"
                   />
-                  <span className="text-body">{t.no}</span>
+                  <span className="text-body">{t.teaCeremonyCheckbox}</span>
                 </label>
               </div>
             </div>
@@ -471,32 +471,6 @@ export default function RSVP() {
               />
             </div>
 
-            {/* Event Type Dropdown */}
-            <div>
-              <label
-                htmlFor="eventType"
-                className="text-label mb-2 block text-left text-sm font-medium text-gray-700"
-              >
-                {t.whichEventCanYouJoin}
-              </label>
-              <select
-                id="eventType"
-                name="eventType"
-                value={formData.eventType}
-                onChange={handleInputChange}
-                disabled={isSubmitting}
-                className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                <option value="">{t.selectEvent}</option>
-                <option value="Western Wedding, May 23, Da Nang">
-                  {t.westernWeddingMay23}
-                </option>
-                <option value="Tea Ceremony, May 21, Sa Dec">
-                  {t.teaCeremonyMay21}
-                </option>
-                <option value="Both events">{t.bothEvents}</option>
-              </select>
-            </div>
 
             {/* Accommodation Details */}
             <div>
@@ -694,7 +668,6 @@ export default function RSVP() {
               disabled={
                 isSubmitting ||
                 !formData.name.trim() ||
-                !formData.canAttend ||
                 !formData.email.trim()
               }
               className="text-button-lg w-full border-2 border-gray-800 px-8 py-3 text-lg font-medium text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"

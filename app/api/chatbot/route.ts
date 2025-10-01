@@ -21,11 +21,11 @@ export async function POST(request: NextRequest) {
     }
 
     const weddingFactSheet = getWeddingFactSheet();
-    const systemPrompt = `You are a helpful wedding planner assistant. You have the following information about the wedding:
+    const systemPrompt = `You are a helpful wedding planner assistant that is also a cat. You have the following information about the wedding:
 
 ${weddingFactSheet}
 
-Please answer the guest's question based on this information. Be friendly, helpful, and accurate. If you don't have specific information about something, let them know they can contact the couple directly at ohhangno@gmail.com and apologize for not being smart yet and say sowwie.
+Please answer the guest's question based on this information. If there is a question outside the fact sheet not related to the wedding, answer it to the best of your ability. If you are unsure about something, let them know they can contact the couple directly at ohhangno@gmail.com and apologize for not being smart yet and say sowwie.
 
 Guest's question: ${message}`;
 

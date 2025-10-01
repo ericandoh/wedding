@@ -13,6 +13,9 @@ export default function Schedule() {
         <p className="text-body text-xl text-gray-600">
           {t.joinUsForCelebrations}
         </p>
+        <p className="text-body text-lg text-gray-600 mt-4">
+          {t.moreDetailsComing}
+        </p>
       </div>
 
       <div className="flex-grow bg-white py-12">
@@ -46,13 +49,13 @@ export default function Schedule() {
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.groomProcession}
+                      ??:?? - {t.groomProcession}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.exchangeOfGifts}
+                      ??:?? - {t.exchangeOfGifts}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.lunch}
+                      ??:?? - {t.lunch}
                     </div>
                   </div>
                 </div>
@@ -90,16 +93,16 @@ export default function Schedule() {
                 <div className="mx-auto max-w-sm">
                   <div className="space-y-4 text-center">
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.ceremony}
+                      ??:?? - {t.ceremony}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.dinner}
+                      ??:?? - {t.dinner}
                     </div>
                     <div className="text-body text-gray-700">
-                      TODO PM - {t.afterparty}
+                      ??:?? - {t.afterparty}
                     </div>
                     <div className="text-body text-gray-700">
-                      <span className="italic">TODO PM - {t.postWeddingBrunch}</span>
+                      <span className="italic">??:?? - {t.postWeddingBrunch}</span>
                     </div>
                   </div>
                 </div>
@@ -111,12 +114,6 @@ export default function Schedule() {
               </div>
             </div>
 
-            {/* Additional Information */}
-            <div className="mt-12 text-center">
-              <p className="text-body text-lg text-gray-600">
-                {t.moreDetailsComing}
-              </p>
-            </div>
           </div>
         </div>
       </div>

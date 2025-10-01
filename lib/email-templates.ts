@@ -1,10 +1,10 @@
 export interface RSVPData {
   name: string;
   plusOneName?: string;
-  canAttend: string;
+  canAttendWesternWedding: boolean;
+  canAttendTeaCeremony: boolean;
   email: string;
   phone?: string;
-  eventType?: string;
   accommodationDetails: boolean;
   transportationDetails: boolean;
   dietaryRestrictions?: string;
@@ -16,15 +16,19 @@ export interface RSVPData {
 }
 
 export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string; html: string; text: string } {
-  const { name, canAttend, eventType, accommodationDetails, transportationDetails, isUpdate } = data;
+  const { name, canAttendWesternWedding, canAttendTeaCeremony, accommodationDetails, transportationDetails, isUpdate } = data;
   
-  const isAttending = canAttend === 'Yes';
+  const isAttending = canAttendWesternWedding || canAttendTeaCeremony;
   const plusOneText = data.plusOneName ? ` and ${data.plusOneName}` : '';
-  const eventText = eventType 
-    ? eventType === 'Both events' 
-      ? ' for the ceremony and reception'
-      : ` for ${eventType}`
-    : '';
+  
+  let eventText = '';
+  if (canAttendWesternWedding && canAttendTeaCeremony) {
+    eventText = ' for both the Western Wedding and Tea Ceremony';
+  } else if (canAttendWesternWedding) {
+    eventText = ' for the Western Wedding';
+  } else if (canAttendTeaCeremony) {
+    eventText = ' for the Tea Ceremony';
+  }
   
   const subject = isUpdate 
     ? `RSVP Updated`
@@ -138,15 +142,13 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
         <span class="detail-value">${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Attending: </span>
-        <span class="detail-value">${canAttend}</span>
+        <span class="detail-label">Western Wedding (May 23, Da Nang): </span>
+        <span class="detail-value">${canAttendWesternWedding ? 'Yes' : 'No'}</span>
       </div>
-      ${eventType ? `
       <div class="detail-row">
-        <span class="detail-label">Event: </span>
-        <span class="detail-value">${eventType}</span>
+        <span class="detail-label">Tea Ceremony (May 20, Sa Dec): </span>
+        <span class="detail-value">${canAttendTeaCeremony ? 'Yes' : 'No'}</span>
       </div>
-      ` : ''}
       ${accommodationDetails ? `
       <div class="detail-row">
         <span class="detail-label">Accommodation: </span>
@@ -173,6 +175,13 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
       ` : ''}
       </div>
       
+      <div class="content">
+        ${isAttending 
+          ? `<p>Thank you, ${name}! We've received your RSVP and can't wait to celebrate with you!</p>
+             <p>We'll be sending out more details about the wedding as the date approaches, including detailed schedule and timeline, venue information and directions, accommodation recommendations, and dress code details.</p>`
+          : `<p>Thank you, ${name}! We're sorry to hear that you're unable to attend our wedding.</p>`
+        }
+      </div>
       
       <div class="footer">
         <p>This email was sent in response to your RSVP submission. If you need to make any changes, please visit our wedding website.</p>
@@ -186,14 +195,16 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
   const text = `
 RSVP Received
 - Name: ${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}
-- Attending: ${canAttend}
-${eventType ? `- Event: ${eventType}` : ''}
+- Western Wedding (May 23, Da Nang): ${canAttendWesternWedding ? 'Yes' : 'No'}
+- Tea Ceremony (May 20, Sa Dec): ${canAttendTeaCeremony ? 'Yes' : 'No'}
 ${accommodationDetails ? '- Accommodation: Details requested' : ''}
 ${transportationDetails ? '- Transportation: Details requested' : ''}
 ${data.dietaryRestrictions ? `- Dietary Restrictions: ${data.dietaryRestrictions}` : ''}
 ${data.accessibilityRestrictions ? `- Accessibility Needs: ${data.accessibilityRestrictions}` : ''}
 
 ${isAttending ? `
+Thank you, ${name}! We've received your RSVP and can't wait to celebrate with you!
+
 We'll be sending out more details about the wedding as the date approaches, including:
 - Detailed schedule and timeline
 - Venue information and directions
@@ -202,7 +213,10 @@ We'll be sending out more details about the wedding as the date approaches, incl
 
 To change your RSVP or modify any information submitted, please re-visit the RSVP page: https://www.hangeric.com/rsvp and resubmit your information.
 If you have any other questions in the meantime, please don't hesitate to reach out to us! Or trial our chatbot at https://www.hangeric.com/chatbot.
-` : ''}
+` : `Thank you, ${name}! We're sorry to hear that you're unable to attend our wedding.
+
+To change your RSVP or modify any information submitted, please re-visit the RSVP page: https://www.hangeric.com/rsvp and resubmit your information.
+If you have any other questions in the meantime, please don't hesitate to reach out to us! Or trial our chatbot at https://www.hangeric.com/chatbot.`}
 
 Thank you for being part of our special day!
 
@@ -214,8 +228,8 @@ Eric & Hang
 }
 
 export function generateAdminNotificationEmail(data: RSVPData): { subject: string; html: string; text: string } {
-  const { name, canAttend, eventType } = data;
-  const isAttending = canAttend === 'Yes';
+  const { name, canAttendWesternWedding, canAttendTeaCeremony } = data;
+  const isAttending = canAttendWesternWedding || canAttendTeaCeremony;
   
   const subject = `New RSVP: ${name} - ${isAttending ? 'Attending' : 'Not Attending'}`;
   
@@ -301,15 +315,13 @@ export function generateAdminNotificationEmail(data: RSVPData): { subject: strin
         <span class="detail-value">${data.phone || 'Not provided'}</span>
       </div>
       <div class="detail-row">
-        <span class="detail-label">Attending: </span>
-        <span class="detail-value">${data.canAttend}</span>
+        <span class="detail-label">Western Wedding (May 23, Da Nang): </span>
+        <span class="detail-value">${canAttendWesternWedding ? 'Yes' : 'No'}</span>
       </div>
-      ${eventType ? `
       <div class="detail-row">
-        <span class="detail-label">Event: </span>
-        <span class="detail-value">${eventType}</span>
+        <span class="detail-label">Tea Ceremony (May 20, Sa Dec): </span>
+        <span class="detail-value">${canAttendTeaCeremony ? 'Yes' : 'No'}</span>
       </div>
-      ` : ''}
       <div class="detail-row">
         <span class="detail-label">Accommodation Details: </span>
         <span class="detail-value">${data.accommodationDetails ? 'Yes' : 'No'}</span>
@@ -347,8 +359,8 @@ New RSVP Notification - ${isAttending ? 'Attending!' : 'Not Attending'}
 Name: ${data.name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}
 Email: ${data.email}
 Phone: ${data.phone || 'Not provided'}
-Attending: ${data.canAttend}
-${eventType ? `Event: ${eventType}` : ''}
+Western Wedding (May 23, Da Nang): ${canAttendWesternWedding ? 'Yes' : 'No'}
+Tea Ceremony (May 20, Sa Dec): ${canAttendTeaCeremony ? 'Yes' : 'No'}
 Accommodation Details: ${data.accommodationDetails ? 'Yes' : 'No'}
 Transportation Details: ${data.transportationDetails ? 'Yes' : 'No'}
 ${data.dietaryRestrictions ? `Dietary Restrictions: ${data.dietaryRestrictions}` : ''}

@@ -21,9 +21,17 @@ export default function Page() {
         <div className="mx-auto max-w-4xl px-6">
           <Link
             href="/rsvp"
-            className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+            className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white hidden"
           >
             {t.rsvp}
+          </Link>
+          
+          {/* Save the Date button */}
+          <Link
+            href="/save-the-date"
+            className="text-button-lg inline-block border-2 border-gray-800 px-8 py-3 text-gray-800 transition-all duration-300 hover:bg-gray-800 hover:text-white"
+          >
+            {t.saveTheDateButton}
           </Link>
         </div>
       </div>
