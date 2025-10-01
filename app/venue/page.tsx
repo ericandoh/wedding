@@ -36,16 +36,16 @@ export default function Venue() {
           {/* Venue Information Card */}
           <div className="mb-12">
             <div className="mx-auto max-w-2xl">
-              {/* Decorative Border */}
-              <div className="border-2 border-gray-300 p-8 shadow-lg">
+              {/* Pearl White Card */}
+              <div className="p-8 shadow-lg bg-gradient-to-b from-white/60 to-white/90 rounded-xl backdrop-blur-sm">
                 {/* Address Section */}
                 <div className="mb-8 text-center">
                   <div className="mb-6">
-                    <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                    <h3 className="text-title text-3xl font-bold text-gray-800">
+                    <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
+                    <h3 className="text-title text-3xl font-bold text-gray-700">
                       {t.address}
                     </h3>
-                    <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
+                    <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
                   </div>
                   
                   <div className="mb-6">
@@ -57,19 +57,19 @@ export default function Venue() {
 
                 {/* Decorative Divider */}
                 <div className="my-8 flex items-center justify-center">
-                  <div className="h-px w-32 bg-gray-300"></div>
-                  <div className="mx-4 text-2xl text-gray-400">❦</div>
-                  <div className="h-px w-32 bg-gray-300"></div>
+                  <div className="h-px w-32 bg-gray-200/30"></div>
+                  <div className="mx-4 text-2xl text-gray-400/50">❦</div>
+                  <div className="h-px w-32 bg-gray-200/30"></div>
                 </div>
 
                 {/* Website Section */}
                 <div className="mb-8 text-center">
                   <div className="mb-6">
-                    <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                    <h3 className="text-title text-3xl font-bold text-gray-800">
+                    <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
+                    <h3 className="text-title text-3xl font-bold text-gray-700">
                       {t.website}
                     </h3>
-                    <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
+                    <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
                   </div>
                   
                   <div className="mb-6">
@@ -86,7 +86,7 @@ export default function Venue() {
 
                 {/* Bottom Decoration */}
                 <div className="mt-8 text-center">
-                  <div className="mx-auto h-px w-16 bg-gray-400"></div>
+                  <div className="mx-auto h-px w-16 bg-gray-300/40"></div>
                 </div>
               </div>
             </div>

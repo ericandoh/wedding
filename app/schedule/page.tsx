@@ -20,18 +20,17 @@ export default function Schedule() {
 
       <div className="flex-grow bg-white py-12">
         <div className="mx-auto max-w-4xl px-6">
-          {/* Invitation Card Container */}
+          {/* Pearl White Schedule Card */}
           <div className="mx-auto max-w-2xl">
-            {/* Decorative Border */}
-            <div className="border-2 border-gray-300 p-8 shadow-lg">
+            <div className="p-8 shadow-lg bg-gradient-to-b from-white/60 to-white/90 rounded-xl backdrop-blur-sm">
               {/* Tea Ceremony */}
               <div className="mb-16 text-center">
                 <div className="mb-6">
-                  <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                  <h2 className="text-title text-5xl font-bold text-gray-800">
+                  <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
+                  <h2 className="text-title text-4xl font-bold text-gray-700">
                     {t.teaCeremony}
                   </h2>
-                  <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
+                  <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
@@ -63,19 +62,19 @@ export default function Schedule() {
 
               {/* Decorative Divider */}
               <div className="my-12 flex items-center justify-center">
-                <div className="h-px w-32 bg-gray-300"></div>
-                <div className="mx-4 text-2xl text-gray-400">❦</div>
-                <div className="h-px w-32 bg-gray-300"></div>
+                <div className="h-px w-32 bg-gray-200/30"></div>
+                <div className="mx-4 text-2xl text-gray-400/50">❦</div>
+                <div className="h-px w-32 bg-gray-200/30"></div>
               </div>
 
               {/* Western Wedding */}
               <div className="mb-8 text-center">
                 <div className="mb-6">
-                  <div className="mx-auto mb-4 h-px w-24 bg-gray-400"></div>
-                  <h2 className="text-title text-5xl font-bold text-gray-800">
+                  <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
+                  <h2 className="text-title text-4xl font-bold text-gray-700">
                     {t.westernWedding}
                   </h2>
-                  <div className="mx-auto mt-4 h-px w-24 bg-gray-400"></div>
+                  <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
                 </div>
                 
                 <div className="mb-8 space-y-3">
@@ -110,10 +109,9 @@ export default function Schedule() {
 
               {/* Bottom Decoration */}
               <div className="mt-8 text-center">
-                <div className="mx-auto h-px w-16 bg-gray-400"></div>
+                <div className="mx-auto h-px w-16 bg-gray-300/40"></div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
