@@ -201,8 +201,21 @@ export default function PetCats() {
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.max(minVelocity, Math.random() * 2);
       
-      // 1/3 chance to start asleep, 2/3 chance to start awake
-      const isAsleep = Math.random() < 1/3;
+      // Generate random position
+      const x = Math.max(margin, Math.min(width - catSize - margin, Math.random() * (width - catSize)));
+      const y = Math.max(margin, Math.min(height - catSize - margin, Math.random() * (height - catSize)));
+      
+      // Check if in restricted sleeping area (25% to 50% of width and height)
+      const restrictedXMin = width * 0.25;
+      const restrictedXMax = width * 0.5;
+      const restrictedYMin = height * 0.25;
+      const restrictedYMax = height * 0.5;
+      const isInRestrictedArea = 
+        x >= restrictedXMin && x <= restrictedXMax &&
+        y >= restrictedYMin && y <= restrictedYMax;
+      
+      // 1/3 chance to start asleep (but not if in restricted area)
+      const isAsleep = !isInRestrictedArea && Math.random() < 1/3;
       const currentTime = Date.now();
       
       // Set initial durations
@@ -211,8 +224,8 @@ export default function PetCats() {
       
       return {
         id: index,
-        x: Math.max(margin, Math.min(width - catSize - margin, Math.random() * (width - catSize))),
-        y: Math.max(margin, Math.min(height - catSize - margin, Math.random() * (height - catSize))),
+        x,
+        y,
         vx: isAsleep ? 0 : Math.cos(angle) * speed,
         vy: isAsleep ? 0 : Math.sin(angle) * speed,
         image: isAsleep ? asleepImages[index] : image,
@@ -549,16 +562,35 @@ export default function PetCats() {
           } else {
             // Cat is awake, check if it should go to sleep
             if (now - cat.awakeStartTime >= cat.awakeDuration) {
-              // Put cat to sleep
-              updatedCat = {
-                ...cat,
-                isAsleep: true,
-                vx: 0,
-                vy: 0,
-                image: asleepImages[cat.id],
-                sleepStartTime: now,
-                sleepDuration: (1 + Math.random()) * 10000 // 10-20 seconds
-              };
+              // Check if cat is in the restricted sleeping area (25% to 50% of width and height)
+              const restrictedXMin = roomSize.width * 0.25;
+              const restrictedXMax = roomSize.width * 0.5;
+              const restrictedYMin = roomSize.height * 0.25;
+              const restrictedYMax = roomSize.height * 0.5;
+              
+              const isInRestrictedArea = 
+                cat.x >= restrictedXMin && cat.x <= restrictedXMax &&
+                cat.y >= restrictedYMin && cat.y <= restrictedYMax;
+              
+              if (isInRestrictedArea) {
+                // Cat is in restricted area - don't let it sleep, extend awake time
+                updatedCat = {
+                  ...cat,
+                  awakeStartTime: now, // Reset awake timer
+                  awakeDuration: (1 + Math.random()) * 10000 // 10-20 seconds more
+                };
+              } else {
+                // Cat is outside restricted area - can sleep
+                updatedCat = {
+                  ...cat,
+                  isAsleep: true,
+                  vx: 0,
+                  vy: 0,
+                  image: asleepImages[cat.id],
+                  sleepStartTime: now,
+                  sleepDuration: (1 + Math.random()) * 10000 // 10-20 seconds
+                };
+              }
             } else {
               // Cat is still awake, continue normal movement
               // Check if cat has speed boost
