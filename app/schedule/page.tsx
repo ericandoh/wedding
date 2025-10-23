@@ -85,119 +85,119 @@ export default function Schedule() {
                   {/* Timeline Events */}
                   <div className="space-y-8">
                     {/* Event 1: Guest Arrival */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.guestArrivalWelcome}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           3:00 – 3:45 PM
                         </div>
                       </div>
                     </div>
 
                     {/* Event 2: Guests Seated */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-6 text-right">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-6 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           3:45 – 4:00 PM
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-12 text-left">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-12 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.guestsAreSeated}
                         </div>
                       </div>
                     </div>
 
                     {/* Event 3: Exchange of Vows */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.exchangeOfVows}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           4:00 – 4:30 PM
                         </div>
                       </div>
                     </div>
 
                     {/* Event 4: Photography */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-6 text-right">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-6 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           4:30 – 5:00 PM
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-12 text-left">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-12 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.photographySession}
                         </div>
                       </div>
                     </div>
 
                     {/* Event 5: Cocktail Reception */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.cocktailReception}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           5:00 – 6:00 PM
                         </div>
                       </div>
                     </div>
 
                     {/* Event 6: Dinner Reception */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-6 text-right">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-6 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           6:00 – 9:00 PM
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-12 text-left">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-12 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.dinnerReception}
                         </div>
                       </div>
                     </div>
 
                     {/* Event 7: Dancing */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <MusicalNoteIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.dancingEveningCelebration}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           After 9:00 PM
                         </div>
                       </div>
@@ -232,51 +232,51 @@ export default function Schedule() {
                   {/* Timeline Events */}
                   <div className="space-y-8">
                     {/* Event 1: Groom Procession */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleTeaItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <UserGroupIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.groomProcession}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           TBD
                         </div>
                       </div>
                     </div>
 
                     {/* Event 2: Exchange of Gifts */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleTeaItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <GiftIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-6 text-right">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-6 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           TBD
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-12 text-left">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-12 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.exchangeOfGifts}
                         </div>
                       </div>
                     </div>
 
                     {/* Event 3: Lunch */}
-                    <div className={`relative flex items-center justify-center min-h-[40px] transition-all duration-500 ${visibleTeaItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white">
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/2 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
-                      <div className="absolute right-1/2 pr-12 text-right">
-                        <div className="text-body text-xl text-gray-700 font-medium whitespace-nowrap">
+                      <div className="absolute right-1/2 pr-12 text-right max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
                           {t.lunch}
                         </div>
                       </div>
-                      <div className="absolute left-1/2 pl-6 text-left">
-                        <div className="text-body text-base text-gray-800 font-semibold whitespace-nowrap">
+                      <div className="absolute left-1/2 pl-6 text-left max-w-[40vw] md:max-w-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
                           TBD
                         </div>
                       </div>
