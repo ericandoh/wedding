@@ -96,6 +96,23 @@ export interface Translations {
   localAttractionsComing: string;
   placesOfInterest: string;
   daNangDescription: string;
+  exploreDaNang: string;
+  tapToReveal: string;
+  tapMeToExplore: string;
+  locationsRevealed: string;
+  of: string;
+  sonTraPeninsula: string;
+  sonTraDescription: string;
+  marbleMountains: string;
+  marbleMountainsDescription: string;
+  hoiAnAncientTown: string;
+  hoiAnDescription: string;
+  baNaHills: string;
+  baNaHillsDescription: string;
+  myKheSandyBeach: string;
+  myKheDescription: string;
+  dragonBridge: string;
+  dragonBridgeDescription: string;
 
   // Q&A page
   qaTitle: string;
@@ -329,7 +346,7 @@ export const translations: Record<Language, Translations> = {
     website: 'Website',
     bookingLink: 'Booking Link',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam',
-    venueWebsite: 'fusionresorts.com',
+    venueWebsite: 'https://fusionresorts.com/danang/',
     comingSoon: 'Coming soon!',
 
     // Things to Do page
@@ -339,6 +356,23 @@ export const translations: Record<Language, Translations> = {
     localAttractionsComing: 'Local attractions and activities will be added here',
     placesOfInterest: 'Places of Interest',
     daNangDescription: 'There are actually three places of interest to visit near Da Nang: Da Nang itself, which is a beach town, Hoi An, which is a historical town + a UNESCO World Heritage Town, and Hue, the former capital of Vietnam!',
+    exploreDaNang: 'Explore Da Nang & Surrounding Areas',
+    tapToReveal: 'Tap each location to reveal the next destination',
+    tapMeToExplore: 'Tap me to explore!',
+    locationsRevealed: 'locations revealed',
+    of: 'of',
+    sonTraPeninsula: 'Son Tra Peninsula',
+    sonTraDescription: 'A stunning peninsula with pristine beaches, dense jungles, and the iconic Lady Buddha statue. Perfect for nature lovers and those seeking panoramic views of Da Nang.',
+    marbleMountains: 'Marble Mountains',
+    marbleMountainsDescription: 'Five marble and limestone hills featuring caves, tunnels, and Buddhist sanctuaries. A mystical blend of natural beauty and spiritual heritage.',
+    hoiAnAncientTown: 'Hoi An Ancient Town',
+    hoiAnDescription: 'A UNESCO World Heritage Site with charming lantern-lit streets, ancient architecture, and vibrant markets. Experience the magic of this historic trading port.',
+    baNaHills: 'Ba Na Hills',
+    baNaHillsDescription: 'A mountain resort featuring the famous Golden Bridge held by giant hands, French colonial architecture, and stunning cable car rides with breathtaking views.',
+    myKheSandyBeach: 'My Khe Beach',
+    myKheDescription: 'One of the most beautiful beaches in the world with soft white sand and crystal-clear waters. Perfect for swimming, surfing, and relaxing under the sun.',
+    dragonBridge: 'Dragon Bridge',
+    dragonBridgeDescription: 'An iconic bridge shaped like a dragon that breathes fire and water on weekend nights. A spectacular display of modern Vietnamese engineering and culture.',
 
     // Q&A page
     qaTitle: 'Q&A',
@@ -570,7 +604,7 @@ export const translations: Record<Language, Translations> = {
     website: 'Trang web',
     bookingLink: 'Liên Kết Đặt Phòng',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam',
-    venueWebsite: 'fusionresorts.com',
+    venueWebsite: 'https://fusionresorts.com/danang/',
     comingSoon: 'Sắp có!',
 
     // Things to Do page
@@ -580,6 +614,23 @@ export const translations: Record<Language, Translations> = {
     localAttractionsComing: 'Các điểm tham quan và hoạt động địa phương sẽ được thêm vào đây',
     placesOfInterest: 'Điểm Tham Quan',
     daNangDescription: 'Thực ra có ba nơi thú vị để tham quan gần Đà Nẵng: chính Đà Nẵng, một thị trấn biển, Hội An, một thị trấn lịch sử + Di sản Thế giới UNESCO, và Huế, cố đô của Việt Nam!',
+    exploreDaNang: 'Khám Phá Đà Nẵng & Vùng Lân Cận',
+    tapToReveal: 'Chạm vào mỗi địa điểm để hiện điểm đến tiếp theo',
+    tapMeToExplore: 'Chạm vào để khám phá!',
+    locationsRevealed: 'địa điểm đã khám phá',
+    of: 'trên',
+    sonTraPeninsula: 'Bán Đảo Sơn Trà',
+    sonTraDescription: 'Một bán đảo tuyệt đẹp với bãi biển nguyên sơ, rừng rậm dày đặc và tượng Phật Bà biểu tượng. Hoàn hảo cho những người yêu thiên nhiên và muốn ngắm toàn cảnh Đà Nẵng.',
+    marbleMountains: 'Ngũ Hành Sơn',
+    marbleMountainsDescription: 'Năm ngọn núi đá vôi và đá cẩm thạch với hang động, đường hầm và các thánh địa Phật giáo. Sự kết hợp huyền bí giữa vẻ đẹp tự nhiên và di sản tinh thần.',
+    hoiAnAncientTown: 'Phố Cổ Hội An',
+    hoiAnDescription: 'Di sản Thế giới UNESCO với những con phố rực rỡ đèn lồng, kiến trúc cổ kính và chợ sôi động. Trải nghiệm sự kỳ diệu của cảng buôn bán lịch sử này.',
+    baNaHills: 'Bà Nà Hills',
+    baNaHillsDescription: 'Khu du lịch núi với Cầu Vàng nổi tiếng được nâng đỡ bởi bàn tay khổng lồ, kiến trúc thuộc địa Pháp và chuyến đi cáp treo với tầm nhìn ngoạn mục.',
+    myKheSandyBeach: 'Bãi Biển Mỹ Khê',
+    myKheDescription: 'Một trong những bãi biển đẹp nhất thế giới với cát trắng mịn và nước biển trong vắt. Hoàn hảo cho bơi lội, lướt sóng và thư giãn dưới ánh nắng mặt trời.',
+    dragonBridge: 'Cầu Rồng',
+    dragonBridgeDescription: 'Cây cầu biểu tượng có hình con rồng phun lửa và nước vào các tối cuối tuần. Một màn trình diễn ngoạn mục của kỹ thuật và văn hóa Việt Nam hiện đại.',
 
     // Q&A page
     qaTitle: 'Hỏi Đáp',
