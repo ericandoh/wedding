@@ -70,7 +70,7 @@ export default function LoginPage() {
   };
 
   return (
-      <div className="relative flex min-h-screen items-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 px-4 justify-center">
+      <div className="relative flex min-h-screen items-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 px-4 justify-center page-fade-in">
         {/* Language Switcher */}
         <div className="absolute top-4 right-4 z-20">
           <LanguageSwitcher />
@@ -93,8 +93,9 @@ export default function LoginPage() {
             backgroundPosition: 'center center',
           }}
         />
+        {/* White overlay on top of background images */}
+        <div className="absolute inset-0 bg-white candle-flicker" />
         <div className="relative z-10 w-full max-w-md">
-          <div className="bg-white/40 p-8 shadow-lg backdrop-blur-sm">
             <div className="space-y-8">
               {/* Title Section */}
               <div className="space-y-4 text-center">
@@ -225,7 +226,6 @@ export default function LoginPage() {
                 </div>
               </form>
             </div>
-          </div>
         </div>
       </div>
   );

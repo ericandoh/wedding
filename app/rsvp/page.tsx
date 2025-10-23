@@ -199,7 +199,7 @@ export default function RSVP() {
 
   if (step === 'submitted') {
     return (
-      <div className="flex min-h-screen flex-col bg-gray-50">
+      <div className="flex min-h-screen flex-col bg-white page-fade-in">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2">
             {t.rsvpTitle}
@@ -237,7 +237,7 @@ export default function RSVP() {
 
   if (step === 'email') {
     return (
-      <div className="flex min-h-screen flex-col bg-gray-50">
+      <div className="flex min-h-screen flex-col bg-white page-fade-in">
         <div className="bg-white py-8 text-center">
           <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
             {t.rsvpTitle}
@@ -329,7 +329,7 @@ export default function RSVP() {
 
   // Form step
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-white page-fade-in">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
           {t.rsvpFormTitle}
@@ -446,7 +446,7 @@ export default function RSVP() {
                 name="email"
                 value={formData.email}
                 disabled
-                className="text-input w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-600"
+                className="text-input w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-600"
                 placeholder={t.emailPlaceholder}
               />
             </div>
@@ -556,7 +556,7 @@ export default function RSVP() {
             </div>
 
             {/* Notification Preferences */}
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
+            <div className="rounded-lg border border-gray-200 bg-white p-6">
               <h3 className="text-card-header text-gray-800 mb-4">
                 {t.howWouldYouLikeToBeNotified}
               </h3>

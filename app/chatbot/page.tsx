@@ -163,7 +163,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-white page-fade-in">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2">
           {t.chatbotTitle}
@@ -186,19 +186,19 @@ export default function Chatbot() {
                     <p className="text-caption-sm text-gray-400 mb-2">{t.tryAsking}</p>
                     <button
                       onClick={() => setInputText(t.whatShouldIWearToWedding)}
-                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                       {t.whatShouldIWearToWedding}
                     </button>
                     <button
                       onClick={() => setInputText(t.whenAndWhereIsWedding)}
-                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                       {t.whenAndWhereIsWedding}
                     </button>
                     <button
                       onClick={() => setInputText(t.doINeedVisaForVietnam)}
-                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                      className="text-button-sm block w-full text-left px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                       {t.doINeedVisaForVietnam}
                     </button>

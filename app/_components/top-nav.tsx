@@ -12,6 +12,11 @@ export default function TopNav() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { t } = useLanguage();
+  
+  // Use white text on home page, dark text on other pages
+  const isHomePage = pathname === '/';
+  const textColorBase = isHomePage ? 'text-white' : 'text-gray-600';
+  const textColorActive = isHomePage ? 'text-white' : 'text-gray-800';
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -42,7 +47,7 @@ export default function TopNav() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200/50 bg-white/80 shadow-sm backdrop-blur-sm">
+    <nav className={`absolute top-0 left-0 right-0 z-50 ${isHomePage ? '' : 'bg-white'}`}>
       <div className="relative mx-auto flex max-w-7xl items-center justify-center px-6 py-4">
         {/* Navigation Links Container */}
         <div className="relative flex items-center justify-center min-w-0 w-full">
@@ -50,7 +55,7 @@ export default function TopNav() {
           {showLeftArrow && (
             <button
               onClick={scrollLeft}
-              className="absolute left-0 z-10 rounded-full bg-white/90 p-2 text-gray-600 shadow-sm transition-colors hover:text-gray-800"
+              className={`absolute left-0 z-10 rounded-full ${isHomePage ? 'bg-black/30' : 'bg-white/90'} p-2 ${textColorBase} shadow-sm transition-colors hover:${textColorActive}`}
               aria-label="Scroll left"
             >
               <svg
@@ -84,100 +89,80 @@ export default function TopNav() {
           </div>
           <Link
             href="/"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.home}
           </Link>
           <Link
             href="/save-the-date"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/rsvp') || isActive('/save-the-date')
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {pathname === '/rsvp' ? t.rsvp : t.saveTheDateNav}
           </Link>
           <Link
             href="/schedule"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/schedule') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.schedule}
           </Link>
           <Link
-            href="/our-story"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
-              isActive('/our-story') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
-            }`}
-          >
-            {t.aboutTheCouple}
-          </Link>
-          <Link
             href="/venue"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/venue') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.venue}
           </Link>
           <Link
             href="/things-to-do"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/things-to-do') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.thingsToDo}
           </Link>
           <Link
             href="/registry"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/registry') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.registry}
           </Link>
           <Link
             href="/qa"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/qa') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.qa}
           </Link>
           <Link
-            href="/chatbot"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
-              isActive('/chatbot') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
-            }`}
-          >
-            {t.chatbot}
-          </Link>
-          <Link
             href="/pet-cats"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:text-gray-800 hover:underline hover:underline-offset-4 ${
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/pet-cats') 
-                ? 'text-gray-800 underline underline-offset-4' 
-                : 'text-gray-600'
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
             }`}
           >
             {t.petCats}
@@ -188,7 +173,7 @@ export default function TopNav() {
           {showRightArrow && (
             <button
               onClick={scrollRight}
-              className="absolute right-0 z-10 rounded-full bg-white/90 p-2 text-gray-600 shadow-sm transition-colors hover:text-gray-800"
+              className={`absolute right-0 z-10 rounded-full ${isHomePage ? 'bg-black/30' : 'bg-white/90'} p-2 ${textColorBase} shadow-sm transition-colors hover:${textColorActive}`}
               aria-label="Scroll right"
             >
               <svg

@@ -138,7 +138,7 @@ export default function SendEmailAdmin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-white py-8">
       <div className="mx-auto max-w-2xl px-6">
         <div className="bg-white rounded-lg shadow-md p-8">
           <h1 className="text-title mb-8 text-center">Send Email</h1>

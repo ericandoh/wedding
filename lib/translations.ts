@@ -34,6 +34,7 @@ export interface Translations {
   may23rd2026: string;
   fusionResortsDaNang: string;
   saveTheDateButton: string;
+  countdownTillParadise: string;
 
   // Schedule page
   scheduleTitle: string;
@@ -53,6 +54,13 @@ export interface Translations {
   afterparty: string;
   postWeddingBrunch: string;
   moreDetailsComing: string;
+  guestArrivalWelcome: string;
+  guestsAreSeated: string;
+  exchangeOfVows: string;
+  photographySession: string;
+  cocktailReception: string;
+  dinnerReception: string;
+  dancingEveningCelebration: string;
 
   // Our Story page
   aboutTheCoupleTitle: string;
@@ -70,8 +78,10 @@ export interface Translations {
   venueDetailsComing: string;
   address: string;
   website: string;
+  bookingLink: string;
   venueAddress: string;
   venueWebsite: string;
+  comingSoon: string;
 
   // Things to Do page
   thingsToDoTitle: string;
@@ -259,8 +269,9 @@ export const translations: Record<Language, Translations> = {
     // Main page
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: 'May 23rd, 2026',
-    fusionResortsDaNang: 'Fusion Resorts Da Nang',
+    fusionResortsDaNang: 'Fusion Resort & Villas Da Nang',
     saveTheDateButton: 'Save the Date',
+    countdownTillParadise: 'Countdown till paradise',
 
     // Schedule page
     scheduleTitle: 'Schedule',
@@ -273,13 +284,20 @@ export const translations: Record<Language, Translations> = {
     exchangeOfGifts: 'Exchange of gifts',
     lunch: 'Lunch',
     westernWedding: 'Western Wedding',
-    fusionResortsAndSpa: 'Fusion Resorts & Spa',
+    fusionResortsAndSpa: 'Fusion Resort & Villas',
     may23rd2026Schedule: 'May 23rd, 2026',
     ceremony: 'Ceremony',
     dinner: 'Dinner',
     afterparty: 'Afterparty',
     postWeddingBrunch: '(optional) Post Wedding Brunch',
     moreDetailsComing: 'More details about timing and logistics will be shared closer to the events.',
+    guestArrivalWelcome: 'Guest Arrival & Welcome',
+    guestsAreSeated: 'Guests Are Seated',
+    exchangeOfVows: 'Exchange of Vows',
+    photographySession: 'Photography Session',
+    cocktailReception: 'Cocktail Reception',
+    dinnerReception: 'Dinner Reception',
+    dancingEveningCelebration: 'Dancing & Evening Celebration',
 
     // Our Story page
     aboutTheCoupleTitle: 'About the Couple',
@@ -292,13 +310,15 @@ export const translations: Record<Language, Translations> = {
     // Venue page
     venueTitle: 'Venue',
     venueInformation: 'Information about our wedding venue',
-    fusionResortsDaNangVenue: 'Fusion Resorts Da Nang',
-    fusionResortsVillasDaNang: 'Fusion Resorts & Villas Da Nang',
+    fusionResortsDaNangVenue: 'Fusion Resort & Villas Da Nang',
+    fusionResortsVillasDaNang: 'Fusion Resort & Villas Da Nang',
     venueDetailsComing: 'Venue details and directions will be added here',
     address: 'Address',
     website: 'Website',
+    bookingLink: 'Booking Link',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam',
     venueWebsite: 'fusionresorts.com',
+    comingSoon: 'Coming soon!',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -313,7 +333,7 @@ export const translations: Record<Language, Translations> = {
     frequentlyAskedQuestions: 'Frequently asked questions about our wedding',
     weddingDetails: 'Wedding Details',
     whenAndWhereWedding: 'When and where is the wedding?',
-    weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resorts Da Nang, Vietnam. The ceremony will begin at ??:??, followed by cocktail hour and reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
+    weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resort & Villas Da Nang, Vietnam. The ceremony will begin at 4:00 PM, followed by photography session, cocktail reception, and dinner reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
     whatShouldIWear: 'What should I wear?',
     dressCodeAnswer: "We'd love to see you dressed up! We will get back to you with details about the dress code.",
     weatherInDaNang: "What's the weather like in Da Nang in May?",
@@ -322,9 +342,9 @@ export const translations: Record<Language, Translations> = {
     doINeedVisa: 'Do I need a visa to visit Vietnam?',
     visaAnswer: 'US Passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa to enter Vietnam. You can apply for an e-visa online and apply well in advance of your travel dates. https://evisa.gov.vn/. Please check the latest requirements for your country',
     whereShouldIStay: 'Where should I stay?',
-    accommodationAnswer: 'We recommend staying at Fusion Resorts Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details.',
+    accommodationAnswer: 'We recommend staying at Fusion Resort & Villas Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details.',
     howToGetFromAirport: 'How do I get from the airport to the venue?',
-    airportTransportAnswer: 'Da Nang International Airport is about 20-30 minutes from Fusion Resorts. You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. We can help coordinate group transportation if needed - see RSVP for details.',
+    airportTransportAnswer: 'Da Nang International Airport is about 20-30 minutes from Fusion Resort & Villas. You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. We can help coordinate group transportation if needed - see RSVP for details.',
     additionalQuestions: 'Additional Questions',
     contactUs: 'How can I contact you with questions?',
     contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact either Hang or Eric at ohhangno@gmail.com, or apinecone@ on IG, or directly through Messenger if you have us friended!',
@@ -337,9 +357,9 @@ export const translations: Record<Language, Translations> = {
     plusOneAnswer: 'Yes!',
     ceremonyAndReception: 'Ceremony & Reception',
     ceremonyIndoorsOrOutdoors: 'Will the ceremony be indoors or outdoors?',
-    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resorts, weather permitting. In case of rain, we have an indoor backup location at the resort.',
+    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resort & Villas, weather permitting. In case of rain, we have an indoor backup location at the resort.',
     whatTimeShouldIArrive: 'What time should I arrive?',
-    arrivalTimeAnswer: 'This will be updated closer to the wedding date!',
+    arrivalTimeAnswer: 'Please arrive between 3:00 PM and 3:45 PM. Guests should be seated by 4:00 PM when the ceremony begins.',
     willThereBeFoodAndDrinks: 'Will there be food and drinks?',
     foodAndDrinksAnswer: 'Absolutely! We\'ll have a cocktail hour with appetizers and drinks after the ceremony, followed by a full dinner reception. We\'ll accommodate dietary restrictions - please let us know when you RSVP.',
     stillHaveQuestions: 'Still Have Questions?',
@@ -484,8 +504,9 @@ export const translations: Record<Language, Translations> = {
     // Main page
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: '23 tháng 5, 2026',
-    fusionResortsDaNang: 'Fusion Resorts Đà Nẵng',
+    fusionResortsDaNang: 'Fusion Resort & Villas Đà Nẵng',
     saveTheDateButton: 'Lưu ngày cưới',
+    countdownTillParadise: 'Đếm ngược đến thiên đường',
 
     // Schedule page
     scheduleTitle: 'Lịch trình',
@@ -498,13 +519,20 @@ export const translations: Record<Language, Translations> = {
     exchangeOfGifts: 'Trao đổi quà cưới',
     lunch: 'Tiệc trưa',
     westernWedding: 'Lễ Cưới Phương Tây',
-    fusionResortsAndSpa: 'Fusion Resorts & Spa',
+    fusionResortsAndSpa: 'Fusion Resort & Villas',
     may23rd2026Schedule: '23 tháng 5, 2026',
     ceremony: 'Lễ cưới',
     dinner: 'Tiệc tối',
     afterparty: 'Tiệc sau cưới',
     postWeddingBrunch: '(tùy chọn) Tiệc sáng sau cưới',
     moreDetailsComing: 'Thông tin chi tiết về thời gian và logistics sẽ được chia sẻ gần hơn với các sự kiện.',
+    guestArrivalWelcome: 'Khách Đến & Chào Đón',
+    guestsAreSeated: 'Khách Ngồi Vào Chỗ',
+    exchangeOfVows: 'Trao Lời Thề',
+    photographySession: 'Buổi Chụp Ảnh',
+    cocktailReception: 'Tiệc Cocktail',
+    dinnerReception: 'Tiệc Tối',
+    dancingEveningCelebration: 'Khiêu Vũ & Tiệc Tối',
 
     // Our Story page
     aboutTheCoupleTitle: 'Về Cặp Đôi',
@@ -517,13 +545,15 @@ export const translations: Record<Language, Translations> = {
     // Venue page
     venueTitle: 'Địa Điểm',
     venueInformation: 'Thông tin về địa điểm cưới của chúng tôi',
-    fusionResortsDaNangVenue: 'Fusion Resorts Đà Nẵng',
-    fusionResortsVillasDaNang: 'Fusion Resorts & Villas Đà Nẵng',
+    fusionResortsDaNangVenue: 'Fusion Resort & Villas Đà Nẵng',
+    fusionResortsVillasDaNang: 'Fusion Resort & Villas Đà Nẵng',
     venueDetailsComing: 'Chi tiết địa điểm và chỉ đường sẽ được thêm vào đây',
     address: 'Địa chỉ',
     website: 'Trang web',
+    bookingLink: 'Liên Kết Đặt Phòng',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam',
     venueWebsite: 'fusionresorts.com',
+    comingSoon: 'Sắp có!',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
@@ -538,7 +568,7 @@ export const translations: Record<Language, Translations> = {
     frequentlyAskedQuestions: 'Những câu hỏi thường gặp về lễ cưới của chúng tôi',
     weddingDetails: 'Chi Tiết Lễ Cưới',
     whenAndWhereWedding: 'Khi nào và ở đâu sẽ tổ chức lễ cưới?',
-    weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resorts Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc ??:??, tiếp theo là tiệc cocktail và tiệc cưới. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
+    weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resort & Villas Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc 4:00 chiều, tiếp theo là buổi chụp ảnh, tiệc cocktail, và tiệc tối. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
     whatShouldIWear: 'Tôi nên mặc gì?',
     dressCodeAnswer: 'Chúng tôi rất muốn thấy bạn ăn mặc đẹp! Chúng tôi sẽ liên hệ lại với bạn về chi tiết mã trang phục.',
     weatherInDaNang: 'Thời tiết ở Đà Nẵng vào tháng 5 như thế nào?',
@@ -547,9 +577,9 @@ export const translations: Record<Language, Translations> = {
     doINeedVisa: 'Tôi có cần visa để thăm Việt Nam không?',
     visaAnswer: 'Người mang hộ chiếu Mỹ sẽ cần visa để thăm Việt Nam. Hầu hết người mang hộ chiếu khác cũng sẽ cần visa để vào Việt Nam. Bạn có thể nộp đơn xin visa điện tử trực tuyến và nộp đơn trước ngày đi du lịch. https://evisa.gov.vn/. Vui lòng kiểm tra yêu cầu mới nhất cho quốc gia của bạn',
     whereShouldIStay: 'Tôi nên ở đâu?',
-    accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resorts Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
+    accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resort & Villas Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
     howToGetFromAirport: 'Làm sao để đi từ sân bay đến địa điểm?',
-    airportTransportAnswer: 'Sân bay Quốc tế Đà Nẵng cách Fusion Resorts khoảng 20-30 phút. Bạn có thể đi taxi, Grab (ứng dụng đi chung xe), hoặc sắp xếp đưa đón sân bay thông qua khu nghỉ dưỡng. Chúng tôi có thể giúp điều phối vận chuyển nhóm nếu cần - xem RSVP để biết chi tiết.',
+    airportTransportAnswer: 'Sân bay Quốc tế Đà Nẵng cách Fusion Resort & Villas khoảng 20-30 phút. Bạn có thể đi taxi, Grab (ứng dụng đi chung xe), hoặc sắp xếp đưa đón sân bay thông qua khu nghỉ dưỡng. Chúng tôi có thể giúp điều phối vận chuyển nhóm nếu cần - xem RSVP để biết chi tiết.',
     additionalQuestions: 'Câu Hỏi Bổ Sung',
     contactUs: 'Làm sao tôi có thể liên hệ với bạn để đặt câu hỏi?',
     contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang hoặc Eric tại ohhangno@gmail.com, hoặc apinecone@ trên IG, hoặc trực tiếp qua Messenger nếu bạn đã kết bạn với chúng tôi!',
@@ -562,9 +592,9 @@ export const translations: Record<Language, Translations> = {
     plusOneAnswer: 'Có!',
     ceremonyAndReception: 'Lễ Cưới & Tiệc Cưới',
     ceremonyIndoorsOrOutdoors: 'Lễ cưới sẽ được tổ chức trong nhà hay ngoài trời?',
-    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resorts, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà tại khu nghỉ dưỡng.',
+    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resort & Villas, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà tại khu nghỉ dưỡng.',
     whatTimeShouldIArrive: 'Tôi nên đến lúc mấy giờ?',
-    arrivalTimeAnswer: 'Thông tin này sẽ được cập nhật gần hơn với ngày cưới!',
+    arrivalTimeAnswer: 'Vui lòng đến từ 3:00 chiều đến 3:45 chiều. Khách nên ngồi vào chỗ trước 4:00 chiều khi lễ cưới bắt đầu.',
     willThereBeFoodAndDrinks: 'Sẽ có thức ăn và đồ uống không?',
     foodAndDrinksAnswer: 'Tất nhiên! Chúng tôi sẽ có giờ cocktail với món khai vị và đồ uống sau lễ cưới, tiếp theo là tiệc tối đầy đủ. Chúng tôi sẽ đáp ứng các hạn chế về ăn uống - vui lòng cho chúng tôi biết khi bạn RSVP.',
     stillHaveQuestions: 'Vẫn Còn Câu Hỏi?',

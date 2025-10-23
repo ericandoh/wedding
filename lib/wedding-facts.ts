@@ -3,10 +3,16 @@ Wedding Information:
 
 DATE & LOCATION:
 - Bride: Hang, Groom: Eric
-- Western Wedding: Date - May 23rd, 2026, Location - Fusion Resorts Da Nang, Vietnam
-- Tea Ceremony: Date - May 20th, 2026, Location - Hang's family home in Sa Dec, Vietnam
+- Western Wedding: Date - May 23rd, 2026, Location - Fusion Resort & Villas Da Nang, Vietnam
+  * 3:00 – 3:45 PM: Guest Arrival & Welcome
+  * 3:45 – 4:00 PM: Guests Are Seated
+  * 4:00 – 4:30 PM: Exchange of Vows
+  * 4:30 – 5:00 PM: Photography Session
+  * 5:00 – 6:00 PM: Cocktail Reception
+  * 6:00 – 9:00 PM: Dinner Reception
+  * After 9:00 PM: Dancing & Evening Celebration
+- Tea Ceremony: Date - May 20th, 2026, Location - Hang's family home in Sa Dec, Vietnam (optional)
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup
-- Time: Ceremony time TBD, cocktail hour and reception to follow
 - We will have more information once we send out invitations to RSVP
 
 DRESS CODE:
@@ -14,7 +20,7 @@ DRESS CODE:
 
 TRAVEL & ACCOMMODATION:
 - Visa: US passport will need a visa. Most other passport holders will also need a visa.
-- Recommended Stay: Fusion Resorts Da Nang (special rates available) or nearby beachfront hotels
+- Recommended Stay: Fusion Resort & Villas Da Nang (special rates available) or nearby beachfront hotels
 - Airport: Da Nang International Airport, 20-30 minutes from venue
 - Transportation: Taxi, Grab (ride-sharing), or resort transfer available, wait for details in invitation for coordination.
 
