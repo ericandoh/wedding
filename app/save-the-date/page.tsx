@@ -34,9 +34,24 @@ export default function SaveTheDate() {
           <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
             {t.saveTheDateNav}
           </h1>
-          <p className="text-subtitle text-xl text-gray-600">
+          <p className="text-subtitle text-xl text-gray-600 mb-4">
             {t.saveTheDateSubtitle}
           </p>
+          
+          {/* No RSVP Needed Message and Button */}
+          <div className="mt-6 max-w-xl mx-auto">
+            <p className="text-body-lg mb-4 text-gray-700">
+              {t.noRsvpNeededMessage}
+            </p>
+            
+            {/* RSVP Anyways Button */}
+            <Link
+              href="/rsvp"
+              className="text-button inline-block border border-gray-400 px-4 py-2 text-sm text-gray-600 transition-all duration-300 hover:bg-gray-50 hover:text-gray-800"
+            >
+              {t.rsvpAnyways}
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -51,24 +66,6 @@ export default function SaveTheDate() {
               className="mx-auto max-w-full h-auto"
             />
           </div>
-          
-          {/* Additional text content - fades in after title */}
-          {showText && (
-            <div className="text-center text-fade-in">
-              {/* Message */}
-              <p className="text-body-lg mb-6 text-gray-700">
-                {t.noRsvpNeededMessage}
-              </p>
-
-              {/* RSVP Anyways Button */}
-              <Link
-                href="/rsvp"
-                className="text-button inline-block border border-gray-400 px-4 py-2 text-sm text-gray-600 transition-all duration-300 hover:bg-gray-50 hover:text-gray-800"
-              >
-                {t.rsvpAnyways}
-              </Link>
-            </div>
-          )}
         </div>
       </div>
 

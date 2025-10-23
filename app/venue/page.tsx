@@ -8,7 +8,7 @@ export default function Venue() {
     <div className="flex min-h-screen flex-col bg-white page-fade-in">
       <div className="bg-white py-8 text-center">
         <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          {t.venueTitle}
+          Fusion Resort & Villas Da Nang
         </h1>
         <p className="text-body text-xl text-gray-600">
           {t.venueInformation}
@@ -25,92 +25,66 @@ export default function Venue() {
       </div>
 
       <div className="flex-grow bg-white py-12">
-        <div className="mx-auto max-w-4xl px-6">
-          {/* Venue Title */}
-          <div className="mb-12 text-center">
-            <h2 className="text-title mb-4 text-4xl font-bold text-gray-800">
-              {t.fusionResortsVillasDaNang}
-            </h2>
-          </div>
+        <div className="mx-auto max-w-6xl px-6">
+          {/* Map and Information Section - side by side on larger screens */}
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            
+            {/* Google Maps Embed */}
+            <div className="w-full lg:w-1/2">
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.7871292971563!2d108.27981847591573!3d15.972489184693103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314211005cd2e2cf%3A0xf6b3cf9995e6db85!2sFusion%20Resort%20%26%20Villas%20Da%20Nang%20%E2%80%93%20Wellness%20Inclusive!5e0!3m2!1sen!2sus!4v1761203425097!5m2!1sen!2sus"
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Fusion Resort & Villas Da Nang Location"
+                ></iframe>
+              </div>
+            </div>
 
-          {/* Venue Information Card */}
-          <div className="mb-12">
-            <div className="mx-auto max-w-2xl">
-              {/* Pearl White Card */}
-              <div className="p-8 shadow-lg bg-gradient-to-b from-white/60 to-white/90 rounded-xl backdrop-blur-sm">
-                {/* Address Section */}
-                <div className="mb-8 text-center">
-                  <div className="mb-6">
-                    <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
-                    <h3 className="text-title text-3xl font-bold text-gray-700">
-                      {t.address}
-                    </h3>
-                    <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <p className="text-body text-xl text-gray-700">
-                      {t.venueAddress}
-                    </p>
-                  </div>
+            {/* Venue Information Table */}
+            <div className="w-full lg:w-1/2">
+              <h2 className="text-title text-3xl font-bold text-gray-800 mb-6 text-center">
+                {t.venueInformation}
+              </h2>
+              
+              <div className="space-y-6">
+                {/* Address */}
+                <div className="border-b border-gray-200 pb-4">
+                  <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                    {t.address}
+                  </h3>
+                  <p className="text-body text-lg text-gray-600">
+                    {t.venueAddress}
+                  </p>
                 </div>
 
-                {/* Decorative Divider */}
-                <div className="my-8 flex items-center justify-center">
-                  <div className="h-px w-32 bg-gray-200/30"></div>
-                  <div className="mx-4 text-2xl text-gray-400/50">❦</div>
-                  <div className="h-px w-32 bg-gray-200/30"></div>
+                {/* Website */}
+                <div className="border-b border-gray-200 pb-4">
+                  <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                    {t.website}
+                  </h3>
+                  <a 
+                    href={`https://${t.venueWebsite}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline break-all"
+                  >
+                    {t.venueWebsite}
+                  </a>
                 </div>
 
-                {/* Website Section */}
-                <div className="mb-8 text-center">
-                  <div className="mb-6">
-                    <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
-                    <h3 className="text-title text-3xl font-bold text-gray-700">
-                      {t.website}
-                    </h3>
-                    <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <a 
-                      href={`https://${t.venueWebsite}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-body text-xl text-blue-600 hover:text-blue-800 hover:underline"
-                    >
-                      {t.venueWebsite}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Decorative Divider */}
-                <div className="my-8 flex items-center justify-center">
-                  <div className="h-px w-32 bg-gray-200/30"></div>
-                  <div className="mx-4 text-2xl text-gray-400/50">❦</div>
-                  <div className="h-px w-32 bg-gray-200/30"></div>
-                </div>
-
-                {/* Booking Link Section */}
-                <div className="mb-8 text-center">
-                  <div className="mb-6">
-                    <div className="mx-auto mb-4 h-px w-24 bg-gray-300/40"></div>
-                    <h3 className="text-title text-3xl font-bold text-gray-700">
-                      {t.bookingLink}
-                    </h3>
-                    <div className="mx-auto mt-4 h-px w-24 bg-gray-300/40"></div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <p className="text-body text-xl text-gray-700">
-                      {t.comingSoon}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom Decoration */}
-                <div className="mt-8 text-center">
-                  <div className="mx-auto h-px w-16 bg-gray-300/40"></div>
+                {/* Booking Link */}
+                <div className="pb-4">
+                  <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                    {t.bookingLink}
+                  </h3>
+                  <p className="text-body text-lg text-gray-600">
+                    {t.comingSoon}
+                  </p>
                 </div>
               </div>
             </div>

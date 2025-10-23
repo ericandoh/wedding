@@ -48,9 +48,9 @@ export default function TopNav() {
 
   return (
     <nav className={`absolute top-0 left-0 right-0 z-50 ${isHomePage ? '' : 'bg-white'}`}>
-      <div className="relative mx-auto flex max-w-7xl items-center justify-center px-6 py-4">
+      <div className="relative flex items-center justify-center px-6 py-4 w-full">
         {/* Navigation Links Container */}
-        <div className="relative flex items-center justify-center min-w-0 w-full">
+        <div className="relative flex items-center justify-center min-w-0">
           {/* Left Arrow */}
           {showLeftArrow && (
             <button
@@ -77,7 +77,7 @@ export default function TopNav() {
           {/* Navigation Links */}
           <div
             ref={scrollContainerRef}
-            className={`scrollbar-hide flex items-center space-x-8 overflow-x-auto w-full ${
+            className={`scrollbar-hide flex items-center space-x-8 overflow-x-auto ${
               showLeftArrow ? 'pl-12' : 'pl-0'
             } ${showRightArrow ? 'pr-12' : 'pr-0'}`}
             onScroll={checkScrollPosition}

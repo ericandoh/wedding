@@ -11,6 +11,13 @@ export default function Page() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [showText, setShowText] = useState(false);
+  const [showCountdown, setShowCountdown] = useState(false);
+  const [showAboutCouple, setShowAboutCouple] = useState(false);
+  const [showEngagement, setShowEngagement] = useState(false);
+  const [showStory1, setShowStory1] = useState(false);
+  const [showStory2, setShowStory2] = useState(false);
+  const [showStory3, setShowStory3] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -56,6 +63,74 @@ export default function Page() {
     }, 400); // Show text after 400ms
 
     return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll-triggered animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          const section = target.dataset.section;
+          
+          switch (section) {
+            case 'countdown':
+              setShowCountdown(true);
+              break;
+            case 'about-couple':
+              setShowAboutCouple(true);
+              break;
+            case 'engagement':
+              setShowEngagement(true);
+              break;
+            case 'story1':
+              setShowStory1(true);
+              break;
+            case 'story2':
+              setShowStory2(true);
+              break;
+            case 'story3':
+              setShowStory3(true);
+              break;
+            case 'gallery':
+              setShowGallery(true);
+              break;
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    const countdownSection = document.querySelector('[data-section="countdown"]');
+    const aboutCoupleSection = document.querySelector('[data-section="about-couple"]');
+    const engagementSection = document.querySelector('[data-section="engagement"]');
+    const story1Section = document.querySelector('[data-section="story1"]');
+    const story2Section = document.querySelector('[data-section="story2"]');
+    const story3Section = document.querySelector('[data-section="story3"]');
+    const gallerySection = document.querySelector('[data-section="gallery"]');
+
+    if (countdownSection) observer.observe(countdownSection);
+    if (aboutCoupleSection) observer.observe(aboutCoupleSection);
+    if (engagementSection) observer.observe(engagementSection);
+    if (story1Section) observer.observe(story1Section);
+    if (story2Section) observer.observe(story2Section);
+    if (story3Section) observer.observe(story3Section);
+    if (gallerySection) observer.observe(gallerySection);
+
+    return () => {
+      if (countdownSection) observer.unobserve(countdownSection);
+      if (aboutCoupleSection) observer.unobserve(aboutCoupleSection);
+      if (engagementSection) observer.unobserve(engagementSection);
+      if (story1Section) observer.unobserve(story1Section);
+      if (story2Section) observer.unobserve(story2Section);
+      if (story3Section) observer.unobserve(story3Section);
+      if (gallerySection) observer.unobserve(gallerySection);
+    };
   }, []);
 
   // Countdown timer
@@ -154,8 +229,8 @@ export default function Page() {
       </div>
 
       {/* Countdown Section */}
-      <div className="bg-white py-16">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <div className="bg-white py-16" data-section="countdown">
+        <div className={`mx-auto max-w-4xl px-6 text-center transition-opacity duration-1000 ${showCountdown ? 'opacity-100' : 'opacity-0'}`}>
           <h2 className="text-title mb-12 text-4xl text-gray-800">
             {t.countdownTillParadise}
           </h2>
@@ -205,11 +280,20 @@ export default function Page() {
         </div>
       </div>
 
+      {/* Decorative Heart Divider */}
+      <div className="bg-white py-8 flex items-center justify-center">
+        <div className="h-px w-32 bg-gray-200/30"></div>
+        <div className="mx-4 text-2xl text-gray-400/50">❦</div>
+        <div className="h-px w-32 bg-gray-200/30"></div>
+      </div>
+
       {/* About the Couple Section */}
-      <div className="bg-white py-8 text-center">
-        <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
-          {t.aboutTheCoupleTitle}
-        </h1>
+      <div className="bg-white py-8 text-center" data-section="about-couple">
+        <div className={`transition-opacity duration-1000 ${showAboutCouple ? 'opacity-100' : 'opacity-0'}`}>
+          <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
+            {t.aboutTheCoupleTitle}
+          </h1>
+        </div>
       </div>
 
       {/* Full-width cover image */}
@@ -225,8 +309,8 @@ export default function Page() {
       <div className="flex-grow bg-white py-12">
         <div className="mx-auto max-w-6xl px-6">
           {/* Engagement Section */}
-          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
-            <div className="flex-1">
+          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12" data-section="engagement">
+            <div className={`flex-1 transition-opacity duration-1000 ${showEngagement ? 'opacity-100' : 'opacity-0'}`}>
               <Image
                 src="/engaged.JPG"
                 alt="Hang and Eric engagement photo"
@@ -235,7 +319,7 @@ export default function Page() {
                 className="rounded-lg shadow-lg"
               />
             </div>
-            <div className="flex-1 text-center lg:text-left">
+            <div className={`flex-1 text-center lg:text-left transition-opacity duration-1000 ${showEngagement ? 'opacity-100' : 'opacity-0'}`}>
               <h2 className="text-title mb-4 text-4xl text-gray-800">
                 {t.ourEngagement}
               </h2>
@@ -245,12 +329,76 @@ export default function Page() {
             </div>
           </div>
 
+          {/* Story 1: We heard each other first! - Text Left, Image Right */}
+          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12" data-section="story1">
+            <div className={`flex-1 text-center lg:text-left transition-opacity duration-1000 ${showStory1 ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-4 text-4xl text-gray-800">
+                {t.story1Title}
+              </h2>
+              <p className="text-body text-xl leading-relaxed text-gray-700">
+                {t.story1Text}
+              </p>
+            </div>
+            <div className={`flex-1 transition-opacity duration-1000 ${showStory1 ? 'opacity-100' : 'opacity-0'}`}>
+              <Image
+                src="/story1.jpg"
+                alt="Hang and Eric first connection"
+                width={500}
+                height={400}
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Story 2: Many Dates, Many Adventures! - Image Left, Text Right */}
+          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12" data-section="story2">
+            <div className={`flex-1 transition-opacity duration-1000 ${showStory2 ? 'opacity-100' : 'opacity-0'}`}>
+              <Image
+                src="/story2.JPG"
+                alt="Hang and Eric adventures together"
+                width={500}
+                height={400}
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+            <div className={`flex-1 text-center lg:text-left transition-opacity duration-1000 ${showStory2 ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-4 text-4xl text-gray-800">
+                {t.story2Title}
+              </h2>
+              <p className="text-body text-xl leading-relaxed text-gray-700">
+                {t.story2Text}
+              </p>
+            </div>
+          </div>
+
+          {/* Story 3: Excited to have you on our next adventure! - Text Left, Image Right */}
+          <div className="mb-16 flex flex-col items-center gap-8 lg:flex-row lg:gap-12" data-section="story3">
+            <div className={`flex-1 text-center lg:text-left transition-opacity duration-1000 ${showStory3 ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-4 text-4xl text-gray-800">
+                {t.story3Title}
+              </h2>
+              <p className="text-body text-xl leading-relaxed text-gray-700">
+                {t.story3Text}
+              </p>
+            </div>
+            <div className={`flex-1 transition-opacity duration-1000 ${showStory3 ? 'opacity-100' : 'opacity-0'}`}>
+              <Image
+                src="/story3.jpg"
+                alt="Excited for the next adventure"
+                width={500}
+                height={400}
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+
           {/* Gallery Section */}
-          <div className="mb-16">
-            <h2 className="text-title mb-8 text-center text-4xl text-gray-800">
-              {t.photoGallery}
-            </h2>
-            <div className="columns-1 gap-6 sm:columns-2 lg:columns-2 xl:columns-2">
+          <div className="mb-16" data-section="gallery">
+            <div className={`transition-opacity duration-1000 ${showGallery ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-8 text-center text-4xl text-gray-800">
+                {t.photoGallery}
+              </h2>
+              <div className="columns-1 gap-6 sm:columns-2 lg:columns-2 xl:columns-2">
               {galleryImages.map((imageSrc, index) => {
                 const heights = ['h-80', 'h-96', 'h-72', 'h-88', 'h-76', 'h-84', 'h-92'];
                 const heightClass = heights[index % heights.length];
@@ -272,6 +420,7 @@ export default function Page() {
                   </div>
                 );
               })}
+              </div>
             </div>
           </div>
         </div>

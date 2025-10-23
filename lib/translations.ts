@@ -67,6 +67,12 @@ export interface Translations {
   hangAndEricsLoveStory: string;
   ourEngagement: string;
   engagementStory: string;
+  story1Title: string;
+  story1Text: string;
+  story2Title: string;
+  story2Text: string;
+  story3Title: string;
+  story3Text: string;
   photoGallery: string;
   clickToView: string;
 
@@ -304,6 +310,12 @@ export const translations: Record<Language, Translations> = {
     hangAndEricsLoveStory: "Hang & Eric's Love Story",
     ourEngagement: 'Our Engagement',
     engagementStory: "Hang and Eric got engaged on March 3rd, 2025, at Hakone Gardens! But they actually first met on Hinge early 2022 (started talking together on Valentine's Day!)",
+    story1Title: 'We heard each other first!',
+    story1Text: "Eric apparently insisted on zoom calling Hang first (my excuse was that it was covid times!!) But it worked out because apparently what Hang liked on Eric's profile was not any of his photos but a voice clip where Eric awkwardly spoke (proving I am a real human!)",
+    story2Title: 'Many Dates, Many Adventures!',
+    story2Text: 'Over the years Hang and Eric went through many adventures and perils! There are certainly the downs (like getting robbed, or getting flooded by the upstairs neighbor, or both of us having to crash at a friend\'s place at the same time due to unexpected housing circumstances!) But there have been also plenty of ups, like adopting three cats!!, raising plenty of tomatoes and gardening, finding deals on estate sales, and exploring redwoods, Japan, and seeing a solar eclipse!',
+    story3Title: 'Excited to have you on our next adventure!',
+    story3Text: "We're really excited to have you as our guests for our wedding! We hope you can make it and thank you for making the trek out to join us!",
     photoGallery: 'Photo Gallery',
     clickToView: 'Click to view',
 
@@ -539,6 +551,12 @@ export const translations: Record<Language, Translations> = {
     hangAndEricsLoveStory: 'Câu Chuyện Tình Yêu Của Hang & Eric',
     ourEngagement: 'Lễ Đính Hôn Của Chúng Tôi',
     engagementStory: 'Hang và Eric đính hôn vào ngày 3 tháng 3, 2025, tại Hakone Gardens! Nhưng thực ra họ gặp nhau lần đầu trên Hinge vào đầu năm 2022 (bắt đầu nói chuyện cùng nhau vào Ngày Lễ Tình Nhân!)',
+    story1Title: 'Chúng tôi nghe thấy nhau trước!',
+    story1Text: 'Có vẻ như Eric khăng khăng gọi zoom cho Hang trước (lý do của tôi là do thời Covid!!) Nhưng nó đã thành công vì dường như điều Hang thích trong hồ sơ của Eric không phải là bất kỳ bức ảnh nào của anh ấy mà là một đoạn âm thanh trong đó Eric nói một cách lúng túng (chứng minh tôi là một con người thực sự!)',
+    story2Title: 'Nhiều Buổi Hẹn, Nhiều Cuộc Phiêu Lưu!',
+    story2Text: 'Trong những năm qua, Hang và Eric đã trải qua nhiều cuộc phiêu lưu và nguy hiểm! Chắc chắn có những lúc khó khăn (như bị cướp, hoặc bị ngập do hàng xóm ở tầng trên, hoặc cả hai người phải tạm trú ở nhà bạn cùng lúc do hoàn cảnh nhà ở bất ngờ!) Nhưng cũng có rất nhiều điều tốt đẹp, như nhận nuôi ba chú mèo!!, trồng nhiều cà chua và làm vườn, tìm được những món hời trong các buổi bán đồ cũ, và khám phá rừng gỗ đỏ, Nhật Bản, và xem nhật thực!',
+    story3Title: 'Rất vui khi bạn tham gia cuộc phiêu lưu tiếp theo của chúng tôi!',
+    story3Text: 'Chúng tôi rất vui mừng khi bạn đến dự đám cưới của chúng tôi! Chúng tôi hy vọng bạn có thể đến và cảm ơn bạn đã vượt xa đến để tham gia cùng chúng tôi!',
     photoGallery: 'Thư Viện Ảnh',
     clickToView: 'Nhấp để xem',
 
