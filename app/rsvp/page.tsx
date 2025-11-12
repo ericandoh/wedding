@@ -486,7 +486,16 @@ export default function RSVP() {
                 <span className="text-body-sm text-sm text-gray-700">
                   {t.accommodationDetails}
                   <span className="block text-xs text-gray-500">
-                    {t.accommodationDetailsNote}
+                    {t.accommodationDetailsNote}{' '}
+                    <a 
+                      href="/venue#booking-instructions" 
+                      className="text-blue-600 hover:text-blue-800 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t.accommodationDetailsHere}
+                    </a>
+                    )
                   </span>
                 </span>
               </label>

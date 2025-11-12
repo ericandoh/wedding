@@ -176,20 +176,20 @@ export default function Page() {
   }, [selectedImage, currentIndex]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white page-fade-in -mt-20">
+    <div className="flex min-h-screen flex-col bg-white page-fade-in">
       {/* Full-screen image with overlay */}
-      <div className="relative h-screen w-full">
+      <div className="relative h-screen w-screen">
         {/* Mobile image - hidden on larger screens */}
         <img
           src="/home_mobile.JPG"
           alt="Hang & Eric Wedding"
-          className="h-full w-full object-cover md:hidden"
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
         />
         {/* Desktop image - hidden on mobile */}
         <img
           src="/home.JPG"
           alt="Hang & Eric Wedding"
-          className="h-full w-full object-cover hidden md:block"
+          className="absolute inset-0 h-full w-full object-cover hidden md:block"
         />
         
         {/* Dark gradient overlay for better text visibility */}

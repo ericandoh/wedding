@@ -6,7 +6,7 @@ import { useState, useRef } from 'react';
 import { useLanguage } from './language-provider';
 import LanguageSwitcher from './language-switcher';
 
-export default function TopNav() {
+export default function TopNav({ isBannerDismissed = false }: { isBannerDismissed?: boolean }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +17,9 @@ export default function TopNav() {
   const isHomePage = pathname === '/';
   const textColorBase = isHomePage ? 'text-white' : 'text-gray-600';
   const textColorActive = isHomePage ? 'text-white' : 'text-gray-800';
+  
+  // Adjust top position based on whether banner is visible
+  const topPosition = isBannerDismissed ? 'top-0' : 'top-10';
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -47,7 +50,7 @@ export default function TopNav() {
   };
 
   return (
-    <nav className={`absolute top-0 left-0 right-0 z-50 ${isHomePage ? '' : 'bg-white'}`}>
+    <nav className={`absolute ${topPosition} left-0 right-0 z-40 ${isHomePage ? '' : 'bg-white'}`} suppressHydrationWarning>
       <div className="relative flex items-center justify-center px-6 py-4 w-full">
         {/* Navigation Links Container */}
         <div className="relative flex items-center justify-center min-w-0">

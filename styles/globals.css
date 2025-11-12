@@ -383,6 +383,10 @@
   animation: smoothFadeIn 1.2s ease-out;
 }
 
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
 @keyframes candleFlicker {
   0%, 100% {
     opacity: 0.6;

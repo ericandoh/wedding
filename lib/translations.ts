@@ -13,6 +13,8 @@ export interface Translations {
   qa: string;
   chatbot: string;
   petCats: string;
+  bookingBanner: string;
+  bookingBannerHere: string;
   
   // Login page
   hangAndEric: string;
@@ -85,9 +87,12 @@ export interface Translations {
   address: string;
   website: string;
   bookingLink: string;
+  bookingInstructions: string;
   venueAddress: string;
   venueWebsite: string;
   comingSoon: string;
+  bookingNote: string;
+  copied: string;
 
   // Things to Do page
   thingsToDoTitle: string;
@@ -224,6 +229,7 @@ export interface Translations {
   phonePlaceholder: string;
   accommodationDetails: string;
   accommodationDetailsNote: string;
+  accommodationDetailsHere: string;
   transportationDetails: string;
   transportationDetailsNote: string;
   dietaryRestrictions: string;
@@ -273,6 +279,8 @@ export const translations: Record<Language, Translations> = {
     qa: 'Q&A',
     chatbot: 'Chatbot',
     petCats: 'Pet Cats',
+    bookingBanner: 'Booking link for venue is now available',
+    bookingBannerHere: 'here',
     
     // Login page
     hangAndEric: 'Hang and Eric',
@@ -345,9 +353,12 @@ export const translations: Record<Language, Translations> = {
     address: 'Address',
     website: 'Website',
     bookingLink: 'Booking Link',
+    bookingInstructions: 'Booking Instructions',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Vietnam',
     venueWebsite: 'https://fusionresorts.com/danang/',
-    comingSoon: 'Coming soon!',
+    comingSoon: 'https://villasdanang.backhotelite.com/en/bookcore/availability/fhrvdang/2026-05-20/2026-05-26/?cp=EHWEDDING2026',
+    bookingNote: 'Promo code: EHWEDDING2026\n\n• Pick the dates to stay at venue. We recommend 5/22-5/24 but the promotion rates are valid from 5/20-5/26!\n• Pick the number of guests staying in the room (needed to receive the special wedding rate)\n  • 1 for single occupancy\n  • 2 for double occupancy\n  • 0 for children',
+    copied: 'Copied!',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -483,7 +494,8 @@ export const translations: Record<Language, Translations> = {
     phoneOptional: 'Phone # (optional)',
     phonePlaceholder: 'Enter your phone number',
     accommodationDetails: "I'd like details about accommodation at the venue directly",
-    accommodationDetailsNote: '(This is being finalized)',
+    accommodationDetailsNote: '(Booking link:',
+    accommodationDetailsHere: 'here',
     transportationDetails: "I'd like details about transportation to the venue",
     transportationDetailsNote: '(This is being finalized)',
     dietaryRestrictions: 'Dietary Restrictions',
@@ -531,6 +543,8 @@ export const translations: Record<Language, Translations> = {
     qa: 'Hỏi đáp',
     chatbot: 'Trò chuyện',
     petCats: 'Thú cưng',
+    bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',
+    bookingBannerHere: 'tại đây',
     
     // Login page
     hangAndEric: 'Hang và Eric',
@@ -603,9 +617,12 @@ export const translations: Record<Language, Translations> = {
     address: 'Địa chỉ',
     website: 'Trang web',
     bookingLink: 'Liên Kết Đặt Phòng',
+    bookingInstructions: 'Hướng Dẫn Đặt Phòng',
     venueAddress: 'Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng 550000, Việt Nam',
     venueWebsite: 'https://fusionresorts.com/danang/',
-    comingSoon: 'Sắp có!',
+    comingSoon: 'https://villasdanang.backhotelite.com/en/bookcore/availability/fhrvdang/2026-05-20/2026-05-26/?cp=EHWEDDING2026',
+    bookingNote: 'Mã khuyến mãi: EHWEDDING2026\n\n• Chọn ngày ở tại địa điểm. Chúng tôi khuyên bạn nên ở 22/5-24/5 nhưng giá khuyến mãi có hiệu lực từ 20/5-26/5!\n• Chọn số lượng khách ở trong phòng (cần thiết để nhận mức giá đặc biệt cho đám cưới)\n  • 1 cho phòng đơn\n  • 2 cho phòng đôi\n  • 0 cho trẻ em',
+    copied: 'Đã sao chép!',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
@@ -741,7 +758,8 @@ export const translations: Record<Language, Translations> = {
     phoneOptional: 'Số Điện Thoại (tùy chọn)',
     phonePlaceholder: 'Nhập số điện thoại của bạn',
     accommodationDetails: 'Tôi muốn biết chi tiết về chỗ ở tại địa điểm trực tiếp',
-    accommodationDetailsNote: '(Đang được hoàn thiện)',
+    accommodationDetailsNote: '(Liên kết đặt phòng:',
+    accommodationDetailsHere: 'tại đây',
     transportationDetails: 'Tôi muốn biết chi tiết về phương tiện di chuyển đến địa điểm',
     transportationDetailsNote: '(Đang được hoàn thiện)',
     dietaryRestrictions: 'Hạn Chế Về Ăn Uống',

@@ -52,7 +52,7 @@ export default function Schedule() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white page-fade-in">
-      <div className="flex-grow bg-white pt-8">
+      <div className="flex-grow bg-white">
         <div className="mx-auto max-w-6xl px-6">
           {/* Pearl White Schedule Card */}
           <div className="mx-auto">

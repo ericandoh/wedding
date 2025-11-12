@@ -1,9 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import { useLanguage } from '../_components/language-provider';
+import { ClipboardDocumentIcon } from '@heroicons/react/24/outline';
 
 export default function Venue() {
   const { t } = useLanguage();
+  const [showToast, setShowToast] = useState(false);
+
+  const copyPromoCode = () => {
+    navigator.clipboard.writeText('EHWEDDING2026');
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
+  };
+
+  // Extract promo code line and rest of note
+  const promoCodeLine = t.bookingNote.split('\n')[0]; // First line contains promo code
+  const restOfNote = t.bookingNote.split('\n').slice(2).join('\n'); // Skip first line and empty line
+
   return (
     <div className="flex min-h-screen flex-col bg-white page-fade-in">
       <div className="bg-white py-8 text-center">
@@ -78,13 +92,40 @@ export default function Venue() {
                 </div>
 
                 {/* Booking Link */}
-                <div className="pb-4">
+                <div className="border-b border-gray-200 pb-4">
                   <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
                     {t.bookingLink}
                   </h3>
-                  <p className="text-body text-lg text-gray-600">
+                  <a 
+                    href={t.comingSoon}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline break-all"
+                  >
                     {t.comingSoon}
-                  </p>
+                  </a>
+                </div>
+
+                {/* Booking Instructions */}
+                <div id="booking-instructions" className="pb-4">
+                  <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                    {t.bookingInstructions}
+                  </h3>
+                  <div className="text-body text-lg text-gray-600">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span>{promoCodeLine}</span>
+                      <button
+                        onClick={copyPromoCode}
+                        className="p-1 hover:bg-gray-100 rounded transition-colors"
+                        title="Copy promo code"
+                      >
+                        <ClipboardDocumentIcon className="w-5 h-5 text-gray-600" />
+                      </button>
+                    </div>
+                    <p className="whitespace-pre-line">
+                      {restOfNote}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -92,6 +133,13 @@ export default function Venue() {
 
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg z-50 animate-fade-in">
+          {t.copied}
+        </div>
+      )}
     </div>
   );
 }
