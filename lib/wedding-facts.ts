@@ -25,7 +25,7 @@ TRAVEL & ACCOMMODATION:
 - Transportation: Taxi, Grab (ride-sharing), or resort transfer available, wait for details in invitation for coordination.
 
 RSVP & LOGISTICS:
-- RSVP deadline: No RSVP needed at this time, look for an invitation to RSVP soon!
+- RSVP deadline: March 8th, 2026
 - Can bring plus ones. If you want to bring other guests please check with Hang or Eric.
 - Dietary restrictions: Accommodated (mention in RSVP)
 

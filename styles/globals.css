@@ -14,6 +14,7 @@
   /* Fix overscroll background color */
   html {
     background-color: white;
+    scroll-behavior: smooth;
   }
   
   body {
@@ -428,7 +429,7 @@
 }
 
 .heart-throb {
-  animation: heartThrob 3s ease-in-out infinite;
+  animation: heartThrob 2.1s ease-in-out infinite;
 }
 
 ::view-transition-new(.animate-slide-from-left) {

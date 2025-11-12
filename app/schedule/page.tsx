@@ -19,6 +19,68 @@ export default function Schedule() {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [visibleTeaItems, setVisibleTeaItems] = useState<number[]>([]);
 
+  const generateGoogleCalendarLink = () => {
+    const title = 'Hang & Eric Western Wedding';
+    const location = 'Fusion Resort & Villas Da Nang, Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng, Vietnam';
+    const description = 'Join us for Hang and Eric\'s wedding celebration!';
+    
+    // May 23rd, 2026, 4:00 PM - 11:00 PM (Da Nang timezone is GMT+7)
+    const startDate = '20260523T160000'; // 4:00 PM in Da Nang time
+    const endDate = '20260523T230000'; // 11:00 PM in Da Nang time
+    
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
+    
+    return googleUrl;
+  };
+
+  const generateICSFile = () => {
+    const title = 'Hang & Eric Western Wedding';
+    const location = 'Fusion Resort & Villas Da Nang, Trường Sa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng, Vietnam';
+    const description = 'Join us for Hang and Eric\'s wedding celebration!';
+    
+    // Format: YYYYMMDDTHHMMSS
+    const startDate = '20260523T160000';
+    const endDate = '20260523T230000';
+    const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Hang & Eric Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE',
+      'TZID:Asia/Ho_Chi_Minh',
+      'BEGIN:STANDARD',
+      'DTSTART:19700101T000000',
+      'TZOFFSETFROM:+0700',
+      'TZOFFSETTO:+0700',
+      'END:STANDARD',
+      'END:VTIMEZONE',
+      'BEGIN:VEVENT',
+      `DTSTART;TZID=Asia/Ho_Chi_Minh:${startDate}`,
+      `DTEND;TZID=Asia/Ho_Chi_Minh:${endDate}`,
+      `DTSTAMP:${timestamp}`,
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${description}`,
+      `LOCATION:${location}`,
+      'STATUS:CONFIRMED',
+      'SEQUENCE:0',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'hang-eric-wedding.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   // Animate western wedding timeline items
   useEffect(() => {
     const totalItems = 7;
@@ -66,6 +128,24 @@ export default function Schedule() {
                   <p className="text-body text-xl text-gray-600 mt-2">
                     {t.fusionResortsAndSpa}, {t.daNangVietnam} · {t.may23rd2026Schedule}
                   </p>
+                  
+                  {/* Calendar Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                    <a
+                      href={generateGoogleCalendarLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToGoogleCalendar}
+                    </a>
+                    <button
+                      onClick={generateICSFile}
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToCalendar}
+                    </button>
+                  </div>
                 </div>
                 
                 {/* Timeline */}

@@ -10,6 +10,18 @@ export interface Translations {
   venue: string;
   thingsToDo: string;
   registry: string;
+  registrySubtitle: string;
+  registryHowever: string;
+  honeymoonFund: string;
+  charityOfOurChoice: string;
+  toysForOurCats: string;
+  venmoInstructions: string;
+  venmoStep1: string;
+  venmoStep2: string;
+  venmoMessageHoneymoon: string;
+  venmoMessageCatToys: string;
+  charityComingSoon: string;
+  close: string;
   qa: string;
   chatbot: string;
   petCats: string;
@@ -35,12 +47,21 @@ export interface Translations {
   hangAndEricMain: string;
   may23rd2026: string;
   fusionResortsDaNang: string;
+  homePageSubtitle: string;
+  homePageSubtitleLine1: string;
+  homePageSubtitleLine2: string;
+  saDec: string;
+  fusionResortsVillasDaNangShort: string;
+  rsvpByDate: string;
+  byMarch8th2026: string;
   saveTheDateButton: string;
   countdownTillParadise: string;
 
   // Schedule page
   scheduleTitle: string;
   joinUsForCelebrations: string;
+  addToGoogleCalendar: string;
+  addToCalendar: string;
   teaCeremony: string;
   hangsFamilialHome: string;
   saDecVietnam: string;
@@ -204,6 +225,7 @@ export interface Translations {
   rsvpSubtitle: string;
   rsvpLoading: string;
   rsvpEmailPrompt: string;
+  rsvpDeadlineMessage: string;
   emailAddress: string;
   emailPlaceholder: string;
   clear: string;
@@ -216,9 +238,15 @@ export interface Translations {
   editResponseNote: string;
   usingEmail: string;
   useDifferentEmail: string;
+  seeSaveTheDate: string;
   yourNamePlaceholder: string;
   plusOneName: string;
   plusOneNamePlaceholder: string;
+  willYouBringKids: string;
+  nameOfChild: string;
+  age: string;
+  addAnotherChild: string;
+  fillExistingChildrenDetails: string;
   whichEventsCanYouAttend: string;
   westernWeddingCheckbox: string;
   teaCeremonyCheckbox: string;
@@ -238,6 +266,7 @@ export interface Translations {
   accessibilityRestrictionsPlaceholder: string;
   notificationPreferences: string;
   howWouldYouLikeToBeNotified: string;
+  subscribeToUpdates: string;
   instagram: string;
   instagramHandlePlaceholder: string;
   emailNotification: string;
@@ -276,6 +305,18 @@ export const translations: Record<Language, Translations> = {
     venue: 'Venue',
     thingsToDo: 'Things to do',
     registry: 'Registry',
+    registrySubtitle: 'Your presence at our wedding is already a great gift to us!',
+    registryHowever: 'However, if you insist, here are some options!',
+    honeymoonFund: 'Honeymoon Fund',
+    charityOfOurChoice: 'Charity of Our Choice',
+    toysForOurCats: 'Toys for Our Cats',
+    venmoInstructions: 'Instructions',
+    venmoStep1: 'Go to Venmo:',
+    venmoStep2: 'In the message, write:',
+    venmoMessageHoneymoon: 'honeymoon',
+    venmoMessageCatToys: 'cat toys',
+    charityComingSoon: 'Coming soon - Hang & Eric are deciding a worthy charity of choice!',
+    close: 'Close',
     qa: 'Q&A',
     chatbot: 'Chatbot',
     petCats: 'Pet Cats',
@@ -301,12 +342,21 @@ export const translations: Record<Language, Translations> = {
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: 'May 23rd, 2026',
     fusionResortsDaNang: 'Fusion Resort & Villas Da Nang',
+    homePageSubtitle: 'May 20th, 2026 • Sa Dec | May 23rd, 2026 • Fusion Resort & Villas Da Nang',
+    homePageSubtitleLine1: 'May 20th, 2026 | Sa Dec',
+    homePageSubtitleLine2: 'May 23rd, 2026 | Fusion Resort & Villas Da Nang',
+    saDec: 'Sa Dec',
+    fusionResortsVillasDaNangShort: 'Fusion Resort & Villas Da Nang',
+    rsvpByDate: 'RSVP by March 8th, 2026',
+    byMarch8th2026: 'by March 8th, 2026',
     saveTheDateButton: 'Save the Date',
     countdownTillParadise: 'Countdown till paradise',
 
     // Schedule page
     scheduleTitle: 'Schedule',
     joinUsForCelebrations: 'Join us for our wedding celebrations',
+    addToGoogleCalendar: 'Add to Google Calendar',
+    addToCalendar: 'Add to Calendar',
     teaCeremony: 'Tea Ceremony',
     hangsFamilialHome: "Hang's Familial Home",
     saDecVietnam: 'Sa Dec, Vietnam',
@@ -407,7 +457,7 @@ export const translations: Record<Language, Translations> = {
     contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact either Hang or Eric at ohhangno@gmail.com, or apinecone@ on IG, or directly through Messenger if you have us friended!',
     rsvpAndGifts: 'RSVP & Gifts',
     rsvpDeadline: 'What is the RSVP deadline?',
-    rsvpDeadlineAnswer: 'Currently, we are only asking you to save the date! Look for an invitation to RSVP soon!',
+    rsvpDeadlineAnswer: 'Please RSVP by March 8th, 2026.',
     giftRegistry: 'Do you have a gift registry?',
     giftRegistryAnswer: 'Your presence at our wedding is the greatest gift of all! However, if you wish to give us a gift, we will have instructions soon closer to the wedding date!',
     canIBringPlusOne: 'Can I bring a plus one?',
@@ -469,7 +519,8 @@ export const translations: Record<Language, Translations> = {
     rsvpTitle: 'RSVP',
     rsvpSubtitle: 'Please enter your email to get started',
     rsvpLoading: 'Loading your RSVP...',
-    rsvpEmailPrompt: 'Please enter your email to get started',
+    rsvpEmailPrompt: 'Enter your email to get started',
+    rsvpDeadlineMessage: 'Please RSVP by March 8th, 2026',
     emailAddress: 'Email Address',
     emailPlaceholder: 'Enter your email address',
     clear: 'Clear',
@@ -482,9 +533,15 @@ export const translations: Record<Language, Translations> = {
     editResponseNote: 'You can come back here anytime to edit your response!',
     usingEmail: 'Using email:',
     useDifferentEmail: 'Use different email',
+    seeSaveTheDate: 'See Save the date',
     yourNamePlaceholder: 'Enter your full name',
     plusOneName: 'Name of Plus One (leave blank if none)',
     plusOneNamePlaceholder: "Enter your +1's name (if applicable)",
+    willYouBringKids: 'Will you be bringing any kids?',
+    nameOfChild: 'Name of child',
+    age: 'Age',
+    addAnotherChild: 'Add another child',
+    fillExistingChildrenDetails: 'Please fill out existing children details first',
     whichEventsCanYouAttend: 'Which events can you attend?',
     westernWeddingCheckbox: 'Western Wedding | May 23rd, 2026 | Da Nang, Vietnam',
     teaCeremonyCheckbox: 'Tea Ceremony | May 20th, 2026 | Sa Dec, Vietnam',
@@ -502,8 +559,9 @@ export const translations: Record<Language, Translations> = {
     dietaryRestrictionsPlaceholder: 'Please let us know about any dietary restrictions or allergies',
     accessibilityRestrictions: 'Accessibility Restrictions',
     accessibilityRestrictionsPlaceholder: 'Please let us know about any accessibility needs',
-    notificationPreferences: 'How would you like to be notified?',
-    howWouldYouLikeToBeNotified: 'How would you like to be notified?',
+    notificationPreferences: 'Notification Preferences',
+    howWouldYouLikeToBeNotified: 'Notification Preferences',
+    subscribeToUpdates: 'Subscribe {email} to wedding updates and more!',
     instagram: 'Instagram (IG)',
     instagramHandlePlaceholder: 'Enter your Instagram handle (e.g., @username)',
     emailNotification: 'Email',
@@ -527,8 +585,8 @@ export const translations: Record<Language, Translations> = {
     
     // Save the Date page
     saveTheDateSubtitle: "You're invited to Hang + Eric's wedding!",
-    noRsvpNeededMessage: 'No RSVP is needed at this time. Please wait for a formal invitation to RSVP!',
-    rsvpAnyways: 'RSVP Anyways',
+    noRsvpNeededMessage: 'RSVP by March 8th, 2026',
+    rsvpAnyways: 'RSVP',
   },
   vi: {
     // Common
@@ -540,6 +598,18 @@ export const translations: Record<Language, Translations> = {
     venue: 'Địa điểm',
     thingsToDo: 'Hoạt động',
     registry: 'Quà cưới',
+    registrySubtitle: 'Sự có mặt của bạn tại đám cưới của chúng tôi đã là món quà tuyệt vời!',
+    registryHowever: 'Tuy nhiên, nếu bạn khăng khăng, đây là một số lựa chọn!',
+    honeymoonFund: 'Quỹ Tuần Trăng Mật',
+    charityOfOurChoice: 'Từ Thiện Theo Lựa Chọn Của Chúng Tôi',
+    toysForOurCats: 'Đồ Chơi Cho Mèo Của Chúng Tôi',
+    venmoInstructions: 'Hướng Dẫn',
+    venmoStep1: 'Truy cập Venmo:',
+    venmoStep2: 'Trong tin nhắn, viết:',
+    venmoMessageHoneymoon: 'honeymoon',
+    venmoMessageCatToys: 'cat toys',
+    charityComingSoon: 'Sắp có - Hang & Eric đang quyết định một tổ chức từ thiện xứng đáng!',
+    close: 'Đóng',
     qa: 'Hỏi đáp',
     chatbot: 'Trò chuyện',
     petCats: 'Thú cưng',
@@ -565,12 +635,21 @@ export const translations: Record<Language, Translations> = {
     hangAndEricMain: 'Hang & Eric',
     may23rd2026: '23 tháng 5, 2026',
     fusionResortsDaNang: 'Fusion Resort & Villas Đà Nẵng',
+    homePageSubtitle: '20 tháng 5, 2026 • Sa Đéc | 23 tháng 5, 2026 • Fusion Resort & Villas Đà Nẵng',
+    homePageSubtitleLine1: '20 tháng 5, 2026 | Sa Đéc',
+    homePageSubtitleLine2: '23 tháng 5, 2026 | Fusion Resort & Villas Đà Nẵng',
+    saDec: 'Sa Đéc',
+    fusionResortsVillasDaNangShort: 'Fusion Resort & Villas Đà Nẵng',
+    rsvpByDate: 'Xác nhận tham dự trước ngày 8 tháng 3, 2026',
+    byMarch8th2026: 'trước ngày 8 tháng 3, 2026',
     saveTheDateButton: 'Lưu ngày cưới',
     countdownTillParadise: 'Đếm ngược đến thiên đường',
 
     // Schedule page
     scheduleTitle: 'Lịch trình',
     joinUsForCelebrations: 'Tham gia cùng chúng tôi trong lễ cưới',
+    addToGoogleCalendar: 'Thêm vào Google Calendar',
+    addToCalendar: 'Thêm vào Lịch',
     teaCeremony: 'Lễ Trà',
     hangsFamilialHome: 'Nhà Gia Đình Hang',
     saDecVietnam: 'Sa Đéc, Việt Nam',
@@ -671,7 +750,7 @@ export const translations: Record<Language, Translations> = {
     contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang hoặc Eric tại ohhangno@gmail.com, hoặc apinecone@ trên IG, hoặc trực tiếp qua Messenger nếu bạn đã kết bạn với chúng tôi!',
     rsvpAndGifts: 'RSVP & Quà Tặng',
     rsvpDeadline: 'Hạn chót RSVP là khi nào?',
-    rsvpDeadlineAnswer: 'Hiện tại, chúng tôi chỉ yêu cầu bạn lưu ngày! Hãy tìm kiếm thiệp mời để RSVP sớm!',
+    rsvpDeadlineAnswer: 'Vui lòng xác nhận tham dự trước ngày 8 tháng 3, 2026.',
     giftRegistry: 'Bạn có danh sách quà tặng không?',
     giftRegistryAnswer: 'Sự có mặt của bạn tại lễ cưới của chúng tôi là món quà tuyệt vời nhất! Tuy nhiên, nếu bạn muốn tặng chúng tôi một món quà, chúng tôi sẽ có hướng dẫn sớm hơn gần ngày cưới!',
     canIBringPlusOne: 'Tôi có thể mang người đi cùng không?',
@@ -733,7 +812,8 @@ export const translations: Record<Language, Translations> = {
     rsvpTitle: 'Xác Nhận Tham Dự',
     rsvpSubtitle: 'Vui lòng nhập email của bạn để bắt đầu',
     rsvpLoading: 'Đang tải RSVP của bạn...',
-    rsvpEmailPrompt: 'Vui lòng nhập email của bạn để bắt đầu',
+    rsvpEmailPrompt: 'Nhập email của bạn để bắt đầu',
+    rsvpDeadlineMessage: 'Vui lòng xác nhận tham dự trước ngày 8 tháng 3, 2026',
     emailAddress: 'Địa Chỉ Email',
     emailPlaceholder: 'Nhập địa chỉ email của bạn',
     clear: 'Xóa',
@@ -746,9 +826,15 @@ export const translations: Record<Language, Translations> = {
     editResponseNote: 'Bạn có thể quay lại đây bất cứ lúc nào để chỉnh sửa phản hồi của mình!',
     usingEmail: 'Đang sử dụng email:',
     useDifferentEmail: 'Sử dụng email khác',
+    seeSaveTheDate: 'Xem trang Lưu ngày cưới',
     yourNamePlaceholder: 'Nhập họ tên đầy đủ của bạn',
     plusOneName: 'Tên Người Đi Cùng (để trống nếu không có)',
     plusOneNamePlaceholder: 'Nhập tên người đi cùng (nếu có)',
+    willYouBringKids: 'Bạn có đưa trẻ em đi cùng không?',
+    nameOfChild: 'Tên của trẻ',
+    age: 'Tuổi',
+    addAnotherChild: 'Thêm trẻ khác',
+    fillExistingChildrenDetails: 'Vui lòng điền thông tin trẻ hiện có trước',
     whichEventsCanYouAttend: 'Bạn có thể tham dự sự kiện nào?',
     westernWeddingCheckbox: 'Lễ Cưới Phương Tây | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
     teaCeremonyCheckbox: 'Lễ Trà | 20 tháng 5, 2026 | Sa Đéc, Việt Nam',
@@ -766,8 +852,9 @@ export const translations: Record<Language, Translations> = {
     dietaryRestrictionsPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ hạn chế ăn uống hoặc dị ứng nào',
     accessibilityRestrictions: 'Hạn Chế Về Khả Năng Tiếp Cận',
     accessibilityRestrictionsPlaceholder: 'Vui lòng cho chúng tôi biết về bất kỳ nhu cầu tiếp cận nào',
-    notificationPreferences: 'Bạn muốn được thông báo như thế nào?',
-    howWouldYouLikeToBeNotified: 'Bạn muốn được thông báo như thế nào?',
+    notificationPreferences: 'Tùy Chọn Thông Báo',
+    howWouldYouLikeToBeNotified: 'Tùy Chọn Thông Báo',
+    subscribeToUpdates: 'Đăng ký {email} nhận thông tin cập nhật về đám cưới và nhiều hơn nữa!',
     instagram: 'Instagram (IG)',
     instagramHandlePlaceholder: 'Nhập tên Instagram của bạn (ví dụ: @username)',
     emailNotification: 'Email',
@@ -791,7 +878,7 @@ export const translations: Record<Language, Translations> = {
     
     // Save the Date page
     saveTheDateSubtitle: 'Bạn được mời đến đám cưới của Hang + Eric!',
-    noRsvpNeededMessage: 'Hiện tại chưa cần xác nhận tham dự. Vui lòng đợi thiệp mời chính thức để RSVP!',
-    rsvpAnyways: 'Xác nhận tham dự ngay',
+    noRsvpNeededMessage: 'Xác nhận tham dự trước ngày 8 tháng 3, 2026',
+    rsvpAnyways: 'Xác nhận tham dự',
   },
 };

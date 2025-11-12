@@ -70,12 +70,23 @@ export async function POST(request: NextRequest) {
         }
       }
 
+      // Parse children CSV back into array: "name:age, name:age" -> [{name, age}, ...]
+      const childrenCSV = matchingRow[12] || '';
+      let children: { name: string; age: string }[] = [];
+      if (childrenCSV && childrenCSV.trim()) {
+        children = childrenCSV.split(',').map((child: string) => {
+          const [name, age] = child.trim().split(':');
+          return { name: name || '', age: age || '' };
+        });
+      }
+
       // Return the existing data
       return NextResponse.json({
         found: true,
         data: {
           name: matchingRow[0] || '',
           plusOneName: matchingRow[1] || '',
+          children,
           canAttendWesternWedding: matchingRow[2] === 'Yes',
           canAttendTeaCeremony: matchingRow[3] === 'Yes',
           email: matchingRow[4] || '',

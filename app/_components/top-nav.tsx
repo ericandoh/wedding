@@ -101,14 +101,14 @@ export default function TopNav({ isBannerDismissed = false }: { isBannerDismisse
             {t.home}
           </Link>
           <Link
-            href="/save-the-date"
+            href="/rsvp"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
-              isActive('/rsvp') || isActive('/save-the-date')
+              isActive('/rsvp')
                 ? `${textColorActive} underline underline-offset-4` 
                 : textColorBase
             }`}
           >
-            {pathname === '/rsvp' ? t.rsvp : t.saveTheDateNav}
+            {t.rsvp}
           </Link>
           <Link
             href="/schedule"

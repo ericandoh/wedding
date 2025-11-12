@@ -207,21 +207,40 @@ export default function Page() {
         <div className="absolute inset-0 flex items-center justify-center">
           {showText && (
             <div className="text-center px-12 smooth-fade-in">
-              <h1 className="text-title mb-2 text-white drop-shadow-lg">
-                {t.hangAndEricMain}
-              </h1>
-              <p className="text-subtitle mb-8 text-white drop-shadow-lg">
-                {t.may23rd2026} | {t.fusionResortsDaNang}
-              </p>
+              <a href="#about-couple">
+                <h1 className="text-title mb-2 text-white drop-shadow-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                  {t.hangAndEricMain}
+                </h1>
+              </a>
+              <div className="mb-8">
+                <p className="text-subtitle text-white drop-shadow-lg">
+                  <Link href="/save-the-date" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                    {t.may20th2026}
+                  </Link>
+                  {' | '}{t.saDec}
+                </p>
+                <p className="text-subtitle text-white drop-shadow-lg">
+                  <Link href="/save-the-date" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                    {t.may23rd2026}
+                  </Link>
+                  {' | '}
+                  <Link href="/venue" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                    {t.fusionResortsVillasDaNangShort}
+                  </Link>
+                </p>
+              </div>
               
-              {/* Save the Date button */}
-              <div>
+              {/* RSVP button */}
+              <div className="flex flex-col items-center">
                 <Link
-                  href="/save-the-date"
-                  className="text-button-lg inline-block border-2 border-white px-8 py-3 text-white transition-all duration-300 hover:bg-white hover:text-gray-800 drop-shadow-lg heart-throb"
+                  href="/rsvp"
+                  className="inline-block border-2 border-white px-8 py-3 text-white transition-all duration-300 hover:bg-white hover:text-gray-800 drop-shadow-lg heart-throb"
                 >
-                  {t.saveTheDateButton}
+                  <span className="font-cormorant-garamond text-xl">{t.rsvp}</span>
                 </Link>
+                <p className="font-cormorant-garamond text-base text-white drop-shadow-lg mt-2">
+                  {t.byMarch8th2026}
+                </p>
               </div>
             </div>
           )}
@@ -288,7 +307,7 @@ export default function Page() {
       </div>
 
       {/* About the Couple Section */}
-      <div className="bg-white py-8 text-center" data-section="about-couple">
+      <div id="about-couple" className="bg-white py-8 text-center" data-section="about-couple">
         <div className={`transition-opacity duration-1000 ${showAboutCouple ? 'opacity-100' : 'opacity-0'}`}>
           <h1 className="text-title mb-2 text-5xl font-bold text-gray-800">
             {t.aboutTheCoupleTitle}

@@ -10,6 +10,7 @@ export default function RSVP() {
   const [formData, setFormData] = useState({
     name: '',
     plusOneName: '',
+    children: [] as { name: string; age: string }[],
     canAttendWesternWedding: false,
     canAttendTeaCeremony: false,
     email: '',
@@ -23,6 +24,8 @@ export default function RSVP() {
     instagramHandle: '',
     rowIndex: 0,
   });
+  const [showKidsSection, setShowKidsSection] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -57,11 +60,17 @@ export default function RSVP() {
 
       if (data.found) {
         // Load existing data
-        setFormData({
+        const loadedData = {
           ...data.data,
+          children: data.data.children || [],
           email: emailToLookup.trim(), // Use the saved email
-        });
+        };
+        setFormData(loadedData);
         setIsExistingUser(true);
+        // Show kids section if there are children
+        if (loadedData.children && loadedData.children.length > 0) {
+          setShowKidsSection(true);
+        }
       } else {
         // New user, start with blank form
         setFormData((prev) => ({ ...prev, email: emailToLookup.trim() }));
@@ -110,11 +119,17 @@ export default function RSVP() {
 
       if (data.found) {
         // Load existing data
-        setFormData({
+        const loadedData = {
           ...data.data,
+          children: data.data.children || [],
           email: email.trim(), // Use the email they entered
-        });
+        };
+        setFormData(loadedData);
         setIsExistingUser(true);
+        // Show kids section if there are children
+        if (loadedData.children && loadedData.children.length > 0) {
+          setShowKidsSection(true);
+        }
       } else {
         // New user, start with blank form
         setFormData((prev) => ({ ...prev, email: email.trim() }));
@@ -197,6 +212,55 @@ export default function RSVP() {
     setEmail('');
   };
 
+  const handleKidsCheckboxChange = (checked: boolean) => {
+    if (checked) {
+      setShowKidsSection(true);
+      if (formData.children.length === 0) {
+        setFormData({
+          ...formData,
+          children: [{ name: '', age: '' }],
+        });
+      }
+    } else {
+      setShowKidsSection(false);
+      setFormData({
+        ...formData,
+        children: [],
+      });
+    }
+  };
+
+  const handleChildChange = (index: number, field: 'name' | 'age', value: string) => {
+    const newChildren = [...formData.children];
+    newChildren[index][field] = value;
+    setFormData({
+      ...formData,
+      children: newChildren,
+    });
+  };
+
+  const handleAddChild = () => {
+    setFormData({
+      ...formData,
+      children: [...formData.children, { name: '', age: '' }],
+    });
+  };
+
+  const handleRemoveChild = (index: number) => {
+    const newChildren = formData.children.filter((_, i) => i !== index);
+    if (newChildren.length === 0) {
+      setShowKidsSection(false);
+    }
+    setFormData({
+      ...formData,
+      children: newChildren,
+    });
+  };
+
+  const canAddAnotherChild = () => {
+    return formData.children.every((child) => child.name.trim() !== '' && child.age.trim() !== '');
+  };
+
   if (step === 'submitted') {
     return (
       <div className="flex min-h-screen flex-col bg-white page-fade-in">
@@ -244,6 +308,9 @@ export default function RSVP() {
           </h1>
           <p className="text-subtitle">
             {isLoading ? t.rsvpLoading : t.rsvpEmailPrompt}
+          </p>
+          <p className="text-body-sm mt-2 text-gray-600">
+            {t.rsvpDeadlineMessage}
           </p>
         </div>
 
@@ -401,6 +468,87 @@ export default function RSVP() {
               />
             </div>
 
+            {/* Kids Section */}
+            <div>
+              {!showKidsSection ? (
+                <label className="flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showKidsSection}
+                    onChange={(e) => handleKidsCheckboxChange(e.target.checked)}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">{t.willYouBringKids}</span>
+                </label>
+              ) : (
+                <div className="space-y-3">
+                  {formData.children.map((child, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <input
+                        type="text"
+                        value={child.name}
+                        onChange={(e) => handleChildChange(index, 'name', e.target.value)}
+                        placeholder={t.nameOfChild}
+                        disabled={isSubmitting}
+                        className="text-input flex-1 rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                      <input
+                        type="text"
+                        value={child.age}
+                        onChange={(e) => handleChildChange(index, 'age', e.target.value)}
+                        placeholder={t.age}
+                        disabled={isSubmitting}
+                        className="text-input w-20 rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveChild(index)}
+                        disabled={isSubmitting}
+                        className="text-gray-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                  <div 
+                    className="relative inline-block"
+                    onMouseEnter={() => {
+                      if (!canAddAnotherChild()) {
+                        setShowTooltip(true);
+                      }
+                    }}
+                    onMouseLeave={() => setShowTooltip(false)}
+                    onClick={(e) => {
+                      if (!canAddAnotherChild()) {
+                        setShowTooltip(true);
+                        setTimeout(() => setShowTooltip(false), 2000);
+                      } else if (!isSubmitting) {
+                        handleAddChild();
+                      }
+                    }}
+                  >
+                    <button
+                      type="button"
+                      disabled={isSubmitting || !canAddAnotherChild()}
+                      className={`text-button text-sm ${!canAddAnotherChild() || isSubmitting ? 'text-gray-400 cursor-not-allowed opacity-50' : 'text-blue-600 hover:text-blue-800 cursor-pointer'}`}
+                      style={{ pointerEvents: 'none' }}
+                    >
+                      {t.addAnotherChild}
+                    </button>
+                    {showTooltip && !canAddAnotherChild() && (
+                      <div className="absolute bottom-full left-0 mb-2 w-64 rounded bg-gray-800 px-3 py-2 text-xs text-white shadow-lg z-10">
+                        {t.fillExistingChildrenDetails}
+                        <div className="absolute top-full left-4 -mt-1 border-4 border-transparent border-t-gray-800"></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Which events can you attend? */}
             <div>
               <label className="text-label mb-3 block text-left text-sm font-medium text-gray-700">
@@ -471,59 +619,6 @@ export default function RSVP() {
               />
             </div>
 
-
-            {/* Accommodation Details */}
-            <div>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="accommodationDetails"
-                  checked={formData.accommodationDetails}
-                  onChange={handleInputChange}
-                  disabled={isSubmitting}
-                  className="mr-3"
-                />
-                <span className="text-body-sm text-sm text-gray-700">
-                  {t.accommodationDetails}
-                  <span className="block text-xs text-gray-500">
-                    {t.accommodationDetailsNote}{' '}
-                    <a 
-                      href="/venue#booking-instructions" 
-                      className="text-blue-600 hover:text-blue-800 hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {t.accommodationDetailsHere}
-                    </a>
-                    )
-                  </span>
-                </span>
-              </label>
-            </div>
-
-            {/* Transportation Details */}
-            <div>
-              <label className="flex items-start space-x-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={formData.transportationDetails}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      transportationDetails: e.target.checked,
-                    })
-                  }
-                  className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <span className="text-body-sm text-sm text-gray-700">
-                  {t.transportationDetails}
-                  <span className="block text-xs text-gray-500">
-                    {t.transportationDetailsNote}
-                  </span>
-                </span>
-              </label>
-            </div>
-
             {/* Dietary Restrictions */}
             <div>
               <label
@@ -570,99 +665,70 @@ export default function RSVP() {
                 {t.howWouldYouLikeToBeNotified}
               </h3>
               
-              <div className="space-y-3">
-                <label className="flex items-center">
+              <div className="space-y-4">
+                {/* Subscribe to Updates */}
+                <label className="flex items-start cursor-pointer">
                   <input
-                    type="radio"
-                    name="notificationMethod"
-                    value="IG"
-                    checked={formData.notificationMethod === 'IG'}
-                    onChange={handleInputChange}
-                    disabled={isSubmitting}
-                    className="mr-3"
-                  />
-                  <span className="text-body">{t.instagram}</span>
-                </label>
-                
-                {formData.notificationMethod === 'IG' && (
-                  <div className="ml-6 mt-3">
-                    <input
-                      type="text"
-                      name="instagramHandle"
-                      value={formData.instagramHandle}
-                      onChange={handleInputChange}
-                      disabled={isSubmitting}
-                      placeholder={t.instagramHandlePlaceholder}
-                      className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                    />
-                  </div>
-                )}
-                
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="notificationMethod"
-                    value="email"
+                    type="checkbox"
                     checked={formData.notificationMethod === 'email'}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        notificationMethod: e.target.checked ? 'email' : '',
+                      })
+                    }
                     disabled={isSubmitting}
-                    className="mr-3"
+                    className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <span className="text-body">{t.emailNotification}</span>
+                  <span className="text-body-sm text-sm text-gray-700 ml-3">
+                    {t.subscribeToUpdates.replace('{email}', formData.email)}
+                  </span>
                 </label>
                 
-                <label className="flex items-center">
+                {/* Accommodation Details */}
+                <label className={`flex items-start ${formData.notificationMethod === 'email' ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                   <input
-                    type="radio"
-                    name="notificationMethod"
-                    value="SMS"
-                    checked={formData.notificationMethod === 'SMS'}
+                    type="checkbox"
+                    name="accommodationDetails"
+                    checked={formData.accommodationDetails && formData.notificationMethod === 'email'}
                     onChange={handleInputChange}
-                    disabled={isSubmitting}
-                    className="mr-3"
+                    disabled={isSubmitting || formData.notificationMethod !== 'email'}
+                    className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <span className="text-body">{t.sms}</span>
+                  <span className="text-body-sm text-sm text-gray-700 ml-3">
+                    {t.accommodationDetails}
+                    <span className="block text-xs text-gray-500">
+                      {t.accommodationDetailsNote}{' '}
+                      <a 
+                        href="/venue#booking-instructions" 
+                        className="text-blue-600 hover:text-blue-800 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t.accommodationDetailsHere}
+                      </a>
+                      )
+                    </span>
+                  </span>
                 </label>
                 
-                <label className="flex items-center">
+                {/* Transportation Details */}
+                <label className={`flex items-start ${formData.notificationMethod === 'email' ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
                   <input
-                    type="radio"
-                    name="notificationMethod"
-                    value="Messenger"
-                    checked={formData.notificationMethod === 'Messenger'}
+                    type="checkbox"
+                    name="transportationDetails"
+                    checked={formData.transportationDetails && formData.notificationMethod === 'email'}
                     onChange={handleInputChange}
-                    disabled={isSubmitting}
-                    className="mr-3"
+                    disabled={isSubmitting || formData.notificationMethod !== 'email'}
+                    className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
-                  <span className="text-body">{t.messenger}</span>
+                  <span className="text-body-sm text-sm text-gray-700 ml-3">
+                    {t.transportationDetails}
+                    <span className="block text-xs text-gray-500">
+                      {t.transportationDetailsNote}
+                    </span>
+                  </span>
                 </label>
-                
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="notificationMethod"
-                    value="Other"
-                    checked={formData.notificationMethod === 'Other'}
-                    onChange={handleInputChange}
-                    disabled={isSubmitting}
-                    className="mr-3"
-                  />
-                  <span className="text-body">{t.other}</span>
-                </label>
-                
-                {formData.notificationMethod === 'Other' && (
-                  <div className="ml-6 mt-3">
-                    <input
-                      type="text"
-                      name="notificationOther"
-                      value={formData.notificationOther}
-                      onChange={handleInputChange}
-                      disabled={isSubmitting}
-                      placeholder={t.pleaseSpecify}
-                      className="text-input w-full rounded-lg border border-gray-300 px-4 py-2 transition-all duration-200 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
-                    />
-                  </div>
-                )}
               </div>
             </div>
 
