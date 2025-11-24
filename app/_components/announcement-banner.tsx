@@ -43,7 +43,7 @@ export default function AnnouncementBanner() {
         <p className={`text-body-sm text-center ${textColor}`}>
           {t.bookingBanner}{' '}
           <Link 
-            href="/venue#booking-instructions" 
+            href="/travel#booking-instructions" 
             className="underline hover:opacity-80 transition-opacity font-semibold"
           >
             {t.bookingBannerHere}

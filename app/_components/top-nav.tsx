@@ -121,9 +121,9 @@ export default function TopNav({ isBannerDismissed = false }: { isBannerDismisse
             {t.schedule}
           </Link>
           <Link
-            href="/venue"
+            href="/travel"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
-              isActive('/venue') 
+              isActive('/travel') 
                 ? `${textColorActive} underline underline-offset-4` 
                 : textColorBase
             }`}

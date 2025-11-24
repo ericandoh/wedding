@@ -224,7 +224,7 @@ export default function Page() {
                     {t.may23rd2026}
                   </Link>
                   {' | '}
-                  <Link href="/venue" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                  <Link href="/travel" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
                     {t.fusionResortsVillasDaNangShort}
                   </Link>
                 </p>

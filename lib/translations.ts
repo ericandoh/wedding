@@ -115,6 +115,29 @@ export interface Translations {
   bookingNote: string;
   copied: string;
 
+  // Travel page
+  gettingThere: string;
+  toWesternWedding: string;
+  toTeaCeremony: string;
+  airport: string;
+  daNangAirportInfo: string;
+  recommendedFlyInDate: string;
+  westernWeddingFlyInDate: string;
+  teaCeremonyFlyInDate: string;
+  shuttles: string;
+  moreInformationComingSoon: string;
+  sgnAirportInfo: string;
+  vcaAirportInfo: string;
+  seeRoute: string;
+  airportRecommendation: string;
+  sgnRecommendation: string;
+  teaCeremonyShuttles: string;
+  informationAboutWesternVenue: string;
+  teaCeremonyHangsHome: string;
+  teaCeremonyAddressNote: string;
+  aboutTheVenue: string;
+  teaCeremonyAboutVenue: string;
+
   // Things to Do page
   thingsToDoTitle: string;
   activitiesAndRecommendations: string;
@@ -302,7 +325,7 @@ export const translations: Record<Language, Translations> = {
     saveTheDateNav: 'Save the Date',
     schedule: 'Schedule',
     aboutTheCouple: 'About the Couple',
-    venue: 'Venue',
+    venue: 'Travel',
     thingsToDo: 'Things to do',
     registry: 'Registry',
     registrySubtitle: 'Your presence at our wedding is already a great gift to us!',
@@ -409,6 +432,29 @@ export const translations: Record<Language, Translations> = {
     comingSoon: 'https://villasdanang.backhotelite.com/en/bookcore/availability/fhrvdang/2026-05-20/2026-05-26/?cp=EHWEDDING2026',
     bookingNote: 'Promo code: EHWEDDING2026\n\n• Pick the dates to stay at venue. We recommend 5/22-5/24 but the promotion rates are valid from 5/20-5/26!\n• Pick the number of guests staying in the room (needed to receive the special wedding rate)\n  • 1 for single occupancy\n  • 2 for double occupancy\n  • 0 for children',
     copied: 'Copied!',
+
+    // Travel page
+    gettingThere: 'Getting There',
+    toWesternWedding: 'To Western Wedding',
+    toTeaCeremony: 'To Tea Ceremony',
+    airport: 'Airport',
+    daNangAirportInfo: 'Da Nang International Airport (DAD) (30 min away by taxi)',
+    recommendedFlyInDate: 'Recommended Fly in Date',
+    westernWeddingFlyInDate: 'May 22nd (wedding is May 23)',
+    teaCeremonyFlyInDate: 'May 19th (ceremony is May 20)',
+    shuttles: 'Shuttles',
+    moreInformationComingSoon: 'More information coming soon',
+    sgnAirportInfo: 'Tan Son Nhat International Airport (SGN) (4 hr away by taxi)',
+    vcaAirportInfo: 'Can Tho International Airport (VCA) (2 hr away by taxi)',
+    seeRoute: '(see route)',
+    airportRecommendation: 'Airport Recommendation',
+    sgnRecommendation: 'We recommend flying into SGN as it is a much bigger airport and easier to get to. We will provide shuttle pick-up / drop-off service from / to Ho Chi Minh',
+    teaCeremonyShuttles: "We will provide a shuttle with pickup service from Ho Chi Minh. Let us know if you're flying from Can Tho + we can also try to arrange transportation.",
+    informationAboutWesternVenue: 'Information about the venue for the Western Wedding',
+    teaCeremonyHangsHome: "Tea Ceremony - Hang's Familial Home",
+    teaCeremonyAddressNote: 'The address is not on Google Maps, but the closest landmark on the maps is this hu tieu restaurant (which is also pretty good)',
+    aboutTheVenue: 'About the Venue',
+    teaCeremonyAboutVenue: "Hang's grandparent's home. We will hold the tea ceremony here and then transition to a restaurant for lunch. Details coming soon about the restaurant!",
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -595,7 +641,7 @@ export const translations: Record<Language, Translations> = {
     saveTheDateNav: 'Lưu ngày cưới',
     schedule: 'Lịch trình',
     aboutTheCouple: 'Về cặp đôi',
-    venue: 'Địa điểm',
+    venue: 'Du Lịch',
     thingsToDo: 'Hoạt động',
     registry: 'Quà cưới',
     registrySubtitle: 'Sự có mặt của bạn tại đám cưới của chúng tôi đã là món quà tuyệt vời!',
@@ -702,6 +748,29 @@ export const translations: Record<Language, Translations> = {
     comingSoon: 'https://villasdanang.backhotelite.com/en/bookcore/availability/fhrvdang/2026-05-20/2026-05-26/?cp=EHWEDDING2026',
     bookingNote: 'Mã khuyến mãi: EHWEDDING2026\n\n• Chọn ngày ở tại địa điểm. Chúng tôi khuyên bạn nên ở 22/5-24/5 nhưng giá khuyến mãi có hiệu lực từ 20/5-26/5!\n• Chọn số lượng khách ở trong phòng (cần thiết để nhận mức giá đặc biệt cho đám cưới)\n  • 1 cho phòng đơn\n  • 2 cho phòng đôi\n  • 0 cho trẻ em',
     copied: 'Đã sao chép!',
+
+    // Travel page
+    gettingThere: 'Đến Đó',
+    toWesternWedding: 'Đến Lễ Cưới Phương Tây',
+    toTeaCeremony: 'Đến Lễ Trà',
+    airport: 'Sân Bay',
+    daNangAirportInfo: 'Sân bay Quốc tế Đà Nẵng (DAD) (30 phút đi taxi)',
+    recommendedFlyInDate: 'Ngày Bay Đến Được Khuyên',
+    westernWeddingFlyInDate: '22 tháng 5 (lễ cưới là 23 tháng 5)',
+    teaCeremonyFlyInDate: '19 tháng 5 (lễ trà là 20 tháng 5)',
+    shuttles: 'Xe Đưa Đón',
+    moreInformationComingSoon: 'Thông tin chi tiết sắp có',
+    sgnAirportInfo: 'Sân bay Quốc tế Tân Sơn Nhất (SGN) (4 giờ đi taxi)',
+    vcaAirportInfo: 'Sân bay Quốc tế Cần Thơ (VCA) (2 giờ đi taxi)',
+    seeRoute: '(xem lộ trình)',
+    airportRecommendation: 'Khuyến Nghị Sân Bay',
+    sgnRecommendation: 'Chúng tôi khuyên bạn nên bay vào SGN vì đây là sân bay lớn hơn nhiều và dễ đến hơn. Chúng tôi sẽ cung cấp dịch vụ đưa đón từ / đến Thành phố Hồ Chí Minh',
+    teaCeremonyShuttles: "Chúng tôi sẽ cung cấp xe đưa đón từ Thành phố Hồ Chí Minh. Hãy cho chúng tôi biết nếu bạn bay từ Cần Thơ + chúng tôi cũng có thể sắp xếp phương tiện di chuyển.",
+    informationAboutWesternVenue: 'Thông tin về địa điểm cho Lễ Cưới Phương Tây',
+    teaCeremonyHangsHome: 'Lễ Trà - Nhà Gia Đình Hang',
+    teaCeremonyAddressNote: 'Địa chỉ không có trên Google Maps, nhưng địa danh gần nhất trên bản đồ là nhà hàng hủ tiếu này (cũng khá ngon)',
+    aboutTheVenue: 'Về Địa Điểm',
+    teaCeremonyAboutVenue: 'Nhà của ông bà Hang. Chúng tôi sẽ tổ chức lễ trà tại đây và sau đó chuyển sang nhà hàng để ăn trưa. Chi tiết về nhà hàng sẽ sớm có!',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
