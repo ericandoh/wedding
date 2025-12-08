@@ -93,12 +93,20 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://your-wedding-site.vercel.app'),
   description:
     'Join us in celebrating our special day! RSVP, view our schedule, and learn more about our wedding.',
+  icons: {
+    icon: '/gallery22.ico',
+    apple: '/gallery22.jpg',
+  },
   openGraph: {
     title: "Eric + Hang's Wedding",
     description:
       'Join us in celebrating our special day! RSVP, view our schedule, and learn more about our wedding.',
+    images: ['/gallery22.jpg'],
   },
-  twitter: { card: 'summary_large_image' },
+  twitter: { 
+    card: 'summary_large_image',
+    images: ['/gallery22.jpg'],
+  },
 };
 
 export default function RootLayout({

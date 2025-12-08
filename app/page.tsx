@@ -26,12 +26,11 @@ export default function Page() {
   });
 
   const galleryImages = [
-    '/gallery2.JPG?v=2', 
-    '/gallery3.JPG?v=2',
-    '/gallery5.JPG?v=2',
-    '/gallery7.JPG?v=2',
-    '/gallery8.JPG?v=2',
-    '/gallery9.JPG?v=2',
+    '/gallery2.JPG', 
+    '/gallery5.JPG',
+    '/gallery7.JPG',
+    '/gallery8.JPG',
+    '/gallery9.JPG',
   ];
 
   const openModal = (imageSrc: string) => {

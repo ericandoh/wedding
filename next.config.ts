@@ -7,6 +7,9 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
+  images: {
+    unoptimized: true,
+  },
 } satisfies NextConfig;
 
 const codeHikeConfig = {
