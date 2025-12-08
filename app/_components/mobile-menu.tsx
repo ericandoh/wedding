@@ -45,6 +45,7 @@ export default function MobileMenu() {
     { href: '/things-to-do', label: t.thingsToDo },
     { href: '/registry', label: t.registry },
     { href: '/qa', label: t.qa },
+    { href: '/message-board', label: t.messageBoard },
     { href: '/pet-cats', label: t.petCats },
   ];
 

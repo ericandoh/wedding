@@ -23,7 +23,23 @@ export interface Translations {
   charityComingSoon: string;
   close: string;
   qa: string;
+  messageBoard: string;
   chatbot: string;
+  postANote: string;
+  notesVisibleToEveryone: string;
+  newMessage: string;
+  writeANewNote: string;
+  writeMessage: string;
+  submit: string;
+  reply: string;
+  edit: string;
+  save: string;
+  cancel: string;
+  pleaseRSVPFirst: string;
+  youMustRSVPToPost: string;
+  loadMore: string;
+  message: string;
+  noMessagesYet: string;
   petCats: string;
   bookingBanner: string;
   bookingBannerHere: string;
@@ -345,6 +361,22 @@ export const translations: Record<Language, Translations> = {
     charityComingSoon: 'Coming soon - Hang & Eric are deciding a worthy charity of choice!',
     close: 'Close',
     qa: 'Q&A',
+    messageBoard: 'Message Board',
+    postANote: 'Post a note!',
+    notesVisibleToEveryone: 'Notes are visible to everyone.',
+    newMessage: 'New message!',
+    writeANewNote: 'Write a new note',
+    writeMessage: 'Write a message',
+    submit: 'Submit',
+    reply: 'Reply',
+    edit: 'Edit',
+    save: 'Save',
+    cancel: 'Cancel',
+    pleaseRSVPFirst: 'Please RSVP First',
+    youMustRSVPToPost: 'You must RSVP before you can post messages. Please RSVP first.',
+    loadMore: 'Load More',
+    message: 'Message',
+    noMessagesYet: 'No messages yet. Be the first to post!',
     chatbot: 'Chatbot',
     petCats: 'Pet Cats',
     bookingBanner: 'Booking link for venue is now available',
@@ -665,6 +697,22 @@ export const translations: Record<Language, Translations> = {
     charityComingSoon: 'Sắp có - Hang & Eric đang quyết định một tổ chức từ thiện xứng đáng!',
     close: 'Đóng',
     qa: 'Hỏi đáp',
+    messageBoard: 'Bảng Tin Nhắn',
+    postANote: 'Đăng một ghi chú!',
+    notesVisibleToEveryone: 'Ghi chú có thể nhìn thấy bởi mọi người.',
+    newMessage: 'Tin nhắn mới!',
+    writeANewNote: 'Viết một ghi chú mới',
+    writeMessage: 'Viết tin nhắn',
+    submit: 'Gửi',
+    reply: 'Trả lời',
+    edit: 'Chỉnh sửa',
+    save: 'Lưu',
+    cancel: 'Hủy',
+    pleaseRSVPFirst: 'Vui lòng RSVP trước',
+    youMustRSVPToPost: 'Bạn phải RSVP trước khi có thể đăng tin nhắn. Vui lòng RSVP trước.',
+    loadMore: 'Tải thêm',
+    message: 'Tin nhắn',
+    noMessagesYet: 'Chưa có tin nhắn nào. Hãy là người đầu tiên đăng!',
     chatbot: 'Trò chuyện',
     petCats: 'Thú cưng',
     bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',

@@ -161,6 +161,16 @@ export default function TopNav({ isBannerDismissed = false }: { isBannerDismisse
             {t.qa}
           </Link>
           <Link
+            href="/message-board"
+            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
+              isActive('/message-board') 
+                ? `${textColorActive} underline underline-offset-4` 
+                : textColorBase
+            }`}
+          >
+            {t.messageBoard}
+          </Link>
+          <Link
             href="/pet-cats"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
               isActive('/pet-cats') 
