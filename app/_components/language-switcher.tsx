@@ -3,7 +3,11 @@
 import { usePathname } from 'next/navigation';
 import { useLanguage } from './language-provider';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  showText?: boolean;
+}
+
+export default function LanguageSwitcher({ showText = false }: LanguageSwitcherProps) {
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   
@@ -29,9 +33,11 @@ export default function LanguageSwitcher() {
       <span className="text-lg">
         {language === 'en' ? '🇻🇳' : '🇺🇸'}
       </span>
-      <span className="hidden sm:inline">
-        {language === 'en' ? 'Tiếng Việt' : 'English'}
-      </span>
+      {showText && (
+        <span>
+          {language === 'en' ? 'Tiếng Việt' : 'English'}
+        </span>
+      )}
     </button>
   );
 }

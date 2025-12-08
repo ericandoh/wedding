@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import TopNav from './top-nav';
 import AnnouncementBanner from './announcement-banner';
+import MobileMenu from './mobile-menu';
 
 export default function ConditionalLayout({
   children,
@@ -59,6 +60,7 @@ export default function ConditionalLayout({
     <div className="relative">
       <AnnouncementBanner />
       <TopNav isBannerDismissed={isBannerDismissed} />
+      <MobileMenu />
       <main className={`min-h-screen ${mainPadding}`} suppressHydrationWarning>
         {children}
       </main>
