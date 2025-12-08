@@ -10,7 +10,9 @@ export async function POST(request: NextRequest) {
       name,
       plusOneName,
       children,
+      canAttendPreWedding,
       canAttendWesternWedding,
+      canAttendAfterparty,
       canAttendTeaCeremony,
       email,
       phone,
@@ -95,7 +97,7 @@ export async function POST(request: NextRequest) {
       // Update existing row
       response = await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `RSVP!A${formData.rowIndex}:M${formData.rowIndex}`,
+        range: `RSVP!A${formData.rowIndex}:O${formData.rowIndex}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -104,6 +106,8 @@ export async function POST(request: NextRequest) {
               plusOneName || '',
               canAttendWesternWedding ? 'Yes' : 'No',
               canAttendTeaCeremony ? 'Yes' : 'No',
+              canAttendPreWedding ? 'Yes' : 'No',
+              canAttendAfterparty ? 'Yes' : 'No',
               email.trim(),
               phone || '',
               accommodationDetails ? 'Yes' : 'No',
@@ -121,7 +125,7 @@ export async function POST(request: NextRequest) {
       // Add new row to spreadsheet
       response = await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'RSVP!A:M', // Extended range for all fields including children
+        range: 'RSVP!A:O', // Extended range for all fields including children
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -130,6 +134,8 @@ export async function POST(request: NextRequest) {
               plusOneName || '',
               canAttendWesternWedding ? 'Yes' : 'No',
               canAttendTeaCeremony ? 'Yes' : 'No',
+              canAttendPreWedding ? 'Yes' : 'No',
+              canAttendAfterparty ? 'Yes' : 'No',
               email.trim(),
               phone || '',
               accommodationDetails ? 'Yes' : 'No',
@@ -152,7 +158,9 @@ export async function POST(request: NextRequest) {
         const emailData = {
           name: name.trim(),
           plusOneName: plusOneName || '',
+          canAttendPreWedding,
           canAttendWesternWedding,
+          canAttendAfterparty,
           canAttendTeaCeremony,
           email: email.trim(),
           phone: phone || '',

@@ -271,7 +271,9 @@ export interface Translations {
   addAnotherChild: string;
   fillExistingChildrenDetails: string;
   whichEventsCanYouAttend: string;
+  preWeddingDinnerCheckbox: string;
   westernWeddingCheckbox: string;
+  afterpartyCheckbox: string;
   teaCeremonyCheckbox: string;
   yes: string;
   no: string;
@@ -589,7 +591,9 @@ export const translations: Record<Language, Translations> = {
     addAnotherChild: 'Add another child',
     fillExistingChildrenDetails: 'Please fill out existing children details first',
     whichEventsCanYouAttend: 'Which events can you attend?',
+    preWeddingDinnerCheckbox: 'Pre-wedding dinner | May 22nd, 2026 | Da Nang, Vietnam',
     westernWeddingCheckbox: 'Western Wedding | May 23rd, 2026 | Da Nang, Vietnam',
+    afterpartyCheckbox: 'Afterparty | May 23rd, 2026 | Da Nang, Vietnam',
     teaCeremonyCheckbox: 'Tea Ceremony | May 20th, 2026 | Sa Dec, Vietnam',
     yes: 'Yes',
     no: 'No',
@@ -905,7 +909,9 @@ export const translations: Record<Language, Translations> = {
     addAnotherChild: 'Thêm trẻ khác',
     fillExistingChildrenDetails: 'Vui lòng điền thông tin trẻ hiện có trước',
     whichEventsCanYouAttend: 'Bạn có thể tham dự sự kiện nào?',
+    preWeddingDinnerCheckbox: 'Tiệc trước cưới | 22 tháng 5, 2026 | Đà Nẵng, Việt Nam',
     westernWeddingCheckbox: 'Lễ Cưới Phương Tây | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
+    afterpartyCheckbox: 'Tiệc sau cưới | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
     teaCeremonyCheckbox: 'Lễ Trà | 20 tháng 5, 2026 | Sa Đéc, Việt Nam',
     yes: 'Có',
     no: 'Không',

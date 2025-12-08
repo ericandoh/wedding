@@ -11,7 +11,9 @@ export default function RSVP() {
     name: '',
     plusOneName: '',
     children: [] as { name: string; age: string }[],
+    canAttendPreWedding: false,
     canAttendWesternWedding: false,
+    canAttendAfterparty: false,
     canAttendTeaCeremony: false,
     email: '',
     phone: '',
@@ -558,6 +560,17 @@ export default function RSVP() {
                 <label className="flex items-center">
                   <input
                     type="checkbox"
+                    name="canAttendPreWedding"
+                    checked={formData.canAttendPreWedding}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">{t.preWeddingDinnerCheckbox}</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
                     name="canAttendWesternWedding"
                     checked={formData.canAttendWesternWedding}
                     onChange={handleInputChange}
@@ -565,6 +578,17 @@ export default function RSVP() {
                     className="mr-3"
                   />
                   <span className="text-body">{t.westernWeddingCheckbox}</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="canAttendAfterparty"
+                    checked={formData.canAttendAfterparty}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    className="mr-3"
+                  />
+                  <span className="text-body">{t.afterpartyCheckbox}</span>
                 </label>
                 <label className="flex items-center">
                   <input

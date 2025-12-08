@@ -1,7 +1,9 @@
 export interface RSVPData {
   name: string;
   plusOneName?: string;
+  canAttendPreWedding: boolean;
   canAttendWesternWedding: boolean;
+  canAttendAfterparty: boolean;
   canAttendTeaCeremony: boolean;
   email: string;
   phone?: string;
@@ -16,18 +18,26 @@ export interface RSVPData {
 }
 
 export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string; html: string; text: string } {
-  const { name, canAttendWesternWedding, canAttendTeaCeremony, accommodationDetails, transportationDetails, isUpdate } = data;
+  const { name, canAttendPreWedding, canAttendWesternWedding, canAttendAfterparty, canAttendTeaCeremony, accommodationDetails, transportationDetails, isUpdate } = data;
   
-  const isAttending = canAttendWesternWedding || canAttendTeaCeremony;
+  const isAttending = canAttendPreWedding || canAttendWesternWedding || canAttendAfterparty || canAttendTeaCeremony;
   const plusOneText = data.plusOneName ? ` and ${data.plusOneName}` : '';
   
+  const attendingEvents = [];
+  if (canAttendPreWedding) attendingEvents.push('Pre-wedding dinner');
+  if (canAttendWesternWedding) attendingEvents.push('Western Wedding');
+  if (canAttendAfterparty) attendingEvents.push('Afterparty');
+  if (canAttendTeaCeremony) attendingEvents.push('Tea Ceremony');
+  
   let eventText = '';
-  if (canAttendWesternWedding && canAttendTeaCeremony) {
-    eventText = ' for both the Western Wedding and Tea Ceremony';
-  } else if (canAttendWesternWedding) {
-    eventText = ' for the Western Wedding';
-  } else if (canAttendTeaCeremony) {
-    eventText = ' for the Tea Ceremony';
+  if (attendingEvents.length > 0) {
+    if (attendingEvents.length === 1) {
+      eventText = ` for the ${attendingEvents[0]}`;
+    } else if (attendingEvents.length === 2) {
+      eventText = ` for the ${attendingEvents[0]} and ${attendingEvents[1]}`;
+    } else {
+      eventText = ` for ${attendingEvents.slice(0, -1).join(', ')}, and ${attendingEvents[attendingEvents.length - 1]}`;
+    }
   }
   
   const subject = isUpdate 
@@ -142,8 +152,16 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
         <span class="detail-value">${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}</span>
       </div>
       <div class="detail-row">
+        <span class="detail-label">Pre-wedding dinner (May 22, Da Nang): </span>
+        <span class="detail-value">${canAttendPreWedding ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="detail-row">
         <span class="detail-label">Western Wedding (May 23, Da Nang): </span>
         <span class="detail-value">${canAttendWesternWedding ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Afterparty (May 23, Da Nang): </span>
+        <span class="detail-value">${canAttendAfterparty ? 'Yes' : 'No'}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Tea Ceremony (May 20, Sa Dec): </span>
@@ -195,7 +213,9 @@ export function generateRSVPConfirmationEmail(data: RSVPData): { subject: string
   const text = `
 RSVP Received
 - Name: ${name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}
+- Pre-wedding dinner (May 22, Da Nang): ${canAttendPreWedding ? 'Yes' : 'No'}
 - Western Wedding (May 23, Da Nang): ${canAttendWesternWedding ? 'Yes' : 'No'}
+- Afterparty (May 23, Da Nang): ${canAttendAfterparty ? 'Yes' : 'No'}
 - Tea Ceremony (May 20, Sa Dec): ${canAttendTeaCeremony ? 'Yes' : 'No'}
 ${accommodationDetails ? '- Accommodation: Details requested' : ''}
 ${transportationDetails ? '- Transportation: Details requested' : ''}
@@ -228,8 +248,8 @@ Eric & Hang
 }
 
 export function generateAdminNotificationEmail(data: RSVPData): { subject: string; html: string; text: string } {
-  const { name, canAttendWesternWedding, canAttendTeaCeremony } = data;
-  const isAttending = canAttendWesternWedding || canAttendTeaCeremony;
+  const { name, canAttendPreWedding, canAttendWesternWedding, canAttendAfterparty, canAttendTeaCeremony } = data;
+  const isAttending = canAttendPreWedding || canAttendWesternWedding || canAttendAfterparty || canAttendTeaCeremony;
   
   const subject = `New RSVP: ${name} - ${isAttending ? 'Attending' : 'Not Attending'}`;
   
@@ -315,8 +335,16 @@ export function generateAdminNotificationEmail(data: RSVPData): { subject: strin
         <span class="detail-value">${data.phone || 'Not provided'}</span>
       </div>
       <div class="detail-row">
+        <span class="detail-label">Pre-wedding dinner (May 22, Da Nang): </span>
+        <span class="detail-value">${canAttendPreWedding ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="detail-row">
         <span class="detail-label">Western Wedding (May 23, Da Nang): </span>
         <span class="detail-value">${canAttendWesternWedding ? 'Yes' : 'No'}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Afterparty (May 23, Da Nang): </span>
+        <span class="detail-value">${canAttendAfterparty ? 'Yes' : 'No'}</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Tea Ceremony (May 20, Sa Dec): </span>
@@ -359,7 +387,9 @@ New RSVP Notification - ${isAttending ? 'Attending!' : 'Not Attending'}
 Name: ${data.name}${data.plusOneName ? ` + ${data.plusOneName}` : ''}
 Email: ${data.email}
 Phone: ${data.phone || 'Not provided'}
+Pre-wedding dinner (May 22, Da Nang): ${canAttendPreWedding ? 'Yes' : 'No'}
 Western Wedding (May 23, Da Nang): ${canAttendWesternWedding ? 'Yes' : 'No'}
+Afterparty (May 23, Da Nang): ${canAttendAfterparty ? 'Yes' : 'No'}
 Tea Ceremony (May 20, Sa Dec): ${canAttendTeaCeremony ? 'Yes' : 'No'}
 Accommodation Details: ${data.accommodationDetails ? 'Yes' : 'No'}
 Transportation Details: ${data.transportationDetails ? 'Yes' : 'No'}
