@@ -69,6 +69,8 @@ export interface Translations {
   groomProcession: string;
   exchangeOfGifts: string;
   lunch: string;
+  morningTBD: string;
+  noonTBD: string;
   westernWedding: string;
   fusionResortsAndSpa: string;
   may23rd2026Schedule: string;
@@ -389,6 +391,8 @@ export const translations: Record<Language, Translations> = {
     groomProcession: 'Groom procession',
     exchangeOfGifts: 'Exchange of gifts',
     lunch: 'Lunch',
+    morningTBD: 'Morning, TBD',
+    noonTBD: 'Noon, TBD',
     westernWedding: 'Western Wedding',
     fusionResortsAndSpa: 'Fusion Resort & Villas',
     may23rd2026Schedule: 'May 23rd, 2026',
@@ -707,6 +711,8 @@ export const translations: Record<Language, Translations> = {
     groomProcession: 'Đoàn rước chú rể',
     exchangeOfGifts: 'Trao đổi quà cưới',
     lunch: 'Tiệc trưa',
+    morningTBD: 'Buổi sáng, TBD',
+    noonTBD: 'Buổi trưa, TBD',
     westernWedding: 'Lễ Cưới Phương Tây',
     fusionResortsAndSpa: 'Fusion Resort & Villas',
     may23rd2026Schedule: '23 tháng 5, 2026',

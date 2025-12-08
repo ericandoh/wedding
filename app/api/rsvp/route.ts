@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { NextRequest, NextResponse } from 'next/server';
-import { generateRSVPConfirmationEmail, generateAdminNotificationEmail } from '../../../lib/email-templates';
+import { generateRSVPConfirmationEmail, generateAdminNotificationEmail, RSVPData } from '../../../lib/email-templates';
 import * as nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
@@ -10,9 +10,9 @@ export async function POST(request: NextRequest) {
       name,
       plusOneName,
       children,
-      canAttendPreWedding,
+      canAttendPreWedding = false,
       canAttendWesternWedding,
-      canAttendAfterparty,
+      canAttendAfterparty = false,
       canAttendTeaCeremony,
       email,
       phone,
@@ -155,17 +155,17 @@ export async function POST(request: NextRequest) {
     // Send confirmation email to the guest only if they subscribed (notificationMethod is 'email')
     if (notificationMethod === 'email') {
       try {
-        const emailData = {
+        const emailData: RSVPData = {
           name: name.trim(),
           plusOneName: plusOneName || '',
-          canAttendPreWedding,
-          canAttendWesternWedding,
-          canAttendAfterparty,
-          canAttendTeaCeremony,
+          canAttendPreWedding: canAttendPreWedding ?? false,
+          canAttendWesternWedding: canAttendWesternWedding ?? false,
+          canAttendAfterparty: canAttendAfterparty ?? false,
+          canAttendTeaCeremony: canAttendTeaCeremony ?? false,
           email: email.trim(),
           phone: phone || '',
-          accommodationDetails,
-          transportationDetails,
+          accommodationDetails: accommodationDetails ?? false,
+          transportationDetails: transportationDetails ?? false,
           dietaryRestrictions: dietaryRestrictions || '',
           accessibilityRestrictions: accessibilityRestrictions || '',
           notificationMethod: notificationMethod || '',

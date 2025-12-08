@@ -23,7 +23,9 @@ const EMAIL_TEMPLATES = {
 const SAMPLE_RSVP_DATA: RSVPData = {
   name: 'John Smith',
   plusOneName: 'Jane Smith',
+  canAttendPreWedding: true,
   canAttendWesternWedding: true,
+  canAttendAfterparty: true,
   canAttendTeaCeremony: false,
   email: 'john@example.com',
   phone: '+1 (555) 123-4567',

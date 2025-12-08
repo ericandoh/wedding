@@ -81,6 +81,68 @@ export default function Schedule() {
     URL.revokeObjectURL(url);
   };
 
+  const generateTeaCeremonyGoogleCalendarLink = () => {
+    const title = 'Hang & Eric Tea Ceremony';
+    const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
+    const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
+    
+    // May 20th, 2026, 9:00 AM - 2:00 PM (Vietnam timezone is GMT+7)
+    const startDate = '20260520T090000'; // 9:00 AM
+    const endDate = '20260520T140000'; // 2:00 PM
+    
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
+    
+    return googleUrl;
+  };
+
+  const generateTeaCeremonyICSFile = () => {
+    const title = 'Hang & Eric Tea Ceremony';
+    const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
+    const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
+    
+    // Format: YYYYMMDDTHHMMSS
+    const startDate = '20260520T090000'; // 9:00 AM
+    const endDate = '20260520T140000'; // 2:00 PM
+    const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Hang & Eric Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE',
+      'TZID:Asia/Ho_Chi_Minh',
+      'BEGIN:STANDARD',
+      'DTSTART:19700101T000000',
+      'TZOFFSETFROM:+0700',
+      'TZOFFSETTO:+0700',
+      'END:STANDARD',
+      'END:VTIMEZONE',
+      'BEGIN:VEVENT',
+      `DTSTART;TZID=Asia/Ho_Chi_Minh:${startDate}`,
+      `DTEND;TZID=Asia/Ho_Chi_Minh:${endDate}`,
+      `DTSTAMP:${timestamp}`,
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${description}`,
+      `LOCATION:${location}`,
+      'STATUS:CONFIRMED',
+      'SEQUENCE:0',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'hang-eric-tea-ceremony.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   // Animate western wedding timeline items
   useEffect(() => {
     const totalItems = 7;
@@ -295,10 +357,28 @@ export default function Schedule() {
                   <p className="text-body text-xl text-gray-600 mt-2">
                     {t.hangsFamilialHome}, {t.saDecVietnam} · {t.may20th2026}
                   </p>
+                  
+                  {/* Calendar Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                    <a
+                      href={generateTeaCeremonyGoogleCalendarLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToGoogleCalendar}
+                    </a>
+                    <button
+                      onClick={generateTeaCeremonyICSFile}
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToCalendar}
+                    </button>
+                  </div>
                 </div>
                 
                 {/* Tea Ceremony Timeline */}
-                <div className="mx-auto max-w-5xl">
+                <div className="mx-auto max-w-3xl">
                   <div className="relative w-full">
                     {/* Central Line */}
                     <div className="absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-0.5"></div>
@@ -312,7 +392,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          TBD
+                          {t.morningTBD}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -329,7 +409,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          TBD
+                          {t.morningTBD}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -346,7 +426,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          TBD
+                          {t.noonTBD}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
