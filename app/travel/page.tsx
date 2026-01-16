@@ -327,7 +327,7 @@ export default function Travel() {
                       {t.website}
                     </h3>
                     <a 
-                      href={`https://${t.venueWebsite}`}
+                      href={t.venueWebsite}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline break-all"
