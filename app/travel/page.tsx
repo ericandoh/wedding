@@ -13,6 +13,7 @@ export default function Travel() {
   const [showTeaCeremony, setShowTeaCeremony] = useState(false);
   const [showWesternVenue, setShowWesternVenue] = useState(false);
   const [showTeaVenue, setShowTeaVenue] = useState(false);
+  const [showTransportation, setShowTransportation] = useState(false);
 
   // Scroll-triggered animations
   useEffect(() => {
@@ -43,6 +44,9 @@ export default function Travel() {
             case 'tea-venue':
               setShowTeaVenue(true);
               break;
+            case 'transportation':
+              setShowTransportation(true);
+              break;
           }
         }
       });
@@ -54,12 +58,14 @@ export default function Travel() {
     const teaCeremonySection = document.querySelector('[data-section="tea-ceremony"]');
     const westernVenueSection = document.querySelector('[data-section="western-venue"]');
     const teaVenueSection = document.querySelector('[data-section="tea-venue"]');
+    const transportationSection = document.querySelector('[data-section="transportation"]');
 
     if (gettingThereSection) observer.observe(gettingThereSection);
     if (westernWeddingSection) observer.observe(westernWeddingSection);
     if (teaCeremonySection) observer.observe(teaCeremonySection);
     if (westernVenueSection) observer.observe(westernVenueSection);
     if (teaVenueSection) observer.observe(teaVenueSection);
+    if (transportationSection) observer.observe(transportationSection);
 
     return () => {
       if (gettingThereSection) observer.unobserve(gettingThereSection);
@@ -67,6 +73,7 @@ export default function Travel() {
       if (teaCeremonySection) observer.unobserve(teaCeremonySection);
       if (westernVenueSection) observer.unobserve(westernVenueSection);
       if (teaVenueSection) observer.unobserve(teaVenueSection);
+      if (transportationSection) observer.unobserve(transportationSection);
     };
   }, []);
 
@@ -437,6 +444,46 @@ export default function Travel() {
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Hang's Familial Home, Sa Dec"
                     ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Transportation Options Section */}
+          <div className="mt-16 mb-16" data-section="transportation">
+            <div className={`bg-white py-8 text-center mb-8 transition-opacity duration-1000 ${showTransportation ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
+                {t.transportationOptions}
+              </h2>
+            </div>
+
+            <div className={`flex flex-col lg:flex-row gap-8 items-start transition-opacity duration-1000 ${showTransportation ? 'opacity-100' : 'opacity-0'}`}>
+              
+              {/* Grab Information */}
+              <div className="w-full lg:w-1/2">
+                <div className="space-y-6">
+                  <div className="border-b border-gray-200 pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      Grab (Ride-Sharing App)
+                    </h3>
+                    <p className="text-body text-lg text-gray-600">
+                      {t.grabDescription}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Private Car Information */}
+              <div className="w-full lg:w-1/2">
+                <div className="space-y-6">
+                  <div className="pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      Private Car Arrangements
+                    </h3>
+                    <p className="text-body text-lg text-gray-600">
+                      {t.privateCarDescription}
+                    </p>
                   </div>
                 </div>
               </div>

@@ -102,6 +102,10 @@ export interface Translations {
   cocktailReception: string;
   dinnerReception: string;
   dancingEveningCelebration: string;
+  preWelcomeDinner: string;
+  restaurantTBD: string;
+  may22nd2026Schedule: string;
+  preWelcomeDinnerEvent: string;
 
   // Our Story page
   aboutTheCoupleTitle: string;
@@ -155,6 +159,9 @@ export interface Translations {
   teaCeremonyAddressNote: string;
   aboutTheVenue: string;
   teaCeremonyAboutVenue: string;
+  transportationOptions: string;
+  grabDescription: string;
+  privateCarDescription: string;
 
   // Things to Do page
   thingsToDoTitle: string;
@@ -180,6 +187,10 @@ export interface Translations {
   myKheDescription: string;
   dragonBridge: string;
   dragonBridgeDescription: string;
+  savedPlacesTitle: string;
+  savedPlacesSubtext: string;
+  viewFullMap: string;
+  embedMapNote: string;
 
   // Q&A page
   qaTitle: string;
@@ -440,6 +451,10 @@ export const translations: Record<Language, Translations> = {
     cocktailReception: 'Cocktail Reception',
     dinnerReception: 'Dinner Reception',
     dancingEveningCelebration: 'Dancing & Evening Celebration',
+    preWelcomeDinner: 'Pre-Welcome Dinner',
+    restaurantTBD: 'Restaurant TBD',
+    may22nd2026Schedule: 'May 22nd, 2026',
+    preWelcomeDinnerEvent: 'Pre-Welcome Dinner',
 
     // Our Story page
     aboutTheCoupleTitle: 'About the Couple',
@@ -493,6 +508,9 @@ export const translations: Record<Language, Translations> = {
     teaCeremonyAddressNote: 'The address is not on Google Maps, but the closest landmark on the maps is this hu tieu restaurant (which is also pretty good)',
     aboutTheVenue: 'About the Venue',
     teaCeremonyAboutVenue: "Hang's grandparent's home. We will hold the tea ceremony here and then transition to a restaurant for lunch. Details coming soon about the restaurant!",
+    transportationOptions: 'Transportation Options',
+    grabDescription: 'Grab is the equivalent of Uber in Vietnam and is widely available in major cities like Da Nang and Ho Chi Minh City. You can download the Grab app on your smartphone and easily book rides for short to medium distances. It\'s convenient, safe, and often more affordable than traditional taxis.',
+    privateCarDescription: 'For longer distance travel (such as between cities or to the wedding venues), you can ask your hotel or hostel front desk to arrange a private car with a driver. This is a common and reliable option in Vietnam, and many accommodations can help coordinate this service for you.',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -518,6 +536,10 @@ export const translations: Record<Language, Translations> = {
     myKheDescription: 'One of the most beautiful beaches in the world with soft white sand and crystal-clear waters. Perfect for swimming, surfing, and relaxing under the sun.',
     dragonBridge: 'Dragon Bridge',
     dragonBridgeDescription: 'An iconic bridge shaped like a dragon that breathes fire and water on weekend nights. A spectacular display of modern Vietnamese engineering and culture.',
+    savedPlacesTitle: "Hang + Eric's Saved Places",
+    savedPlacesSubtext: "Some places we've bookmarked around the area. Includes food, shopping, and points of interest",
+    viewFullMap: 'View Full Map',
+    embedMapNote: 'Note: The embedded map above may not show all places. Click the link below to view the complete saved list.',
 
     // Q&A page
     qaTitle: 'Q&A',
@@ -776,6 +798,10 @@ export const translations: Record<Language, Translations> = {
     cocktailReception: 'Tiệc Cocktail',
     dinnerReception: 'Tiệc Tối',
     dancingEveningCelebration: 'Khiêu Vũ & Tiệc Tối',
+    preWelcomeDinner: 'Tiệc chào mừng trước lễ cưới',
+    restaurantTBD: 'Nhà hàng (sắp được xác nhận)',
+    may22nd2026Schedule: '22 tháng 5, 2026',
+    preWelcomeDinnerEvent: 'Tiệc chào mừng trước lễ cưới',
 
     // Our Story page
     aboutTheCoupleTitle: 'Về Cặp Đôi',
@@ -829,6 +855,9 @@ export const translations: Record<Language, Translations> = {
     teaCeremonyAddressNote: 'Địa chỉ không có trên Google Maps, nhưng địa danh gần nhất trên bản đồ là nhà hàng hủ tiếu này (cũng khá ngon)',
     aboutTheVenue: 'Về Địa Điểm',
     teaCeremonyAboutVenue: 'Nhà của ông bà Hang. Chúng tôi sẽ tổ chức lễ trà tại đây và sau đó chuyển sang nhà hàng để ăn trưa. Chi tiết về nhà hàng sẽ sớm có!',
+    transportationOptions: 'Tùy Chọn Vận Chuyển',
+    grabDescription: 'Grab là ứng dụng tương đương với Uber ở Việt Nam và được sử dụng rộng rãi ở các thành phố lớn như Đà Nẵng và Thành phố Hồ Chí Minh. Bạn có thể tải ứng dụng Grab trên điện thoại thông minh và dễ dàng đặt xe cho các quãng đường ngắn đến trung bình. Nó tiện lợi, an toàn và thường rẻ hơn so với taxi truyền thống.',
+    privateCarDescription: 'Đối với việc đi lại quãng đường xa (chẳng hạn như giữa các thành phố hoặc đến các địa điểm đám cưới), bạn có thể yêu cầu quầy lễ tân khách sạn hoặc nhà trọ sắp xếp xe riêng có tài xế. Đây là một lựa chọn phổ biến và đáng tin cậy ở Việt Nam, và nhiều chỗ ở có thể giúp bạn điều phối dịch vụ này.',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
@@ -854,6 +883,10 @@ export const translations: Record<Language, Translations> = {
     myKheDescription: 'Một trong những bãi biển đẹp nhất thế giới với cát trắng mịn và nước biển trong vắt. Hoàn hảo cho bơi lội, lướt sóng và thư giãn dưới ánh nắng mặt trời.',
     dragonBridge: 'Cầu Rồng',
     dragonBridgeDescription: 'Cây cầu biểu tượng có hình con rồng phun lửa và nước vào các tối cuối tuần. Một màn trình diễn ngoạn mục của kỹ thuật và văn hóa Việt Nam hiện đại.',
+    savedPlacesTitle: 'Những Địa Điểm Hang + Eric Đã Lưu',
+    savedPlacesSubtext: 'Một số địa điểm chúng tôi đã đánh dấu quanh khu vực. Bao gồm ẩm thực, mua sắm và các điểm tham quan',
+    viewFullMap: 'Xem Bản Đồ Đầy Đủ',
+    embedMapNote: 'Lưu ý: Bản đồ nhúng ở trên có thể không hiển thị tất cả các địa điểm. Nhấp vào liên kết bên dưới để xem danh sách đã lưu đầy đủ.',
 
     // Q&A page
     qaTitle: 'Hỏi Đáp',

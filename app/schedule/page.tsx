@@ -11,13 +11,60 @@ import {
   CakeIcon,
   MusicalNoteIcon,
   UserGroupIcon,
-  GiftIcon
+  GiftIcon,
+  BuildingStorefrontIcon
 } from '@heroicons/react/24/outline';
 
 export default function Schedule() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [visibleTeaItems, setVisibleTeaItems] = useState<number[]>([]);
+  const [visiblePreWelcomeItems, setVisiblePreWelcomeItems] = useState<number[]>([]);
+
+  // Helper function to format time - 24-hour format for Vietnamese, 12-hour for English
+  const formatTime = (time12hr: string): string => {
+    if (language === 'vi') {
+      // Convert 12-hour format to 24-hour format
+      // Handle ranges like "6:00 – 9:00 PM" or single times like "After 9:00 PM"
+      if (time12hr.includes('After')) {
+        const match = time12hr.match(/After (\d{1,2}):(\d{2}) (AM|PM)/i);
+        if (match) {
+          let hours = parseInt(match[1]);
+          const minutes = match[2];
+          const period = match[3].toUpperCase();
+          
+          if (period === 'PM' && hours !== 12) hours += 12;
+          if (period === 'AM' && hours === 12) hours = 0;
+          
+          return `Sau ${hours.toString().padStart(2, '0')}:${minutes}`;
+        }
+        return time12hr;
+      }
+      
+      // Handle time ranges
+      const rangeMatch = time12hr.match(/(\d{1,2}):(\d{2}) – (\d{1,2}):(\d{2}) (AM|PM)/i);
+      if (rangeMatch) {
+        let startHours = parseInt(rangeMatch[1]);
+        const startMinutes = rangeMatch[2];
+        let endHours = parseInt(rangeMatch[3]);
+        const endMinutes = rangeMatch[4];
+        const period = rangeMatch[5].toUpperCase();
+        
+        if (period === 'PM') {
+          if (startHours !== 12) startHours += 12;
+          if (endHours !== 12) endHours += 12;
+        } else {
+          if (startHours === 12) startHours = 0;
+          if (endHours === 12) endHours = 0;
+        }
+        
+        return `${startHours.toString().padStart(2, '0')}:${startMinutes} – ${endHours.toString().padStart(2, '0')}:${endMinutes}`;
+      }
+      
+      return time12hr;
+    }
+    return time12hr;
+  };
 
   const generateGoogleCalendarLink = () => {
     const title = 'Hang & Eric Western Wedding';
@@ -143,15 +190,93 @@ export default function Schedule() {
     URL.revokeObjectURL(url);
   };
 
-  // Animate western wedding timeline items
+  const generatePreWelcomeDinnerGoogleCalendarLink = () => {
+    const title = 'Hang & Eric Pre-Welcome Dinner';
+    const location = 'Restaurant TBD, Da Nang, Vietnam';
+    const description = 'Join us for Hang and Eric\'s pre-welcome dinner!';
+    
+    // May 22nd, 2026, 6:00 PM - 9:00 PM (Da Nang timezone is GMT+7)
+    const startDate = '20260522T180000'; // 6:00 PM in Da Nang time
+    const endDate = '20260522T210000'; // 9:00 PM in Da Nang time
+    
+    const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
+    
+    return googleUrl;
+  };
+
+  const generatePreWelcomeDinnerICSFile = () => {
+    const title = 'Hang & Eric Pre-Welcome Dinner';
+    const location = 'Restaurant TBD, Da Nang, Vietnam';
+    const description = 'Join us for Hang and Eric\'s pre-welcome dinner!';
+    
+    // Format: YYYYMMDDTHHMMSS
+    const startDate = '20260522T180000';
+    const endDate = '20260522T210000';
+    const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Hang & Eric Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE',
+      'TZID:Asia/Ho_Chi_Minh',
+      'BEGIN:STANDARD',
+      'DTSTART:19700101T000000',
+      'TZOFFSETFROM:+0700',
+      'TZOFFSETTO:+0700',
+      'END:STANDARD',
+      'END:VTIMEZONE',
+      'BEGIN:VEVENT',
+      `DTSTART;TZID=Asia/Ho_Chi_Minh:${startDate}`,
+      `DTEND;TZID=Asia/Ho_Chi_Minh:${endDate}`,
+      `DTSTAMP:${timestamp}`,
+      `SUMMARY:${title}`,
+      `DESCRIPTION:${description}`,
+      `LOCATION:${location}`,
+      'STATUS:CONFIRMED',
+      'SEQUENCE:0',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'hang-eric-pre-welcome-dinner.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // Animate pre-welcome dinner timeline items
   useEffect(() => {
-    const totalItems = 7;
+    const totalItems = 1;
     const timers: NodeJS.Timeout[] = [];
     
     for (let i = 0; i < totalItems; i++) {
       const timer = setTimeout(() => {
-        setVisibleItems(prev => [...prev, i]);
+        setVisiblePreWelcomeItems(prev => [...prev, i]);
       }, i * 200); // 0.2 seconds per item
+      timers.push(timer);
+    }
+    
+    return () => timers.forEach(timer => clearTimeout(timer));
+  }, []);
+
+  // Animate western wedding timeline items (starts after pre-welcome dinner)
+  useEffect(() => {
+    const totalItems = 7;
+    const timers: NodeJS.Timeout[] = [];
+    const startDelay = 200; // Start after pre-welcome dinner animation (1 * 200)
+    
+    for (let i = 0; i < totalItems; i++) {
+      const timer = setTimeout(() => {
+        setVisibleItems(prev => [...prev, i]);
+      }, startDelay + (i * 200)); // 0.2 seconds per item
       timers.push(timer);
     }
     
@@ -162,7 +287,7 @@ export default function Schedule() {
   useEffect(() => {
     const totalTeaItems = 3;
     const timers: NodeJS.Timeout[] = [];
-    const startDelay = 1400; // Start after western wedding animation (7 * 200)
+    const startDelay = 1600; // Start after western wedding animation (200 + 7 * 200)
     
     for (let i = 0; i < totalTeaItems; i++) {
       const timer = setTimeout(() => {
@@ -187,7 +312,64 @@ export default function Schedule() {
                   <h2 className="text-title text-3xl font-bold text-gray-800">
                     {t.westernWedding}
                   </h2>
-                  <p className="text-body text-xl text-gray-600 mt-2">
+                </div>
+                
+                {/* Pre-Welcome Dinner Section */}
+                <div className="mb-8">
+                  <p className="text-body text-xl text-gray-600 mt-2 mb-4">
+                    ({t.restaurantTBD}), {t.daNangVietnam} · {t.may22nd2026Schedule}
+                  </p>
+                  
+                  {/* Calendar Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                    <a
+                      href={generatePreWelcomeDinnerGoogleCalendarLink()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToGoogleCalendar}
+                    </a>
+                    <button
+                      onClick={generatePreWelcomeDinnerICSFile}
+                      className="text-button-sm inline-block border border-gray-400 px-3 py-1.5 text-xs text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      {t.addToCalendar}
+                    </button>
+                  </div>
+                  
+                  {/* Timeline */}
+                  <div className="mx-auto max-w-3xl mt-6">
+                    <div className="relative w-full">
+                      {/* Central Line */}
+                      <div className="absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-0.5"></div>
+                      
+                      {/* Timeline Events */}
+                      <div className="space-y-8">
+                      {/* Event: Pre-Welcome Dinner */}
+                      <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visiblePreWelcomeItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                          <BuildingStorefrontIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                        </div>
+                        <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                          <div className="text-body text-base text-gray-800 font-semibold">
+                            {formatTime('6:00 – 9:00 PM')}
+                          </div>
+                        </div>
+                        <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                          <div className="text-body text-xl text-gray-700 font-medium">
+                            {t.preWelcomeDinnerEvent}
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Main Wedding Section */}
+                <div className="mb-6">
+                  <p className="text-body text-xl text-gray-600 mt-2 mb-4">
                     {t.fusionResortsAndSpa}, {t.daNangVietnam} · {t.may23rd2026Schedule}
                   </p>
                   
@@ -208,134 +390,134 @@ export default function Schedule() {
                       {t.addToCalendar}
                     </button>
                   </div>
-                </div>
-                
-                {/* Timeline */}
-                <div className="mx-auto max-w-3xl">
-                  <div className="relative w-full">
-                    {/* Central Line */}
-                    <div className="absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-0.5"></div>
-                    
-                    {/* Timeline Events */}
-                    <div className="space-y-8">
-                    {/* Event 1: Guest Arrival */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          3:00 – 3:45 PM
+                  
+                  {/* Timeline */}
+                  <div className="mx-auto max-w-3xl mt-6">
+                    <div className="relative w-full">
+                      {/* Central Line */}
+                      <div className="absolute left-1/3 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-0.5"></div>
+                      
+                      {/* Timeline Events */}
+                      <div className="space-y-8">
+                        {/* Event 1: Guest Arrival */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('3:00 – 3:45 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.guestArrivalWelcome}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.guestArrivalWelcome}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 2: Guests Seated */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          3:45 – 4:00 PM
+                        {/* Event 2: Guests Seated */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('3:45 – 4:00 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.guestsAreSeated}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.guestsAreSeated}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 3: Exchange of Vows */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          4:00 – 4:30 PM
+                        {/* Event 3: Exchange of Vows */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('4:00 – 4:30 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.exchangeOfVows}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.exchangeOfVows}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 4: Photography */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          4:30 – 5:00 PM
+                        {/* Event 4: Photography */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('4:30 – 5:00 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.photographySession}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.photographySession}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 5: Cocktail Reception */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          5:00 – 6:00 PM
+                        {/* Event 5: Cocktail Reception */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('5:00 – 6:00 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.cocktailReception}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.cocktailReception}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 6: Dinner Reception */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          6:00 – 9:00 PM
+                        {/* Event 6: Dinner Reception */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('6:00 – 9:00 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.dinnerReception}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.dinnerReception}
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Event 7: Dancing */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
-                        <MusicalNoteIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
-                      </div>
-                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-base text-gray-800 font-semibold">
-                          After 9:00 PM
+                        {/* Event 7: Dancing */}
+                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                          <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                            <MusicalNoteIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                          </div>
+                          <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-base text-gray-800 font-semibold">
+                              {formatTime('After 9:00 PM')}
+                            </div>
+                          </div>
+                          <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                            <div className="text-body text-xl text-gray-700 font-medium">
+                              {t.dancingEveningCelebration}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
-                        <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.dancingEveningCelebration}
-                        </div>
-                      </div>
-                    </div>
                     </div>
                   </div>
                 </div>

@@ -330,6 +330,51 @@ export default function ThingsToDo() {
               </div>
             </div>
           </div>
+
+          {/* Saved Places Section */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
+                {t.savedPlacesTitle}
+              </h2>
+              <p className="text-body text-xl text-gray-600">
+                {t.savedPlacesSubtext}
+              </p>
+            </div>
+
+            {/* Embedded Google Maps */}
+            <div className="mb-4 rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/d/embed?mid=1dfL3GcyW1niUucFMUFYVSLJkMZX1Ujg&ehbc=2E312F"
+                width="100%"
+                height="500"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Hang and Eric's Saved Places"
+              ></iframe>
+            </div>
+
+            {/* Note about embed */}
+            <div className="mb-4 text-center">
+              <p className="text-body text-sm text-gray-600 italic">
+                {t.embedMapNote}
+              </p>
+            </div>
+
+            {/* Link to Full Map */}
+            <div className="text-center">
+              <a
+                href="https://maps.app.goo.gl/rHZaUdRRs76UuqR26"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline inline-block"
+              >
+                {t.viewFullMap} →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
