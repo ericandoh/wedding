@@ -162,6 +162,18 @@ export interface Translations {
   transportationOptions: string;
   grabDescription: string;
   privateCarDescription: string;
+  location: string;
+  centralVietnam: string;
+  southVietnam: string;
+  westernWeddingShuttles: string;
+  teaCeremonyShuttlesFull: string;
+  accommodationOptions: string;
+  accommodationOptionsNote: string;
+  teaCeremonyToWesternWedding: string;
+  sgnToDad: string;
+  sgnToDadDescription: string;
+  vcaToDad: string;
+  vcaToDadDescription: string;
 
   // Things to Do page
   thingsToDoTitle: string;
@@ -191,6 +203,9 @@ export interface Translations {
   savedPlacesSubtext: string;
   viewFullMap: string;
   embedMapNote: string;
+  saDecRecsTitle: string;
+  saDecRecsSubtext: string;
+  saDecTravelGuide: string;
 
   // Q&A page
   qaTitle: string;
@@ -511,6 +526,18 @@ export const translations: Record<Language, Translations> = {
     transportationOptions: 'Transportation Options',
     grabDescription: 'Grab is the equivalent of Uber in Vietnam and is widely available in major cities like Da Nang and Ho Chi Minh City. You can download the Grab app on your smartphone and easily book rides for short to medium distances. It\'s convenient, safe, and often more affordable than traditional taxis.',
     privateCarDescription: 'For longer distance travel (such as between cities or to the wedding venues), you can ask your hotel or hostel front desk to arrange a private car with a driver. This is a common and reliable option in Vietnam, and many accommodations can help coordinate this service for you.',
+    location: 'Location',
+    centralVietnam: 'Central Vietnam',
+    southVietnam: 'South Vietnam',
+    westernWeddingShuttles: 'We will request for your flight information 2 weeks before the wedding. More information coming soon.',
+    teaCeremonyShuttlesFull: "We will provide a shuttle with pickup service from Ho Chi Minh. Let us know if you're flying from Can Tho + we can also try to arrange transportation. We will request for your flight information 2 weeks before the tea ceremony. More information coming soon.",
+    accommodationOptions: 'Accommodation Options',
+    accommodationOptionsNote: 'Check this section later for a list of recommended hotels / places to stay at.',
+    teaCeremonyToWesternWedding: 'Tea Ceremony to Western Wedding',
+    sgnToDad: 'SGN → DAD',
+    sgnToDadDescription: "We'll provide transportation to SGN the day after the tea ceremony. We recommend this option as there are more flight options from SGN to DAD.",
+    vcaToDad: 'VCA → DAD',
+    vcaToDadDescription: 'Vietjet operates daily nonstop flights (once a day) and Vietnam Airlines operates a single nonstop flight (on the 22nd). Note that Vietjet is a low cost carrier if you choose this option.',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -536,10 +563,13 @@ export const translations: Record<Language, Translations> = {
     myKheDescription: 'One of the most beautiful beaches in the world with soft white sand and crystal-clear waters. Perfect for swimming, surfing, and relaxing under the sun.',
     dragonBridge: 'Dragon Bridge',
     dragonBridgeDescription: 'An iconic bridge shaped like a dragon that breathes fire and water on weekend nights. A spectacular display of modern Vietnamese engineering and culture.',
-    savedPlacesTitle: "Hang + Eric's Saved Places",
+    savedPlacesTitle: "Hang + Eric's Da Nang Recs",
     savedPlacesSubtext: "Some places we've bookmarked around the area. Includes food, shopping, and points of interest",
     viewFullMap: 'View Full Map',
     embedMapNote: 'Note: The embedded map above may not show all places. Click the link below to view the complete saved list.',
+    saDecRecsTitle: "Hang + Eric's Sa Dec Recs",
+    saDecRecsSubtext: "If you are joining us for the tea ceremony, here is a list of places to explore around Sa Dec, Hang's hometown!",
+    saDecTravelGuide: 'Sa Dec travel guide',
 
     // Q&A page
     qaTitle: 'Q&A',
@@ -858,6 +888,18 @@ export const translations: Record<Language, Translations> = {
     transportationOptions: 'Tùy Chọn Vận Chuyển',
     grabDescription: 'Grab là ứng dụng tương đương với Uber ở Việt Nam và được sử dụng rộng rãi ở các thành phố lớn như Đà Nẵng và Thành phố Hồ Chí Minh. Bạn có thể tải ứng dụng Grab trên điện thoại thông minh và dễ dàng đặt xe cho các quãng đường ngắn đến trung bình. Nó tiện lợi, an toàn và thường rẻ hơn so với taxi truyền thống.',
     privateCarDescription: 'Đối với việc đi lại quãng đường xa (chẳng hạn như giữa các thành phố hoặc đến các địa điểm đám cưới), bạn có thể yêu cầu quầy lễ tân khách sạn hoặc nhà trọ sắp xếp xe riêng có tài xế. Đây là một lựa chọn phổ biến và đáng tin cậy ở Việt Nam, và nhiều chỗ ở có thể giúp bạn điều phối dịch vụ này.',
+    location: 'Địa Điểm',
+    centralVietnam: 'Miền Trung Việt Nam',
+    southVietnam: 'Miền Nam Việt Nam',
+    westernWeddingShuttles: 'Chúng tôi sẽ yêu cầu thông tin chuyến bay của bạn 2 tuần trước đám cưới. Thông tin chi tiết sắp có.',
+    teaCeremonyShuttlesFull: "Chúng tôi sẽ cung cấp xe đưa đón từ Thành phố Hồ Chí Minh. Hãy cho chúng tôi biết nếu bạn bay từ Cần Thơ + chúng tôi cũng có thể sắp xếp phương tiện di chuyển. Chúng tôi sẽ yêu cầu thông tin chuyến bay của bạn 2 tuần trước lễ trà. Thông tin chi tiết sắp có.",
+    accommodationOptions: 'Tùy Chọn Chỗ Ở',
+    accommodationOptionsNote: 'Kiểm tra phần này sau để xem danh sách các khách sạn / nơi ở được đề xuất.',
+    teaCeremonyToWesternWedding: 'Từ Lễ Trà Đến Lễ Cưới Phương Tây',
+    sgnToDad: 'SGN → DAD',
+    sgnToDadDescription: 'Chúng tôi sẽ cung cấp phương tiện di chuyển đến SGN vào ngày sau lễ trà. Chúng tôi khuyên bạn nên chọn phương án này vì có nhiều lựa chọn chuyến bay từ SGN đến DAD hơn.',
+    vcaToDad: 'VCA → DAD',
+    vcaToDadDescription: 'Vietjet có các chuyến bay thẳng hàng ngày (một lần mỗi ngày) và Vietnam Airlines có một chuyến bay thẳng duy nhất (vào ngày 22). Lưu ý rằng Vietjet là hãng hàng không giá rẻ nếu bạn chọn phương án này.',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
@@ -883,10 +925,13 @@ export const translations: Record<Language, Translations> = {
     myKheDescription: 'Một trong những bãi biển đẹp nhất thế giới với cát trắng mịn và nước biển trong vắt. Hoàn hảo cho bơi lội, lướt sóng và thư giãn dưới ánh nắng mặt trời.',
     dragonBridge: 'Cầu Rồng',
     dragonBridgeDescription: 'Cây cầu biểu tượng có hình con rồng phun lửa và nước vào các tối cuối tuần. Một màn trình diễn ngoạn mục của kỹ thuật và văn hóa Việt Nam hiện đại.',
-    savedPlacesTitle: 'Những Địa Điểm Hang + Eric Đã Lưu',
+    savedPlacesTitle: 'Gợi Ý Đà Nẵng của Hang + Eric',
     savedPlacesSubtext: 'Một số địa điểm chúng tôi đã đánh dấu quanh khu vực. Bao gồm ẩm thực, mua sắm và các điểm tham quan',
     viewFullMap: 'Xem Bản Đồ Đầy Đủ',
     embedMapNote: 'Lưu ý: Bản đồ nhúng ở trên có thể không hiển thị tất cả các địa điểm. Nhấp vào liên kết bên dưới để xem danh sách đã lưu đầy đủ.',
+    saDecRecsTitle: 'Gợi Ý Sa Đéc của Hang + Eric',
+    saDecRecsSubtext: 'Nếu bạn tham gia lễ trà với chúng tôi, đây là danh sách các địa điểm để khám phá quanh Sa Đéc, quê hương của Hang!',
+    saDecTravelGuide: 'Hướng dẫn du lịch Sa Đéc',
 
     // Q&A page
     qaTitle: 'Hỏi Đáp',

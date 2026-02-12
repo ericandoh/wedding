@@ -352,7 +352,7 @@ export default function ThingsToDo() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Hang and Eric's Saved Places"
+                title="Hang and Eric's Da Nang Recs"
               ></iframe>
             </div>
 
@@ -373,6 +373,42 @@ export default function ThingsToDo() {
               >
                 {t.viewFullMap} →
               </a>
+            </div>
+          </div>
+
+          {/* Sa Dec Recs Section */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
+                {t.saDecRecsTitle}
+              </h2>
+              <p className="text-body text-xl text-gray-600">
+                {t.saDecRecsSubtext}
+              </p>
+            </div>
+
+            {/* Links to Travel Guide and Full Map */}
+            <div className="text-center space-y-4">
+              <div>
+                <a
+                  href="https://vemekong.com/sa-dec-travel-guide/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline inline-block"
+                >
+                  {t.saDecTravelGuide} →
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://maps.app.goo.gl/qecBEmCnfnKWHUTN8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline inline-block"
+                >
+                  {t.viewFullMap} →
+                </a>
+              </div>
             </div>
           </div>
         </div>

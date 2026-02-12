@@ -11,6 +11,7 @@ export default function Travel() {
   const [showGettingThere, setShowGettingThere] = useState(false);
   const [showWesternWedding, setShowWesternWedding] = useState(false);
   const [showTeaCeremony, setShowTeaCeremony] = useState(false);
+  const [showTeaCeremonyToWestern, setShowTeaCeremonyToWestern] = useState(false);
   const [showWesternVenue, setShowWesternVenue] = useState(false);
   const [showTeaVenue, setShowTeaVenue] = useState(false);
   const [showTransportation, setShowTransportation] = useState(false);
@@ -38,6 +39,9 @@ export default function Travel() {
             case 'tea-ceremony':
               setShowTeaCeremony(true);
               break;
+            case 'tea-ceremony-to-western':
+              setShowTeaCeremonyToWestern(true);
+              break;
             case 'western-venue':
               setShowWesternVenue(true);
               break;
@@ -56,6 +60,7 @@ export default function Travel() {
     const gettingThereSection = document.querySelector('[data-section="getting-there"]');
     const westernWeddingSection = document.querySelector('[data-section="western-wedding"]');
     const teaCeremonySection = document.querySelector('[data-section="tea-ceremony"]');
+    const teaCeremonyToWesternSection = document.querySelector('[data-section="tea-ceremony-to-western"]');
     const westernVenueSection = document.querySelector('[data-section="western-venue"]');
     const teaVenueSection = document.querySelector('[data-section="tea-venue"]');
     const transportationSection = document.querySelector('[data-section="transportation"]');
@@ -63,6 +68,7 @@ export default function Travel() {
     if (gettingThereSection) observer.observe(gettingThereSection);
     if (westernWeddingSection) observer.observe(westernWeddingSection);
     if (teaCeremonySection) observer.observe(teaCeremonySection);
+    if (teaCeremonyToWesternSection) observer.observe(teaCeremonyToWesternSection);
     if (westernVenueSection) observer.observe(westernVenueSection);
     if (teaVenueSection) observer.observe(teaVenueSection);
     if (transportationSection) observer.observe(transportationSection);
@@ -71,6 +77,7 @@ export default function Travel() {
       if (gettingThereSection) observer.unobserve(gettingThereSection);
       if (westernWeddingSection) observer.unobserve(westernWeddingSection);
       if (teaCeremonySection) observer.unobserve(teaCeremonySection);
+      if (teaCeremonyToWesternSection) observer.unobserve(teaCeremonyToWesternSection);
       if (westernVenueSection) observer.unobserve(westernVenueSection);
       if (teaVenueSection) observer.unobserve(teaVenueSection);
       if (transportationSection) observer.unobserve(transportationSection);
@@ -136,6 +143,16 @@ export default function Travel() {
                 {/* Information Table */}
                 <div className="w-full lg:w-1/2">
                   <div className="space-y-6">
+                    {/* Location */}
+                    <div className="border-b border-gray-200 pb-4">
+                      <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                        <strong>{t.location}</strong>
+                      </h3>
+                      <p className="text-body text-lg text-gray-600">
+                        {t.centralVietnam}
+                      </p>
+                    </div>
+
                     {/* Airport */}
                     <div className="border-b border-gray-200 pb-4">
                       <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
@@ -162,7 +179,7 @@ export default function Travel() {
                         {t.shuttles}
                       </h3>
                       <p className="text-body text-lg text-gray-600">
-                        {t.moreInformationComingSoon}
+                        {t.westernWeddingShuttles}
                       </p>
                     </div>
                   </div>
@@ -181,6 +198,16 @@ export default function Travel() {
                 {/* Information Table */}
                 <div className="w-full lg:w-1/2">
                   <div className="space-y-6">
+                    {/* Location */}
+                    <div className="border-b border-gray-200 pb-4">
+                      <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                        <strong>{t.location}</strong>
+                      </h3>
+                      <p className="text-body text-lg text-gray-600">
+                        {t.southVietnam}
+                      </p>
+                    </div>
+
                     {/* Airport */}
                     <div className="border-b border-gray-200 pb-4">
                       <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
@@ -238,7 +265,7 @@ export default function Travel() {
                         {t.shuttles}
                       </h3>
                       <p className="text-body text-lg text-gray-600">
-                        {t.teaCeremonyShuttles}
+                        {t.teaCeremonyShuttlesFull}
                       </p>
                     </div>
                   </div>
@@ -261,6 +288,39 @@ export default function Travel() {
                       referrerPolicy="no-referrer-when-downgrade"
                       title={teaCeremonyRoute === 'SGN' ? "Directions from Tan Son Nhat Airport to Sa Dec" : "Directions from Can Tho Airport to Sa Dec"}
                     ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tea Ceremony to Western Wedding */}
+            <div className="mt-16" data-section="tea-ceremony-to-western">
+              <h2 className={`text-title text-3xl font-bold text-gray-800 mb-6 text-center transition-opacity duration-1000 ${showTeaCeremonyToWestern ? 'opacity-100' : 'opacity-0'}`}>
+                {t.teaCeremonyToWesternWedding}
+              </h2>
+              
+              <div className={`transition-opacity duration-1000 ${showTeaCeremonyToWestern ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="w-full max-w-4xl mx-auto">
+                  <div className="space-y-6">
+                    {/* SGN → DAD */}
+                    <div className="border-b border-gray-200 pb-4">
+                      <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                        {t.sgnToDad}
+                      </h3>
+                      <p className="text-body text-lg text-gray-600">
+                        {t.sgnToDadDescription}
+                      </p>
+                    </div>
+
+                    {/* VCA → DAD */}
+                    <div className="pb-4">
+                      <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                        {t.vcaToDad}
+                      </h3>
+                      <p className="text-body text-lg text-gray-600">
+                        {t.vcaToDadDescription}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -420,12 +480,22 @@ export default function Travel() {
                     </div>
 
                     {/* About the Venue */}
-                    <div className="pb-4">
+                    <div className="border-b border-gray-200 pb-4">
                       <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
                         {t.aboutTheVenue}
                       </h3>
                       <p className="text-body text-lg text-gray-600">
                         {t.teaCeremonyAboutVenue}
+                      </p>
+                    </div>
+
+                    {/* Accommodation Options */}
+                    <div className="pb-4">
+                      <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                        {t.accommodationOptions}
+                      </h3>
+                      <p className="text-body text-lg text-gray-600">
+                        {t.accommodationOptionsNote}
                       </p>
                     </div>
                   </div>
