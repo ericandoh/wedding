@@ -43,6 +43,7 @@ export interface Translations {
   petCats: string;
   bookingBanner: string;
   bookingBannerHere: string;
+  visaBanner: string;
   
   // Login page
   hangAndEric: string;
@@ -407,6 +408,7 @@ export const translations: Record<Language, Translations> = {
     petCats: 'Pet Cats',
     bookingBanner: 'Booking link for venue is now available',
     bookingBannerHere: 'here',
+    visaBanner: 'Reminder to apply for Vietnam Visa - necessary for US Passport Holders',
     
     // Login page
     hangAndEric: 'Hang and Eric',
@@ -583,7 +585,7 @@ export const translations: Record<Language, Translations> = {
     weatherAnswer: "May is typically warm and sunny in Da Nang with temperatures around 25-30°C (77-86°F). It's the beginning of the dry season, so rain is less likely. We recommend bringing light, breathable clothing and sunscreen.",
     travelAndAccommodation: 'Travel & Accommodation',
     doINeedVisa: 'Do I need a visa to visit Vietnam?',
-    visaAnswer: 'US Passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa to enter Vietnam. You can apply for an e-visa online and apply well in advance of your travel dates. https://evisa.gov.vn/. Please check the latest requirements for your country',
+    visaAnswer: 'US Passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa to enter Vietnam. You can apply for an e-visa online and apply well in advance of your travel dates. See our step-by-step guide here for detailed instructions. Please check the latest requirements for your country',
     whereShouldIStay: 'Where should I stay?',
     accommodationAnswer: 'We recommend staying at Fusion Resort & Villas Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details.',
     howToGetFromAirport: 'How do I get from the airport to the venue?',
@@ -769,6 +771,7 @@ export const translations: Record<Language, Translations> = {
     petCats: 'Thú cưng',
     bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',
     bookingBannerHere: 'tại đây',
+    visaBanner: 'Nhắc nhở xin Visa Việt Nam - cần thiết cho người mang Hộ chiếu Mỹ',
     
     // Login page
     hangAndEric: 'Hang và Eric',
@@ -945,7 +948,7 @@ export const translations: Record<Language, Translations> = {
     weatherAnswer: 'Tháng 5 thường ấm và nắng ở Đà Nẵng với nhiệt độ khoảng 25-30°C (77-86°F). Đây là đầu mùa khô, nên ít có khả năng mưa. Chúng tôi khuyên bạn nên mang quần áo nhẹ, thoáng khí và kem chống nắng.',
     travelAndAccommodation: 'Du Lịch & Chỗ Ở',
     doINeedVisa: 'Tôi có cần visa để thăm Việt Nam không?',
-    visaAnswer: 'Người mang hộ chiếu Mỹ sẽ cần visa để thăm Việt Nam. Hầu hết người mang hộ chiếu khác cũng sẽ cần visa để vào Việt Nam. Bạn có thể nộp đơn xin visa điện tử trực tuyến và nộp đơn trước ngày đi du lịch. https://evisa.gov.vn/. Vui lòng kiểm tra yêu cầu mới nhất cho quốc gia của bạn',
+    visaAnswer: 'Người mang hộ chiếu Mỹ sẽ cần visa để thăm Việt Nam. Hầu hết người mang hộ chiếu khác cũng sẽ cần visa để vào Việt Nam. Bạn có thể nộp đơn xin visa điện tử trực tuyến và nộp đơn trước ngày đi du lịch. Xem hướng dẫn từng bước của chúng tôi tại đây để biết hướng dẫn chi tiết. Vui lòng kiểm tra yêu cầu mới nhất cho quốc gia của bạn',
     whereShouldIStay: 'Tôi nên ở đâu?',
     accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resort & Villas Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
     howToGetFromAirport: 'Làm sao để đi từ sân bay đến địa điểm?',

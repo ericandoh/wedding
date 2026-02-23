@@ -6,7 +6,7 @@ import { useState, useRef } from 'react';
 import { useLanguage } from './language-provider';
 import LanguageSwitcher from './language-switcher';
 
-export default function TopNav({ isBannerDismissed = false }: { isBannerDismissed?: boolean }) {
+export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }: { isBannerDismissed?: boolean; visibleBanners?: number }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -18,8 +18,10 @@ export default function TopNav({ isBannerDismissed = false }: { isBannerDismisse
   const textColorBase = isHomePage ? 'text-white' : 'text-gray-600';
   const textColorActive = isHomePage ? 'text-white' : 'text-gray-800';
   
-  // Adjust top position based on whether banner is visible
-  const topPosition = isBannerDismissed ? 'top-0' : 'top-10';
+  // Adjust top position based on number of visible banners
+  // Each banner is approximately 40px (top-10 = 2.5rem = 40px)
+  // top-0: no banners, top-10: one banner, top-20: two banners
+  const topPosition = visibleBanners === 0 ? 'top-0' : visibleBanners === 1 ? 'top-10' : 'top-20';
 
   const isActive = (href: string) => {
     if (href === '/') {

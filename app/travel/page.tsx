@@ -328,7 +328,7 @@ export default function Travel() {
           </div>
 
           {/* Venue Section */}
-          <div data-section="western-venue">
+          <div id="western-venue" data-section="western-venue">
             <div className={`bg-white py-8 text-center mb-8 transition-opacity duration-1000 ${showWesternVenue ? 'opacity-100' : 'opacity-0'}`}>
               <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
                 Fusion Resort & Villas Da Nang
@@ -444,7 +444,7 @@ export default function Travel() {
             </div>
 
             {/* Tea Ceremony Venue Section */}
-            <div className="mt-16" data-section="tea-venue">
+            <div id="tea-venue" className="mt-16" data-section="tea-venue">
               <div className={`bg-white py-8 text-center mb-8 transition-opacity duration-1000 ${showTeaVenue ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
                   {t.teaCeremonyHangsHome}
@@ -514,6 +514,75 @@ export default function Travel() {
                       referrerPolicy="no-referrer-when-downgrade"
                       title="Hang's Familial Home, Sa Dec"
                     ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Visa Section */}
+          <div className="mt-16 mb-16" data-section="visa">
+            <div className="bg-white py-8 text-center mb-8">
+              <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
+                Visa Information
+              </h2>
+              <p className="text-body text-xl text-gray-600">
+                US Passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa to enter Vietnam.
+              </p>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              <div className="w-full lg:w-1/2">
+                <div className="space-y-6">
+                  <div className="border-b border-gray-200 pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      E-Visa Application
+                    </h3>
+                    <p className="text-body text-lg text-gray-600">
+                      You can apply for an e-visa online and apply well in advance of your travel dates. We have created a step-by-step guide to help you through the process.
+                    </p>
+                  </div>
+                  <div className="pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      Step-by-Step Guide
+                    </h3>
+                    <p className="text-body text-lg text-gray-600 mb-4">
+                      Follow our detailed guide with screenshots for each step of the e-visa application process.
+                    </p>
+                    <a 
+                      href="/evisa"
+                      className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline font-semibold inline-block"
+                    >
+                      View E-Visa Application Guide →
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full lg:w-1/2">
+                <div className="space-y-6">
+                  <div className="pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      Official E-Visa Website
+                    </h3>
+                    <p className="text-body text-lg text-gray-600 mb-2">
+                      Apply directly on the official Vietnam e-visa website:
+                    </p>
+                    <a 
+                      href="https://evisa.gov.vn/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-body text-lg text-blue-600 hover:text-blue-800 hover:underline break-all"
+                    >
+                      https://evisa.gov.vn/
+                    </a>
+                  </div>
+                  <div className="pb-4">
+                    <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
+                      Important Notes
+                    </h3>
+                    <p className="text-body text-lg text-gray-600">
+                      Please check the latest requirements for your country and apply well in advance of your travel dates. Processing times can vary.
+                    </p>
                   </div>
                 </div>
               </div>

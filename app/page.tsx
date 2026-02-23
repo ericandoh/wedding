@@ -216,14 +216,17 @@ export default function Page() {
                   <Link href="/save-the-date" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
                     {t.may20th2026}
                   </Link>
-                  {' | '}{t.saDec}
+                  {' | '}
+                  <Link href="/travel#tea-venue" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                    {t.saDec}
+                  </Link>
                 </p>
                 <p className="text-subtitle text-white drop-shadow-lg">
                   <Link href="/save-the-date" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
                     {t.may23rd2026}
                   </Link>
                   {' | '}
-                  <Link href="/travel" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+                  <Link href="/travel#western-venue" className="cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
                     {t.fusionResortsVillasDaNangShort}
                   </Link>
                 </p>

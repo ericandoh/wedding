@@ -27,6 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await fetch('/api/auth', { method: 'DELETE' });
       // Clear banner dismissed state on logout
       localStorage.removeItem('banner-dismissed');
+      localStorage.removeItem('visa-banner-dismissed');
       window.location.href = '/login';
     } catch (error) {
       console.error('Logout failed:', error);

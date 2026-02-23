@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useLanguage } from '../_components/language-provider';
 import ChatbotBubble from '../_components/chatbot-bubble';
 
@@ -78,7 +79,25 @@ export default function QA() {
                     {t.doINeedVisa}
                   </h3>
                   <p className="text-body text-gray-700">
-                    {t.visaAnswer}
+                    {t.visaAnswer.includes('See our step-by-step guide here') || t.visaAnswer.includes('Xem hướng dẫn từng bước của chúng tôi tại đây') ? (
+                      <>
+                        {t.visaAnswer.includes('See our step-by-step guide here') 
+                          ? t.visaAnswer.split('See our step-by-step guide here')[0]
+                          : t.visaAnswer.split('Xem hướng dẫn từng bước của chúng tôi tại đây')[0]}
+                        <Link href="/evisa" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">
+                          {' '}
+                          {t.visaAnswer.includes('See our step-by-step guide here') 
+                            ? 'See our step-by-step guide here'
+                            : 'Xem hướng dẫn từng bước của chúng tôi tại đây'}
+                          {' '}
+                        </Link>
+                        {t.visaAnswer.includes('See our step-by-step guide here')
+                          ? t.visaAnswer.split('See our step-by-step guide here')[1]
+                          : t.visaAnswer.split('Xem hướng dẫn từng bước của chúng tôi tại đây')[1]}
+                      </>
+                    ) : (
+                      t.visaAnswer
+                    )}
                   </p>
                 </div>
 
