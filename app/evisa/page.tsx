@@ -66,6 +66,94 @@ export default function Evisa() {
 
       <div className="flex-grow bg-white py-12">
         <div className="mx-auto max-w-4xl px-6">
+          {/* Important Notes Before Steps */}
+          <div className="mb-12 bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+            <h2 className="text-title text-2xl font-bold text-gray-800 mb-4">
+              Important Information Before You Start
+            </h2>
+            <div className="text-body text-lg text-gray-700 space-y-4">
+              <p>
+                As of March 2025, citizens of 29 countries can enter Vietnam without a visa for stays from 14 to 90 days. If your country is NOT on the list, applying for a visa is REQUIRED to enter the country.
+              </p>
+              <p>
+                You need to apply for the visa at least 1.5 weeks before your trip (preferably 2 to be safe).
+              </p>
+              <p>
+                If you have less time, contact Eric at{' '}
+                <a href="tel:+16506653787" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">
+                  (650)-665-3787
+                </a>
+                {' '}or{' '}
+                <a href="mailto:ohhangno@gmail.com" className="text-blue-600 hover:text-blue-800 hover:underline font-semibold">
+                  ohhangno@gmail.com
+                </a>
+                {' '}+ we can look into Urgent VOA (Visa on Arrival) options but note that this is costly / not guaranteed.
+              </p>
+              
+              <div className="mt-6">
+                <h3 className="text-title text-xl font-bold text-gray-800 mb-3">
+                  List of countries where visa is not required
+                </h3>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-300">
+                          Duration
+                        </th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-300">
+                          Countries
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">
+                          up to 90 days
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          Chile, Panama
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">
+                          up to 45 days
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          Denmark, Finland, France, Germany, Italy, Japan, Norway, Russia, South Korea, Spain, Sweden, United Kingdom (Not applicable to British National Overseas), Poland, Czech Republic, Switzerland
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">
+                          up to 30 days
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          Cambodia, Thailand, Malaysia, Singapore, Indonesia, Laos, Belarus, Kyrgyzstan, Kazakhstan
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">
+                          up to 21 days
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          Philippines
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm text-gray-700 font-medium">
+                          up to 14 days
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-700">
+                          Brunei, Myanmar
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-12">
             {steps.map((step) => (
               <div key={step} className="bg-gray-50 p-6 rounded-lg shadow-md">

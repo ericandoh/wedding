@@ -408,7 +408,7 @@ export const translations: Record<Language, Translations> = {
     petCats: 'Pet Cats',
     bookingBanner: 'Booking link for venue is now available',
     bookingBannerHere: 'here',
-    visaBanner: 'Reminder to apply for Vietnam Visa - necessary for US Passport Holders',
+    visaBanner: 'Reminder to do your visa! Click me for details',
     
     // Login page
     hangAndEric: 'Hang and Eric',
@@ -771,7 +771,7 @@ export const translations: Record<Language, Translations> = {
     petCats: 'Thú cưng',
     bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',
     bookingBannerHere: 'tại đây',
-    visaBanner: 'Nhắc nhở xin Visa Việt Nam - cần thiết cho người mang Hộ chiếu Mỹ',
+    visaBanner: 'Nhắc nhở làm visa của bạn! Nhấp vào đây để xem chi tiết',
     
     // Login page
     hangAndEric: 'Hang và Eric',
