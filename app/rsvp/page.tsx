@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../_components/language-provider';
 
 export default function RSVP() {
@@ -32,6 +32,7 @@ export default function RSVP() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [isExistingUser, setIsExistingUser] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   // Load saved email from localStorage on component mount and auto-proceed
   useEffect(() => {
@@ -167,6 +168,12 @@ export default function RSVP() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Prevent duplicate submissions
+    if (isSubmittingRef.current || isSubmitting) {
+      return;
+    }
+
     if (
       !formData.name.trim() ||
       !formData.email.trim()
@@ -175,6 +182,8 @@ export default function RSVP() {
       return;
     }
 
+    // Set both state and ref to prevent race conditions
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     setError('');
 
@@ -200,6 +209,7 @@ export default function RSVP() {
           : t.failedToSubmitRsvp,
       );
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   };

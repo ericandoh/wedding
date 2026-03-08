@@ -89,15 +89,45 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if this is an update operation (has rowIndex)
-    const isUpdate = formData.rowIndex && formData.rowIndex > 0;
+    let isUpdate = formData.rowIndex && formData.rowIndex > 0;
+    let rowIndexToUpdate = formData.rowIndex;
+
+    // If not an update, check if email already exists to prevent duplicates
+    if (!isUpdate) {
+      try {
+        const existingData = await sheets.spreadsheets.values.get({
+          spreadsheetId,
+          range: 'RSVP!A:O',
+        });
+
+        const rows = existingData.data.values || [];
+        const emailToCheck = email.trim().toLowerCase();
+
+        // Find existing row with matching email (skip header row)
+        for (let i = 1; i < rows.length; i++) {
+          const row = rows[i];
+          // Check new format (email at index 6) and old format (email at index 4)
+          const rowEmail = (row[6] || row[4] || '').trim().toLowerCase();
+          if (rowEmail === emailToCheck) {
+            // Found existing row, update it instead of creating duplicate
+            isUpdate = true;
+            rowIndexToUpdate = i + 1; // Google Sheets is 1-indexed
+            break;
+          }
+        }
+      } catch (lookupError) {
+        // If lookup fails, proceed with append (don't fail the submission)
+        console.error('Error checking for existing RSVP:', lookupError);
+      }
+    }
 
     let response;
 
-    if (isUpdate) {
+    if (isUpdate && rowIndexToUpdate) {
       // Update existing row
       response = await sheets.spreadsheets.values.update({
         spreadsheetId,
-        range: `RSVP!A${formData.rowIndex}:O${formData.rowIndex}`,
+        range: `RSVP!A${rowIndexToUpdate}:O${rowIndexToUpdate}`,
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
