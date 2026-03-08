@@ -173,10 +173,10 @@ export default function Travel() {
                       </p>
                     </div>
 
-                    {/* Shuttles */}
+                    {/* Transportation */}
                     <div className="pb-4">
                       <h3 className="text-body text-lg font-semibold text-gray-700 mb-2">
-                        {t.shuttles}
+                        {t.transportation}
                       </h3>
                       <p className="text-body text-lg text-gray-600">
                         {t.westernWeddingShuttles}

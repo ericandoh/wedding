@@ -192,7 +192,7 @@ export default function Schedule() {
 
   const generatePreWelcomeDinnerGoogleCalendarLink = () => {
     const title = 'Hang & Eric Pre-Welcome Dinner';
-    const location = 'Restaurant TBD, Da Nang, Vietnam';
+    const location = 'Nhà hàng Madame Lân, Da Nang, Vietnam';
     const description = 'Join us for Hang and Eric\'s pre-welcome dinner!';
     
     // May 22nd, 2026, 6:00 PM - 9:00 PM (Da Nang timezone is GMT+7)
@@ -206,7 +206,7 @@ export default function Schedule() {
 
   const generatePreWelcomeDinnerICSFile = () => {
     const title = 'Hang & Eric Pre-Welcome Dinner';
-    const location = 'Restaurant TBD, Da Nang, Vietnam';
+    const location = 'Nhà hàng Madame Lân, Da Nang, Vietnam';
     const description = 'Join us for Hang and Eric\'s pre-welcome dinner!';
     
     // Format: YYYYMMDDTHHMMSS
@@ -317,7 +317,12 @@ export default function Schedule() {
                 {/* Pre-Welcome Dinner Section */}
                 <div className="mb-8">
                   <p className="text-body text-xl text-gray-600 mt-2 mb-4">
-                    ({t.restaurantTBD}), {t.daNangVietnam} · {t.may22nd2026Schedule}
+                    Restaurant: <a 
+                      href="https://maps.app.goo.gl/BmkjFRYZLp6JAqyn7" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                    >Nhà hàng Madame Lân</a>, {t.daNangVietnam} · {t.may22nd2026Schedule}
                   </p>
                   
                   {/* Calendar Buttons */}

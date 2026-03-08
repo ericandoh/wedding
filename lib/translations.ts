@@ -148,6 +148,7 @@ export interface Translations {
   westernWeddingFlyInDate: string;
   teaCeremonyFlyInDate: string;
   shuttles: string;
+  transportation: string;
   moreInformationComingSoon: string;
   sgnAirportInfo: string;
   vcaAirportInfo: string;
@@ -513,6 +514,7 @@ export const translations: Record<Language, Translations> = {
     westernWeddingFlyInDate: 'May 22nd (wedding is May 23)',
     teaCeremonyFlyInDate: 'May 19th (ceremony is May 20)',
     shuttles: 'Shuttles',
+    transportation: 'Transportation',
     moreInformationComingSoon: 'More information coming soon',
     sgnAirportInfo: 'Tan Son Nhat International Airport (SGN) (4 hr away by taxi)',
     vcaAirportInfo: 'Can Tho International Airport (VCA) (2 hr away by taxi)',
@@ -531,7 +533,7 @@ export const translations: Record<Language, Translations> = {
     location: 'Location',
     centralVietnam: 'Central Vietnam',
     southVietnam: 'South Vietnam',
-    westernWeddingShuttles: 'We will request for your flight information 2 weeks before the wedding. More information coming soon.',
+    westernWeddingShuttles: 'We recommend grabbing a grab or taxi at the airport to get to the venue. To leave the venue, Fusion Hotel can help with arranging a taxi on the day of your departure. See transportation options section below for more info.',
     teaCeremonyShuttlesFull: "We will provide a shuttle with pickup service from Ho Chi Minh. Let us know if you're flying from Can Tho + we can also try to arrange transportation. We will request for your flight information 2 weeks before the tea ceremony. More information coming soon.",
     accommodationOptions: 'Accommodation Options',
     accommodationOptionsNote: 'Check this section later for a list of recommended hotels / places to stay at.',
@@ -876,6 +878,7 @@ export const translations: Record<Language, Translations> = {
     westernWeddingFlyInDate: '22 tháng 5 (lễ cưới là 23 tháng 5)',
     teaCeremonyFlyInDate: '19 tháng 5 (lễ trà là 20 tháng 5)',
     shuttles: 'Xe Đưa Đón',
+    transportation: 'Vận Chuyển',
     moreInformationComingSoon: 'Thông tin chi tiết sắp có',
     sgnAirportInfo: 'Sân bay Quốc tế Tân Sơn Nhất (SGN) (4 giờ đi taxi)',
     vcaAirportInfo: 'Sân bay Quốc tế Cần Thơ (VCA) (2 giờ đi taxi)',
@@ -894,7 +897,7 @@ export const translations: Record<Language, Translations> = {
     location: 'Địa Điểm',
     centralVietnam: 'Miền Trung Việt Nam',
     southVietnam: 'Miền Nam Việt Nam',
-    westernWeddingShuttles: 'Chúng tôi sẽ yêu cầu thông tin chuyến bay của bạn 2 tuần trước đám cưới. Thông tin chi tiết sắp có.',
+    westernWeddingShuttles: 'Chúng tôi khuyên bạn nên bắt Grab hoặc taxi tại sân bay để đến địa điểm. Để rời khỏi địa điểm, Khách sạn Fusion có thể giúp sắp xếp taxi vào ngày bạn khởi hành. Xem phần tùy chọn vận chuyển bên dưới để biết thêm thông tin',
     teaCeremonyShuttlesFull: "Chúng tôi sẽ cung cấp xe đưa đón từ Thành phố Hồ Chí Minh. Hãy cho chúng tôi biết nếu bạn bay từ Cần Thơ + chúng tôi cũng có thể sắp xếp phương tiện di chuyển. Chúng tôi sẽ yêu cầu thông tin chuyến bay của bạn 2 tuần trước lễ trà. Thông tin chi tiết sắp có.",
     accommodationOptions: 'Tùy Chọn Chỗ Ở',
     accommodationOptionsNote: 'Kiểm tra phần này sau để xem danh sách các khách sạn / nơi ở được đề xuất.',
