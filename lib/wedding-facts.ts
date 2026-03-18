@@ -24,9 +24,7 @@ DATE & LOCATION:
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup. Dinner reception will be indoors.
 
 DRESS CODE:
-- Please avoid wearing white dresses.
-- Dress code: semi-formal.
-- Suits, dresses, ao dais, hanboks, or wedding attire from other cultures are all welcome.
+- Please check back later for finalized dress code details.
 
 TRAVEL & ACCOMMODATION:
 - Visa: US passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa. There is an e-visa guide on the website at hangeric.com/evisa
