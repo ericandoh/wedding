@@ -14,7 +14,7 @@ const renderFormattedAnswer = (text: string) => {
     return text;
   }
 
-  const processedLines = lines.map((line, index) => {
+  const processedLines = lines.map((line, index): React.ReactElement => {
     const trimmed = line.trim();
     if (trimmed.startsWith('* ')) {
       return (
@@ -33,8 +33,8 @@ const renderFormattedAnswer = (text: string) => {
     );
   });
 
-  const result: JSX.Element[] = [];
-  let currentList: JSX.Element[] = [];
+  const result: React.ReactElement[] = [];
+  let currentList: React.ReactElement[] = [];
 
   processedLines.forEach((el, idx) => {
     if (el.type === 'li') {
