@@ -24,7 +24,9 @@ DATE & LOCATION:
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup. Dinner reception will be indoors.
 
 DRESS CODE:
-- Please check back later for finalized dress code details.
+- Welcome dinner: Dressy casual (e.g., button-down shirts with slacks, tie or jacket optional; a nice top with a skirt; or a knee-length or midi dress).
+- Western wedding: Tropical black-tie optional. Floor-length gowns are most common, though a refined midi-length dress is also very appropriate. Suits with jackets may have flexibility in color and style. Because Vietnam is hot and humid in May and the ceremony and cocktail hour are outdoors by the beach, breathable fabrics such as linen, silk, chiffon, or lightweight wool blends are recommended. All shades are welcome, from classic black to lighter tones, soft hues, and tropical-inspired colors. For shoes, comfortable but formal options work best (formal loafers or black patent leather shoes; for heels, block heels or formal wedges are often easier than stilettos), as part of the reception space is on a lawn / grassy surface near the beach before transitioning to solid ground.
+- Tea ceremony: Similar formality to the Western wedding. Traditional attire from Korean and Vietnamese cultures, such as ao dais or hanboks, as well as formalwear from other cultures, is warmly welcomed.
 
 TRAVEL & ACCOMMODATION:
 - Visa: US passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa. There is an e-visa guide on the website at hangeric.com/evisa

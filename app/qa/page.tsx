@@ -5,6 +5,64 @@ import Link from 'next/link';
 import { useLanguage } from '../_components/language-provider';
 import ChatbotBubble from '../_components/chatbot-bubble';
 
+// Helper to render bullets and basic formatting in FAQ answers
+const renderFormattedAnswer = (text: string) => {
+  const lines = text.split('\n');
+  const hasListItems = lines.some(line => line.trim().startsWith('* '));
+
+  if (!hasListItems) {
+    return text;
+  }
+
+  const processedLines = lines.map((line, index) => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('* ')) {
+      return (
+        <li key={`li-${index}`} className="ml-4 list-disc">
+          {trimmed.slice(2)}
+        </li>
+      );
+    }
+    if (trimmed === '') {
+      return <br key={`br-${index}`} />;
+    }
+    return (
+      <p key={`p-${index}`} className="mb-1">
+        {line}
+      </p>
+    );
+  });
+
+  const result: JSX.Element[] = [];
+  let currentList: JSX.Element[] = [];
+
+  processedLines.forEach((el, idx) => {
+    if (el.type === 'li') {
+      currentList.push(el);
+    } else {
+      if (currentList.length > 0) {
+        result.push(
+          <ul key={`ul-${idx}`} className="list-disc list-inside mb-2">
+            {currentList}
+          </ul>
+        );
+        currentList = [];
+      }
+      result.push(el);
+    }
+  });
+
+  if (currentList.length > 0) {
+    result.push(
+      <ul key="ul-final" className="list-disc list-inside mb-2">
+        {currentList}
+      </ul>
+    );
+  }
+
+  return result;
+};
+
 export default function QA() {
   const { t } = useLanguage();
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
@@ -51,9 +109,9 @@ export default function QA() {
                   <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
                     {t.whatShouldIWear}
                   </h3>
-                  <p className="text-body text-gray-700">
-                    {t.dressCodeAnswer}
-                  </p>
+                  <div className="text-body text-gray-700 space-y-1">
+                    {renderFormattedAnswer(t.dressCodeAnswer)}
+                  </div>
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg">

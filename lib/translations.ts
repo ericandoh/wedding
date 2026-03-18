@@ -627,7 +627,8 @@ export const translations: Record<Language, Translations> = {
     whenAndWhereWedding: 'When and where is the wedding?',
     weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resort & Villas Da Nang, Vietnam. The ceremony will begin at 4:00 PM, followed by photography session, cocktail reception, and dinner reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
     whatShouldIWear: 'What should I wear?',
-    dressCodeAnswer: 'Please check back later for finalized dress code details.',
+    dressCodeAnswer:
+      'Welcome Dinner: Dressy Casual\n\nWestern Wedding and Tea Ceremony: Tropical Black-Tie Optional\n* Attire: Midi, floor-length dresses, pant suits, suits\n* Fabrics: Linen, silk, chiffon, or lightweight wool blends (Vietnam will be hot and humid in May, and the ceremony and cocktail hour are outdoors by the beach)\n* Colors: All shades are welcome; anything from classic black to lighter tones, soft hues, or tropical-inspired shades\n* Shoes: Comfortable but formal shoes; parts of the reception space are on a lawn / grassy surface near the beach before transitioning to solid ground for dinner and dancing\n* Traditional attire is also welcome, such as ao dais, hanboks, or formalwear from other cultures',
     weatherInDaNang: "What's the weather like in Da Nang in May?",
     weatherAnswer: "May is typically warm and sunny in Da Nang with temperatures around 25-30°C (77-86°F). It's the beginning of the dry season, so rain is less likely. We recommend bringing light, breathable clothing and sunscreen.",
     travelAndAccommodation: 'Travel & Accommodation',
@@ -1025,7 +1026,8 @@ export const translations: Record<Language, Translations> = {
     whenAndWhereWedding: 'Khi nào và ở đâu sẽ tổ chức lễ cưới?',
     weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resort & Villas Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc 4:00 chiều, tiếp theo là buổi chụp ảnh, tiệc cocktail, và tiệc tối. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
     whatShouldIWear: 'Tôi nên mặc gì?',
-    dressCodeAnswer: 'Vui lòng quay lại sau để xem thông tin cập nhật về yêu cầu trang phục.',
+    dressCodeAnswer:
+      'Tiệc chào mừng: Dressy Casual\n\nLễ cưới kiểu phương Tây và Lễ trà: Tropical Black-Tie Optional\n* Trang phục: Đầm midi, đầm dài chạm mắt cá chân hoặc chạm sàn, jumpsuit hoặc bộ suit\n* Chất liệu: Linen, lụa, chiffon hoặc len pha mỏng (thời tiết Việt Nam tháng 5 nóng và ẩm, và phần lễ cùng tiệc cocktail diễn ra ngoài trời gần bãi biển)\n* Màu sắc: Mọi gam màu đều được chào đón; khách có thể chọn từ tông đen cổ điển đến các gam sáng, tông màu dịu hoặc sắc màu mang cảm hứng nhiệt đới\n* Giày: Giày trang trọng nhưng thoải mái; một phần không gian tiệc diễn ra trên bãi cỏ / nền cỏ gần bãi biển trước khi chuyển sang nền cứng cho tiệc tối và khiêu vũ\n* Trang phục truyền thống cũng rất được chào đón, như áo dài, hanbok hoặc các trang phục trang trọng từ những nền văn hoá khác',
     weatherInDaNang: 'Thời tiết ở Đà Nẵng vào tháng 5 như thế nào?',
     weatherAnswer: 'Tháng 5 thường ấm và nắng ở Đà Nẵng với nhiệt độ khoảng 25-30°C (77-86°F). Đây là đầu mùa khô, nên ít có khả năng mưa. Chúng tôi khuyên bạn nên mang quần áo nhẹ, thoáng khí và kem chống nắng.',
     travelAndAccommodation: 'Du Lịch & Chỗ Ở',
