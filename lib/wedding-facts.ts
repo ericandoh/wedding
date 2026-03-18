@@ -21,10 +21,12 @@ DATE & LOCATION:
     - After 9:00 PM: Dancing & Evening Celebration
 - Tea Ceremony: Date - May 20th, 2026, Location - Hang's family home in Sa Dec, Vietnam (220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam)
   * Schedule includes: Groom procession, Exchange of gifts, and Lunch
-- Ceremony: Outdoor on the beach (weather permitting), with indoor backup
+- Ceremony: Outdoor on the beach (weather permitting), with indoor backup. Dinner reception will be indoors.
 
 DRESS CODE:
-- Wait for invitation to RSVP for dress code
+- Please avoid wearing white dresses.
+- Dress code: semi-formal.
+- Suits, dresses, ao dais, hanboks, or wedding attire from other cultures are all welcome.
 
 TRAVEL & ACCOMMODATION:
 - Visa: US passport holders will need a visa to visit Vietnam. Most other passport holders will also need a visa. There is an e-visa guide on the website at hangeric.com/evisa
@@ -58,8 +60,9 @@ THINGS TO DO IN DA NANG:
 - Dragon Bridge: An iconic bridge shaped like a dragon that breathes fire and water on weekend nights
 
 RSVP & LOGISTICS:
-- RSVP deadline: March 8th, 2026
-- Can bring plus ones. If you want to bring other guests please check with Hang or Eric.
+- RSVP deadline: March 8th, 2026 (now passed; please contact Hang and Eric at ohhangno@gmail.com about available options).
+- Plus ones: Plus ones are welcome.
+- Plus twos or more: Please contact Hang and Eric so we can see how to accommodate this.
 - Dietary restrictions: Accommodated (mention in RSVP)
 - Accessibility restrictions: Accommodated (mention in RSVP)
 - Children: Can be included in RSVP

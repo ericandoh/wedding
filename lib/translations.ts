@@ -41,9 +41,18 @@ export interface Translations {
   message: string;
   noMessagesYet: string;
   petCats: string;
+  wedding: string;
   bookingBanner: string;
   bookingBannerHere: string;
   visaBanner: string;
+
+  // Wedding page
+  weddingTitle: string;
+  photos: string;
+  pleaseAddYourPhotosHere: string;
+  googlePhotosAlbum: string;
+  applePhotosAlbum: string;
+  seatingChart: string;
   
   // Login page
   hangAndEric: string;
@@ -79,6 +88,11 @@ export interface Translations {
   joinUsForCelebrations: string;
   addToGoogleCalendar: string;
   addToCalendar: string;
+  resortLawn: string;
+  charLawn: string;
+  ballroom: string;
+  charRestaurant: string;
+  madameLanRestaurant: string;
   teaCeremony: string;
   hangsFamilialHome: string;
   saDecVietnam: string;
@@ -107,6 +121,12 @@ export interface Translations {
   restaurantTBD: string;
   may22nd2026Schedule: string;
   preWelcomeDinnerEvent: string;
+  lobbyEntrance: string;
+  fusionMapTitle: string;
+  fusionMapDescription: string;
+  teaCeremonyGroomLocation: string;
+  teaCeremonyGiftsLocation: string;
+  teaCeremonyLunchLocation: string;
 
   // Our Story page
   aboutTheCoupleTitle: string;
@@ -363,6 +383,19 @@ export interface Translations {
   saveTheDateSubtitle: string;
   noRsvpNeededMessage: string;
   rsvpAnyways: string;
+
+  // Apple Photos dialog
+  applePhotosSubtitle: string;
+  applePhotosLoginRequired: string;
+  applePhotosDialogTitle: string;
+  applePhotosDialogDescription: string;
+  applePhotosRsvpEmailLabel: string;
+  applePhotosAppleEmailLabel: string;
+  applePhotosAppleEmailPlaceholder: string;
+  applePhotosSubmit: string;
+  applePhotosRequestSubmitted: string;
+  applePhotosError: string;
+  applePhotosPending: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -407,6 +440,7 @@ export const translations: Record<Language, Translations> = {
     noMessagesYet: 'No messages yet. Be the first to post!',
     chatbot: 'Chatbot',
     petCats: 'Pet Cats',
+    wedding: 'Wedding',
     bookingBanner: 'Booking link for venue is now available',
     bookingBannerHere: 'here',
     visaBanner: 'Reminder to do your visa! Click me for details',
@@ -445,6 +479,11 @@ export const translations: Record<Language, Translations> = {
     joinUsForCelebrations: 'Join us for our wedding celebrations',
     addToGoogleCalendar: 'Add to Google Calendar',
     addToCalendar: 'Add to Calendar',
+    resortLawn: 'Resort Lawn',
+    charLawn: 'Char Lawn',
+    ballroom: 'Ballroom',
+    charRestaurant: 'Char Restaurant',
+    madameLanRestaurant: 'Madame Lân Restaurant',
     teaCeremony: 'Tea Ceremony',
     hangsFamilialHome: "Hang's Familial Home",
     saDecVietnam: 'Sa Dec, Vietnam',
@@ -473,6 +512,12 @@ export const translations: Record<Language, Translations> = {
     restaurantTBD: 'Restaurant TBD',
     may22nd2026Schedule: 'May 22nd, 2026',
     preWelcomeDinnerEvent: 'Pre-Welcome Dinner',
+    lobbyEntrance: 'Lobby / Entrance',
+    fusionMapTitle: 'Map - Fusion Resorts & Da Nang',
+    fusionMapDescription: 'Tap a legend item or schedule event to highlight its location on the map.',
+    teaCeremonyGroomLocation: "Hang's familial home",
+    teaCeremonyGiftsLocation: 'Wedding hotel',
+    teaCeremonyLunchLocation: 'Wedding hotel / restaurant',
 
     // Our Story page
     aboutTheCoupleTitle: 'About the Couple',
@@ -582,7 +627,7 @@ export const translations: Record<Language, Translations> = {
     whenAndWhereWedding: 'When and where is the wedding?',
     weddingDetailsAnswer: "Our wedding will be held on May 23rd, 2026 at Fusion Resort & Villas Da Nang, Vietnam. The ceremony will begin at 4:00 PM, followed by photography session, cocktail reception, and dinner reception. There is an optional tea ceremony in Sa Dec, Vietnam at Hang's familial home on May 20th, 2026.",
     whatShouldIWear: 'What should I wear?',
-    dressCodeAnswer: "We'd love to see you dressed up! We will get back to you with details about the dress code.",
+    dressCodeAnswer: "Please avoid wearing white dresses. The dress code is semi-formal. Suits, dresses, ao dais, hanboks, or wedding attire from other cultures are all welcome.",
     weatherInDaNang: "What's the weather like in Da Nang in May?",
     weatherAnswer: "May is typically warm and sunny in Da Nang with temperatures around 25-30°C (77-86°F). It's the beginning of the dry season, so rain is less likely. We recommend bringing light, breathable clothing and sunscreen.",
     travelAndAccommodation: 'Travel & Accommodation',
@@ -597,14 +642,14 @@ export const translations: Record<Language, Translations> = {
     contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact either Hang or Eric at ohhangno@gmail.com, or apinecone@ on IG, or directly through Messenger if you have us friended!',
     rsvpAndGifts: 'RSVP & Gifts',
     rsvpDeadline: 'What is the RSVP deadline?',
-    rsvpDeadlineAnswer: 'Please RSVP by March 8th, 2026.',
+      rsvpDeadlineAnswer: 'As the RSVP date has passed, please contact Hang and Eric at ohhangno@gmail.com about available options.',
     giftRegistry: 'Do you have a gift registry?',
     giftRegistryAnswer: 'Your presence at our wedding is the greatest gift of all! However, if you wish to give us a gift, we will have instructions soon closer to the wedding date!',
-    canIBringPlusOne: 'Can I bring a plus one?',
-    plusOneAnswer: 'Yes!',
+    canIBringPlusOne: 'Can I bring a plus one or more?',
+    plusOneAnswer: 'Plus ones are welcome. If you would like to bring a plus two or more, please contact Hang and Eric so we can see how to accommodate this.',
     ceremonyAndReception: 'Ceremony & Reception',
     ceremonyIndoorsOrOutdoors: 'Will the ceremony be indoors or outdoors?',
-    ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resort & Villas, weather permitting. In case of rain, we have an indoor backup location at the resort.',
+      ceremonyLocationAnswer: 'Our ceremony will be held outdoors on the beach at Fusion Resort & Villas, weather permitting. In case of rain, we have an indoor backup location at the resort. The dinner reception will be held indoors after the ceremony.',
     whatTimeShouldIArrive: 'What time should I arrive?',
     arrivalTimeAnswer: 'Please arrive between 3:00 PM and 3:45 PM. Guests should be seated by 4:00 PM when the ceremony begins.',
     willThereBeFoodAndDrinks: 'Will there be food and drinks?',
@@ -729,6 +774,28 @@ export const translations: Record<Language, Translations> = {
     saveTheDateSubtitle: "You're invited to Hang + Eric's wedding!",
     noRsvpNeededMessage: 'RSVP by March 8th, 2026',
     rsvpAnyways: 'RSVP',
+
+    // Apple Photos dialog
+    applePhotosSubtitle: 'Click to request access to the shared Apple Photos album',
+    applePhotosLoginRequired: 'RSVP with your email first to request access',
+    applePhotosDialogTitle: 'Ask to join Apple Photos',
+    applePhotosDialogDescription:
+      'We’ll use your RSVP email to verify you and your Apple Photos email to send the invite to the shared album.',
+    applePhotosRsvpEmailLabel: 'RSVP email (already on file)',
+    applePhotosAppleEmailLabel: 'Apple Photos email',
+    applePhotosAppleEmailPlaceholder: 'Email associated with your Apple Photos / iCloud account',
+    applePhotosSubmit: 'Submit request',
+    applePhotosRequestSubmitted: 'Request submitted! We will send you an invite soon.',
+    applePhotosError: 'Something went wrong while saving your request. Please try again.',
+    applePhotosPending: 'Request pending',
+
+    // Wedding page
+    weddingTitle: 'Wedding',
+    photos: 'Photos',
+    pleaseAddYourPhotosHere: 'Please add your photos here',
+    googlePhotosAlbum: 'Google Photos Album',
+    applePhotosAlbum: 'Apple Photos Album',
+    seatingChart: 'Seating Chart',
   },
   vi: {
     // Common
@@ -771,6 +838,7 @@ export const translations: Record<Language, Translations> = {
     noMessagesYet: 'Chưa có tin nhắn nào. Hãy là người đầu tiên đăng!',
     chatbot: 'Trò chuyện',
     petCats: 'Thú cưng',
+    wedding: 'Đám cưới',
     bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',
     bookingBannerHere: 'tại đây',
     visaBanner: 'Nhắc nhở làm visa của bạn! Nhấp vào đây để xem chi tiết',
@@ -809,6 +877,11 @@ export const translations: Record<Language, Translations> = {
     joinUsForCelebrations: 'Tham gia cùng chúng tôi trong lễ cưới',
     addToGoogleCalendar: 'Thêm vào Google Calendar',
     addToCalendar: 'Thêm vào Lịch',
+    resortLawn: 'Bãi cỏ khu nghỉ dưỡng',
+    charLawn: 'Bãi cỏ Char',
+    ballroom: 'Phòng tiệc',
+    charRestaurant: 'Nhà hàng Char',
+    madameLanRestaurant: 'Nhà hàng Madame Lân',
     teaCeremony: 'Lễ Trà',
     hangsFamilialHome: 'Nhà Gia Đình Hang',
     saDecVietnam: 'Sa Đéc, Việt Nam',
@@ -837,6 +910,12 @@ export const translations: Record<Language, Translations> = {
     restaurantTBD: 'Nhà hàng (sắp được xác nhận)',
     may22nd2026Schedule: '22 tháng 5, 2026',
     preWelcomeDinnerEvent: 'Tiệc chào mừng trước lễ cưới',
+    lobbyEntrance: 'Sảnh / Cổng vào',
+    fusionMapTitle: 'Bản đồ - Fusion Resorts & Đà Nẵng',
+    fusionMapDescription: 'Chạm vào mục chú thích hoặc sự kiện trong lịch trình để làm nổi bật vị trí trên bản đồ.',
+    teaCeremonyGroomLocation: 'Nhà gia đình Hang',
+    teaCeremonyGiftsLocation: 'Khách sạn tiệc cưới',
+    teaCeremonyLunchLocation: 'Khách sạn / nhà hàng tiệc cưới',
 
     // Our Story page
     aboutTheCoupleTitle: 'Về Cặp Đôi',
@@ -946,7 +1025,7 @@ export const translations: Record<Language, Translations> = {
     whenAndWhereWedding: 'Khi nào và ở đâu sẽ tổ chức lễ cưới?',
     weddingDetailsAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức vào ngày 23 tháng 5, 2026 tại Fusion Resort & Villas Đà Nẵng, Việt Nam. Lễ cưới sẽ bắt đầu lúc 4:00 chiều, tiếp theo là buổi chụp ảnh, tiệc cocktail, và tiệc tối. Có một buổi lễ trà tùy chọn tại Sa Đéc, Việt Nam tại nhà gia đình Hang vào ngày 20 tháng 5, 2026.',
     whatShouldIWear: 'Tôi nên mặc gì?',
-    dressCodeAnswer: 'Chúng tôi rất muốn thấy bạn ăn mặc đẹp! Chúng tôi sẽ liên hệ lại với bạn về chi tiết mã trang phục.',
+    dressCodeAnswer: 'Vui lòng tránh mặc váy trắng. Mã trang phục là semi-formal (bán trang trọng). Bạn có thể mặc suit, đầm/váy, áo dài, hanbok hoặc trang phục cưới truyền thống của các nền văn hóa khác – tất cả đều được chào đón!',
     weatherInDaNang: 'Thời tiết ở Đà Nẵng vào tháng 5 như thế nào?',
     weatherAnswer: 'Tháng 5 thường ấm và nắng ở Đà Nẵng với nhiệt độ khoảng 25-30°C (77-86°F). Đây là đầu mùa khô, nên ít có khả năng mưa. Chúng tôi khuyên bạn nên mang quần áo nhẹ, thoáng khí và kem chống nắng.',
     travelAndAccommodation: 'Du Lịch & Chỗ Ở',
@@ -961,14 +1040,14 @@ export const translations: Record<Language, Translations> = {
     contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang hoặc Eric tại ohhangno@gmail.com, hoặc apinecone@ trên IG, hoặc trực tiếp qua Messenger nếu bạn đã kết bạn với chúng tôi!',
     rsvpAndGifts: 'RSVP & Quà Tặng',
     rsvpDeadline: 'Hạn chót RSVP là khi nào?',
-    rsvpDeadlineAnswer: 'Vui lòng xác nhận tham dự trước ngày 8 tháng 3, 2026.',
+    rsvpDeadlineAnswer: 'Vì ngày RSVP đã qua, vui lòng liên hệ Hang và Eric tại ohhangno@gmail.com để hỏi về các lựa chọn còn lại.',
     giftRegistry: 'Bạn có danh sách quà tặng không?',
     giftRegistryAnswer: 'Sự có mặt của bạn tại lễ cưới của chúng tôi là món quà tuyệt vời nhất! Tuy nhiên, nếu bạn muốn tặng chúng tôi một món quà, chúng tôi sẽ có hướng dẫn sớm hơn gần ngày cưới!',
-    canIBringPlusOne: 'Tôi có thể mang người đi cùng không?',
-    plusOneAnswer: 'Có!',
+    canIBringPlusOne: 'Tôi có thể mang người đi cùng (và nếu nhiều hơn thì sao)?',
+    plusOneAnswer: 'Bạn có thể mang một người đi cùng (+1). Nếu bạn muốn mang thêm hai người hoặc nhiều hơn, vui lòng liên hệ Hang và Eric để chúng tôi xem có thể sắp xếp thêm chỗ được không.',
     ceremonyAndReception: 'Lễ Cưới & Tiệc Cưới',
-    ceremonyIndoorsOrOutdoors: 'Lễ cưới sẽ được tổ chức trong nhà hay ngoài trời?',
-    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resort & Villas, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà tại khu nghỉ dưỡng.',
+    ceremonyIndoorsOrOutdoors: 'Lễ cưới sẽ được tổ chức trong nhà hay ngoài trời? (và tiệc tối thì sao?)',
+    ceremonyLocationAnswer: 'Lễ cưới của chúng tôi sẽ được tổ chức ngoài trời trên bãi biển tại Fusion Resort & Villas, tùy thuộc vào thời tiết. Trong trường hợp mưa, chúng tôi có một địa điểm dự phòng trong nhà tại khu nghỉ dưỡng. Tiệc tối sau lễ cưới sẽ được tổ chức trong nhà.',
     whatTimeShouldIArrive: 'Tôi nên đến lúc mấy giờ?',
     arrivalTimeAnswer: 'Vui lòng đến từ 3:00 chiều đến 3:45 chiều. Khách nên ngồi vào chỗ trước 4:00 chiều khi lễ cưới bắt đầu.',
     willThereBeFoodAndDrinks: 'Sẽ có thức ăn và đồ uống không?',
@@ -1093,5 +1172,27 @@ export const translations: Record<Language, Translations> = {
     saveTheDateSubtitle: 'Bạn được mời đến đám cưới của Hang + Eric!',
     noRsvpNeededMessage: 'Xác nhận tham dự trước ngày 8 tháng 3, 2026',
     rsvpAnyways: 'Xác nhận tham dự',
+
+    // Apple Photos dialog
+    applePhotosSubtitle: 'Nhấn để yêu cầu tham gia album Apple Photos dùng chung',
+    applePhotosLoginRequired: 'Vui lòng RSVP với email của bạn trước để yêu cầu tham gia',
+    applePhotosDialogTitle: 'Yêu cầu tham gia Apple Photos',
+    applePhotosDialogDescription:
+      'Chúng tôi sẽ dùng email RSVP để xác nhận và email Apple Photos của bạn để gửi lời mời vào album dùng chung.',
+    applePhotosRsvpEmailLabel: 'Email RSVP (đã lưu)',
+    applePhotosAppleEmailLabel: 'Email Apple Photos',
+    applePhotosAppleEmailPlaceholder: 'Email gắn với tài khoản Apple Photos / iCloud của bạn',
+    applePhotosSubmit: 'Gửi yêu cầu',
+    applePhotosRequestSubmitted: 'Đã gửi yêu cầu! Chúng tôi sẽ sớm gửi lời mời cho bạn.',
+    applePhotosError: 'Có lỗi xảy ra khi lưu yêu cầu. Vui lòng thử lại.',
+    applePhotosPending: 'Đang chờ xử lý',
+
+    // Wedding page
+    weddingTitle: 'Đám cưới',
+    photos: 'Ảnh',
+    pleaseAddYourPhotosHere: 'Vui lòng thêm ảnh của bạn tại đây',
+    googlePhotosAlbum: 'Album Google Photos',
+    applePhotosAlbum: 'Album Apple Photos',
+    seatingChart: 'Sơ đồ chỗ ngồi',
   },
 };

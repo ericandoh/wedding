@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../_components/language-provider';
 import { 
   HandRaisedIcon,
@@ -12,7 +12,8 @@ import {
   MusicalNoteIcon,
   UserGroupIcon,
   GiftIcon,
-  BuildingStorefrontIcon
+  BuildingStorefrontIcon,
+  MapPinIcon
 } from '@heroicons/react/24/outline';
 
 export default function Schedule() {
@@ -20,6 +21,26 @@ export default function Schedule() {
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [visibleTeaItems, setVisibleTeaItems] = useState<number[]>([]);
   const [visiblePreWelcomeItems, setVisiblePreWelcomeItems] = useState<number[]>([]);
+  const [activeLocation, setActiveLocation] = useState<string | null>(null);
+  const mapSectionRef = useRef<HTMLDivElement | null>(null);
+
+  const showLocationOnMap = (locationKey: string) => {
+    setActiveLocation(locationKey);
+    if (mapSectionRef.current) {
+      mapSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const fusionLocations: Record<
+    string,
+    { xPct: number; yPct: number; label: string }
+  > = {
+    charRestaurant: { xPct: 76.1, yPct: 47.9, label: t.charRestaurant },
+    charLawn: { xPct: 77.7, yPct: 44.9, label: t.charLawn },
+    resortLawn: { xPct: 76.1, yPct: 40.5, label: t.resortLawn },
+    ballroom: { xPct: 28.6, yPct: 49.0, label: t.ballroom },
+    lobbyEntrance: { xPct: 26.3, yPct: 40.15, label: t.lobbyEntrance },
+  };
 
   // Helper function to format time - 24-hour format for Vietnamese, 12-hour for English
   const formatTime = (time12hr: string): string => {
@@ -365,6 +386,9 @@ export default function Schedule() {
                           <div className="text-body text-xl text-gray-700 font-medium">
                             {t.preWelcomeDinnerEvent}
                           </div>
+                          <div className="text-body text-xs text-gray-500 mt-0.5">
+                            {t.madameLanRestaurant}
+                          </div>
                         </div>
                       </div>
                       </div>
@@ -405,7 +429,10 @@ export default function Schedule() {
                       {/* Timeline Events */}
                       <div className="space-y-8">
                         {/* Event 1: Guest Arrival */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('resortLawn')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -418,11 +445,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.guestArrivalWelcome}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.resortLawn}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 2: Guests Seated */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('resortLawn')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -435,11 +468,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.guestsAreSeated}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.resortLawn}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 3: Exchange of Vows */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('resortLawn')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -452,11 +491,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.exchangeOfVows}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.resortLawn}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 4: Photography */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('resortLawn')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -469,11 +514,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.photographySession}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.resortLawn}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 5: Cocktail Reception */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('charLawn')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -486,11 +537,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.cocktailReception}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.charLawn}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 6: Dinner Reception */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('ballroom')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -503,11 +560,17 @@ export default function Schedule() {
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.dinnerReception}
                             </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.ballroom}
+                            </div>
                           </div>
                         </div>
 
                         {/* Event 7: Dancing */}
-                        <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                        <div
+                          className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                          onClick={() => showLocationOnMap('charRestaurant')}
+                        >
                           <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                             <MusicalNoteIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                           </div>
@@ -519,6 +582,9 @@ export default function Schedule() {
                           <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
                             <div className="text-body text-xl text-gray-700 font-medium">
                               {t.dancingEveningCelebration}
+                            </div>
+                            <div className="text-body text-xs text-gray-500 mt-0.5">
+                              {t.charRestaurant}
                             </div>
                           </div>
                         </div>
@@ -586,6 +652,9 @@ export default function Schedule() {
                         <div className="text-body text-xl text-gray-700 font-medium">
                           {t.groomProcession}
                         </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
                       </div>
                     </div>
 
@@ -602,6 +671,9 @@ export default function Schedule() {
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-xl text-gray-700 font-medium">
                           {t.exchangeOfGifts}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGiftsLocation}
                         </div>
                       </div>
                     </div>
@@ -620,10 +692,140 @@ export default function Schedule() {
                         <div className="text-body text-xl text-gray-700 font-medium">
                           {t.lunch}
                         </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyLunchLocation}
+                        </div>
                       </div>
                     </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Map Section */}
+            <div className="mt-8 mb-4 text-center" ref={mapSectionRef}>
+              <h2 className="text-title text-2xl font-bold text-gray-800 mb-2">
+                {t.fusionMapTitle}
+              </h2>
+              <p className="text-body text-sm text-gray-500 mb-4">
+                {t.fusionMapDescription}
+              </p>
+              <div className="mx-auto max-w-3xl">
+                {/* Legend */}
+                <div className="mb-4 flex flex-wrap justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveLocation((current) =>
+                        current === 'resortLawn' ? null : 'resortLawn'
+                      )
+                    }
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                      activeLocation === 'resortLawn'
+                        ? 'border-gray-800 bg-gray-800 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <SparklesIcon className="h-4 w-4" />
+                    <span>{t.resortLawn}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveLocation((current) =>
+                        current === 'charLawn' ? null : 'charLawn'
+                      )
+                    }
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                      activeLocation === 'charLawn'
+                        ? 'border-gray-800 bg-gray-800 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <BeakerIcon className="h-4 w-4" />
+                    <span>{t.charLawn}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveLocation((current) =>
+                        current === 'ballroom' ? null : 'ballroom'
+                      )
+                    }
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                      activeLocation === 'ballroom'
+                        ? 'border-gray-800 bg-gray-800 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <CakeIcon className="h-4 w-4" />
+                    <span>{t.ballroom}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveLocation((current) =>
+                        current === 'charRestaurant' ? null : 'charRestaurant'
+                      )
+                    }
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                      activeLocation === 'charRestaurant'
+                        ? 'border-gray-800 bg-gray-800 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <MusicalNoteIcon className="h-4 w-4" />
+                    <span>{t.charRestaurant}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveLocation((current) =>
+                        current === 'lobbyEntrance' ? null : 'lobbyEntrance'
+                      )
+                    }
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs transition-all ${
+                      activeLocation === 'lobbyEntrance'
+                        ? 'border-gray-800 bg-gray-800 text-white'
+                        : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <BuildingStorefrontIcon className="h-4 w-4" />
+                    <span>{t.lobbyEntrance}</span>
+                  </button>
+                </div>
+
+                {/* Map with marker overlay */}
+                <div
+                  className="relative w-full rounded-lg shadow-sm overflow-hidden cursor-pointer"
+                  onClick={() => setActiveLocation(null)}
+                >
+                  <img
+                    src="/fusion_resort_map.png"
+                    alt="Fusion Resort & Villas Da Nang map"
+                    className="w-full select-none pointer-events-none"
+                  />
+                  {activeLocation && fusionLocations[activeLocation] && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveLocation(null);
+                      }}
+                      style={{
+                        left: `${fusionLocations[activeLocation].xPct}%`,
+                        top: `${fusionLocations[activeLocation].yPct}%`,
+                      }}
+                      className="absolute -translate-x-1/2 -translate-y-1/2"
+                    >
+                      <span className="relative inline-flex h-10 w-10 items-center justify-center">
+                        <span className="absolute inline-flex h-full w-full rounded-full border-2 border-blue-500 bg-white/70"></span>
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-60 animate-ping"></span>
+                        <MapPinIcon className="relative h-6 w-6 text-blue-900" />
+                      </span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

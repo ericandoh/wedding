@@ -55,6 +55,12 @@ export default function PetCats() {
   const lastInteractionTime = useRef<number>(0);
   const { t } = useLanguage();
 
+  const getCatSize = (catId: number, isMobile: boolean) => {
+    const baseSize = isMobile ? 80 : 100;
+    const multiplier = catId === 0 ? 1.2 : 1; // Aspen (id 0) is 20% larger
+    return baseSize * multiplier;
+  };
+
   const catImages = [
     '/aspenified.png',
     '/cypressified.png', 
@@ -192,11 +198,11 @@ export default function PetCats() {
 
   // Initialize cats with proper positioning
   const initializeCats = (width: number, height: number) => {
-    const catSize = isMobile ? 80 : 100;
     const margin = 20; // Ensure cats don't spawn too close to edges
     const minVelocity = 0.5; // Minimum initial velocity
     
     return catImages.map((image, index) => {
+      const catSize = getCatSize(index, isMobile);
       // Generate random angle and speed for initial velocity
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.max(minVelocity, Math.random() * 2);
@@ -269,7 +275,7 @@ export default function PetCats() {
     const repositionCats = (newWidth: number, newHeight: number) => {
       setCats(prevCats => 
         prevCats.map(cat => {
-          const catSize = isMobile ? 80 : 100;
+          const catSize = getCatSize(cat.id, isMobile);
           const margin = 20;
           const minVelocity = 0.5;
           
@@ -340,7 +346,7 @@ export default function PetCats() {
       // Only update position if we're actually dragging
       if (isDragging && roomRect) {
         event.preventDefault();
-        const catSize = isMobile ? 80 : 100;
+        const catSize = getCatSize(draggedCatId, isMobile);
         const margin = 10;
         
         // Calculate position relative to the room container using cached rect
@@ -392,7 +398,7 @@ export default function PetCats() {
       // Only update position if we're actually dragging
       if (isDragging && roomRect && event.touches[0]) {
         event.preventDefault();
-        const catSize = isMobile ? 80 : 100;
+        const catSize = getCatSize(draggedCatId, isMobile);
         const margin = 10;
         
         // Calculate position relative to the room container using cached rect
@@ -529,7 +535,7 @@ export default function PetCats() {
             return cat;
           }
           
-          const catSize = isMobile ? 80 : 100;
+          const catSize = getCatSize(cat.id, isMobile);
           const margin = 10;
           const minVelocity = 0.3; // Minimum velocity to prevent cats from getting stuck
           const now = Date.now();
@@ -937,8 +943,8 @@ export default function PetCats() {
                 <Image
                   src={cat.image}
                   alt={`Cat ${cat.id + 1}`}
-                  width={isMobile ? 80 : 100}
-                  height={isMobile ? 80 : 100}
+                  width={getCatSize(cat.id, isMobile)}
+                  height={getCatSize(cat.id, isMobile)}
                   className="drop-shadow-lg pointer-events-none"
                   draggable={false}
                 />

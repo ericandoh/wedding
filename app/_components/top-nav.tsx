@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLanguage } from './language-provider';
 import LanguageSwitcher from './language-switcher';
+import { getDaNangDateString } from '#/lib/da-nang-time';
 
 export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }: { isBannerDismissed?: boolean; visibleBanners?: number }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -12,6 +13,19 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { t } = useLanguage();
+
+  // Date-based nav: show Wedding tab only on May 23, Tea Ceremony only on May 20 (Da Nang time); hide RSVP on those dates
+  const [showRsvpTab, setShowRsvpTab] = useState(true);
+  const [showWeddingTab, setShowWeddingTab] = useState(false);
+  const [showTeaCeremonyTab, setShowTeaCeremonyTab] = useState(false);
+  useEffect(() => {
+    const dateStr = getDaNangDateString();
+    const isMay20 = dateStr === '2026-05-20';
+    const isMay23 = dateStr === '2026-05-23';
+    setShowRsvpTab(!isMay20 && !isMay23);
+    setShowWeddingTab(isMay23);
+    setShowTeaCeremonyTab(isMay20);
+  }, []);
   
   // Use white text on home page, dark text on other pages
   const isHomePage = pathname === '/';
@@ -102,16 +116,18 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
           >
             {t.home}
           </Link>
-          <Link
-            href="/rsvp"
-            className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
-              isActive('/rsvp')
-                ? `${textColorActive} underline underline-offset-4` 
-                : textColorBase
-            }`}
-          >
-            {t.rsvp}
-          </Link>
+          {showRsvpTab && (
+            <Link
+              href="/rsvp"
+              className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
+                isActive('/rsvp')
+                  ? `${textColorActive} underline underline-offset-4` 
+                  : textColorBase
+              }`}
+            >
+              {t.rsvp}
+            </Link>
+          )}
           <Link
             href="/schedule"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
@@ -122,6 +138,30 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
           >
             {t.schedule}
           </Link>
+          {showWeddingTab && (
+            <Link
+              href="/wedding"
+              className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
+                isActive('/wedding') 
+                  ? `${textColorActive} underline underline-offset-4` 
+                  : textColorBase
+              }`}
+            >
+              {t.wedding}
+            </Link>
+          )}
+          {showTeaCeremonyTab && (
+            <Link
+              href="/tea-ceremony"
+              className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
+                isActive('/tea-ceremony') 
+                  ? `${textColorActive} underline underline-offset-4` 
+                  : textColorBase
+              }`}
+            >
+              {t.teaCeremony}
+            </Link>
+          )}
           <Link
             href="/travel"
             className={`text-bar-header whitespace-nowrap transition-all duration-300 hover:${textColorActive} hover:underline hover:underline-offset-4 ${
