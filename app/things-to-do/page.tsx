@@ -136,9 +136,9 @@ export default function ThingsToDo() {
   }, [plannerMessages, plannerIsLoading]);
 
   const plannerRegionToLabel: Record<PlannerRegion, string> = {
-    central: 'Central Vietnam (Da Nang / Hoi An / Hue)',
-    south: 'South Vietnam (Sa Dec / Can Tho / HCMC)',
-    both: 'Both regions',
+    central: t.tripPlannerRegionCentralLabel,
+    south: t.tripPlannerRegionSouthLabel,
+    both: t.tripPlannerRegionBothLabel,
   };
 
   const handleSendPlannerMessage = async (e: React.FormEvent) => {
@@ -179,7 +179,7 @@ export default function ThingsToDo() {
             id: plannerMessageId + 1,
             text:
               data.message ||
-              'Sorry, we can only answer 1000 planning questions a day because we are cheap and on a free model. Please try again tomorrow!',
+              t.tripPlannerRateLimitFallbackMessage,
             isUser: false,
             timestamp: new Date(),
             isRateLimit: true,
@@ -195,7 +195,7 @@ export default function ThingsToDo() {
         id: plannerMessageId + 1,
         text:
           data.response ||
-          "Sorry, I couldn't process your request. Please try again.",
+          t.tripPlannerRequestFailedFallbackMessage,
         isUser: false,
         timestamp: new Date(),
       };
@@ -207,7 +207,7 @@ export default function ThingsToDo() {
       const errorMessage: PlannerMessage = {
         id: plannerMessageId + 1,
         text:
-          "Sorry, I'm having trouble connecting right now. Please try again later.",
+          t.tripPlannerConnectionFailedFallbackMessage,
         isUser: false,
         timestamp: new Date(),
       };
@@ -525,11 +525,10 @@ export default function ThingsToDo() {
           <div className="mb-16">
             <div className="text-center mb-6">
               <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
-                Trip planner chatbot
+                {t.tripPlannerChatbotTitle}
               </h2>
               <p className="text-body text-lg text-gray-600">
-                Ask for help planning what to eat, see, and shop for based on
-                Hang + Eric&apos;s saved places in Central and South Vietnam.
+                {t.tripPlannerChatbotDescription}
               </p>
             </div>
 
@@ -555,7 +554,7 @@ export default function ThingsToDo() {
             <div className="mx-auto max-w-4xl rounded-lg border border-gray-200 bg-white shadow-sm">
               <div className="border-b border-gray-200 px-4 py-3">
                 <p className="text-sm text-gray-600">
-                  Current focus:{' '}
+                  {t.tripPlannerCurrentFocusLabel}{' '}
                   <span className="font-semibold">
                     {plannerRegionToLabel[plannerRegion]}
                   </span>
@@ -567,44 +566,44 @@ export default function ThingsToDo() {
                   <div className="flex h-full items-center justify-center text-gray-500">
                     <div className="text-center max-w-md">
                       <p className="text-body mb-3">
-                        Not sure where to start?
+                        {t.tripPlannerNotSureWhereToStart}
                       </p>
                       <p className="text-body-sm mb-4">
-                        Try asking things like:
+                        {t.tripPlannerTryAskingThingsLike}
                       </p>
                       <div className="space-y-2 text-left">
                         <button
                           type="button"
                           onClick={() =>
                             setPlannerInput(
-                              'Can you plan a one-day itinerary around Da Nang using your favorite food and shopping spots?'
+                              t.tripPlannerQuickPromptOneDayDaNangText
                             )
                           }
                           className="w-full rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-800 hover:bg-gray-100"
                         >
-                          Plan a one-day Da Nang food + shopping day
+                          {t.tripPlannerQuickPromptOneDayDaNangLabel}
                         </button>
                         <button
                           type="button"
                           onClick={() =>
                             setPlannerInput(
-                              'We will spend two days in Sa Dec and Can Tho. Can you suggest a relaxed itinerary using your saved places?'
+                              t.tripPlannerQuickPromptTwoDaysSaDecCanThoText
                             )
                           }
                           className="w-full rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-800 hover:bg-gray-100"
                         >
-                          Two days in Sa Dec / Can Tho
+                          {t.tripPlannerQuickPromptTwoDaysSaDecCanThoLabel}
                         </button>
                         <button
                           type="button"
                           onClick={() =>
                             setPlannerInput(
-                              'We like coffee, stationery, and plants. Can you recommend a few places from your list that we should not miss?'
+                              t.tripPlannerQuickPromptCoffeeStationeryPlantsText
                             )
                           }
                           className="w-full rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-800 hover:bg-gray-100"
                         >
-                          Coffee, stationery, and plant recs
+                          {t.tripPlannerQuickPromptCoffeeStationeryPlantsLabel}
                         </button>
                       </div>
                     </div>
@@ -662,7 +661,7 @@ export default function ThingsToDo() {
                                 style={{ animationDelay: '0.2s' }}
                               />
                             </div>
-                            <p className="text-xs text-gray-600">Thinking…</p>
+                            <p className="text-xs text-gray-600">{t.thinking}</p>
                           </div>
                         </div>
                       </div>
@@ -681,7 +680,7 @@ export default function ThingsToDo() {
                     type="text"
                     value={plannerInput}
                     onChange={(e) => setPlannerInput(e.target.value)}
-                    placeholder="Ask for a plan using the saved places…"
+                    placeholder={t.tripPlannerInputPlaceholder}
                     disabled={plannerIsLoading}
                     className="flex-grow rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
@@ -690,7 +689,7 @@ export default function ThingsToDo() {
                     disabled={!plannerInput.trim() || plannerIsLoading}
                     className="rounded-lg bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                   >
-                    {plannerIsLoading ? 'Sending…' : 'Send'}
+                    {plannerIsLoading ? t.sending : t.send}
                   </button>
                 </form>
               </div>

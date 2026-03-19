@@ -229,6 +229,26 @@ export interface Translations {
   saDecRecsSubtext: string;
   saDecTravelGuide: string;
 
+  // Trip planner chatbot (Things to Do page)
+  tripPlannerChatbotTitle: string;
+  tripPlannerChatbotDescription: string;
+  tripPlannerRegionCentralLabel: string;
+  tripPlannerRegionSouthLabel: string;
+  tripPlannerRegionBothLabel: string;
+  tripPlannerCurrentFocusLabel: string;
+  tripPlannerNotSureWhereToStart: string;
+  tripPlannerTryAskingThingsLike: string;
+  tripPlannerQuickPromptOneDayDaNangLabel: string;
+  tripPlannerQuickPromptOneDayDaNangText: string;
+  tripPlannerQuickPromptTwoDaysSaDecCanThoLabel: string;
+  tripPlannerQuickPromptTwoDaysSaDecCanThoText: string;
+  tripPlannerQuickPromptCoffeeStationeryPlantsLabel: string;
+  tripPlannerQuickPromptCoffeeStationeryPlantsText: string;
+  tripPlannerInputPlaceholder: string;
+  tripPlannerRateLimitFallbackMessage: string;
+  tripPlannerRequestFailedFallbackMessage: string;
+  tripPlannerConnectionFailedFallbackMessage: string;
+
   // Q&A page
   qaTitle: string;
   frequentlyAskedQuestions: string;
@@ -581,7 +601,8 @@ export const translations: Record<Language, Translations> = {
     westernWeddingShuttles: 'We recommend grabbing a grab or taxi at the airport to get to the venue. To leave the venue, Fusion Hotel can help with arranging a taxi on the day of your departure. See transportation options section below for more info.',
     teaCeremonyShuttlesFull: "We will provide a shuttle with pickup service from Ho Chi Minh. Let us know if you're flying from Can Tho + we can also try to arrange transportation. We will request for your flight information 2 weeks before the tea ceremony. More information coming soon.",
     accommodationOptions: 'Accommodation Options',
-    accommodationOptionsNote: 'Check this section later for a list of recommended hotels / places to stay at.',
+    accommodationOptionsNote:
+      'Hang and Eric will book accommodation for our tea ceremony guests for the duration of the stay in Sa Dec. Please reach out to Hang + Eric (if they have not yet already) for getting this booked! We will request your flight info + days you are staying in Sa Dec.',
     teaCeremonyToWesternWedding: 'Tea Ceremony to Western Wedding',
     sgnToDad: 'SGN → DAD',
     sgnToDadDescription: "We'll provide transportation to SGN the day after the tea ceremony. We recommend this option as there are more flight options from SGN to DAD.",
@@ -619,6 +640,31 @@ export const translations: Record<Language, Translations> = {
     saDecRecsTitle: "Hang + Eric's Sa Dec Recs",
     saDecRecsSubtext: "If you are joining us for the tea ceremony, here is a list of places to explore around Sa Dec, Hang's hometown!",
     saDecTravelGuide: 'Sa Dec travel guide',
+
+    // Trip planner chatbot (Things to Do page)
+    tripPlannerChatbotTitle: 'Trip planner chatbot',
+    tripPlannerChatbotDescription:
+      "Ask for help planning what to eat, see, and shop for based on Hang + Eric's saved places in Central and South Vietnam.",
+    tripPlannerRegionCentralLabel: 'Central Vietnam (Da Nang / Hoi An / Hue)',
+    tripPlannerRegionSouthLabel: 'South Vietnam (Sa Dec / Can Tho / HCMC)',
+    tripPlannerRegionBothLabel: 'Both regions',
+    tripPlannerCurrentFocusLabel: 'Current focus:',
+    tripPlannerNotSureWhereToStart: 'Not sure where to start?',
+    tripPlannerTryAskingThingsLike: 'Try asking things like:',
+    tripPlannerQuickPromptOneDayDaNangLabel: 'Plan a one-day Da Nang food + shopping day',
+    tripPlannerQuickPromptOneDayDaNangText:
+      'Can you plan a one-day itinerary around Da Nang using your favorite food and shopping spots?',
+    tripPlannerQuickPromptTwoDaysSaDecCanThoLabel: 'Two days in Sa Dec / Can Tho',
+    tripPlannerQuickPromptTwoDaysSaDecCanThoText:
+      'We will spend two days in Sa Dec and Can Tho. Can you suggest a relaxed itinerary using your saved places?',
+    tripPlannerQuickPromptCoffeeStationeryPlantsLabel: 'Coffee, stationery, and plant recs',
+    tripPlannerQuickPromptCoffeeStationeryPlantsText:
+      'We like coffee, stationery, and plants. Can you recommend a few places from your list that we should not miss?',
+    tripPlannerInputPlaceholder: 'Ask for a plan using the saved places…',
+    tripPlannerRateLimitFallbackMessage:
+      'Sorry, we can only answer 1000 planning questions a day because we are cheap and on a free model. Please try again tomorrow!',
+    tripPlannerRequestFailedFallbackMessage: "Sorry, I couldn't process your request. Please try again.",
+    tripPlannerConnectionFailedFallbackMessage: "Sorry, I'm having trouble connecting right now. Please try again later.",
 
     // Q&A page
     qaTitle: 'Q&A',
@@ -980,7 +1026,8 @@ export const translations: Record<Language, Translations> = {
     westernWeddingShuttles: 'Chúng tôi khuyên bạn nên bắt Grab hoặc taxi tại sân bay để đến địa điểm. Để rời khỏi địa điểm, Khách sạn Fusion có thể giúp sắp xếp taxi vào ngày bạn khởi hành. Xem phần tùy chọn vận chuyển bên dưới để biết thêm thông tin',
     teaCeremonyShuttlesFull: "Chúng tôi sẽ cung cấp xe đưa đón từ Thành phố Hồ Chí Minh. Hãy cho chúng tôi biết nếu bạn bay từ Cần Thơ + chúng tôi cũng có thể sắp xếp phương tiện di chuyển. Chúng tôi sẽ yêu cầu thông tin chuyến bay của bạn 2 tuần trước lễ trà. Thông tin chi tiết sắp có.",
     accommodationOptions: 'Tùy Chọn Chỗ Ở',
-    accommodationOptionsNote: 'Kiểm tra phần này sau để xem danh sách các khách sạn / nơi ở được đề xuất.',
+    accommodationOptionsNote:
+      'Hang và Eric sẽ đặt chỗ ở cho các khách tham dự lễ trà trong suốt thời gian lưu trú tại Sa Đéc. Vui lòng liên hệ Hang + Eric (nếu các bạn chưa liên hệ với chúng mình) để chúng mình sắp xếp việc đặt phòng này nhé! Chúng mình sẽ xin thông tin chuyến bay của bạn và số ngày bạn dự định ở tại Sa Đéc.',
     teaCeremonyToWesternWedding: 'Từ Lễ Trà Đến Lễ Cưới Phương Tây',
     sgnToDad: 'SGN → DAD',
     sgnToDadDescription: 'Chúng tôi sẽ cung cấp phương tiện di chuyển đến SGN vào ngày sau lễ trà. Chúng tôi khuyên bạn nên chọn phương án này vì có nhiều lựa chọn chuyến bay từ SGN đến DAD hơn.',
@@ -1018,6 +1065,31 @@ export const translations: Record<Language, Translations> = {
     saDecRecsTitle: 'Gợi Ý Sa Đéc của Hang + Eric',
     saDecRecsSubtext: 'Nếu bạn tham gia lễ trà với chúng tôi, đây là danh sách các địa điểm để khám phá quanh Sa Đéc, quê hương của Hang!',
     saDecTravelGuide: 'Hướng dẫn du lịch Sa Đéc',
+
+    // Trip planner chatbot (Things to Do page)
+    tripPlannerChatbotTitle: 'Chatbot lập kế hoạch chuyến đi',
+    tripPlannerChatbotDescription:
+      'Hãy nhờ chúng tôi giúp lên kế hoạch nên ăn gì, xem gì và mua sắm gì dựa trên danh sách địa điểm đã lưu của Hang + Eric ở miền Trung và miền Nam Việt Nam.',
+    tripPlannerRegionCentralLabel: 'Miền Trung Việt Nam (Đà Nẵng / Hội An / Huế)',
+    tripPlannerRegionSouthLabel: 'Miền Nam Việt Nam (Sa Đéc / Cần Thơ / TP.HCM)',
+    tripPlannerRegionBothLabel: 'Cả hai khu vực',
+    tripPlannerCurrentFocusLabel: 'Tập trung hiện tại:',
+    tripPlannerNotSureWhereToStart: 'Chưa biết bắt đầu từ đâu?',
+    tripPlannerTryAskingThingsLike: 'Bạn có thể thử hỏi kiểu như:',
+    tripPlannerQuickPromptOneDayDaNangLabel: 'Lịch trình 1 ngày ở Đà Nẵng: ăn uống + mua sắm',
+    tripPlannerQuickPromptOneDayDaNangText:
+      'Bạn có thể lên kế hoạch lịch trình 1 ngày quanh Đà Nẵng dựa trên các địa điểm ăn uống và mua sắm mà chúng mình thích không?',
+    tripPlannerQuickPromptTwoDaysSaDecCanThoLabel: '2 ngày ở Sa Đéc / Cần Thơ',
+    tripPlannerQuickPromptTwoDaysSaDecCanThoText:
+      'Chúng mình sẽ ở Sa Đéc và Cần Thơ trong 2 ngày. Bạn có thể gợi ý một lịch trình thoải mái dựa trên danh sách địa điểm đã lưu của bạn không?',
+    tripPlannerQuickPromptCoffeeStationeryPlantsLabel: 'Gợi ý cà phê, văn phòng phẩm & cây xanh',
+    tripPlannerQuickPromptCoffeeStationeryPlantsText:
+      'Chúng mình thích cà phê, văn phòng phẩm và cây xanh. Bạn có thể gợi ý vài địa điểm trong danh sách của bạn mà chúng mình không nên bỏ qua không?',
+    tripPlannerInputPlaceholder: 'Hãy hỏi để có một kế hoạch dựa trên các địa điểm đã lưu…',
+    tripPlannerRateLimitFallbackMessage:
+      'Xin lỗi, tụi mình chỉ có thể trả lời tối đa 1000 câu hỏi lập kế hoạch mỗi ngày vì đang dùng gói miễn phí. Vui lòng thử lại vào ngày mai!',
+    tripPlannerRequestFailedFallbackMessage: 'Xin lỗi, mình không thể xử lý yêu cầu của bạn. Vui lòng thử lại.',
+    tripPlannerConnectionFailedFallbackMessage: 'Xin lỗi, hiện tại mình đang gặp vấn đề khi kết nối. Vui lòng thử lại sau nhé.',
 
     // Q&A page
     qaTitle: 'Hỏi Đáp',
