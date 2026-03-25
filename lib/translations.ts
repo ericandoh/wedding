@@ -99,6 +99,11 @@ export interface Translations {
   may20th2026: string;
   groomProcession: string;
   exchangeOfGifts: string;
+  arrivalWelcomeExchangeOfGifts: string;
+  ancestralCeremony: string;
+  teaCeremonyRitual: string;
+  guestWelcomingLunch: string;
+  grandEntrance: string;
   lunch: string;
   morningTBD: string;
   noonTBD: string;
@@ -510,7 +515,12 @@ export const translations: Record<Language, Translations> = {
     may20th2026: 'May 20th, 2026',
     groomProcession: 'Groom procession',
     exchangeOfGifts: 'Exchange of gifts',
-    lunch: 'Lunch',
+    arrivalWelcomeExchangeOfGifts: 'Arrival, Welcome & Exchange of Gifts',
+    ancestralCeremony: 'Ancestral Ceremony',
+    teaCeremonyRitual: 'Tea Ceremony',
+    guestWelcomingLunch: 'Guest Welcoming For Lunch',
+    grandEntrance: 'Grand Entrance',
+    lunch: 'Lunch Service',
     morningTBD: 'Morning, TBD',
     noonTBD: 'Noon, TBD',
     westernWedding: 'Western Wedding',
@@ -935,7 +945,12 @@ export const translations: Record<Language, Translations> = {
     may20th2026: '20 tháng 5, 2026',
     groomProcession: 'Đoàn rước chú rể',
     exchangeOfGifts: 'Trao đổi quà cưới',
-    lunch: 'Tiệc trưa',
+    arrivalWelcomeExchangeOfGifts: 'Đón tiếp, chào mừng & trao quà',
+    ancestralCeremony: 'Lễ gia tiên',
+    teaCeremonyRitual: 'Lễ trà',
+    guestWelcomingLunch: 'Đón tiếp khách dự tiệc trưa',
+    grandEntrance: 'Nhập tiệc',
+    lunch: 'Phục vụ tiệc trưa',
     morningTBD: 'Buổi sáng, TBD',
     noonTBD: 'Buổi trưa, TBD',
     westernWedding: 'Lễ Cưới Phương Tây',

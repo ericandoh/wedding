@@ -42,46 +42,59 @@ export default function Schedule() {
     lobbyEntrance: { xPct: 26.3, yPct: 40.15, label: t.lobbyEntrance },
   };
 
-  // Helper function to format time - 24-hour format for Vietnamese, 12-hour for English
+  const to24h = (hours: number, minutes: string, period: string): string => {
+    let h = hours;
+    const upper = period.toUpperCase();
+    if (upper === 'PM' && h !== 12) h += 12;
+    if (upper === 'AM' && h === 12) h = 0;
+    return `${h.toString().padStart(2, '0')}:${minutes}`;
+  };
+
+  // 24-hour format for Vietnamese, 12-hour for English
   const formatTime = (time12hr: string): string => {
     if (language === 'vi') {
-      // Convert 12-hour format to 24-hour format
-      // Handle ranges like "6:00 – 9:00 PM" or single times like "After 9:00 PM"
       if (time12hr.includes('After')) {
         const match = time12hr.match(/After (\d{1,2}):(\d{2}) (AM|PM)/i);
         if (match) {
-          let hours = parseInt(match[1]);
-          const minutes = match[2];
-          const period = match[3].toUpperCase();
-          
-          if (period === 'PM' && hours !== 12) hours += 12;
-          if (period === 'AM' && hours === 12) hours = 0;
-          
-          return `Sau ${hours.toString().padStart(2, '0')}:${minutes}`;
+          return `Sau ${to24h(parseInt(match[1], 10), match[2], match[3])}`;
         }
         return time12hr;
       }
-      
-      // Handle time ranges
-      const rangeMatch = time12hr.match(/(\d{1,2}):(\d{2}) – (\d{1,2}):(\d{2}) (AM|PM)/i);
-      if (rangeMatch) {
-        let startHours = parseInt(rangeMatch[1]);
-        const startMinutes = rangeMatch[2];
-        let endHours = parseInt(rangeMatch[3]);
-        const endMinutes = rangeMatch[4];
-        const period = rangeMatch[5].toUpperCase();
-        
-        if (period === 'PM') {
-          if (startHours !== 12) startHours += 12;
-          if (endHours !== 12) endHours += 12;
-        } else {
-          if (startHours === 12) startHours = 0;
-          if (endHours === 12) endHours = 0;
-        }
-        
-        return `${startHours.toString().padStart(2, '0')}:${startMinutes} – ${endHours.toString().padStart(2, '0')}:${endMinutes}`;
+
+      const crossDayMatch = time12hr.match(
+        /(\d{1,2}):(\d{2}) (AM|PM) – (\d{1,2}):(\d{2}) (AM|PM)/i
+      );
+      if (crossDayMatch) {
+        const start = to24h(
+          parseInt(crossDayMatch[1], 10),
+          crossDayMatch[2],
+          crossDayMatch[3]
+        );
+        const end = to24h(
+          parseInt(crossDayMatch[4], 10),
+          crossDayMatch[5],
+          crossDayMatch[6]
+        );
+        return `${start} – ${end}`;
       }
-      
+
+      const rangeMatch = time12hr.match(
+        /(\d{1,2}):(\d{2}) – (\d{1,2}):(\d{2}) (AM|PM)/i
+      );
+      if (rangeMatch) {
+        const start = to24h(
+          parseInt(rangeMatch[1], 10),
+          rangeMatch[2],
+          rangeMatch[5]
+        );
+        const end = to24h(
+          parseInt(rangeMatch[3], 10),
+          rangeMatch[4],
+          rangeMatch[5]
+        );
+        return `${start} – ${end}`;
+      }
+
       return time12hr;
     }
     return time12hr;
@@ -154,10 +167,9 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    // May 20th, 2026, 9:00 AM - 2:00 PM (Vietnam timezone is GMT+7)
-    const startDate = '20260520T090000'; // 9:00 AM
-    const endDate = '20260520T140000'; // 2:00 PM
-    
+    const startDate = '20260520T070000';
+    const endDate = '20260520T131500';
+
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
     
     return googleUrl;
@@ -168,9 +180,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    // Format: YYYYMMDDTHHMMSS
-    const startDate = '20260520T090000'; // 9:00 AM
-    const endDate = '20260520T140000'; // 2:00 PM
+    const startDate = '20260520T070000';
+    const endDate = '20260520T131500';
     const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     
     const icsContent = [
@@ -306,7 +317,7 @@ export default function Schedule() {
 
   // Animate tea ceremony timeline items (starts after western wedding)
   useEffect(() => {
-    const totalTeaItems = 3;
+    const totalTeaItems = 8;
     const timers: NodeJS.Timeout[] = [];
     const startDelay = 1600; // Start after western wedding animation (200 + 7 * 200)
     
@@ -645,7 +656,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {t.morningTBD}
+                          {formatTime('7:00 – 7:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -658,34 +669,134 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 2: Exchange of Gifts */}
+                    {/* Event 2: Arrival, Welcome & Exchange of Gifts */}
                     <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <GiftIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {t.morningTBD}
+                          {formatTime('7:30 – 7:45 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-xl text-gray-700 font-medium">
-                          {t.exchangeOfGifts}
+                          {t.arrivalWelcomeExchangeOfGifts}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.teaCeremonyGiftsLocation}
+                          {t.teaCeremonyGroomLocation}
                         </div>
                       </div>
                     </div>
 
-                    {/* Event 3: Lunch */}
+                    {/* Event 3: Ancestral Ceremony */}
                     <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('7:45 – 8:30 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.ancestralCeremony}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 4: Tea Ceremony */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('8:30 – 8:45 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.teaCeremonyRitual}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 5: Photography Session */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('8:45 – 9:30 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.photographySession}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 6: Guest Welcoming for Lunch */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('10:30 – 11:30 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.guestWelcomingLunch}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.restaurantTBD}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 7: Grand Entrance */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('11:30 – 11:45 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.grandEntrance}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.restaurantTBD}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 8: Lunch Service */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(7) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {t.noonTBD}
+                          {formatTime('11:45 AM – 1:15 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -693,7 +804,7 @@ export default function Schedule() {
                           {t.lunch}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.teaCeremonyLunchLocation}
+                          {t.restaurantTBD}
                         </div>
                       </div>
                     </div>
