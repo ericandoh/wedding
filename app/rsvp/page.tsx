@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../_components/language-provider';
+import { getDaNangDateString } from '#/lib/da-nang-time';
 
 export default function RSVP() {
   const { t } = useLanguage();
+  const isPastRsvpDeadline = getDaNangDateString() > '2026-03-08';
   const [step, setStep] = useState<'email' | 'form' | 'submitted'>('email');
   const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({
@@ -321,9 +323,15 @@ export default function RSVP() {
           <p className="text-subtitle">
             {isLoading ? t.rsvpLoading : t.rsvpEmailPrompt}
           </p>
-          <p className="text-body-sm mt-2 text-gray-600">
-            {t.rsvpDeadlineMessage}
-          </p>
+          {isPastRsvpDeadline ? (
+            <div className="mx-auto mt-4 max-w-3xl rounded-xl border-2 border-gray-800 bg-gray-100 px-6 py-4 text-left shadow-sm">
+              <p className="text-body-sm text-gray-800 font-semibold">
+                {t.rsvpClosedBigBoxMessage}
+              </p>
+            </div>
+          ) : (
+            <p className="text-body-sm mt-2 text-gray-600">{t.rsvpDeadlineMessage}</p>
+          )}
         </div>
 
         <div className="flex-grow bg-white py-6">
@@ -418,6 +426,13 @@ export default function RSVP() {
             ? t.updateRsvpDetails
             : t.fillRsvpDetails}
         </p>
+        {isPastRsvpDeadline && (
+          <div className="mx-auto mt-4 max-w-3xl rounded-xl border-2 border-gray-800 bg-gray-100 px-6 py-4 text-left shadow-sm">
+            <p className="text-body-sm text-gray-800 font-semibold">
+              {t.rsvpClosedBigBoxMessage}
+            </p>
+          </div>
+        )}
         <p className="text-card-header text-xl text-gray-600">
           {t.rsvpNote}
         </p>

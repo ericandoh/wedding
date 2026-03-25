@@ -45,6 +45,7 @@ export interface Translations {
   bookingBanner: string;
   bookingBannerHere: string;
   visaBanner: string;
+  rsvpClosedBanner: string;
 
   // Wedding page
   weddingTitle: string;
@@ -80,6 +81,7 @@ export interface Translations {
   fusionResortsVillasDaNangShort: string;
   rsvpByDate: string;
   byMarch8th2026: string;
+  lookingForwardToHavingYouAtOurWedding: string;
   saveTheDateButton: string;
   countdownTillParadise: string;
 
@@ -340,6 +342,7 @@ export interface Translations {
   rsvpLoading: string;
   rsvpEmailPrompt: string;
   rsvpDeadlineMessage: string;
+  rsvpClosedBigBoxMessage: string;
   emailAddress: string;
   emailPlaceholder: string;
   clear: string;
@@ -469,6 +472,7 @@ export const translations: Record<Language, Translations> = {
     bookingBanner: 'Booking link for venue is now available',
     bookingBannerHere: 'here',
     visaBanner: 'Reminder to do your visa! Click me for details',
+    rsvpClosedBanner: 'RSVPS now closed - to change, please contact Eric & Hang',
     
     // Login page
     hangAndEric: 'Hang and Eric',
@@ -496,6 +500,7 @@ export const translations: Record<Language, Translations> = {
     fusionResortsVillasDaNangShort: 'Fusion Resort & Villas Da Nang',
     rsvpByDate: 'RSVP by March 8th, 2026',
     byMarch8th2026: 'by March 8th, 2026',
+    lookingForwardToHavingYouAtOurWedding: 'Looking forward to having you at our wedding!',
     saveTheDateButton: 'Save the Date',
     countdownTillParadise: 'Countdown till paradise',
 
@@ -763,6 +768,8 @@ export const translations: Record<Language, Translations> = {
     rsvpLoading: 'Loading your RSVP...',
     rsvpEmailPrompt: 'Enter your email to get started',
     rsvpDeadlineMessage: 'Please RSVP by March 8th, 2026',
+    rsvpClosedBigBoxMessage:
+      "RSVPs are now officially closed. You can still use the form to edit your response but please also let Hang & Eric know of the change(s) as well if you have a change in your plans! Otherwise, we're excited to see you at the wedding if you can make it!",
     emailAddress: 'Email Address',
     emailPlaceholder: 'Enter your email address',
     clear: 'Clear',
@@ -899,6 +906,7 @@ export const translations: Record<Language, Translations> = {
     bookingBanner: 'Liên kết đặt phòng cho địa điểm đã có sẵn',
     bookingBannerHere: 'tại đây',
     visaBanner: 'Nhắc nhở làm visa của bạn! Nhấp vào đây để xem chi tiết',
+    rsvpClosedBanner: 'Đăng ký RSVP đã đóng - nếu cần thay đổi, vui lòng liên hệ Eric & Hang',
     
     // Login page
     hangAndEric: 'Hang và Eric',
@@ -926,6 +934,7 @@ export const translations: Record<Language, Translations> = {
     fusionResortsVillasDaNangShort: 'Fusion Resort & Villas Đà Nẵng',
     rsvpByDate: 'Xác nhận tham dự trước ngày 8 tháng 3, 2026',
     byMarch8th2026: 'trước ngày 8 tháng 3, 2026',
+    lookingForwardToHavingYouAtOurWedding: 'Chúng tôi mong được chào đón bạn tại đám cưới của chúng tôi!',
     saveTheDateButton: 'Lưu ngày cưới',
     countdownTillParadise: 'Đếm ngược đến thiên đường',
 
@@ -1193,6 +1202,8 @@ export const translations: Record<Language, Translations> = {
     rsvpLoading: 'Đang tải RSVP của bạn...',
     rsvpEmailPrompt: 'Nhập email của bạn để bắt đầu',
     rsvpDeadlineMessage: 'Vui lòng xác nhận tham dự trước ngày 8 tháng 3, 2026',
+    rsvpClosedBigBoxMessage:
+      'Đăng ký RSVP hiện đã chính thức đóng. Bạn vẫn có thể dùng biểu mẫu để chỉnh sửa phản hồi của mình, nhưng cũng vui lòng cho Hang & Eric biết về những thay đổi nếu bạn dự định thay đổi kế hoạch. Nếu bạn có thể tham dự, chúng mình rất mong được gặp bạn tại đám cưới!',
     emailAddress: 'Địa Chỉ Email',
     emailPlaceholder: 'Nhập địa chỉ email của bạn',
     clear: 'Xóa',

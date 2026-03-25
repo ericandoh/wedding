@@ -5,9 +5,11 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import LogoutButton from './_components/logout-button';
 import { useLanguage } from './_components/language-provider';
+import { getDaNangDateString } from '#/lib/da-nang-time';
 
 export default function Page() {
   const { t } = useLanguage();
+  const isPastRsvpDeadline = getDaNangDateString() > '2026-03-08';
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [showText, setShowText] = useState(false);
@@ -241,7 +243,9 @@ export default function Page() {
                   <span className="font-cormorant-garamond text-xl">{t.rsvp}</span>
                 </Link>
                 <p className="font-cormorant-garamond text-base text-white drop-shadow-lg mt-2">
-                  {t.byMarch8th2026}
+                  {isPastRsvpDeadline
+                    ? t.lookingForwardToHavingYouAtOurWedding
+                    : t.byMarch8th2026}
                 </p>
               </div>
             </div>

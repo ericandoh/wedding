@@ -28,6 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Clear banner dismissed state on logout
       localStorage.removeItem('banner-dismissed');
       localStorage.removeItem('visa-banner-dismissed');
+      localStorage.removeItem('rsvp-banner-dismissed');
       window.location.href = '/login';
     } catch (error) {
       console.error('Logout failed:', error);

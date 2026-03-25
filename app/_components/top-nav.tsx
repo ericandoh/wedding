@@ -32,10 +32,9 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
   const textColorBase = isHomePage ? 'text-white' : 'text-gray-600';
   const textColorActive = isHomePage ? 'text-white' : 'text-gray-800';
   
-  // Adjust top position based on number of visible banners
-  // Each banner is approximately 40px (top-10 = 2.5rem = 40px)
-  // top-0: no banners, top-10: one banner, top-20: two banners
-  const topPosition = visibleBanners === 0 ? 'top-0' : visibleBanners === 1 ? 'top-10' : 'top-20';
+  // Adjust top position based on number of visible banners.
+  // Each banner is approximately 40px (tailwind `top-10` = 2.5rem = 40px).
+  const topOffsetPx = visibleBanners * 40;
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -66,7 +65,11 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
   };
 
   return (
-    <nav className={`absolute ${topPosition} left-0 right-0 z-40 ${isHomePage ? '' : 'bg-white'}`} suppressHydrationWarning>
+    <nav
+      className={`absolute left-0 right-0 z-40 ${isHomePage ? '' : 'bg-white'}`}
+      style={{ top: `${topOffsetPx}px` }}
+      suppressHydrationWarning
+    >
       <div className="relative flex items-center justify-center px-6 py-4 w-full">
         {/* Navigation Links Container */}
         <div className="relative flex items-center justify-center min-w-0">

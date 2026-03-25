@@ -20,7 +20,15 @@ DATE & LOCATION:
     - 6:00 – 9:00 PM: Dinner Reception
     - After 9:00 PM: Dancing & Evening Celebration
 - Tea Ceremony: Date - May 20th, 2026, Location - Hang's family home in Sa Dec, Vietnam (220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam)
-  * Schedule includes: Groom procession, Exchange of gifts, and Lunch
+  * May 20th, 2026 Schedule:
+    - 7:00 – 7:30 AM: Groom Procession (Hang's familial home)
+    - 7:30 – 7:45 AM: Arrival, Welcome & Exchange of Gifts (Hang's familial home)
+    - 7:45 – 8:30 AM: Ancestral Ceremony (Hang's familial home)
+    - 8:30 – 8:45 AM: Tea Ceremony (Hang's familial home)
+    - 8:45 – 9:30 AM: Photography Session (Hang's familial home)
+    - 10:30 – 11:30 AM: Guest Welcoming For Lunch (Restaurant TBD)
+    - 11:30 – 11:45 AM: Grand Entrance (Restaurant TBD)
+    - 11:45 AM – 1:15 PM: Lunch Service (Restaurant TBD)
 - Ceremony: Outdoor on the beach (weather permitting), with indoor backup. Dinner reception will be indoors.
 
 DRESS CODE:
