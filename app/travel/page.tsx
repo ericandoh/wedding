@@ -15,6 +15,7 @@ export default function Travel() {
   const [showWesternVenue, setShowWesternVenue] = useState(false);
   const [showTeaVenue, setShowTeaVenue] = useState(false);
   const [showTransportation, setShowTransportation] = useState(false);
+  const [showTravelTips, setShowTravelTips] = useState(false);
 
   // Scroll-triggered animations
   useEffect(() => {
@@ -51,6 +52,9 @@ export default function Travel() {
             case 'transportation':
               setShowTransportation(true);
               break;
+            case 'travel-tips':
+              setShowTravelTips(true);
+              break;
           }
         }
       });
@@ -64,6 +68,7 @@ export default function Travel() {
     const westernVenueSection = document.querySelector('[data-section="western-venue"]');
     const teaVenueSection = document.querySelector('[data-section="tea-venue"]');
     const transportationSection = document.querySelector('[data-section="transportation"]');
+    const travelTipsSection = document.querySelector('[data-section="travel-tips"]');
 
     if (gettingThereSection) observer.observe(gettingThereSection);
     if (westernWeddingSection) observer.observe(westernWeddingSection);
@@ -72,6 +77,7 @@ export default function Travel() {
     if (westernVenueSection) observer.observe(westernVenueSection);
     if (teaVenueSection) observer.observe(teaVenueSection);
     if (transportationSection) observer.observe(transportationSection);
+    if (travelTipsSection) observer.observe(travelTipsSection);
 
     return () => {
       if (gettingThereSection) observer.unobserve(gettingThereSection);
@@ -81,6 +87,7 @@ export default function Travel() {
       if (westernVenueSection) observer.unobserve(westernVenueSection);
       if (teaVenueSection) observer.unobserve(teaVenueSection);
       if (transportationSection) observer.unobserve(transportationSection);
+      if (travelTipsSection) observer.unobserve(travelTipsSection);
     };
   }, []);
 
@@ -626,6 +633,41 @@ export default function Travel() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Travel Tips Section */}
+          <div className="mt-16 mb-16" data-section="travel-tips">
+            <div className={`bg-white py-8 text-center mb-8 transition-opacity duration-1000 ${showTravelTips ? 'opacity-100' : 'opacity-0'}`}>
+              <h2 className="text-title mb-2 text-4xl font-bold text-gray-800">
+                {t.travelTipsTitle}
+              </h2>
+              <p className="text-body text-xl text-gray-600">
+                {t.travelTipsSubtitle}
+              </p>
+            </div>
+
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 transition-opacity duration-1000 ${showTravelTips ? 'opacity-100' : 'opacity-0'}`}>
+              {[
+                { title: t.airportAndFlightTipsTitle, content: t.airportAndFlightTipsBody },
+                { title: t.simAndAccessTipsTitle, content: t.simAndAccessTipsBody },
+                { title: t.currencyAndMoneyTipsTitle, content: t.currencyAndMoneyTipsBody },
+                { title: t.gettingAroundVietnamTipsTitle, content: t.gettingAroundVietnamTipsBody },
+                { title: t.foodAndBeverageTipsTitle, content: t.foodAndBeverageTipsBody },
+                { title: t.safetyAndSanitationTipsTitle, content: t.safetyAndSanitationTipsBody },
+                { title: t.miscTravelTipsTitle, content: t.miscTravelTipsBody },
+              ].map((tip) => (
+                <div key={tip.title} className="border border-gray-200 rounded-lg p-6 bg-white shadow-sm">
+                  <h3 className="text-body text-xl font-semibold text-gray-800 mb-4">{tip.title}</h3>
+                  <ul className="space-y-2">
+                    {tip.content.split('\n').filter(Boolean).map((line) => (
+                      <li key={line} className="text-body text-lg text-gray-600 leading-relaxed">
+                        • {line}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </div>

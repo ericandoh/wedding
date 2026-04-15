@@ -176,6 +176,42 @@ export default function QA() {
                     {t.airportTransportAnswer}
                   </p>
                 </div>
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
+                    {t.arrivalAndImmigrationTipsQuestion}
+                  </h3>
+                  <div className="text-body text-gray-700 space-y-1">
+                    {renderFormattedAnswer(t.arrivalAndImmigrationTipsAnswer)}
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
+                    {t.cashAndCardsQuestion}
+                  </h3>
+                  <div className="text-body text-gray-700 space-y-1">
+                    {renderFormattedAnswer(t.cashAndCardsAnswer)}
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
+                    {t.bestWayToGetAroundQuestion}
+                  </h3>
+                  <div className="text-body text-gray-700 space-y-1">
+                    {renderFormattedAnswer(t.bestWayToGetAroundAnswer)}
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="text-body text-xl font-semibold text-gray-800 mb-2">
+                    {t.healthAndSafetyTipsQuestion}
+                  </h3>
+                  <div className="text-body text-gray-700 space-y-1">
+                    {renderFormattedAnswer(t.healthAndSafetyTipsAnswer)}
+                  </div>
+                </div>
               </div>
             </div>
 

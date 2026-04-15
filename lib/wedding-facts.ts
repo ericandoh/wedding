@@ -59,6 +59,52 @@ TRAVEL & ACCOMMODATION:
   * Transportation options: Grab (ride-sharing app like Uber), taxis, or private car arrangements through hotels
   * Tea Ceremony to Western Wedding: Transportation provided from SGN to DAD the day after the tea ceremony
 
+PRACTICAL TRAVEL TIPS (VIETNAM):
+- Airport / Flight:
+  * Immigration at international airports can take a long time (~1 hour in our experience), so go straight to immigration after deplaning.
+  * If possible, use the restroom on the plane (or wait until baggage claim after immigration).
+  * Fast-track immigration services are available, though we have not used them ourselves.
+  * Near baggage claim, some people may offer to help with luggage and usually expect a tip.
+  * For domestic flights, we generally recommend Vietnam Airlines when possible; Vietjet can be less reliable.
+- SIM / Connectivity:
+  * eSIM options (like Airalo) are convenient; many data plans do not include voice calling.
+  * Most restaurants and shops have Wi-Fi and can usually share the password.
+- Currency / Money:
+  * Exchange only a small amount at the airport; city exchange points (often gold jewelry stores) usually have better rates.
+  * Crisp/new USD $100 bills often get the best exchange rates.
+  * ATM withdrawals are common; VPBank has had no ATM fee in our experience, with around 20 million VND max per withdrawal.
+  * Vietnam is still mostly cash-based, though e-payments are becoming more common.
+  * Currency shorthand: prices often use "k" (e.g., 100k = 100,000 VND).
+  * Rough exchange (Apr 2026): 50k ~ $2, 100k ~ $4, 500k ~ $20, 1M ~ $40.
+- Getting Around Vietnam:
+  * Grab is recommended for rides and food delivery; set up app + payment before arriving.
+  * Commonly trusted taxi brands: Mai Linh, Vinasun, Xanh. Still watch the meter.
+  * Many taxis are cash-only and drivers may not always have exact change.
+  * For intercity travel, private shuttle/bus or private drivers are often more reliable than public transit.
+  * FUTA buses are a common option for routes like HCMC <-> Sa Dec: https://futabus.vn/
+  * Hiring a private driver is common; a Sa Dec <-> HCMC day roundtrip with multiple stops is often ~$100-$150.
+  * Motorbikes under 50cc are generally allowed; 50cc+ requires proper licensing/permit.
+  * Vietnam officially recognizes 1968 Convention IDP (the common US 1949 IDP is not officially valid).
+  * Pedestrian infrastructure is limited; cross streets predictably and avoid sudden movements.
+- Food / Beverage Notes:
+  * Smaller restaurants may not reliably accommodate strict allergies, so plan conservatively if needed.
+  * Vietnam is generally very good for vegetarian, vegan, and pescatarian travelers.
+  * Ingredient translation helper: https://travelbud.com/travelbud-blog/blog/vietnam/vegetarian-in-vietnam-a-crash-course
+  * Recommended local specialties: fruits, vegetables, freshwater fish, crab, and seafood.
+- Safety / Sanitation:
+  * May is hot and humid: hydrate (water + electrolytes), use sun protection, and pace midday activity.
+  * Wear breathable clothing; many travelers also wear masks for dust/air pollution when outdoors.
+  * Public water fountains are uncommon, so carry water.
+  * Some public restrooms charge a small fee (1k-2k VND) and may not provide tissue/soap.
+  * Do not drink tap water; use ice only when it appears factory-moulded.
+  * We have generally been fine using tap water for brushing teeth/washing produce, but sensitive stomachs should be more cautious.
+  * Carrying anti-diarrheal medicine (e.g., Imodium) is practical.
+  * Vietnam has generally felt safe for us, but always stay alert and watch your belongings.
+- Misc:
+  * Vietnam has strong morning culture (many places active by 5-6 AM); some breakfast spots sell out by ~9 AM.
+  * Midday can be very hot; planning around early morning/late afternoon is often more comfortable.
+  * Vietnam Coracle is a useful off-the-beaten-path guide: https://www.vietnamcoracle.com
+
 THINGS TO DO IN DA NANG:
 - Son Tra Peninsula: A stunning peninsula with pristine beaches, dense jungles, and the iconic Lady Buddha statue
 - Marble Mountains: Five marble and limestone hills featuring caves, tunnels, and Buddhist sanctuaries

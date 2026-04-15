@@ -167,8 +167,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T070000';
-    const endDate = '20260520T131500';
+    const startDate = '20260520T080000';
+    const endDate = '20260520T141500';
 
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
     
@@ -180,8 +180,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T070000';
-    const endDate = '20260520T131500';
+    const startDate = '20260520T080000';
+    const endDate = '20260520T141500';
     const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     
     const icsContent = [
@@ -621,6 +621,14 @@ export default function Schedule() {
                   <p className="text-body text-xl text-gray-600 mt-2">
                     {t.hangsFamilialHome}, {t.saDecVietnam} · {t.may20th2026}
                   </p>
+                  <p className="text-body text-xl text-gray-600 mt-2 mb-4">
+                    Restaurant: <a
+                      href="https://maps.app.goo.gl/NSkf87Zj8SvVdjuK6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
+                    >Nhà Hàng Hai Lúa Sa Đéc</a>, {t.saDecVietnam}
+                  </p>
                   
                   {/* Calendar Buttons */}
                   <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
@@ -656,7 +664,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('7:00 – 7:30 AM')}
+                          {formatTime('8:00 – 8:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -676,7 +684,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('7:30 – 7:45 AM')}
+                          {formatTime('8:30 – 8:45 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -696,7 +704,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('7:45 – 8:30 AM')}
+                          {formatTime('8:45 – 9:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -716,7 +724,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:30 – 8:45 AM')}
+                          {formatTime('9:30 – 9:45 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -736,7 +744,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:45 – 9:30 AM')}
+                          {formatTime('9:45 – 10:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -756,7 +764,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('10:30 – 11:30 AM')}
+                          {formatTime('11:30 AM – 12:30 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -764,7 +772,7 @@ export default function Schedule() {
                           {t.guestWelcomingLunch}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.restaurantTBD}
+                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
                         </div>
                       </div>
                     </div>
@@ -776,7 +784,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('11:30 – 11:45 AM')}
+                          {formatTime('12:30 – 12:45 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -784,7 +792,7 @@ export default function Schedule() {
                           {t.grandEntrance}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.restaurantTBD}
+                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
                         </div>
                       </div>
                     </div>
@@ -796,7 +804,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('11:45 AM – 1:15 PM')}
+                          {formatTime('12:45 – 2:15 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -804,7 +812,7 @@ export default function Schedule() {
                           {t.lunch}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.restaurantTBD}
+                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
                         </div>
                       </div>
                     </div>

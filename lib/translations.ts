@@ -203,6 +203,22 @@ export interface Translations {
   sgnToDadDescription: string;
   vcaToDad: string;
   vcaToDadDescription: string;
+  travelTipsTitle: string;
+  travelTipsSubtitle: string;
+  airportAndFlightTipsTitle: string;
+  airportAndFlightTipsBody: string;
+  simAndAccessTipsTitle: string;
+  simAndAccessTipsBody: string;
+  currencyAndMoneyTipsTitle: string;
+  currencyAndMoneyTipsBody: string;
+  gettingAroundVietnamTipsTitle: string;
+  gettingAroundVietnamTipsBody: string;
+  foodAndBeverageTipsTitle: string;
+  foodAndBeverageTipsBody: string;
+  safetyAndSanitationTipsTitle: string;
+  safetyAndSanitationTipsBody: string;
+  miscTravelTipsTitle: string;
+  miscTravelTipsBody: string;
 
   // Things to Do page
   thingsToDoTitle: string;
@@ -273,6 +289,14 @@ export interface Translations {
   accommodationAnswer: string;
   howToGetFromAirport: string;
   airportTransportAnswer: string;
+  arrivalAndImmigrationTipsQuestion: string;
+  arrivalAndImmigrationTipsAnswer: string;
+  cashAndCardsQuestion: string;
+  cashAndCardsAnswer: string;
+  bestWayToGetAroundQuestion: string;
+  bestWayToGetAroundAnswer: string;
+  healthAndSafetyTipsQuestion: string;
+  healthAndSafetyTipsAnswer: string;
   additionalQuestions: string;
   contactUs: string;
   contactUsAnswer: string;
@@ -623,6 +647,29 @@ export const translations: Record<Language, Translations> = {
     sgnToDadDescription: "We'll provide transportation to SGN the day after the tea ceremony. We recommend this option as there are more flight options from SGN to DAD.",
     vcaToDad: 'VCA → DAD',
     vcaToDadDescription: 'Vietjet operates daily nonstop flights (once a day) and Vietnam Airlines operates a single nonstop flight (on the 22nd). Note that Vietjet is a low cost carrier if you choose this option.',
+    travelTipsTitle: 'Travel Tips',
+    travelTipsSubtitle: 'Helpful tips for airport, money, transportation, food, and daily travel in Vietnam',
+    airportAndFlightTipsTitle: 'Airport / Flight',
+    airportAndFlightTipsBody:
+      'Immigration lines can take about 1 hour at international airports in Vietnam, so head to immigration as soon as you deplane.\nIf possible, use the restroom on the plane, or wait until after immigration at baggage claim.\nFast-track immigration services are available, but we have not personally used them.\nNear baggage claim, some people may offer luggage help and usually expect a tip.\nFor domestic flights, we recommend Vietnam Airlines when possible; Vietjet can be less reliable.',
+    simAndAccessTipsTitle: 'SIM Card / Access',
+    simAndAccessTipsBody:
+      'We now use eSIM options (like Airalo) for convenience, but data-only plans usually do not include calling.\nMost restaurants and shops have Wi-Fi and are usually willing to share the password.',
+    currencyAndMoneyTipsTitle: 'Currency / Money',
+    currencyAndMoneyTipsBody:
+      'Exchange only a small amount at the airport, then exchange in the city (often at gold jewelry stores) for better rates.\nYou usually get the best exchange rate with crisp new USD $100 bills.\nATMs are another option; VPBank has offered no ATM fee in our experience, with around 20 million VND maximum per withdrawal.\nVietnam is still mostly cash-based, but e-payments are becoming more common.\n500,000 VND is the largest bill, and prices often use k as shorthand (for example, 100k = 100,000 VND).\nApproximate April 2026 rates: 50k ~ $2, 100k ~ $4, 500k ~ $20, and 1M ~ $40.\nSample Sa Dec neighborhood prices: pho 45k-80k, hu tieu 15k-50k, sticky rice 10k, coffee 10k-100k, banh mi 15k-35k, shampoo 80k+, sandals 50k-120k, shoes 250k-500k+.',
+    gettingAroundVietnamTipsTitle: 'Getting Around Vietnam',
+    gettingAroundVietnamTipsBody:
+      'Grab is great for rides and food delivery; download it and set payment before your trip.\nFor taxis, Mai Linh, Vinasun, and Xanh are typically reliable; always watch the meter.\nMany taxis are cash-based and drivers may not always carry exact change.\nSome taxi drivers offer full-day service, which can be convenient for multiple stops and local recommendations.\nMotorbikes are a great way to experience Vietnam; you can legally drive under 50cc.\nFor 50cc+ bikes, you need proper licensing and the correct permit; Vietnam officially recognizes the 1968 IDP (not the 1949 version typically issued in the US).\nPublic transport reliability can vary; private shuttle/bus options are often more dependable.\nFUTA buses are a popular option for routes like Ho Chi Minh City <-> Sa Dec: https://futabus.vn/\nHiring a private car/driver is common; a Sa Dec <-> Ho Chi Minh City roundtrip day with multiple stops is often around $100-$150.\nPedestrian infrastructure is limited; cross predictably, avoid sudden movement, and walk with others when needed.',
+    foodAndBeverageTipsTitle: 'Food / Beverages',
+    foodAndBeverageTipsBody:
+      'Smaller restaurants may not reliably accommodate strict allergies, so plan conservatively if this is important.\nVietnam is generally very friendly for vegetarian, vegan, and pescatarian diets.\nIngredient translation guide: https://travelbud.com/travelbud-blog/blog/vietnam/vegetarian-in-vietnam-a-crash-course\nWe highly recommend local fruit, vegetables, freshwater fish, crab, and seafood.\nSa Dec and southern cuisine often has sweet-savory flavor profiles and frequent use of coconut, citrus, and spices.\nIn Sa Dec, try hu tieu (dry with sauce + side soup, or wet in broth).\nDa Nang and central Vietnam are seafood-heavy, with lots of wrap-style dishes, banh xeo, nem, bo la lot, and Bun bo Hue.',
+    safetyAndSanitationTipsTitle: 'Safety / Sanitation',
+    safetyAndSanitationTipsBody:
+      'May is hot and humid, so drink water + electrolytes and stay covered to avoid heat exhaustion.\nUse sunscreen; many people prefer sunscreen products bought in Asia.\nPublic water fountains are uncommon, so carry your own water.\nWear breathable, flowy fabrics; long sleeves and pants can help with heat and sun.\nMasks are useful outdoors (walking or motorbike) because of dust and air pollution.\nSome public restrooms charge 1k-2k VND and may not include soap or toilet paper, so carry tissues, sanitizer, and soap sheets.\nDo not drink tap water. Use ice only when it appears factory-moulded.\nTap water has usually been fine for brushing teeth and washing produce for us, but sensitive stomachs should be more cautious.\nCarrying anti-diarrheal medicine (for example, Imodium) is practical.\nVietnam has generally felt safe for us, but stay alert and keep an eye on your belongings.',
+    miscTravelTipsTitle: 'Misc Tips',
+    miscTravelTipsBody:
+      'Vietnam has a strong morning culture; many places get active around 5-6 AM.\nBreakfast options can sell out by about 9 AM, so early starts are often rewarding.\nMidday is often very hot, and many locals rest after lunch before activity picks up around 3:30 PM.\nPlanning activities around early mornings and late afternoons can make your days more comfortable.\nVietnam Coracle is a useful off-the-beaten-path travel guide: https://www.vietnamcoracle.com',
 
     // Things to Do page
     thingsToDoTitle: 'Things to Do',
@@ -699,6 +746,18 @@ export const translations: Record<Language, Translations> = {
     accommodationAnswer: 'We recommend staying at Fusion Resort & Villas Da Nang or nearby hotels in the Da Nang area. The resort offers special rates for wedding guests - please contact us for details.',
     howToGetFromAirport: 'How do I get from the airport to the venue?',
     airportTransportAnswer: 'Da Nang International Airport is about 20-30 minutes from Fusion Resort & Villas. You can take a taxi, Grab (ride-sharing app), or arrange airport transfer through the resort. We can help coordinate group transportation if needed - see RSVP for details.',
+    arrivalAndImmigrationTipsQuestion: 'Any arrival or immigration tips for Vietnam airports?',
+    arrivalAndImmigrationTipsAnswer:
+      '* Immigration at international airports can take a while (around 1 hour in our experience), so head to the line quickly after landing.\n* If possible, use the restroom on the plane or after immigration at baggage claim.\n* Some airports offer fast-track immigration services.\n* Around baggage claim, people may offer luggage help and usually expect a tip.',
+    cashAndCardsQuestion: 'Should I use cash, cards, or ATM withdrawals in Vietnam?',
+    cashAndCardsAnswer:
+      '* Vietnam is still mostly cash-based, though e-payments are increasing.\n* Exchange only a small amount at the airport, then exchange in the city for better rates.\n* Crisp USD $100 bills usually get better exchange rates.\n* ATM withdrawal is also common; in our experience VPBank has had no ATM fee with around 20 million VND max per withdrawal.\n* Prices often use k shorthand (for example, 100k = 100,000 VND).',
+    bestWayToGetAroundQuestion: 'What is the best way to get around in Vietnam?',
+    bestWayToGetAroundAnswer:
+      '* Grab is usually the easiest for rides and food delivery; set up the app and payment before your trip.\n* For taxis, Mai Linh, Vinasun, and Xanh are commonly trusted brands; keep an eye on the meter.\n* Taxis are often cash-based and drivers may not always have exact change.\n* For intercity routes, private cars or private buses/shuttles are often more reliable than public transport.',
+    healthAndSafetyTipsQuestion: 'Any practical health and safety tips?',
+    healthAndSafetyTipsAnswer:
+      '* May is hot and humid, so hydrate well (water + electrolytes) and pace midday activities.\n* Wear breathable clothing, sunscreen, and a mask outdoors if you are sensitive to dust/pollution.\n* Avoid drinking tap water; use ice only when it appears factory-moulded.\n* Some public restrooms may charge a small fee and may not provide soap/tissue, so carry your own essentials.\n* Vietnam has generally felt safe for us, but still stay aware of your surroundings and belongings.',
     additionalQuestions: 'Additional Questions',
     contactUs: 'How can I contact you with questions?',
     contactUsAnswer: 'Feel free to reach out to us with any questions! You can contact either Hang or Eric at ohhangno@gmail.com, or apinecone@ on IG, or directly through Messenger if you have us friended!',
@@ -1057,6 +1116,29 @@ export const translations: Record<Language, Translations> = {
     sgnToDadDescription: 'Chúng tôi sẽ cung cấp phương tiện di chuyển đến SGN vào ngày sau lễ trà. Chúng tôi khuyên bạn nên chọn phương án này vì có nhiều lựa chọn chuyến bay từ SGN đến DAD hơn.',
     vcaToDad: 'VCA → DAD',
     vcaToDadDescription: 'Vietjet có các chuyến bay thẳng hàng ngày (một lần mỗi ngày) và Vietnam Airlines có một chuyến bay thẳng duy nhất (vào ngày 22). Lưu ý rằng Vietjet là hãng hàng không giá rẻ nếu bạn chọn phương án này.',
+    travelTipsTitle: 'Mẹo Du Lịch',
+    travelTipsSubtitle: 'Gợi ý hữu ích về sân bay, tiền tệ, di chuyển, ăn uống và sinh hoạt hằng ngày tại Việt Nam',
+    airportAndFlightTipsTitle: 'Sân Bay / Chuyến Bay',
+    airportAndFlightTipsBody:
+      'Hàng chờ nhập cảnh ở các sân bay quốc tế tại Việt Nam có thể mất khoảng 1 giờ, nên hãy ra hàng nhập cảnh ngay khi xuống máy bay.\nNếu có thể, hãy đi vệ sinh trên máy bay hoặc chờ qua khu nhập cảnh rồi mới đi ở khu lấy hành lý.\nCó dịch vụ làm thủ tục nhập cảnh nhanh, nhưng tụi mình chưa tự dùng dịch vụ này.\nGần khu lấy hành lý có thể có người đề nghị giúp mang đồ, và thông thường họ sẽ mong được tip.\nVới chuyến bay nội địa, tụi mình khuyến nghị Vietnam Airlines khi có thể; Vietjet đôi lúc kém ổn định hơn.',
+    simAndAccessTipsTitle: 'SIM / Kết Nối',
+    simAndAccessTipsBody:
+      'Gần đây tụi mình dùng eSIM (ví dụ Airalo) cho tiện, nhưng gói data-only thường không có gọi điện.\nĐa số quán ăn / cửa hàng có Wi-Fi và thường sẵn sàng chia sẻ mật khẩu.',
+    currencyAndMoneyTipsTitle: 'Tiền Tệ / Thanh Toán',
+    currencyAndMoneyTipsBody:
+      'Nên chỉ đổi một ít tiền ở sân bay, sau đó đổi trong thành phố (thường ở tiệm vàng) để có tỷ giá tốt hơn.\nThường sẽ có tỷ giá tốt nhất với tờ USD 100 mới, phẳng, đẹp.\nRút ATM cũng là lựa chọn tốt; theo trải nghiệm của tụi mình, VPBank có thời điểm không thu phí ATM, giới hạn khoảng 20 triệu VND/lần rút.\nViệt Nam vẫn chủ yếu dùng tiền mặt, nhưng thanh toán điện tử đang tăng nhanh.\n500,000 VND là tờ tiền mệnh giá lớn nhất, và giá thường ghi tắt bằng k (ví dụ 100k = 100,000 VND).\nTỷ giá tham khảo tháng 4/2026: 50k ~ $2, 100k ~ $4, 500k ~ $20, 1M ~ $40.\nGiá tham khảo khu dân cư ở Sa Đéc: phở 45k-80k, hủ tiếu 15k-50k, xôi 10k, cà phê 10k-100k, bánh mì 15k-35k, dầu gội 80k+, dép 50k-120k, giày 250k-500k+.',
+    gettingAroundVietnamTipsTitle: 'Di Chuyển Ở Việt Nam',
+    gettingAroundVietnamTipsBody:
+      'Grab rất tiện cho đi lại và giao đồ ăn; nên tải app và thiết lập thanh toán trước chuyến đi.\nVới taxi, Mai Linh, Vinasun và Xanh thường đáng tin; luôn chú ý đồng hồ tính cước.\nNhiều taxi nhận tiền mặt và tài xế có thể không luôn có tiền lẻ.\nMột số tài xế sẽ đề nghị chở nguyên ngày, khá tiện cho lịch trình nhiều điểm và hay có gợi ý địa phương tốt.\nXe máy là cách rất hay để trải nghiệm Việt Nam; bạn được phép lái xe dưới 50cc.\nVới xe trên 50cc, bạn cần bằng lái hợp lệ và giấy phép phù hợp; Việt Nam chính thức công nhận IDP theo Công ước 1968 (không phải bản 1949 thường cấp ở Mỹ).\nPhương tiện công cộng có thể thiếu ổn định tùy nơi; xe khách / shuttle tư nhân thường đáng tin hơn.\nXe FUTA là lựa chọn phổ biến cho tuyến như TP.HCM <-> Sa Đéc: https://futabus.vn/\nThuê xe riêng có tài xế rất phổ biến; chuyến khứ hồi Sa Đéc <-> TP.HCM trong ngày, nhiều điểm dừng, thường khoảng $100-$150.\nVỉa hè cho người đi bộ thường hạn chế; khi sang đường hãy đi đều, dễ đoán, tránh đổi hướng đột ngột và đi cùng người khác khi cần.',
+    foodAndBeverageTipsTitle: 'Ăn Uống',
+    foodAndBeverageTipsBody:
+      'Các quán nhỏ có thể khó đáp ứng dị ứng thực phẩm nghiêm ngặt, nên cân nhắc chọn món cẩn thận nếu bạn có yêu cầu chặt.\nViệt Nam nói chung rất thân thiện với chế độ ăn chay, thuần chay và pescatarian.\nTrang tham khảo dịch nguyên liệu: https://travelbud.com/travelbud-blog/blog/vietnam/vegetarian-in-vietnam-a-crash-course\nTụi mình rất khuyên bạn thử trái cây, rau, cá nước ngọt, cua và hải sản địa phương.\nẨm thực Sa Đéc / miền Nam thường thiên vị ngọt-mặn, dùng nhiều dừa, vị chua cam quýt và gia vị.\nỞ Sa Đéc, nên thử hủ tiếu (ăn khô với sốt + nước lèo riêng, hoặc ăn nước).\nĐà Nẵng và miền Trung nổi tiếng hải sản, các món cuốn, bánh xèo, nem, bò lá lốt và bún bò Huế.',
+    safetyAndSanitationTipsTitle: 'An Toàn / Vệ Sinh',
+    safetyAndSanitationTipsBody:
+      'Tháng 5 nóng và ẩm, nên uống đủ nước + điện giải và che chắn để tránh kiệt sức vì nhiệt.\nNên dùng kem chống nắng; nhiều người thích các loại kem chống nắng mua tại châu Á.\nÍt có vòi nước công cộng, nên chủ động mang nước theo.\nƯu tiên quần áo thoáng, rộng; tay dài và quần dài có thể giúp mát và chống nắng tốt.\nĐeo khẩu trang khi đi ngoài đường (đi bộ / đi xe máy) giúp giảm bụi và ô nhiễm.\nMột số nhà vệ sinh công cộng thu 1k-2k VND và có thể không có giấy hay xà phòng, nên mang giấy, nước rửa tay và giấy xà phòng.\nKhông uống nước máy. Chỉ dùng đá khi nhìn giống đá làm bằng khuôn công nghiệp.\nTheo trải nghiệm của tụi mình, nước máy thường vẫn ổn để đánh răng và rửa rau, nhưng ai bụng yếu nên cẩn thận hơn.\nMang theo thuốc chống tiêu chảy (ví dụ Imodium) là rất thực tế.\nViệt Nam nhìn chung khá an toàn với tụi mình, nhưng vẫn nên luôn cảnh giác và giữ kỹ đồ đạc.',
+    miscTravelTipsTitle: 'Mẹo Linh Tinh',
+    miscTravelTipsBody:
+      'Việt Nam có nhịp sống buổi sáng rất mạnh; nhiều nơi bắt đầu nhộn nhịp từ 5-6 giờ sáng.\nNhiều món sáng có thể bán hết trước khoảng 9 giờ, nên dậy sớm thường rất đáng.\nGiữa trưa thường rất nóng, nhiều người nghỉ sau ăn trưa rồi hoạt động lại từ khoảng 3:30 chiều.\nLên lịch đi chơi vào sáng sớm và chiều muộn sẽ dễ chịu hơn nhiều.\nVietnam Coracle là nguồn hướng dẫn đi điểm ít người biết khá hay: https://www.vietnamcoracle.com',
 
     // Things to Do page
     thingsToDoTitle: 'Hoạt Động',
@@ -1133,6 +1215,18 @@ export const translations: Record<Language, Translations> = {
     accommodationAnswer: 'Chúng tôi khuyên bạn nên ở tại Fusion Resort & Villas Đà Nẵng hoặc các khách sạn gần đó trong khu vực Đà Nẵng. Khu nghỉ dưỡng cung cấp giá đặc biệt cho khách mời đám cưới - vui lòng liên hệ với chúng tôi để biết chi tiết. Cũng có nhiều khách sạn đẹp ven biển trong khu vực.',
     howToGetFromAirport: 'Làm sao để đi từ sân bay đến địa điểm?',
     airportTransportAnswer: 'Sân bay Quốc tế Đà Nẵng cách Fusion Resort & Villas khoảng 20-30 phút. Bạn có thể đi taxi, Grab (ứng dụng đi chung xe), hoặc sắp xếp đưa đón sân bay thông qua khu nghỉ dưỡng. Chúng tôi có thể giúp điều phối vận chuyển nhóm nếu cần - xem RSVP để biết chi tiết.',
+    arrivalAndImmigrationTipsQuestion: 'Có mẹo nào khi nhập cảnh ở sân bay Việt Nam không?',
+    arrivalAndImmigrationTipsAnswer:
+      '* Hàng chờ nhập cảnh ở sân bay quốc tế có thể khá lâu (khoảng 1 giờ theo trải nghiệm của tụi mình), nên hãy vào hàng sớm ngay sau khi hạ cánh.\n* Nếu có thể, đi vệ sinh trên máy bay hoặc sau khi qua nhập cảnh ở khu lấy hành lý.\n* Một số sân bay có dịch vụ làm thủ tục nhập cảnh nhanh.\n* Gần khu lấy hành lý có thể có người đề nghị giúp mang đồ, và thường sẽ mong được tip.',
+    cashAndCardsQuestion: 'Nên dùng tiền mặt, thẻ hay rút ATM ở Việt Nam?',
+    cashAndCardsAnswer:
+      '* Việt Nam vẫn chủ yếu dùng tiền mặt, dù thanh toán điện tử đang tăng lên.\n* Nên chỉ đổi một ít ở sân bay, sau đó đổi trong thành phố để có tỷ giá tốt hơn.\n* Tờ USD $100 mới, đẹp thường có tỷ giá tốt hơn.\n* Rút ATM cũng rất phổ biến; theo trải nghiệm của tụi mình, VPBank từng không thu phí ATM, giới hạn khoảng 20 triệu VND/lần.\n* Giá thường ghi tắt bằng k (ví dụ 100k = 100,000 VND).',
+    bestWayToGetAroundQuestion: 'Cách di chuyển thuận tiện nhất ở Việt Nam là gì?',
+    bestWayToGetAroundAnswer:
+      '* Grab thường là cách tiện nhất để đi lại và gọi đồ ăn; nên cài app và thiết lập thanh toán trước chuyến đi.\n* Với taxi, Mai Linh, Vinasun và Xanh là các hãng thường đáng tin; nên theo dõi đồng hồ tính cước.\n* Taxi thường nhận tiền mặt và tài xế không phải lúc nào cũng có tiền lẻ.\n* Với quãng đường liên tỉnh, xe riêng hoặc shuttle/xe khách tư nhân thường ổn định hơn phương tiện công cộng.',
+    healthAndSafetyTipsQuestion: 'Có lưu ý thực tế nào về sức khỏe và an toàn không?',
+    healthAndSafetyTipsAnswer:
+      '* Tháng 5 nóng và ẩm, nên uống đủ nước (kèm điện giải) và hạn chế hoạt động nặng vào giữa trưa.\n* Mặc đồ thoáng khí, dùng kem chống nắng, và đeo khẩu trang ngoài trời nếu bạn nhạy với bụi/ô nhiễm.\n* Không uống nước máy; chỉ dùng đá khi trông giống đá làm khuôn công nghiệp.\n* Một số nhà vệ sinh công cộng thu phí nhỏ và có thể không có xà phòng/giấy, nên mang sẵn đồ cá nhân.\n* Việt Nam nhìn chung khá an toàn với tụi mình, nhưng vẫn nên để ý đồ đạc và môi trường xung quanh.',
     additionalQuestions: 'Câu Hỏi Bổ Sung',
     contactUs: 'Làm sao tôi có thể liên hệ với bạn để đặt câu hỏi?',
     contactUsAnswer: 'Đừng ngại liên hệ với chúng tôi với bất kỳ câu hỏi nào! Bạn có thể liên hệ Hang hoặc Eric tại ohhangno@gmail.com, hoặc apinecone@ trên IG, hoặc trực tiếp qua Messenger nếu bạn đã kết bạn với chúng tôi!',
