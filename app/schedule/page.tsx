@@ -167,8 +167,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T080000';
-    const endDate = '20260520T141500';
+    const startDate = '20260520T073000';
+    const endDate = '20260520T134500';
 
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
     
@@ -180,8 +180,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T080000';
-    const endDate = '20260520T141500';
+    const startDate = '20260520T073000';
+    const endDate = '20260520T134500';
     const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     
     const icsContent = [
@@ -664,7 +664,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:00 – 8:30 AM')}
+                          {formatTime('7:30 – 8:00 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -684,7 +684,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:30 – 8:45 AM')}
+                          {formatTime('8:00 – 8:15 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -704,7 +704,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:45 – 9:30 AM')}
+                          {formatTime('8:15 – 9:00 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -724,7 +724,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('9:30 – 9:45 AM')}
+                          {formatTime('9:00 – 9:15 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -744,7 +744,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('9:45 – 10:30 AM')}
+                          {formatTime('9:15 – 10:00 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -764,7 +764,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('11:30 AM – 12:30 PM')}
+                          {formatTime('11:00 AM – 12:00 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -784,7 +784,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('12:30 – 12:45 PM')}
+                          {formatTime('12:00 – 12:15 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -804,7 +804,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('12:45 – 2:15 PM')}
+                          {formatTime('12:15 – 1:45 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
