@@ -1053,8 +1053,8 @@ export default function PetCats() {
             </div>
           ) : leaderboard.length > 0 ? (
             <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border-2 border-amber-200">
-              <div className="space-y-2">
-                {leaderboard.slice(0, 10).map((entry, index) => (
+              <div className="max-h-[min(70vh,560px)] overflow-y-auto space-y-2 pr-1">
+                {leaderboard.map((entry, index) => (
                   <div
                     key={entry.name}
                     className={`px-4 py-3 rounded-lg ${
@@ -1092,7 +1092,8 @@ export default function PetCats() {
                     </div>
                   </div>
                 ))}
-                
+              </div>
+
                 {/* All Cats Total Row */}
                 {(() => {
                   const totalCypress = leaderboard.reduce((sum, entry) => sum + entry.cypress, 0);
@@ -1130,7 +1131,6 @@ export default function PetCats() {
                     </div>
                   );
                 })()}
-              </div>
             </div>
           ) : (
             <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border-2 border-amber-200">

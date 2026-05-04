@@ -20,7 +20,26 @@ export interface Translations {
   venmoStep2: string;
   venmoMessageHoneymoon: string;
   venmoMessageCatToys: string;
-  charityComingSoon: string;
+  registryCharityModalTitle: string;
+  registryCharityDonationOptionalBlurb: string;
+  donationNameLabel: string;
+  donationAmountLabel: string;
+  donationCharityLabel: string;
+  donationCharitySelectPlaceholder: string;
+  donationIDonatedButton: string;
+  donationSubmitting: string;
+  donationThankYouRecorded: string;
+  donationMissingFields: string;
+  donationErrorGeneric: string;
+  registryCharityCPAFHeading: string;
+  registryCharityCPAFDescription: string;
+  registryCharityAnimalSheltersHeading: string;
+  registryCharitySJKittenLinkLabel: string;
+  registryCharitySJWishlistLinkLabel: string;
+  donationCharityOptionCPA: string;
+  donationCharityOptionSJACC: string;
+  donationCharityOptionEBARR: string;
+  donationCharityOptionOKC: string;
   close: string;
   qa: string;
   messageBoard: string;
@@ -54,7 +73,16 @@ export interface Translations {
   googlePhotosAlbum: string;
   applePhotosAlbum: string;
   seatingChart: string;
-  
+  seatingLeftTable: string;
+  seatingRightTable: string;
+  seatingChartLoading: string;
+  seatingChartError: string;
+  seatingChartEmpty: string;
+  seatingChartNoNamesForTable: string;
+  danceFloor: string;
+  seatingFindSeatFor: string;
+  seatingFindSeatPlaceholder: string;
+
   // Login page
   hangAndEric: string;
   may232026: string;
@@ -100,10 +128,12 @@ export interface Translations {
   saDecVietnam: string;
   may20th2026: string;
   groomProcession: string;
+  theEntrance: string;
   exchangeOfGifts: string;
   arrivalWelcomeExchangeOfGifts: string;
   ancestralCeremony: string;
   teaCeremonyRitual: string;
+  paebaekRituals: string;
   guestWelcomingLunch: string;
   grandEntrance: string;
   lunch: string;
@@ -464,14 +494,36 @@ export const translations: Record<Language, Translations> = {
     registrySubtitle: 'Your presence at our wedding is already a great gift to us!',
     registryHowever: 'However, if you insist, here are some options!',
     honeymoonFund: 'Honeymoon Fund',
-    charityOfOurChoice: 'Charity of Our Choice',
+    charityOfOurChoice: 'Charity & animal shelters',
     toysForOurCats: 'Toys for Our Cats',
     venmoInstructions: 'Instructions',
     venmoStep1: 'Go to Venmo:',
     venmoStep2: 'In the message, write:',
     venmoMessageHoneymoon: 'honeymoon',
     venmoMessageCatToys: 'cat toys',
-    charityComingSoon: 'Coming soon - Hang & Eric are deciding a worthy charity of choice!',
+    registryCharityModalTitle: 'Charity & animal shelters',
+    registryCharityDonationOptionalBlurb:
+      '(Optional) After donating, come back here and mark your donation: enter the amount, choose which organization below, and click “I donated!”',
+    donationNameLabel: 'Your name',
+    donationAmountLabel: 'Donation amount',
+    donationCharityLabel: 'Organization',
+    donationCharitySelectPlaceholder: 'Select where you donated',
+    donationIDonatedButton: 'I donated!',
+    donationSubmitting: 'Saving…',
+    donationThankYouRecorded: 'Thank you — we recorded your donation.',
+    donationMissingFields:
+      'Please enter your name, donation amount, and choose an organization.',
+    donationErrorGeneric: 'Something went wrong. Please try again.',
+    registryCharityCPAFHeading: 'Center for Pacific Asian Family',
+    registryCharityCPAFDescription:
+      'Supports survivors of domestic and sexual violence.',
+    registryCharityAnimalSheltersHeading: 'Animal shelters',
+    registryCharitySJKittenLinkLabel: 'San Jose Animal Care Center — kitten fund',
+    registryCharitySJWishlistLinkLabel: 'San Jose Animal Care Center — wishlist',
+    donationCharityOptionCPA: 'Center for Pacific Asian Family',
+    donationCharityOptionSJACC: 'San Jose Animal Care Center',
+    donationCharityOptionEBARR: 'East Bay Animal Rescue',
+    donationCharityOptionOKC: 'Orphan Kitten Club',
     close: 'Close',
     qa: 'Q&A',
     messageBoard: 'Message Board',
@@ -543,10 +595,12 @@ export const translations: Record<Language, Translations> = {
     saDecVietnam: 'Sa Dec, Vietnam',
     may20th2026: 'May 20th, 2026',
     groomProcession: 'Groom procession',
+    theEntrance: 'The entrance',
     exchangeOfGifts: 'Exchange of gifts',
     arrivalWelcomeExchangeOfGifts: 'Arrival, Welcome & Exchange of Gifts',
     ancestralCeremony: 'Ancestral Ceremony',
     teaCeremonyRitual: 'Tea Ceremony',
+    paebaekRituals: 'Paebaek Rituals',
     guestWelcomingLunch: 'Guest Welcoming For Lunch',
     grandEntrance: 'Grand Entrance',
     lunch: 'Lunch Service',
@@ -918,7 +972,16 @@ export const translations: Record<Language, Translations> = {
     pleaseAddYourPhotosHere: 'Please add your photos here',
     googlePhotosAlbum: 'Google Photos Album',
     applePhotosAlbum: 'Apple Photos Album',
-    seatingChart: 'Seating Chart',
+    seatingChart: 'Reception seating chart',
+    seatingLeftTable: 'Left table',
+    seatingRightTable: 'Right table',
+    seatingChartLoading: 'Loading seating…',
+    seatingChartError: 'We could not load the seating chart. Please try again later.',
+    seatingChartEmpty: 'Seating will show here once names are added to the spreadsheet.',
+    seatingChartNoNamesForTable: 'No seats listed for this table.',
+    danceFloor: 'Dance floor',
+    seatingFindSeatFor: 'Find seat for:',
+    seatingFindSeatPlaceholder: 'Part of a name or full name — comma-separated for several',
   },
   vi: {
     // Common
@@ -933,14 +996,36 @@ export const translations: Record<Language, Translations> = {
     registrySubtitle: 'Sự có mặt của bạn tại đám cưới của chúng tôi đã là món quà tuyệt vời!',
     registryHowever: 'Tuy nhiên, nếu bạn khăng khăng, đây là một số lựa chọn!',
     honeymoonFund: 'Quỹ Tuần Trăng Mật',
-    charityOfOurChoice: 'Từ Thiện Theo Lựa Chọn Của Chúng Tôi',
+    charityOfOurChoice: 'Từ thiện & trại cứu hộ động vật',
     toysForOurCats: 'Đồ Chơi Cho Mèo Của Chúng Tôi',
     venmoInstructions: 'Hướng Dẫn',
     venmoStep1: 'Truy cập Venmo:',
     venmoStep2: 'Trong tin nhắn, viết:',
     venmoMessageHoneymoon: 'honeymoon',
     venmoMessageCatToys: 'cat toys',
-    charityComingSoon: 'Sắp có - Hang & Eric đang quyết định một tổ chức từ thiện xứng đáng!',
+    registryCharityModalTitle: 'Từ thiện & trại cứu hộ động vật',
+    registryCharityDonationOptionalBlurb:
+      '(Tùy chọn) Sau khi quyên góp, quay lại đây và ghi nhận: nhập số tiền, chọn tổ chức bên dưới, rồi nhấn “Tôi đã quyên góp!”',
+    donationNameLabel: 'Tên của bạn',
+    donationAmountLabel: 'Số tiền quyên góp',
+    donationCharityLabel: 'Tổ chức',
+    donationCharitySelectPlaceholder: 'Chọn nơi bạn đã quyên góp',
+    donationIDonatedButton: 'Tôi đã quyên góp!',
+    donationSubmitting: 'Đang lưu…',
+    donationThankYouRecorded: 'Cảm ơn bạn — chúng tôi đã ghi nhận khoản quyên góp.',
+    donationMissingFields:
+      'Vui lòng nhập tên, số tiền quyên góp và chọn tổ chức.',
+    donationErrorGeneric: 'Đã xảy ra lỗi. Vui lòng thử lại.',
+    registryCharityCPAFHeading: 'Center for Pacific Asian Family',
+    registryCharityCPAFDescription:
+      'Hỗ trợ nạn nhân bạo lực gia đình và bạo lực tình dục.',
+    registryCharityAnimalSheltersHeading: 'Trại cứu hộ động vật',
+    registryCharitySJKittenLinkLabel: 'San Jose Animal Care Center — quỹ mèo con',
+    registryCharitySJWishlistLinkLabel: 'San Jose Animal Care Center — danh sách mong muốn',
+    donationCharityOptionCPA: 'Center for Pacific Asian Family',
+    donationCharityOptionSJACC: 'San Jose Animal Care Center',
+    donationCharityOptionEBARR: 'East Bay Animal Rescue',
+    donationCharityOptionOKC: 'Orphan Kitten Club',
     close: 'Đóng',
     qa: 'Hỏi đáp',
     messageBoard: 'Bảng Tin Nhắn',
@@ -1012,10 +1097,12 @@ export const translations: Record<Language, Translations> = {
     saDecVietnam: 'Sa Đéc, Việt Nam',
     may20th2026: '20 tháng 5, 2026',
     groomProcession: 'Đoàn rước chú rể',
+    theEntrance: 'Lễ vào nhà',
     exchangeOfGifts: 'Trao đổi quà cưới',
     arrivalWelcomeExchangeOfGifts: 'Đón tiếp, chào mừng & trao quà',
     ancestralCeremony: 'Lễ gia tiên',
     teaCeremonyRitual: 'Lễ trà',
+    paebaekRituals: 'Lễ Paebaek',
     guestWelcomingLunch: 'Đón tiếp khách dự tiệc trưa',
     grandEntrance: 'Nhập tiệc',
     lunch: 'Phục vụ tiệc trưa',
@@ -1387,6 +1474,15 @@ export const translations: Record<Language, Translations> = {
     pleaseAddYourPhotosHere: 'Vui lòng thêm ảnh của bạn tại đây',
     googlePhotosAlbum: 'Album Google Photos',
     applePhotosAlbum: 'Album Apple Photos',
-    seatingChart: 'Sơ đồ chỗ ngồi',
+    seatingChart: 'Sơ đồ chỗ ngồi tiệc chiêu đãi',
+    seatingLeftTable: 'Bàn bên trái',
+    seatingRightTable: 'Bàn bên phải',
+    seatingChartLoading: 'Đang tải sơ đồ chỗ ngồi…',
+    seatingChartError: 'Không tải được sơ đồ chỗ ngồi. Vui lòng thử lại sau.',
+    seatingChartEmpty: 'Sơ đồ sẽ hiển thị khi đã thêm tên vào bảng tính.',
+    seatingChartNoNamesForTable: 'Chưa có danh sách chỗ cho bàn này.',
+    danceFloor: 'Sàn nhảy',
+    seatingFindSeatFor: 'Tìm chỗ cho:',
+    seatingFindSeatPlaceholder: 'Một phần hoặc họ tên đầy đủ — nhiều người thì cách nhau bằng dấu phẩy',
   },
 };

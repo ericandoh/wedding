@@ -13,7 +13,8 @@ import {
   UserGroupIcon,
   GiftIcon,
   BuildingStorefrontIcon,
-  MapPinIcon
+  MapPinIcon,
+  HeartIcon
 } from '@heroicons/react/24/outline';
 
 export default function Schedule() {
@@ -167,8 +168,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T073000';
-    const endDate = '20260520T134500';
+    const startDate = '20260520T070000';
+    const endDate = '20260520T131500';
 
     const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&ctz=Asia/Ho_Chi_Minh`;
     
@@ -180,8 +181,8 @@ export default function Schedule() {
     const location = '220 Đường Lê Lợi, khóm 1, Sa Đéc, Đồng Tháp, Vietnam';
     const description = 'Join us for Hang and Eric\'s tea ceremony celebration!';
     
-    const startDate = '20260520T073000';
-    const endDate = '20260520T134500';
+    const startDate = '20260520T070000';
+    const endDate = '20260520T131500';
     const timestamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     
     const icsContent = [
@@ -317,7 +318,7 @@ export default function Schedule() {
 
   // Animate tea ceremony timeline items (starts after western wedding)
   useEffect(() => {
-    const totalTeaItems = 8;
+    const totalTeaItems = 10;
     const timers: NodeJS.Timeout[] = [];
     const startDelay = 1600; // Start after western wedding animation (200 + 7 * 200)
     
@@ -623,11 +624,11 @@ export default function Schedule() {
                   </p>
                   <p className="text-body text-xl text-gray-600 mt-2 mb-4">
                     Restaurant: <a
-                      href="https://maps.app.goo.gl/NSkf87Zj8SvVdjuK6"
+                      href="https://share.google/px4D5PzH0PDA9nia0"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-                    >Nhà Hàng Hai Lúa Sa Đéc</a>, {t.saDecVietnam}
+                    >Dragon Palace Sadec</a>, {t.saDecVietnam}
                   </p>
                   
                   {/* Calendar Buttons */}
@@ -664,7 +665,7 @@ export default function Schedule() {
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('7:30 – 8:00 AM')}
+                          {formatTime('7:00 – 7:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -677,14 +678,34 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 2: Arrival, Welcome & Exchange of Gifts */}
+                    {/* Event 2: The entrance */}
                     <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <BuildingStorefrontIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('7:30 – 7:45 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.theEntrance}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 3: Arrival, Welcome & Exchange of Gifts */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <GiftIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:00 – 8:15 AM')}
+                          {formatTime('7:45 – 8:40 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -697,14 +718,14 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 3: Ancestral Ceremony */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 4: Ancestral Ceremony */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <SparklesIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('8:15 – 9:00 AM')}
+                          {formatTime('8:40 – 8:55 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -717,14 +738,14 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 4: Tea Ceremony */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 5: Tea Ceremony */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <BeakerIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('9:00 – 9:15 AM')}
+                          {formatTime('8:55 – 9:10 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -737,14 +758,34 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 5: Photography Session */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 6: Paebaek Rituals */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                      <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
+                        <HeartIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-base text-gray-800 font-semibold">
+                          {formatTime('9:10 – 9:55 AM')}
+                        </div>
+                      </div>
+                      <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
+                        <div className="text-body text-xl text-gray-700 font-medium">
+                          {t.paebaekRituals}
+                        </div>
+                        <div className="text-body text-xs text-gray-500 mt-0.5">
+                          {t.teaCeremonyGroomLocation}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Event 7: Photography Session */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CameraIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('9:15 – 10:00 AM')}
+                          {formatTime('9:55 – 10:25 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -757,14 +798,14 @@ export default function Schedule() {
                       </div>
                     </div>
 
-                    {/* Event 6: Guest Welcoming for Lunch */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 8: Guest Welcoming for Lunch */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(7) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <HandRaisedIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('11:00 AM – 12:00 PM')}
+                          {formatTime('10:50 – 11:30 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -772,19 +813,19 @@ export default function Schedule() {
                           {t.guestWelcomingLunch}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
+                          Dragon Palace Sadec - Restaurant
                         </div>
                       </div>
                     </div>
 
-                    {/* Event 7: Grand Entrance */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 9: Grand Entrance */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(8) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <Squares2X2Icon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('12:00 – 12:15 PM')}
+                          {formatTime('11:30 – 11:45 AM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -792,19 +833,19 @@ export default function Schedule() {
                           {t.grandEntrance}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
+                          Dragon Palace Sadec - Restaurant
                         </div>
                       </div>
                     </div>
 
-                    {/* Event 8: Lunch Service */}
-                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(7) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                    {/* Event 10: Lunch Service */}
+                    <div className={`group relative flex items-center justify-center min-h-[40px] transition-all duration-500 cursor-pointer ${visibleTeaItems.includes(9) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                       <div className="absolute left-1/3 transform -translate-x-1/2 z-10 bg-white transition-transform duration-300 group-hover:scale-125">
                         <CakeIcon className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
                       </div>
                       <div className="absolute right-2/3 pr-6 text-right transition-transform duration-300 group-hover:scale-110">
                         <div className="text-body text-base text-gray-800 font-semibold">
-                          {formatTime('12:15 – 1:45 PM')}
+                          {formatTime('11:45 AM – 1:15 PM')}
                         </div>
                       </div>
                       <div className="absolute left-1/3 pl-12 text-left transition-transform duration-300 group-hover:scale-110">
@@ -812,7 +853,7 @@ export default function Schedule() {
                           {t.lunch}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          Nhà Hàng Hai Lúa Sa Đéc - Restaurant
+                          Dragon Palace Sadec - Restaurant
                         </div>
                       </div>
                     </div>
