@@ -673,7 +673,7 @@ export default function Schedule() {
                           {t.groomProcession}
                         </div>
                         <div className="text-body text-xs text-gray-500 mt-0.5">
-                          {t.teaCeremonyGroomLocation}
+                          {t.groomProcessionLocation}
                         </div>
                       </div>
                     </div>

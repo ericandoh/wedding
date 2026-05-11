@@ -162,6 +162,7 @@ export interface Translations {
   fusionMapTitle: string;
   fusionMapDescription: string;
   teaCeremonyGroomLocation: string;
+  groomProcessionLocation: string;
   teaCeremonyGiftsLocation: string;
   teaCeremonyLunchLocation: string;
 
@@ -629,6 +630,7 @@ export const translations: Record<Language, Translations> = {
     fusionMapTitle: 'Map - Fusion Resorts & Da Nang',
     fusionMapDescription: 'Tap a legend item or schedule event to highlight its location on the map.',
     teaCeremonyGroomLocation: "Hang's familial home",
+    groomProcessionLocation: 'Hotel',
     teaCeremonyGiftsLocation: 'Wedding hotel',
     teaCeremonyLunchLocation: 'Wedding hotel / restaurant',
 
@@ -1131,6 +1133,7 @@ export const translations: Record<Language, Translations> = {
     fusionMapTitle: 'Bản đồ - Fusion Resorts & Đà Nẵng',
     fusionMapDescription: 'Chạm vào mục chú thích hoặc sự kiện trong lịch trình để làm nổi bật vị trí trên bản đồ.',
     teaCeremonyGroomLocation: 'Nhà gia đình Hang',
+    groomProcessionLocation: 'Khách sạn',
     teaCeremonyGiftsLocation: 'Khách sạn tiệc cưới',
     teaCeremonyLunchLocation: 'Khách sạn / nhà hàng tiệc cưới',
 

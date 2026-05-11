@@ -2,7 +2,8 @@ import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
 // Tab "Seating" in the main wedding spreadsheet (GCP_SPREADSHEET_ID):
-// Column A = left table (order top-to-bottom), Column B = right table.
+// Columns A–B = one side vs opposite side of the left table (same row = facing pair).
+// Columns C–D = same for the right table.
 export async function GET() {
   try {
     const privateKey = process.env.GCP_PRIVATE_KEY?.replace(/\\n/g, '\n');
@@ -28,7 +29,7 @@ export async function GET() {
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'Seating!A:B',
+      range: 'Seating!A:D',
     });
 
     const rows = response.data.values || [];
@@ -36,11 +37,23 @@ export async function GET() {
     const isHeaderRow = (row: string[]) => {
       const a = (row[0] ?? '').trim();
       const b = (row[1] ?? '').trim();
-      if (!a && !b) return false;
-      return (
+      const c = (row[2] ?? '').trim();
+      const d = (row[3] ?? '').trim();
+      if (!a && !b && !c && !d) return false;
+      // Legacy two-column header: Left | Right
+      if (
         /^left$/i.test(a) &&
-        (/^right$/i.test(b) || /^table\s*2$/i.test(b) || /^b$/i.test(b))
-      );
+        (/^right$/i.test(b) || /^table\s*2$/i.test(b) || /^b$/i.test(b)) &&
+        !c &&
+        !d
+      ) {
+        return true;
+      }
+      // Four-column header, e.g. Left wall | Left aisle | Right wall | Right aisle
+      if (/^left/i.test(a) && /^left/i.test(b) && /^right/i.test(c)) {
+        return true;
+      }
+      return false;
     };
 
     let dataRows = rows;
@@ -48,17 +61,26 @@ export async function GET() {
       dataRows = dataRows.slice(1);
     }
 
-    const leftTable: string[] = [];
-    const rightTable: string[] = [];
+    type SeatingRow = {
+      leftA: string;
+      leftB: string;
+      rightA: string;
+      rightB: string;
+    };
+
+    const seatingRows: SeatingRow[] = [];
 
     for (const row of dataRows) {
-      const left = (row[0] ?? '').trim();
-      const right = (row[1] ?? '').trim();
-      if (left) leftTable.push(left);
-      if (right) rightTable.push(right);
+      const leftA = (row[0] ?? '').trim();
+      const leftB = (row[1] ?? '').trim();
+      const rightA = (row[2] ?? '').trim();
+      const rightB = (row[3] ?? '').trim();
+      if (leftA || leftB || rightA || rightB) {
+        seatingRows.push({ leftA, leftB, rightA, rightB });
+      }
     }
 
-    return NextResponse.json({ leftTable, rightTable });
+    return NextResponse.json({ seatingRows });
   } catch (error) {
     console.error('Error fetching seating chart:', error);
     return NextResponse.json(

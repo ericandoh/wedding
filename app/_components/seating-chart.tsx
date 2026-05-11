@@ -18,9 +18,15 @@ import {
   rsvpToDisplayNameParts,
 } from '#/lib/seating-highlight';
 
+type SeatingRow = {
+  leftA: string;
+  leftB: string;
+  rightA: string;
+  rightB: string;
+};
+
 type SeatingResponse = {
-  leftTable: string[];
-  rightTable: string[];
+  seatingRows: SeatingRow[];
 };
 
 type Side = 'left' | 'right';
@@ -40,7 +46,7 @@ function zigzagStep(index: number): 0 | 1 | 2 {
 const INDENT = ['pl-0', 'pl-5 sm:pl-9 sm:pl-11', 'pl-10 sm:pl-[4.25rem] sm:pl-[5.25rem]'] as const;
 const INDENT_R = ['pr-0', 'pr-5 sm:pr-9 sm:pr-11', 'pr-10 sm:pr-[4.25rem] sm:pr-[5.25rem]'] as const;
 
-/** Global stagger order: row 0 left, row 0 right, row 1 left, … (same rhythm as reading across tables). */
+/** Global stagger order: row 0 left table, row 0 right table, row 1 left, … */
 function buildRowStaggerOrders(leftLen: number, rightLen: number) {
   const leftOrder: number[] = [];
   const rightOrder: number[] = [];
@@ -63,15 +69,25 @@ function SeatPersonIcon() {
   );
 }
 
-function ZigzagNameList({
-  names,
+function nameHighlightClass(name: string, highlightTokens: string[]) {
+  const matched =
+    name.trim() !== '' &&
+    highlightTokens.length > 0 &&
+    highlightTokens.some((h) => namesMatchSeatToHighlight(name, h));
+  return matched
+    ? 'text-body break-words text-xs font-bold leading-snug text-gray-900 underline decoration-2 underline-offset-2 sm:text-sm md:text-base'
+    : 'text-body break-words text-xs leading-snug text-gray-800 sm:text-sm md:text-base';
+}
+
+function ZigzagPairedTableList({
+  rows,
   side,
   label,
   highlightTokens,
   rowOrders,
   visibleOrders,
 }: {
-  names: string[];
+  rows: { seatA: string; seatB: string }[];
   side: Side;
   label: string;
   highlightTokens: string[];
@@ -84,45 +100,52 @@ function ZigzagNameList({
         {label}
       </h3>
       <ul className="w-full min-w-0 overflow-visible px-0 sm:px-1 md:px-2" aria-label={label}>
-        {names.map((name, i) => {
+        {rows.map(({ seatA, seatB }, i) => {
           const step = zigzagStep(i);
-          const indentClass = side === 'left' ? INDENT[step] : INDENT_R[step];
+          /** Wall and aisle edges use opposite phases along the serpentine bend. */
+          const innerStep = (2 - step) as 0 | 1 | 2;
           const globalOrder = rowOrders[i] ?? i;
           const rowVisible = visibleOrders.includes(globalOrder);
-          const matched =
-            highlightTokens.length > 0 &&
-            highlightTokens.some((h) => namesMatchSeatToHighlight(name, h));
-          const nameClass = matched
-            ? 'text-body min-w-0 break-words text-xs font-bold leading-snug text-gray-900 underline decoration-2 underline-offset-2 sm:text-sm md:text-base'
-            : 'text-body min-w-0 break-words text-xs leading-snug text-gray-800 sm:text-sm md:text-base';
-          const rowInner =
-            side === 'left' ? (
-              <>
-                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
-                  <SeatPersonIcon />
-                </div>
-                <div className="min-w-0 transition-transform duration-300 group-hover:scale-110">
-                  <span className={nameClass}>{name}</span>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="min-w-0 transition-transform duration-300 group-hover:scale-110">
-                  <span className={nameClass}>{name}</span>
-                </div>
-                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
-                  <SeatPersonIcon />
-                </div>
-              </>
-            );
+          const showA = seatA.trim() !== '';
+          const showB = seatB.trim() !== '';
+          const classA = showA ? nameHighlightClass(seatA, highlightTokens) : 'text-body text-xs text-gray-300 sm:text-sm md:text-base';
+          const classB = showB ? nameHighlightClass(seatB, highlightTokens) : 'text-body text-xs text-gray-300 sm:text-sm md:text-base';
+          const labelParts = [showA ? seatA : null, showB ? seatB : null].filter(Boolean);
+          const rowLabel = labelParts.length > 0 ? labelParts.join(' · ') : `Row ${i + 1}`;
+          // Left physical table: wall = first cluster; right physical table: wall = second cluster (far from dance floor).
+          const outerClusterPad =
+            side === 'left' ? INDENT[step] : INDENT_R[step];
+          const innerClusterPad =
+            side === 'left' ? INDENT_R[innerStep] : INDENT[innerStep];
           return (
             <li
-              key={`${i}-${name}`}
-              className={`group flex cursor-pointer items-center gap-1.5 py-1 leading-snug transition-all duration-350 sm:gap-2.5 sm:py-1.5 ${indentClass} ${
-                side === 'left' ? 'justify-start' : 'justify-end'
-              } ${rowVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+              key={`${i}-${seatA}-${seatB}`}
+              aria-label={rowLabel}
+              className={`group flex w-full cursor-pointer items-center gap-0.5 py-1 leading-snug transition-all duration-350 sm:gap-1 sm:py-1.5 ${rowVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
             >
-              {rowInner}
+              <div
+                className={`flex min-w-0 flex-1 items-center gap-1 sm:gap-2 ${side === 'left' ? outerClusterPad : innerClusterPad} justify-end`}
+              >
+                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
+                  <SeatPersonIcon />
+                </div>
+                <div className="min-w-0 flex-auto text-center transition-transform duration-300 group-hover:scale-[1.02] sm:text-right">
+                  <span className={classA}>{showA ? seatA : '—'}</span>
+                </div>
+              </div>
+              <span className="shrink-0 select-none px-0.5 text-base text-gray-400/80 sm:text-lg" aria-hidden>
+                ❦
+              </span>
+              <div
+                className={`flex min-w-0 flex-1 items-center gap-1 sm:gap-2 ${side === 'left' ? innerClusterPad : outerClusterPad} justify-start`}
+              >
+                <div className="min-w-0 flex-auto text-center transition-transform duration-300 group-hover:scale-[1.02] sm:text-left">
+                  <span className={classB}>{showB ? seatB : '—'}</span>
+                </div>
+                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
+                  <SeatPersonIcon />
+                </div>
+              </div>
             </li>
           );
         })}
@@ -292,7 +315,7 @@ function DanceFloorLabel({ label }: { label: string }) {
       ))}
       <div
         ref={wrapRef}
-        className="flex w-9 shrink-0 cursor-pointer select-none items-center justify-center self-stretch rounded-sm px-0 outline-none transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 sm:w-11 md:w-12"
+        className="flex min-w-[2.25rem] shrink-0 cursor-pointer select-none items-center justify-center self-stretch rounded-sm px-1 outline-none transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 sm:min-w-[2.75rem] sm:px-1.5 md:min-w-12"
         onPointerEnter={onPointerEnter}
         onClick={onClick}
         onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
@@ -305,7 +328,7 @@ function DanceFloorLabel({ label }: { label: string }) {
         role="button"
         aria-label={label}
       >
-        <p className="text-title origin-center rotate-[-90deg] whitespace-nowrap text-[0.65rem] font-bold text-gray-800 sm:text-xs md:text-sm">
+        <p className="text-title writing-vertical-rl py-2 text-center text-[0.65rem] font-bold leading-snug text-gray-800 sm:text-xs md:text-sm">
           {label}
         </p>
       </div>
@@ -358,10 +381,24 @@ export default function SeatingChart({
           throw new Error(json.error || 'Request failed');
         }
         if (!cancelled) {
-          setData({
-            leftTable: json.leftTable ?? [],
-            rightTable: json.rightTable ?? [],
-          });
+          let seatingRows: SeatingRow[] = Array.isArray(json.seatingRows)
+            ? json.seatingRows
+            : [];
+          if (
+            seatingRows.length === 0 &&
+            (Array.isArray(json.leftTable) || Array.isArray(json.rightTable))
+          ) {
+            const legacyLeft: string[] = json.leftTable ?? [];
+            const legacyRight: string[] = json.rightTable ?? [];
+            const n = Math.max(legacyLeft.length, legacyRight.length);
+            seatingRows = Array.from({ length: n }, (_, i) => ({
+              leftA: legacyLeft[i] ?? '',
+              leftB: '',
+              rightA: legacyRight[i] ?? '',
+              rightB: '',
+            }));
+          }
+          setData({ seatingRows });
           setError(null);
         }
       } catch (e) {
@@ -409,19 +446,28 @@ export default function SeatingChart({
     };
   }, []);
 
-  const left = data?.leftTable ?? [];
-  const right = data?.rightTable ?? [];
-
-  const { leftOrder, rightOrder, totalSeatSteps } = useMemo(
-    () => {
-      const { leftOrder: lo, rightOrder: ro, total } = buildRowStaggerOrders(
-        left.length,
-        right.length,
-      );
-      return { leftOrder: lo, rightOrder: ro, totalSeatSteps: total };
-    },
-    [left, right],
+  const rows = data?.seatingRows ?? [];
+  /** Omit trailing / sparse rows with no one on the left table (right can still have seats). */
+  const leftPairsFiltered = useMemo(
+    () =>
+      rows
+        .filter((r) => (r.leftA ?? '').trim() || (r.leftB ?? '').trim())
+        .map((r) => ({ seatA: r.leftA ?? '', seatB: r.leftB ?? '' })),
+    [rows],
   );
+  const hasLeft = leftPairsFiltered.length > 0;
+  const hasRight = rows.some((r) => (r.rightA ?? '').trim() || (r.rightB ?? '').trim());
+  const rightPairs = rows.map((r) => ({ seatA: r.rightA ?? '', seatB: r.rightB ?? '' }));
+
+  const { leftOrder, rightOrder, totalSeatSteps } = useMemo(() => {
+    const leftLen = hasLeft ? leftPairsFiltered.length : 0;
+    const rightLen = hasRight ? rows.length : 0;
+    const { leftOrder: lo, rightOrder: ro, total } = buildRowStaggerOrders(
+      leftLen,
+      rightLen,
+    );
+    return { leftOrder: lo, rightOrder: ro, totalSeatSteps: total };
+  }, [rows, hasLeft, hasRight, leftPairsFiltered]);
 
   useEffect(() => {
     if (loading || error) return;
@@ -441,7 +487,7 @@ export default function SeatingChart({
     return () => {
       timers.forEach((t) => clearTimeout(t));
     };
-  }, [loading, error, totalSeatSteps, left, right]);
+  }, [loading, error, totalSeatSteps, rows]);
 
   if (loading) {
     return (
@@ -459,7 +505,7 @@ export default function SeatingChart({
     );
   }
 
-  const isEmpty = left.length === 0 && right.length === 0;
+  const isEmpty = rows.length === 0;
 
   if (isEmpty) {
     return (
@@ -500,11 +546,11 @@ export default function SeatingChart({
         </div>
       </div>
 
-      <div className="flex flex-row items-start justify-center gap-1 sm:gap-2 md:gap-3">
+      <div className="flex flex-row items-start justify-center gap-2 sm:gap-3 md:gap-4">
         <div className="min-w-0 flex-1 basis-0">
-          {left.length > 0 ? (
-            <ZigzagNameList
-              names={left}
+          {hasLeft ? (
+            <ZigzagPairedTableList
+              rows={leftPairsFiltered}
               side="left"
               label={seatingLeftTable}
               highlightTokens={highlightTokens}
@@ -521,12 +567,14 @@ export default function SeatingChart({
           )}
         </div>
 
-        <DanceFloorLabel label={danceFloor} />
+        <div className="flex shrink-0 self-stretch items-center justify-center px-1.5 sm:px-2.5 md:px-3.5">
+          <DanceFloorLabel label={danceFloor} />
+        </div>
 
         <div className="min-w-0 flex-1 basis-0">
-          {right.length > 0 ? (
-            <ZigzagNameList
-              names={right}
+          {hasRight ? (
+            <ZigzagPairedTableList
+              rows={rightPairs}
               side="right"
               label={seatingRightTable}
               highlightTokens={highlightTokens}
