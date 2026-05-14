@@ -426,6 +426,9 @@ export interface Translations {
   westernWeddingCheckbox: string;
   afterpartyCheckbox: string;
   teaCeremonyCheckbox: string;
+  teaCeremonyFlyerSectionTitle: string;
+  teaCeremonyFlyerOpenFullscreen: string;
+  teaCeremonyFlyerDocumentTitle: string;
   yes: string;
   no: string;
   email: string;
@@ -913,6 +916,9 @@ export const translations: Record<Language, Translations> = {
     westernWeddingCheckbox: 'Western Wedding | May 23rd, 2026 | Da Nang, Vietnam',
     afterpartyCheckbox: 'Afterparty | May 23rd, 2026 | Da Nang, Vietnam',
     teaCeremonyCheckbox: 'Tea Ceremony | May 20th, 2026 | Sa Dec, Vietnam',
+    teaCeremonyFlyerSectionTitle: 'Ceremony',
+    teaCeremonyFlyerOpenFullscreen: 'Open flyer full screen',
+    teaCeremonyFlyerDocumentTitle: 'Tea ceremony details flyer',
     yes: 'Yes',
     no: 'No',
     email: 'Email',
@@ -1418,6 +1424,9 @@ export const translations: Record<Language, Translations> = {
     westernWeddingCheckbox: 'Lễ Cưới Phương Tây | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
     afterpartyCheckbox: 'Tiệc sau cưới | 23 tháng 5, 2026 | Đà Nẵng, Việt Nam',
     teaCeremonyCheckbox: 'Lễ Trà | 20 tháng 5, 2026 | Sa Đéc, Việt Nam',
+    teaCeremonyFlyerSectionTitle: 'Nghi lễ',
+    teaCeremonyFlyerOpenFullscreen: 'Mở tờ rơi toàn màn hình',
+    teaCeremonyFlyerDocumentTitle: 'Tờ rơi chi tiết lễ trà',
     yes: 'Có',
     no: 'Không',
     email: 'Email',

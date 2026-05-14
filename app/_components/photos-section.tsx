@@ -8,7 +8,12 @@ const GOOGLE_PHOTOS_URL = 'https://photos.app.goo.gl/74az5jumEJEpq45D6';
 const APPLE_ALBUM_URL =
   'https://www.icloud.com/photos/#/sharedalbums/sa,841C363F-6C5A-4057-9565-824B5AF6316C/';
 
-export default function PhotosSection() {
+type PhotosSectionProps = {
+  /** Bottom spacing below the section (e.g. tighter when seating follows). */
+  sectionClassName?: string;
+};
+
+export default function PhotosSection({ sectionClassName = 'mb-16' }: PhotosSectionProps) {
   const { t } = useLanguage();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [showDialog, setShowDialog] = useState(false);
@@ -136,7 +141,7 @@ export default function PhotosSection() {
 
   return (
     <>
-      <section className="mb-16">
+      <section className={sectionClassName}>
         <h2 className="text-title text-3xl font-bold text-gray-800 mb-4 text-center">
           {t.photos}
         </h2>

@@ -15,16 +15,8 @@ export default function Wedding() {
             {t.weddingTitle}
           </h1>
 
-          <PhotosSection />
+          <PhotosSection sectionClassName="mb-8" />
 
-          {/* Decorative Divider */}
-          <div className="my-12 flex items-center justify-center">
-            <div className="h-px w-32 bg-gray-200/30" />
-            <div className="mx-4 text-2xl text-gray-400/50">❦</div>
-            <div className="h-px w-32 bg-gray-200/30" />
-          </div>
-
-          {/* Seating Chart Section */}
           <section className="mb-16" aria-labelledby="seating-chart-heading">
             <h2
               id="seating-chart-heading"
