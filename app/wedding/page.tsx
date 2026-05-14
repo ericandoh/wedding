@@ -43,6 +43,8 @@ export default function Wedding() {
                 danceFloor={t.danceFloor}
                 seatingFindSeatFor={t.seatingFindSeatFor}
                 seatingFindSeatPlaceholder={t.seatingFindSeatPlaceholder}
+                seatingBallroomTerrace={t.seatingBallroomTerrace}
+                seatingMainEntrance={t.seatingMainEntrance}
                 clearSearchLabel={t.close}
               />
             </div>

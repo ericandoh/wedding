@@ -82,6 +82,8 @@ export interface Translations {
   danceFloor: string;
   seatingFindSeatFor: string;
   seatingFindSeatPlaceholder: string;
+  seatingBallroomTerrace: string;
+  seatingMainEntrance: string;
 
   // Login page
   hangAndEric: string;
@@ -984,6 +986,8 @@ export const translations: Record<Language, Translations> = {
     danceFloor: 'Dance floor',
     seatingFindSeatFor: 'Find seat for:',
     seatingFindSeatPlaceholder: 'Part of a name or full name — comma-separated for several',
+    seatingBallroomTerrace: 'Ballroom terrace',
+    seatingMainEntrance: 'Main entrance',
   },
   vi: {
     // Common
@@ -1487,5 +1491,7 @@ export const translations: Record<Language, Translations> = {
     danceFloor: 'Sàn nhảy',
     seatingFindSeatFor: 'Tìm chỗ cho:',
     seatingFindSeatPlaceholder: 'Một phần hoặc họ tên đầy đủ — nhiều người thì cách nhau bằng dấu phẩy',
+    seatingBallroomTerrace: 'Hiên ballroom',
+    seatingMainEntrance: 'Lối vào chính',
   },
 };

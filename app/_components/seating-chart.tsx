@@ -1,8 +1,9 @@
 'use client';
 
 import type { KeyboardEvent, MouseEvent } from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
+  ArrowLongRightIcon,
   CakeIcon,
   GiftIcon,
   HeartIcon,
@@ -45,8 +46,8 @@ function zigzagStep(index: number): 0 | 1 | 2 {
   return step as 0 | 1 | 2;
 }
 
-const INDENT = ['pl-0', 'pl-5 sm:pl-9 sm:pl-11', 'pl-10 sm:pl-[4.25rem] sm:pl-[5.25rem]'] as const;
-const INDENT_R = ['pr-0', 'pr-5 sm:pr-9 sm:pr-11', 'pr-10 sm:pr-[4.25rem] sm:pr-[5.25rem]'] as const;
+const INDENT = ['pl-0', 'pl-2 sm:pl-9 sm:pl-11', 'pl-4 sm:pl-[4.25rem] sm:pl-[5.25rem]'] as const;
+const INDENT_R = ['pr-0', 'pr-2 sm:pr-9 sm:pr-11', 'pr-4 sm:pr-[4.25rem] sm:pr-[5.25rem]'] as const;
 
 /** Global stagger order: row 0 left table, row 0 right table, row 1 left, … */
 function buildRowStaggerOrders(leftLen: number, rightLen: number) {
@@ -71,9 +72,52 @@ function SeatPersonIcon() {
   );
 }
 
-/** Fluid type: shrinks on narrow viewports instead of wrapping within each name line. */
+/** Arrow: along top toward center, then down — flow from terrace into the room. */
+function SeatingBallroomTerraceArrow({ label }: { label: string }) {
+  return (
+    <figure className="mx-auto flex w-full max-w-2xl flex-col items-center">
+      <svg
+        viewBox="0 0 320 48"
+        className="h-10 w-full text-gray-600 sm:h-12"
+        aria-hidden
+      >
+        <path
+          d="M 8 24 H 162 V 40"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.25}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path d="M 162 46 L 155 34 H 169 Z" fill="currentColor" />
+      </svg>
+      <figcaption className="text-body -mt-0.5 px-1 text-center text-[0.65rem] font-semibold leading-tight text-gray-800 sm:text-xs">
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
+
+function SeatingMainEntranceArrow({ label }: { label: string }) {
+  return (
+    <div
+      className="flex h-full min-h-[6rem] w-max min-w-0 flex-row items-center justify-center gap-0.5 pr-0 sm:min-h-[7.5rem] sm:gap-0.5"
+      role="group"
+      aria-label={label}
+    >
+      <div className="relative grid h-[6.25rem] w-4 shrink-0 place-items-center overflow-visible sm:h-[7.25rem] sm:w-4">
+        <span className="text-body absolute left-1/2 top-1/2 inline-block w-max origin-center -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-[0.55rem] font-medium leading-none text-gray-800 sm:text-[0.6rem] sm:font-semibold">
+          {label}
+        </span>
+      </div>
+      <ArrowLongRightIcon className="h-4 w-7 shrink-0 text-gray-600 sm:h-4 sm:w-8" strokeWidth={1.5} aria-hidden />
+    </div>
+  );
+}
+
+/** Fluid type: extra-small on phones; scroll parent avoids squishing. */
 const SEAT_NAME_FLUID =
-  'text-[clamp(0.5rem,2.1vmin+1.4vw,0.8125rem)] sm:text-[clamp(0.5625rem,1.8vmin+1.1vw,0.9375rem)] md:text-[clamp(0.625rem,1.2vmin+0.75vw,1rem)]';
+  'max-sm:text-[clamp(0.4rem,calc(0.32rem+2.8vw),0.68rem)] text-[clamp(0.48rem,1.9vmin+1.2vw,0.78rem)] sm:text-[clamp(0.5625rem,1.8vmin+1.1vw,0.9375rem)] md:text-[clamp(0.625rem,1.2vmin+0.75vw,1rem)]';
 
 function SeatNameLines({
   name,
@@ -128,7 +172,7 @@ function ZigzagPairedTableList({
 }) {
   return (
     <div className="flex min-w-0 flex-1 flex-col w-full">
-      <h3 className="text-title mb-3 text-center text-sm font-bold tracking-tight text-gray-900 sm:mb-4 sm:text-base md:text-lg lg:text-xl">
+      <h3 className="text-title mb-3 text-center text-xs font-bold tracking-tight text-gray-900 sm:mb-4 sm:text-sm md:text-base lg:text-xl">
         {label}
       </h3>
       <ul className="w-full min-w-0 overflow-visible px-0 sm:px-1 md:px-2" aria-label={label}>
@@ -357,7 +401,7 @@ function DanceFloorLabel({ label }: { label: string }) {
       ))}
       <div
         ref={wrapRef}
-        className="flex min-w-[2.25rem] shrink-0 cursor-pointer select-none items-center justify-center self-stretch rounded-sm px-1 outline-none transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 sm:min-w-[2.75rem] sm:px-1.5 md:min-w-12"
+        className="relative flex h-full min-h-0 w-4 shrink-0 cursor-pointer select-none items-center justify-center self-stretch rounded-sm px-0 outline-none transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-1 sm:w-4"
         onPointerEnter={onPointerEnter}
         onClick={onClick}
         onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
@@ -370,9 +414,9 @@ function DanceFloorLabel({ label }: { label: string }) {
         role="button"
         aria-label={label}
       >
-        <p className="text-title writing-vertical-rl py-2 text-center text-[0.65rem] font-bold leading-snug text-gray-800 sm:text-xs md:text-sm">
+        <span className="text-title absolute left-1/2 top-1/2 inline-block w-max origin-center -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-[0.55rem] font-semibold leading-none text-gray-800 sm:text-[0.6rem]">
           {label}
-        </p>
+        </span>
       </div>
     </>
   );
@@ -388,6 +432,8 @@ export default function SeatingChart({
   danceFloor,
   seatingFindSeatFor,
   seatingFindSeatPlaceholder,
+  seatingBallroomTerrace,
+  seatingMainEntrance,
   clearSearchLabel,
 }: {
   seatingLeftTable: string;
@@ -399,6 +445,8 @@ export default function SeatingChart({
   danceFloor: string;
   seatingFindSeatFor: string;
   seatingFindSeatPlaceholder: string;
+  seatingBallroomTerrace: string;
+  seatingMainEntrance: string;
   clearSearchLabel: string;
 }) {
   const [data, setData] = useState<SeatingResponse | null>(null);
@@ -407,6 +455,9 @@ export default function SeatingChart({
 
   const [findSeatInput, setFindSeatInput] = useState('');
   const [visibleSeatOrders, setVisibleSeatOrders] = useState<number[]>([]);
+
+  const mapScrollRef = useRef<HTMLDivElement>(null);
+  const danceFloorAnchorRef = useRef<HTMLDivElement>(null);
 
   const highlightTokens = useMemo(
     () => parseFindSeatInput(findSeatInput),
@@ -531,6 +582,24 @@ export default function SeatingChart({
     };
   }, [loading, error, totalSeatSteps, rows]);
 
+  /** On small viewports, start scrolled so the dance floor is centered when the map overflows. */
+  useLayoutEffect(() => {
+    if (loading || error || rows.length === 0) return;
+
+    const scrollEl = mapScrollRef.current;
+    const anchor = danceFloorAnchorRef.current;
+    if (!scrollEl || !anchor) return;
+
+    const centerDanceFloor = () => {
+      if (scrollEl.scrollWidth <= scrollEl.clientWidth + 1) return;
+      anchor.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(centerDanceFloor);
+    });
+  }, [loading, error, rows.length]);
+
   if (loading) {
     return (
       <div className="px-2 py-16 text-center">
@@ -588,49 +657,74 @@ export default function SeatingChart({
         </div>
       </div>
 
-      <div className="flex flex-row items-start justify-center gap-2 sm:gap-3 md:gap-4">
-        <div className="min-w-0 flex-1 basis-0">
-          {hasLeft ? (
-            <ZigzagPairedTableList
-              rows={leftPairsFiltered}
-              side="left"
-              label={seatingLeftTable}
-              highlightTokens={highlightTokens}
-              rowOrders={leftOrder}
-              visibleOrders={visibleSeatOrders}
-            />
-          ) : (
-            <div className="text-center">
-              <h3 className="text-title mb-3 text-center text-sm font-bold text-gray-900 sm:text-base md:text-lg lg:text-xl">
-                {seatingLeftTable}
-              </h3>
-              <p className="text-body text-sm text-gray-400">{seatingChartNoNamesForTable}</p>
+      <div className="mx-auto w-full max-w-5xl px-0 sm:px-1">
+        <div
+          ref={mapScrollRef}
+          className="flex min-h-0 flex-col overflow-x-auto overflow-y-visible pb-2 [-webkit-overflow-scrolling:touch] sm:overflow-x-visible sm:pb-0"
+          role="region"
+          aria-label="Seating chart and ballroom terrace"
+        >
+          <div className="flex min-w-[28rem] flex-col gap-1 sm:min-w-0 sm:gap-2">
+            <div className="flex w-full flex-row items-start gap-x-0.5 sm:gap-x-1 md:gap-x-2">
+              <div className="w-7 shrink-0 sm:w-8" aria-hidden />
+              <div className="min-w-0 flex-1">
+                <SeatingBallroomTerraceArrow label={seatingBallroomTerrace} />
+              </div>
             </div>
-          )}
-        </div>
+            <div className="flex w-full flex-row items-start gap-x-0.5 sm:gap-x-1 md:gap-x-2">
+              <div className="shrink-0 self-stretch">
+                <SeatingMainEntranceArrow label={seatingMainEntrance} />
+              </div>
+              <div className="flex min-w-0 flex-1 flex-row items-start justify-center gap-2 sm:gap-3 md:gap-4">
+                <div className="min-w-0 flex-1 basis-0">
+                  {hasLeft ? (
+                    <ZigzagPairedTableList
+                      rows={leftPairsFiltered}
+                      side="left"
+                      label={seatingLeftTable}
+                      highlightTokens={highlightTokens}
+                      rowOrders={leftOrder}
+                      visibleOrders={visibleSeatOrders}
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <h3 className="text-title mb-3 text-center text-sm font-bold text-gray-900 sm:text-base md:text-lg lg:text-xl">
+                        {seatingLeftTable}
+                      </h3>
+                      <p className="text-body text-sm text-gray-400">{seatingChartNoNamesForTable}</p>
+                    </div>
+                  )}
+                </div>
 
-        <div className="flex shrink-0 self-stretch items-center justify-center px-1.5 sm:px-2.5 md:px-3.5">
-          <DanceFloorLabel label={danceFloor} />
-        </div>
+                <div
+                  ref={danceFloorAnchorRef}
+                  className="flex shrink-0 self-stretch items-center justify-center px-0"
+                >
+                  <DanceFloorLabel label={danceFloor} />
+                </div>
 
-        <div className="min-w-0 flex-1 basis-0">
-          {hasRight ? (
-            <ZigzagPairedTableList
-              rows={rightPairs}
-              side="right"
-              label={seatingRightTable}
-              highlightTokens={highlightTokens}
-              rowOrders={rightOrder}
-              visibleOrders={visibleSeatOrders}
-            />
-          ) : (
-            <div className="text-center">
-              <h3 className="text-title mb-3 text-center text-sm font-bold text-gray-900 sm:text-base md:text-lg lg:text-xl">
-                {seatingRightTable}
-              </h3>
-              <p className="text-body text-sm text-gray-400">{seatingChartNoNamesForTable}</p>
+                <div className="min-w-0 flex-1 basis-0">
+                  {hasRight ? (
+                    <ZigzagPairedTableList
+                      rows={rightPairs}
+                      side="right"
+                      label={seatingRightTable}
+                      highlightTokens={highlightTokens}
+                      rowOrders={rightOrder}
+                      visibleOrders={visibleSeatOrders}
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <h3 className="text-title mb-3 text-center text-sm font-bold text-gray-900 sm:text-base md:text-lg lg:text-xl">
+                        {seatingRightTable}
+                      </h3>
+                      <p className="text-body text-sm text-gray-400">{seatingChartNoNamesForTable}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
