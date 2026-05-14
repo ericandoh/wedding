@@ -2,6 +2,31 @@ export function normalizeFullName(s: string): string {
   return s.trim().replace(/\s+/g, ' ');
 }
 
+/** First token, optional middle (all between), last token — Western-style order for display. */
+export type SeatNameParts = { first: string; middle: string; last: string };
+
+export function splitNameForSeatDisplay(fullName: string): SeatNameParts {
+  const normalized = normalizeFullName(fullName);
+  if (!normalized) return { first: '', middle: '', last: '' };
+  const parts = normalized.split(' ');
+  if (parts.length === 1) return { first: parts[0]!, middle: '', last: '' };
+  if (parts.length === 2) return { first: parts[0]!, middle: '', last: parts[1]! };
+  return {
+    first: parts[0]!,
+    middle: parts.slice(1, -1).join(' '),
+    last: parts[parts.length - 1]!,
+  };
+}
+
+/** Non-empty lines: first, then middle (if any), then last (when distinct from first-only). */
+export function seatDisplayLines(parts: SeatNameParts): string[] {
+  const out: string[] = [];
+  if (parts.first) out.push(parts.first);
+  if (parts.middle) out.push(parts.middle);
+  if (parts.last) out.push(parts.last);
+  return out;
+}
+
 /**
  * True if the seat label contains the highlight text (trimmed, collapsed spaces),
  * case-insensitive. Comma-separated terms are each checked separately (OR).

@@ -16,6 +16,8 @@ import {
   namesMatchSeatToHighlight,
   parseFindSeatInput,
   rsvpToDisplayNameParts,
+  seatDisplayLines,
+  splitNameForSeatDisplay,
 } from '#/lib/seating-highlight';
 
 type SeatingRow = {
@@ -69,14 +71,44 @@ function SeatPersonIcon() {
   );
 }
 
-function nameHighlightClass(name: string, highlightTokens: string[]) {
+/** Fluid type: shrinks on narrow viewports instead of wrapping within each name line. */
+const SEAT_NAME_FLUID =
+  'text-[clamp(0.5rem,2.1vmin+1.4vw,0.8125rem)] sm:text-[clamp(0.5625rem,1.8vmin+1.1vw,0.9375rem)] md:text-[clamp(0.625rem,1.2vmin+0.75vw,1rem)]';
+
+function SeatNameLines({
+  name,
+  highlightTokens,
+  alignClass,
+}: {
+  name: string;
+  highlightTokens: string[];
+  alignClass: string;
+}) {
+  const raw = name.trim();
+  if (!raw) {
+    return (
+      <div className={`text-body ${SEAT_NAME_FLUID} ${alignClass} text-gray-300`}>
+        <span className="block whitespace-nowrap">—</span>
+      </div>
+    );
+  }
+  const parts = splitNameForSeatDisplay(raw);
+  const lines = seatDisplayLines(parts);
   const matched =
-    name.trim() !== '' &&
     highlightTokens.length > 0 &&
-    highlightTokens.some((h) => namesMatchSeatToHighlight(name, h));
-  return matched
-    ? 'text-body break-words text-xs font-bold leading-snug text-gray-900 underline decoration-2 underline-offset-2 sm:text-sm md:text-base'
-    : 'text-body break-words text-xs leading-snug text-gray-800 sm:text-sm md:text-base';
+    highlightTokens.some((h) => namesMatchSeatToHighlight(raw, h));
+  const lineClass = matched
+    ? `text-body block whitespace-nowrap leading-[1.08] font-bold text-gray-900 underline decoration-2 underline-offset-2 ${SEAT_NAME_FLUID}`
+    : `text-body block whitespace-nowrap leading-[1.08] text-gray-800 ${SEAT_NAME_FLUID}`;
+  return (
+    <div className={`flex flex-col gap-0 ${alignClass}`}>
+      {lines.map((line, idx) => (
+        <span key={`${idx}-${line}`} className={lineClass}>
+          {line}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 function ZigzagPairedTableList({
@@ -108,8 +140,6 @@ function ZigzagPairedTableList({
           const rowVisible = visibleOrders.includes(globalOrder);
           const showA = seatA.trim() !== '';
           const showB = seatB.trim() !== '';
-          const classA = showA ? nameHighlightClass(seatA, highlightTokens) : 'text-body text-xs text-gray-300 sm:text-sm md:text-base';
-          const classB = showB ? nameHighlightClass(seatB, highlightTokens) : 'text-body text-xs text-gray-300 sm:text-sm md:text-base';
           const labelParts = [showA ? seatA : null, showB ? seatB : null].filter(Boolean);
           const rowLabel = labelParts.length > 0 ? labelParts.join(' · ') : `Row ${i + 1}`;
           // Left physical table: wall = first cluster; right physical table: wall = second cluster (far from dance floor).
@@ -124,26 +154,38 @@ function ZigzagPairedTableList({
               className={`group flex w-full cursor-pointer items-center gap-0.5 py-1 leading-snug transition-all duration-350 sm:gap-1 sm:py-1.5 ${rowVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
             >
               <div
-                className={`flex min-w-0 flex-1 items-center gap-1 sm:gap-2 ${side === 'left' ? outerClusterPad : innerClusterPad} justify-end`}
+                className={`flex min-w-0 flex-1 items-center ${side === 'left' ? outerClusterPad : innerClusterPad} justify-end`}
               >
-                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
-                  <SeatPersonIcon />
-                </div>
-                <div className="min-w-0 flex-auto text-center transition-transform duration-300 group-hover:scale-[1.02] sm:text-right">
-                  <span className={classA}>{showA ? seatA : '—'}</span>
+                <div className="inline-flex max-w-full min-w-0 items-center gap-1">
+                  <div className="shrink-0 bg-white leading-none transition-transform duration-300 group-hover:scale-125">
+                    <SeatPersonIcon />
+                  </div>
+                  <div className="min-w-0 max-w-full transition-transform duration-300 group-hover:scale-[1.02]">
+                    <SeatNameLines
+                      name={showA ? seatA : ''}
+                      highlightTokens={highlightTokens}
+                      alignClass="text-left"
+                    />
+                  </div>
                 </div>
               </div>
               <span className="shrink-0 select-none px-0.5 text-base text-gray-400/80 sm:text-lg" aria-hidden>
                 ❦
               </span>
               <div
-                className={`flex min-w-0 flex-1 items-center gap-1 sm:gap-2 ${side === 'left' ? innerClusterPad : outerClusterPad} justify-start`}
+                className={`flex min-w-0 flex-1 items-center ${side === 'left' ? innerClusterPad : outerClusterPad} justify-start`}
               >
-                <div className="min-w-0 flex-auto text-center transition-transform duration-300 group-hover:scale-[1.02] sm:text-left">
-                  <span className={classB}>{showB ? seatB : '—'}</span>
-                </div>
-                <div className="shrink-0 bg-white transition-transform duration-300 group-hover:scale-125">
-                  <SeatPersonIcon />
+                <div className="inline-flex max-w-full min-w-0 items-center gap-1">
+                  <div className="min-w-0 max-w-full transition-transform duration-300 group-hover:scale-[1.02]">
+                    <SeatNameLines
+                      name={showB ? seatB : ''}
+                      highlightTokens={highlightTokens}
+                      alignClass="text-right"
+                    />
+                  </div>
+                  <div className="shrink-0 bg-white leading-none transition-transform duration-300 group-hover:scale-125">
+                    <SeatPersonIcon />
+                  </div>
                 </div>
               </div>
             </li>
