@@ -429,6 +429,9 @@ export interface Translations {
   teaCeremonyFlyerSectionTitle: string;
   teaCeremonyFlyerOpenFullscreen: string;
   teaCeremonyFlyerDocumentTitle: string;
+  teaCeremonySeatingChartSectionTitle: string;
+  teaCeremonySeatingChartOpenFullscreen: string;
+  teaCeremonySeatingChartDocumentTitle: string;
   yes: string;
   no: string;
   email: string;
@@ -919,6 +922,9 @@ export const translations: Record<Language, Translations> = {
     teaCeremonyFlyerSectionTitle: 'Ceremony',
     teaCeremonyFlyerOpenFullscreen: 'Open flyer full screen',
     teaCeremonyFlyerDocumentTitle: 'Tea ceremony details flyer',
+    teaCeremonySeatingChartSectionTitle: 'Seating chart',
+    teaCeremonySeatingChartOpenFullscreen: 'Open seating chart full screen',
+    teaCeremonySeatingChartDocumentTitle: 'Tea ceremony seating chart',
     yes: 'Yes',
     no: 'No',
     email: 'Email',
@@ -1427,6 +1433,9 @@ export const translations: Record<Language, Translations> = {
     teaCeremonyFlyerSectionTitle: 'Nghi lễ',
     teaCeremonyFlyerOpenFullscreen: 'Mở tờ rơi toàn màn hình',
     teaCeremonyFlyerDocumentTitle: 'Tờ rơi chi tiết lễ trà',
+    teaCeremonySeatingChartSectionTitle: 'Sơ đồ chỗ ngồi',
+    teaCeremonySeatingChartOpenFullscreen: 'Mở sơ đồ chỗ ngồi toàn màn hình',
+    teaCeremonySeatingChartDocumentTitle: 'Sơ đồ chỗ ngồi lễ trà',
     yes: 'Có',
     no: 'Không',
     email: 'Email',

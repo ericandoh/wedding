@@ -5,7 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { useLanguage } from './language-provider';
 import LanguageSwitcher from './language-switcher';
-import { getDaNangDateString } from '#/lib/da-nang-time';
+import {
+  isEventDayHideRsvpInDaNang,
+  isTeaCeremonyNavVisibleInDaNang,
+  isWeddingNavVisibleInDaNang,
+} from '#/lib/da-nang-time';
 
 export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }: { isBannerDismissed?: boolean; visibleBanners?: number }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -14,17 +18,14 @@ export default function TopNav({ isBannerDismissed = false, visibleBanners = 0 }
   const pathname = usePathname();
   const { t } = useLanguage();
 
-  // Date-based nav: show Wedding tab only on May 23, Tea Ceremony only on May 20 (Da Nang time); hide RSVP on those dates
+  // Date-based nav (Da Nang time): Tea Ceremony May 19–20, Wedding May 22–23; hide RSVP on those days
   const [showRsvpTab, setShowRsvpTab] = useState(true);
   const [showWeddingTab, setShowWeddingTab] = useState(false);
   const [showTeaCeremonyTab, setShowTeaCeremonyTab] = useState(false);
   useEffect(() => {
-    const dateStr = getDaNangDateString();
-    const isMay20 = dateStr === '2026-05-20';
-    const isMay23 = dateStr === '2026-05-23';
-    setShowRsvpTab(!isMay20 && !isMay23);
-    setShowWeddingTab(isMay23);
-    setShowTeaCeremonyTab(isMay20);
+    setShowRsvpTab(!isEventDayHideRsvpInDaNang());
+    setShowWeddingTab(isWeddingNavVisibleInDaNang());
+    setShowTeaCeremonyTab(isTeaCeremonyNavVisibleInDaNang());
   }, []);
   
   // Use white text on home page, dark text on other pages
