@@ -5,6 +5,11 @@ const TEA_CEREMONY_NAV_END = '2026-05-20';
 const WEDDING_NAV_START = '2026-05-22';
 const WEDDING_NAV_END = '2026-05-23';
 
+/** Western wedding ceremony start: May 23, 2026, 4:00 PM Da Nang (GMT+7). */
+export const WEDDING_COUNTDOWN_TARGET_MS = new Date(
+  '2026-05-23T16:00:00+07:00',
+).getTime();
+
 /**
  * Returns the current date in YYYY-MM-DD format in Da Nang, Vietnam time.
  * Used to show/hide Wedding and Tea Ceremony nav tabs and RSVP on event dates.

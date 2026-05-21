@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '../_components/language-provider';
 import LanguageSwitcher from '../_components/language-switcher';
+import { WEDDING_COUNTDOWN_TARGET_MS } from '#/lib/da-nang-time';
 
 export default function LoginPage() {
   const [keyphrase, setKeyphrase] = useState('');
@@ -21,7 +22,7 @@ export default function LoginPage() {
 
   // Countdown timer
   useEffect(() => {
-    const targetDate = new Date('2026-05-23T00:00:00').getTime();
+    const targetDate = WEDDING_COUNTDOWN_TARGET_MS;
 
     const timer = setInterval(() => {
       const now = new Date().getTime();

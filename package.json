@@ -14,6 +14,7 @@
     "@types/mdx": "2.0.13",
     "@types/nodemailer": "7.0.1",
     "autoprefixer": "10.4.21",
+    "canvas-confetti": "1.9.4",
     "clsx": "2.1.1",
     "codehike": "1.0.7",
     "date-fns": "4.1.0",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "0.5.10",
     "@tailwindcss/typography": "0.5.16",
+    "@types/canvas-confetti": "1.9.0",
     "@types/ms": "2.1.0",
     "@types/node": "22.13.1",
     "@types/react": "19.1.2",

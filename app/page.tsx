@@ -2,10 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import LogoutButton from './_components/logout-button';
 import { useLanguage } from './_components/language-provider';
-import { getDaNangDateString } from '#/lib/da-nang-time';
+import {
+  getDaNangDateString,
+  WEDDING_COUNTDOWN_TARGET_MS,
+} from '#/lib/da-nang-time';
 
 export default function Page() {
   const { t } = useLanguage();
@@ -26,6 +29,44 @@ export default function Page() {
     minutes: 0,
     seconds: 0,
   });
+  const [isCountdownOver, setIsCountdownOver] = useState(
+    () => Date.now() >= WEDDING_COUNTDOWN_TARGET_MS,
+  );
+  const confettiFiredRef = useRef(false);
+  const [isLocalDev, setIsLocalDev] = useState(false);
+
+  const fireParadiseConfetti = useCallback(() => {
+    void import('canvas-confetti').then(({ default: confetti }) => {
+      const colors = ['#d4af37', '#f4c2c2', '#ffffff', '#c9a96e'];
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.55 },
+        colors,
+      });
+      const end = Date.now() + 2500;
+      const frame = () => {
+        confetti({
+          particleCount: 2,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.6 },
+          colors,
+        });
+        confetti({
+          particleCount: 2,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.6 },
+          colors,
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      };
+      frame();
+    });
+  }, []);
 
   const galleryImages = [
     '/gallery2.JPG', 
@@ -55,6 +96,20 @@ export default function Page() {
     const newIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
     setCurrentIndex(newIndex);
     setSelectedImage(galleryImages[newIndex]);
+  };
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+    const host = window.location.hostname;
+    setIsLocalDev(host === 'localhost' || host === '127.0.0.1');
+  }, []);
+
+  const handleDevCountdownSkip = () => {
+    if (!isLocalDev) return;
+    setIsCountdownOver(true);
+    setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    confettiFiredRef.current = true;
+    fireParadiseConfetti();
   };
 
   // Show text after background loads
@@ -136,7 +191,7 @@ export default function Page() {
 
   // Countdown timer
   useEffect(() => {
-    const targetDate = new Date('2026-05-23T00:00:00').getTime();
+    const targetDate = WEDDING_COUNTDOWN_TARGET_MS;
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -153,11 +208,20 @@ export default function Page() {
         });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsCountdownOver(true);
       }
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (!showCountdown || !isCountdownOver || confettiFiredRef.current) {
+      return;
+    }
+    confettiFiredRef.current = true;
+    fireParadiseConfetti();
+  }, [showCountdown, isCountdownOver, fireParadiseConfetti]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -256,52 +320,65 @@ export default function Page() {
       {/* Countdown Section */}
       <div className="bg-white py-16" data-section="countdown">
         <div className={`mx-auto max-w-4xl px-6 text-center transition-opacity duration-1000 ${showCountdown ? 'opacity-100' : 'opacity-0'}`}>
-          <h2 className="text-title mb-12 text-4xl text-gray-800">
-            {t.countdownTillParadise}
+          <h2
+            className={`text-title text-gray-800 ${
+              isCountdownOver
+                ? 'text-5xl md:text-6xl'
+                : 'mb-12 text-4xl'
+            }${isLocalDev ? ' cursor-pointer' : ''}`}
+            onClick={isLocalDev ? handleDevCountdownSkip : undefined}
+            onKeyDown={
+              isLocalDev
+                ? (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleDevCountdownSkip();
+                    }
+                  }
+                : undefined
+            }
+            role={isLocalDev ? 'button' : undefined}
+            tabIndex={isLocalDev ? 0 : undefined}
+          >
+            {isCountdownOver ? t.paradiseReached : t.countdownTillParadise}
           </h2>
-          
-          {/* Countdown Boxes */}
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            {/* Days */}
-            <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
-              <div className="text-title text-5xl text-gray-800 mb-1">
-                {timeLeft.days}
+
+          {!isCountdownOver && (
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+              <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
+                <div className="text-title text-5xl text-gray-800 mb-1">
+                  {timeLeft.days}
+                </div>
+                <div className="text-body text-base text-gray-600">
+                  {t.days}
+                </div>
               </div>
-              <div className="text-body text-base text-gray-600">
-                {t.days}
+              <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
+                <div className="text-title text-5xl text-gray-800 mb-1">
+                  {timeLeft.hours}
+                </div>
+                <div className="text-body text-base text-gray-600">
+                  {t.hours}
+                </div>
               </div>
-            </div>
-            
-            {/* Hours */}
-            <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
-              <div className="text-title text-5xl text-gray-800 mb-1">
-                {timeLeft.hours}
+              <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
+                <div className="text-title text-5xl text-gray-800 mb-1">
+                  {timeLeft.minutes}
+                </div>
+                <div className="text-body text-base text-gray-600">
+                  {t.minutes}
+                </div>
               </div>
-              <div className="text-body text-base text-gray-600">
-                {t.hours}
-              </div>
-            </div>
-            
-            {/* Minutes */}
-            <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
-              <div className="text-title text-5xl text-gray-800 mb-1">
-                {timeLeft.minutes}
-              </div>
-              <div className="text-body text-base text-gray-600">
-                {t.minutes}
-              </div>
-            </div>
-            
-            {/* Seconds */}
-            <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
-              <div className="text-title text-5xl text-gray-800 mb-1">
-                {timeLeft.seconds}
-              </div>
-              <div className="text-body text-base text-gray-600">
-                {t.seconds}
+              <div className="aspect-square flex flex-col items-center justify-center rounded border border-gray-200/40 p-4">
+                <div className="text-title text-5xl text-gray-800 mb-1">
+                  {timeLeft.seconds}
+                </div>
+                <div className="text-body text-base text-gray-600">
+                  {t.seconds}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 

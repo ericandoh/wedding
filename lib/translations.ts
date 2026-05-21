@@ -114,6 +114,7 @@ export interface Translations {
   lookingForwardToHavingYouAtOurWedding: string;
   saveTheDateButton: string;
   countdownTillParadise: string;
+  paradiseReached: string;
 
   // Schedule page
   scheduleTitle: string;
@@ -588,6 +589,7 @@ export const translations: Record<Language, Translations> = {
     lookingForwardToHavingYouAtOurWedding: 'Looking forward to having you at our wedding!',
     saveTheDateButton: 'Save the Date',
     countdownTillParadise: 'Countdown till paradise',
+    paradiseReached: 'Paradise reached!',
 
     // Schedule page
     scheduleTitle: 'Schedule',
@@ -1099,6 +1101,7 @@ export const translations: Record<Language, Translations> = {
     lookingForwardToHavingYouAtOurWedding: 'Chúng tôi mong được chào đón bạn tại đám cưới của chúng tôi!',
     saveTheDateButton: 'Lưu ngày cưới',
     countdownTillParadise: 'Đếm ngược đến thiên đường',
+    paradiseReached: 'Đã đến thiên đường!',
 
     // Schedule page
     scheduleTitle: 'Lịch trình',
